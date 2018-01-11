@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<link href="../../../../asserts/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen">
+<link href="../../../bootstrap/css/bootstrap-select.css" rel="stylesheet" media="screen">
+<link href="../../../bootstrap/css/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">	
+<link rel="stylesheet"  href="../../../css/ncms_page.css"/>
+<style>
+
+	button.dropdown-toggle{height:32px;border-radius:0px;margin-bottom: 5px;}
+</style>
+</head>
+<body>
+	<form id="form" class="form-inline">
+		<div class="form-group">
+			<input type="text" placeholder="站点编码或名称" id="siteReg">
+		</div>
+		<div class="form-group"> 
+			<select	id="city" name="city">
+				<option>-选择地市-</option>
+			</select> 
+		</div>
+		<div class="form-group"> 
+			<select id="region" name="region">
+				<option>-选择区县-</option>
+			</select> 
+		</div>
+		<div class="form-group"> 
+			<select id="property" name="property">
+				<option value="">-站点归属-</option>
+				<option value="1">中国移动</option>
+				<option value="2">中国联通</option>
+				<option value="3">中国电信</option>
+				<option value="4">中国铁通</option>
+				<option value="5">广电</option>
+				<option value="6">业主</option>
+				<option value="7">其他</option>
+				<option value="8">电力</option>
+				<option value="9">中国铁塔</option>
+			</select> 
+		</div>
+		<div class="form-group"> 
+			<select id="auditStatus" name="auditStatus">
+				<option value="">---审核状态---</option>
+				<option value=0>审核通过</option>
+				<option value=8>审核未通过</option>
+				<option value=9>审核中</option>
+				<option value=-1>未提交</option>
+			</select> 
+		</div>
+		<div class="form-group"> 
+			<select id="status" name="status">
+				<option value="">-站点状态-</option>
+				<option value="1">在网</option>
+				<option value="2">工程</option>
+				<option value="3">退网</option>
+			</select>
+		</div>
+		<button type="button" class="btn btn-success" onclick="findSite()">查询</button>
+	</form>
+	<div class="btn-toolbar">
+		<button class="btn btn-primary" type="button" onclick="add()">新增</button>
+		<button class="btn btn-primary" type="button" onclick="modify()">修改</button>
+		<button class="btn btn-danger" type="button" onclick="rmData()">删除</button>
+		<button class="btn btn-primary" type="button" onclick="submitAudit()">提交审核</button>
+		<button class="btn btn-primary" type="button" onclick="importData()">导入</button>
+		<button class="btn btn-primary" type="button" onclick="exportData()">导出</button>
+	</div>
+	<table id="tb"></table>
+	<!-- 提交审批 -->
+	<div class="modal hide fade" id="firstUsers" tabindex="-1"></div>
+
+	<!-- 新增、修改弹出页面 -->
+	<div class="modal fade" id="EditPanel" tabindex="-1" role="dialog"
+		aria-labelledby="EditPanel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4 id="myModalLabel">添加/修改 站点信息</h4>
+				</div>
+				<div class="modal-body" id="control-roomStyle">
+					<form class="form-horizontal" id="dataForm" role="form">
+						<div>
+							<div class="pull-left">
+								<label>站点CID</label>
+								<input type="text" name="basesiteCuid" class="forbidden"/>
+							</div>
+							<div class="pull-right">
+								<label>站点编码</label>
+								<input type="text" name="basesiteCode" id="basesiteCode"/>
+							</div>
+							<div style="clear:both;"></div>
+						</div>
+						<div>
+							<div class="pull-left">
+								<label>站点名称</label>
+								<input type="text" name="basesiteName" class="forbidden">
+							</div>
+							<div class="pull-right">
+								<label>站点归属</label>
+								<select id="basesiteBelong" class="selectpicker forbidden"
+								multiple data-hide-disabled="true" data-size="4">
+								</select>
+								<input type="hidden" id="basesiteBelongIds" name="basesiteBelong"/>
+							</div>
+							<div style="clear:both;"></div>
+						</div>
+						<div>
+							<div class="pull-left">
+								<label for="district">地市</label>
+								<select id="pregId" name="pregId" class="forbidden"></select>
+							</div>
+							<div class="pull-right">
+								<label>区县</label>
+								<select id="regId" name="regId" class="forbidden"></select>
+							</div>
+							<div style="clear:both;"></div>
+						</div>
+						<div>
+							<div class="pull-left">
+								<label>生命周期状态</label>
+								<select id="basesiteState" name="basesiteState" class="forbidden">
+									<option value="">-请选择-</option>
+									<option value="1">在网</option>
+									<option value="2">工程</option>
+									<option value="3">退网</option>
+								</select>
+							</div>
+							<div class="pull-right">
+								<label>站点地址</label>
+								<input type="text" name="basesiteAddress" class="forbidden" >
+							</div>
+							<div style="clear:both;"></div>
+						</div>
+						<div>
+							<div class="pull-left">
+								<label>站点类型</label>
+								<select id="basesiteType" name="basesiteType" class="forbidden">
+									<option value="">-请选择-</option>
+									<option value="1">核心站点</option>
+									<option value="2">骨干站点</option>
+									<option value="3">汇聚站点</option>
+									<option value="4">接入站点</option>
+									<option value="5">其他站点</option>
+								</select>
+							</div>
+							<div class="pull-right">
+								<label>共享属性</label>
+								<select id="basesiteShare" name="basesiteShare" class="forbidden">
+									<option value="">-请选择-</option>
+									<option value="1">联通</option>
+									<option value="2">电信</option>
+									<option value="3">联通电信</option>
+								</select>
+							</div>
+							<div style="clear:both;"></div>
+						</div>
+						<div>
+							<div class="pull-left">
+								<label>入网时间</label>
+								<input type='text' class="forbidden" id="basesiteOpendate"/>
+							</div> 
+							<div class="pull-right">
+								<label>产权属性</label>
+								<select id="basesiteProperty" name="basesiteProperty" class="forbidden">
+									<option value="">-请选择-</option>
+									<option value="1">自建</option>
+									<option value="2">共建</option>
+									<option value="3">租用</option>
+									<option value="4">购买</option>
+								</select>
+							</div> 
+							<div style="clear:both;"></div>
+						</div>
+						<div>
+							<div class="pull-left">
+								<label>经度</label>
+								<input type="text" name="basesiteLongitude" id="basesiteLongitude" class="forbidden">
+							</div> 
+							<div class="pull-right">
+								<label>纬度</label>
+								<input type="text" name="basesiteLatitude" id="basesiteLatitude" class="forbidden">
+							</div> 
+							<div style="clear:both;"></div>
+						</div>
+						<input type="hidden" id="basesiteId" name="basesiteId" /> 
+						<input type="hidden" id="prvId" name="prvId" /> 
+						<input type="hidden" id="prvSname" name="prvSname" /> 
+						<input type="hidden" id="regName" name="regName" /> 
+						<input type="hidden" id="pregName" name="pregName" /> 
+						<input type="hidden" id="dataFrom" name="dataFrom" /> 
+						<input type="hidden" id="auditingState" name="auditingState" /> 
+						<input type="hidden" id="auditingUserId" name="auditingUserId" /> 
+						<input type="hidden" id="auditingDate" name="auditingDate" />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+					<button id="saveSet"class="btn btn-primary" type="button" onclick="formSubmit();">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="filePanel" tabindex="-1" role="dialog"
+		aria-labelledby="filePanel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4 id="myModalLabel">导入数据</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="fileForm" role="form">
+						<div class="form-group">
+							<label class="col-sm-3 control-label" style="width:100px">上传文件:</label>
+							<div class="col-sm-8">
+								<input type="file" class="form-control" id="file_url"
+									name="files"
+									accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+					<button class="btn btn-primary" type="button" onclick="uploadExcel();">上传</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 站点详细信息弹窗 -->
+	<div class="modal fade" id="EditPanel1" tabindex="-1" role="dialog"
+		aria-labelledby="EditPanel1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 800px;">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4 id="myModalLabel">站点详细信息</h4>
+				</div>
+				<div class="modal-body" id="control-style">
+					<form class="form-horizontal" id="dataForm" role="form">
+						<div class="pull-left">
+							<label>站点CID</label>
+							<input class="forbidden" name="basesiteCuid1" id="basesiteCuid1"/>
+						</div>
+						<div class="pull-right">
+							<label>站点编码</label>
+							<input  class="forbidden" name="basesiteCode1" id="basesiteCode1"/>
+						</div>
+						<div class="pull-left">
+							<label>站点名称</label>
+							<input class="forbidden" name="basesiteName1" id="basesiteName1"/>
+						</div>
+						<div class="pull-right">
+							<label>站点地址</label>
+							<input class="forbidden" name="basesiteAddress1"id="basesiteAddress1"/>
+						</div>
+						<div class="pull-left">
+							<label>地市</label>
+							<input class="forbidden" id="pregName1" name="pregName1"/>
+						</div>
+						<div class="pull-right">
+							<label>区县</label>
+							<input class="forbidden" id="regName1" name="regName1"/>
+						</div>
+						<div class="pull-left">
+							<label>站点归属</label>
+							<input class="forbidden" id="basesiteBelong1" name="basesiteBelong1"/>
+						</div>
+						<div class="pull-right">
+							<label>站点类型</label>
+							<input class="forbidden" id="basesiteType1" name="basesiteType1"/>
+						</div>
+						<div class="pull-left">
+							<label>共享属性</label>
+							<input class="forbidden" id="basesiteShare1" name="basesiteShare1"/>
+						</div>
+						<div class="pull-right">
+							<label>入网时间</label>
+							<input class="forbidden" id="basesiteOpendate1"/>
+						</div>
+						<div class="pull-left">
+							<label>产权属性</label>
+							<input class="forbidden" id="basesiteProperty1" name="basesiteProperty1"/>
+						</div>
+						<div class="pull-right">
+							<label>生命周期状态</label>
+							<input class="forbidden" id="basesiteState1" name="basesiteState1"/>
+						</div>
+						<div class="pull-left">
+							<label>经度</label>
+							<input class="forbidden" name="basesiteLongitude1" id="basesiteLongitude1"/>
+						</div>
+						<div class="pull-right">
+							<label>纬度</label>
+							<input class="forbidden" name="basesiteLatitude1" id="basesiteLatitude1"/>
+						</div>
+						<div style="clear:both;"></div>
+
+						<!-- 资源信息 -->
+						<div id="myModalLabel" class="search_title">资源详细信息</div>
+						<table id="tbs" class="table table-bordered table-hover table-striped">
+							<thead style='text-align: center;'>
+								<tr>
+									<th id="baseresourceCode">资源代码</th>
+									<th id="baseresourceName">资源名称</th>
+									<th id="basesiteId">所属站点编码</th>
+									<th id="baseresourceType">资源类别</th>
+									<th id="pregName1">地市</th>
+									<th id="regName1">区县</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+								<tr id="tr">
+								</tr>
+							</tbody>
+						</table>
+						<div id="histoicFlowList" class="info_check"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+<script src="../../../../asserts/bootstrap/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../../../bootstrap/js/bootstrap-select.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/common/common.js"></script>
+<script type="text/javascript"
+	src="../../../js/page/basedata/site/site.js?v=3"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#basesiteOpendate').datetimepicker({
+			format : 'YYYY-MM-DD',
+			locale : moment.locale('zh-cn')
+		});
+	});
+</script>
+</body>
+
+</html>

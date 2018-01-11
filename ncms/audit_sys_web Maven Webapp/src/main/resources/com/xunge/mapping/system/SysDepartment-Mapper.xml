@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.SysDepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.system.department.SysDepartmentVO" >
+    <id column="dep_id" property="depId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="dep_code" property="depCode" jdbcType="VARCHAR" />
+    <result column="dep_name" property="depName" jdbcType="VARCHAR" />
+    <result column="pdep_id" property="pdepId" jdbcType="VARCHAR" />
+    <result column="dep_order" property="depOrder" jdbcType="INTEGER" />
+    <result column="dep_state" property="depState" jdbcType="INTEGER" />
+    <result column="parent_Name" property="parentName" jdbcType="VARCHAR" />
+    <result column="parent_Code" property="parentCode" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    dep.dep_id, dep.prv_id, dep.dep_code, dep.dep_name, dep2.dep_name as parent_Name,dep2.dep_code AS parent_Code, dep.dep_order,dep.dep_state
+  </sql>
+
+<!-- 查询省用户 -->
+  <select id="queryDepartmentByConditions" resultMap="BaseResultMap" parameterType="map" >
+    select 
+     <include refid="Base_Column_List" />
+    from sys_department dep
+    		LEFT JOIN sys_department dep2 on dep.pdep_id = dep2.dep_id
+    <where>
+    	<if test="prvId != '' and prvId != null">
+     		and dep.prv_id = #{prvId,jdbcType=VARCHAR}
+     	</if>
+     	<if test="depState != '' and depState != null">
+     		and dep.dep_state != #{depState,jdbcType=VARCHAR}
+     	</if>
+     </where>
+  </select>
+  
+  <!-- 通过code查询部门信息 -->
+  <select id="queryDeptitemByCode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    	<include refid="Base_Column_List" />
+    from sys_department dep
+    		LEFT JOIN sys_department dep2 on dep.pdep_id = dep2.dep_id
+    where 
+     	 dep.dep_code = #{deptCode,jdbcType=VARCHAR}
+     and dep.dep_state = #{state,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查询集团用户     集团用户没有prv_id -->
+  <select id="queryDepartmentByCond" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_department
+    where 
+     	 pdep_id = 'D'
+  </select>
+  
+  <!-- 新增组织机构节点 -->
+  <insert id="saveDepartNode" parameterType="com.xunge.model.system.department.SysDepartmentVO">
+		insert into sys_department values(
+			#{depId,jdbcType=VARCHAR},
+			#{prvId,jdbcType=VARCHAR},
+			#{depCode,jdbcType=VARCHAR},
+			#{depName,jdbcType=VARCHAR},
+			#{pdepId,jdbcType=VARCHAR},
+			#{depOrder,jdbcType=INTEGER},
+			#{depState,jdbcType=INTEGER}
+		)  
+	</insert> 
+	<!-- 修改组织机构节点  -->
+	<update id="modiyDepartNode" parameterType="com.xunge.model.system.department.SysDepartmentVO">
+		update sys_department d set
+			d.dep_code = #{depCode,jdbcType=VARCHAR},
+			d.dep_name = #{depName,jdbcType=VARCHAR},
+			d.dep_order = #{depOrder,jdbcType=INTEGER},
+			d.dep_state = #{depState,jdbcType=INTEGER}
+			where d.dep_id = #{depId,jdbcType=VARCHAR}
+	</update>
+	<!-- 批量修改状态【删除、启用、禁用】 -->
+  	<update id="modifyDepartStateBath" parameterType="Map">
+		update sys_department d set d.dep_state=#{state}
+	    where 1=1
+		<if test="idLists != null and idLists.size()>0">  
+	        and d.dep_id in  
+	        <foreach collection="idLists" item="item" index="index" open="(" separator="," close=")">  
+                #{item}  
+            </foreach>  
+    	</if>
+	</update>
+	<!-- 模糊查询 -->
+  <select id="queryDepartByConditions" parameterType="Map" resultMap="BaseResultMap"> 
+     select 
+	    <include refid="Base_Column_List" />
+     from sys_department  dep 	
+     LEFT JOIN sys_department dep2 
+     ON dep.pdep_id = dep2.dep_id
+     <where> 
+    	<if test="funcCode != '' and funcCode != null">
+     		and dep.dep_code like CONCAT('%',#{funcCode,jdbcType=VARCHAR},'%')
+     	</if>
+     	<if test="funcName != '' and funcName != null">
+     		and dep.dep_name like CONCAT('%',#{funcName,jdbcType=VARCHAR},'%') 
+     	</if>
+     	<if test="prvId != '' and prvId != null">
+     		and dep.prv_id = #{prvId,jdbcType=VARCHAR}
+     	</if>
+     	<if test="depState != '' and depState != null">
+     		and dep.dep_state != #{depState,jdbcType=VARCHAR}
+     	</if>
+     </where>
+     order by dep.dep_order
+   </select> 
+   <select id="queryDepartment" resultMap="BaseResultMap">
+    select
+    dep_id,dep_name
+    from sys_department
+    where
+     dep_state=#{state}
+   <if test="prvId != '' and prvId != null">
+     	and prv_id=#{prvId}
+   </if>
+  </select>
+</mapper>

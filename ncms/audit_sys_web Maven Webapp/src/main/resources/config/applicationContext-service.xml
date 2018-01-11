@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!--导入bean配置文件 -->
+	<import resource="classpath:com/xunge/service/*/*.xml"/>
+	<import resource="classpath:com/xunge/service/*.xml"/>
+
+    <context:property-placeholder location="classpath:properties/*.properties" />
+	
+    <!-- 自动将Service层注入-->
+    <context:component-scan base-package="com.xunge.service" />
+ 
+    <!-- 自动注解 
+    <aop:aspectj-autoproxy/>-->
+	
+    <!-- 事务 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
+
+            <tx:method name="*" propagation="REQUIRED" />
+            <tx:method name="*" rollback-for="java.lang.Exception"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* com.xunge.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
+    
+    <!-- 异常处理器 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+	    <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->  
+	    <property name="exceptionAttribute" value="ex"></property>  
+	    <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->  
+	    <property name="exceptionMappings">  
+	        <props>  
+	            <prop key="com.xunge.core.exception.BusinessException">error-business</prop>  
+	            <prop key="com.xunge.core.exception.ParameterException">error-parameter</prop>  
+	        </props>  
+	    </property> 
+	    <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->       
+        <property name="warnLogCategory" value="WARN"></property>       
+        <!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->       
+        <property name="defaultErrorView" value="err/error"></property>       
+        <!-- 默认HTTP状态码 -->       
+        <property name="defaultStatusCode" value="500"></property>  
+	</bean>
+	
+    <!-- 注册XmlViewResolver，用于iReport & JasperReports报表生成 -->  
+	<bean id="jasperReportResolver" class="org.springframework.web.servlet.view.XmlViewResolver">  
+	    <property name="order">  
+	        <value>0</value>  
+	    </property>  
+	    <property name="location">  
+	        <value>WEB-INF/jasper/jasper-defs.xml</value>  
+	    </property>  
+	</bean>
+</beans>

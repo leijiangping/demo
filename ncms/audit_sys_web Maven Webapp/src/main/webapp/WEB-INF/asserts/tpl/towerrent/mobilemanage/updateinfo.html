@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css" />
+<link href="../../../bootstrap/css/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="../../../bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../css/ncms_page.css" />
+
+<title>铁塔资源对比审核--审核</title>
+</head>
+
+<body>
+	<div id="towerAudit" class="updateinfo">
+		<div class="search_title">修改资源信息</div>
+		<ul class="list-group">
+			<li class="list-group-item row">
+				<div class="col-md-3">移动起租编码</div>
+				<div class="col-md-3" id="rentinformationId"></div>
+				<div class="col-md-3">业务确认单号</div>
+				<div class="col-md-3" id="businessConfirmNumber"></div>
+			</li>
+			<!-- <li class="list-group-item row">
+				<div class="col-md-3">地市</div>
+				<div class="col-md-3">上海</div>
+				<div class="col-md-3">区县</div>
+				<div class="col-md-3">浦东</div>
+			</li> -->
+			<li class="list-group-item row">
+				<div class="col-md-3">运营商自有物理站址编码</div>
+				<div class="col-md-3">移动自有-0225454</div>
+				<div class="col-md-3">运营商自有物理站址名称</div>
+				<div class="col-md-3">西厂</div>
+			</li>
+			<!-- <li class="list-group-item row">
+				<div class="col-md-3">产品配置</div>
+				<div class="col-md-3" >
+					<select id="Village" class="form-control">
+						<option value=''>-选择区县-</option>
+					</select>
+				</div>
+				<div class="col-md-3">实际最高天线挂高（米）</div>
+				<div class="col-md-3">
+					<input type="text" value="10<H<30" class="form-control" id="antennaHeightRangeId">
+				</div>
+			</li> -->
+
+			<li class="list-group-item row">
+				<div class="col-md-3">RRU拉远时BBU是否放在铁塔公司机房</div>
+				<div class="col-md-3">
+					<select id="product1IfbbuOnRoom" class="form-control">
+						<option value='1'>-是-</option>
+						<option value='0'>-否-</option>
+					</select>
+				</div>
+				<div class="col-md-3">0-6可否上战</div>
+				<div class="col-md-3">
+					<select id="isSpecEnterStation" class="form-control">
+						<option value='1'>-是-</option>
+						<option value='0'>-否-</option>
+					</select>
+				</div>
+			</li>
+			<li class="list-group-item row">
+				<div class="col-md-3">维护等级</div>
+				<div class="col-md-3">
+					<select id="maintenanceLevelId" class="form-control">
+						<option value='1'>标准</option>
+						<option value='0'>其他</option>
+					</select>
+				</div>
+
+				<div class="col-md-3">电力保障服务模式</div>
+				<div class="col-md-3">
+					<select id="electricProtectionMethodId" class="form-control">
+						<option value='1'>协调缴费（11）</option>
+						<option value='0'>其他</option>
+					</select>
+				</div>
+			</li>
+			<li class="list-group-item row">
+				<div class="col-md-3">是否选择发电服务</div>
+				<div class="col-md-3">
+					<select id="ifSelectPowerService" class="form-control">
+						<option value='1'>-是-</option>
+						<option value='0'>-否-</option>
+					</select>
+				</div>
+				<div class="col-md-3">是否具备发电条件</div>
+				<div class="col-md-3">
+					<select id="ifHasPowerCondition" class="form-control">
+						<option value='1'>-是-</option>
+						<option value='0'>-否-</option>
+					</select>
+				</div>
+			</li>
+			<li class="list-group-item row">
+				<div class="col-md-3">油机发电服务模式</div>
+				<div class="col-md-3">
+					<select id="oilGenerateElectricMethodId" class="form-control">
+						<option value='1'>按次收费</option>
+						<option value='0'>-否-</option>
+					</select>
+				</div>
+				<div class="col-md-3">产品单元数</div>
+				<div class="col-md-3">
+					<input type="text" value="1" class="form-control" id="product1UnitNum">
+				</div>
+			</li>
+			<li class="list-group-item row">
+				<div class="col-md-3">维护费折扣</div>
+				<div class="col-md-3">
+					<input type="text" value="1" class="form-control">
+				</div>
+				<div class="col-md-3">场地费折扣</div>
+				<div class="col-md-3">
+					<input type="text" value="1" class="form-control" id="maintenanceFeeDis">
+				</div>
+			</li>
+			<li class="list-group-item row">
+				<div class="col-md-3">电力引入费折扣</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" id="electricImportFeeDis">
+				</div>
+				<div class="col-md-3">铁塔共享折扣</div>
+				<div class="col-md-3">
+					<input type="text"  class="form-control" id="towerShareDis">
+				</div>
+			</li>
+			
+			<li class="list-group-item row">
+			    <div class="col-md-3">服务开始时间</div>
+				<div class="col-md-3 ">
+				       <input type='text' class=" forbidden form-control"  id="startDate" />
+				</div>
+				<div class="col-md-3">服务结束日期</div>
+				<div class="col-md-3" id="endDate">2017-04-01</div>
+			</li>
+		</ul>
+		<!-- <div class="search_title">变更记录</div>
+        <table id="tb"></table> 
+		 <div class="search_title">进行审核</div>
+		<form action="" class="form-horizontal">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<label class="control-label">审核状态：</label> <select name="" id=""
+							class="redColor">
+							<option value="0">通过</option>
+							<option value="8">不通过</option>
+						</select>
+					</div>
+					<div class="col-md-6" style="text-align:right;">
+						<label class="control-label">审核人：</label> <input type="text"
+							name="roleName">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label class="control-label">审核时间：</label> <input type="text"
+							name="roleName">
+					</div>
+					<div class="col-md-6" style="text-align:right;">
+						<label class="control-label"
+							style=" position: relative;top: -30px;">审核备注：</label>
+						<textarea name="" id="" col="20" rows="2"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="btn-toolbar">
+			<button class="btn btn-primary" onclick="">保存</button>
+			<button class="btn btn-primary" onclick="goBack();"
+				style="float:right;">返回</button>
+		</div>
+	</div> -->
+	<div class="btn-toolbar">
+			<button class="btn btn-primary" type="button" onclick="sendData()">保存</button>
+			<button class="btn btn-primary" type="button" onclick="goBack();"
+				style="float:right;">返回</button>
+		</div>
+	<script src="../../../../asserts/lib/jquery.js"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<!--[if lte IE 9]>
+	 <script src="../../../bootstrap/js/html5shiv.js"></script>
+	 <script src="../../../bootstrap/js/respond.min.js"></script>
+	 <script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+	<script  src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script type="text/javascript" src="../../../js/page/twrrent/mobilemanage/updateinfo.js?v=30"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#startDate').datetimepicker({
+		        format: 'YYYY-MM-DD',
+		        locale: moment.locale('zh-cn')
+		    });
+		});
+	</script>
+	
+</body>
+</html>

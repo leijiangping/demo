@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../../../bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="../../../css/ncms_page.css" rel="stylesheet">
+    <title>地市自设考核指标扣罚-添加</title>
+</head>
+<body>
+    <form class="form-inline" id="dataForm">
+    	<div class="btn-toolbar">
+	        <button type="button" class="btn btn-primary" onclick="FormSubmit();">保存</button>
+	        <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>
+   		</div>
+        <div class="examination_title">添加省内考核指标扣罚信息</div>
+        <ul class="list-group examination-list">
+            <li class="list-group-item row">
+                <div class="col-md-4 examination-item">所属区县</div>
+                <div class="col-md-8">
+                	<select id="City" name="City" class="form-control">
+                		<option></option>	
+					</select>
+					<span id="err" class="modal-error"></span>
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-4 examination-item">年/月份</div>
+                <div class="col-md-8">
+                	<input type='text' id='datetimepicker' name="datetimepicker"class="form-control"/>
+                	<span id="err" class="modal-error"></span>
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-4 examination-item">扣罚指标</div>
+                <div class="col-md-8">
+                	<input type='text' class="form-control" id="punishName" name="punishName"/>
+                	<span id="err" class="modal-error"></span>
+                </div>
+            </li> 
+             <li class="list-group-item row">
+                <div class="col-md-4 examination-item">扣罚申请人</div>
+                <div class="col-md-8">
+                	<input type='text' class="form-control" id="punishPerson" name="punishPerson"/>
+                	<span id="err" class="modal-error"></span>
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-4 examination-item">扣罚费用</div>
+                <div class="col-md-8">
+                	<input type='text' class="form-control" id="punishAmount" name="punishAmount"/>
+                	<span id="err" class="modal-error"></span>
+                </div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-4 examination-item">扣罚原因详细说明</div>
+                <div class="col-md-8">
+                	<textarea rows="4" class="form-control" id="punishCause" name="punishCause"></textarea>
+                	<span id="err" class="modal-error"></span>
+                </div>
+            </li>
+            <li class="list-group-item row" style="display:none">
+                <div class="col-md-4 examination-item">审核状态</div>
+                <div class="col-md-8">
+                	<input type='hidden' class="form-control" id="auditState" name="auditState"/>
+                	<span id="err" class="modal-error"></span>
+                </div>
+            </li>
+        </ul>    
+    </form>
+    
+	<script src="../../../../asserts/lib/jquery.2.0.3.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script><!-- 时间格式化 -->
+	<script src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+	
+	<script src="../../../js/common.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../../js/page/twrrent/checkmanage/addPvc.js"></script>
+	<script>
+	$(function () {
+		var myDate = new Date();
+        var str = "" + myDate.getFullYear();
+        str += (myDate.getMonth()+1);
+        $('#datetimepicker').val(str);
+        
+        $('#datetimepicker').datetimepicker({
+        	format: 'YYYY/MM',
+			locale: moment.locale('zh-cn')
+        });
+    });
+	</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" 
+	media="screen">
+<link href="../../../css/ncms_page.css?v=2" rel="stylesheet" media="screen">
+<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" href="../../../bootstrap/css/jquery.treetable.css">
+<link rel="stylesheet" href="../../../bootstrap/css/jquery.treetable.theme.default.css">
+
+<script src="../../../../asserts/lib/jquery.2.0.3.min.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+<script src="../../../bootstrap/js/messages_zh.js"></script>
+
+<script type="text/javascript" src="../../../js/cascade-common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/selfelec/billaccount/auditing_check.js?v=12"></script> 
+<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+    <script  src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+<script src="../../../bootstrap/js/jquery.treetable.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	$('#planDate').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: moment.locale('zh-cn')
+    });
+});
+</script>
+	
+	
+	
+	
+</script>
+</head>
+<body>
+
+<form id="addOrModifyForm" action="">
+    <input id="billaccountId" type="hidden" />
+    <div class="btn-toolbar">
+        <button id="saveSet" type="button" class="btn btn-primary" onclick="auditingsave()">保存</button>
+        <button type="button" class="btn btn-default" onclick="back();">取消</button>
+    </div>
+    <div class="B_box">
+    	<!-- 审核信息 -->
+<!--     	<div>
+    		<ul class="list-group">
+	            <li class="list-group-item row">
+	                <div class="col-md-3">审核状态</div>
+	                <div class="col-md-3">
+	                    <select class="form-control" id='checkState'>
+	                        <option value='0'>审核通过</option>
+	                        <option value='8'>不通过</option>
+	                    </select>
+	                </div>
+	                  <div class="col-md-3">审核人</div>
+	                <div class="col-md-3" id="curUser"></div>
+	                <div class="col-md-3">审核时间</div>
+	                <div class="col-md-3">
+	                    <input type="date"/>
+	                </div>
+	            </li>
+	            <li class="list-group-item row">
+	              
+	                <div class="col-md-3">下级审核人</div>
+	                <div class="col-md-3">
+	                    <select class="form-control" id='leader' multiple="multiple">
+	                        
+	                    </select>
+	                    <select id="nextUsers" class="selectpicker" data-hide-disabled="true" data-size="4"></select> 
+	                </div>
+	                <div class="col-md-3">审核备注</div>
+	                <div class="col-md-3">
+	                    <input type="text" class="form-control" id='comment'>
+	                </div>
+	            </li>
+	        </ul>
+    	</div> -->
+        <div class="info_check">
+         <ul class="list-group addReburseStyle">
+            <li class="list-group-item row">
+                <div class="col-md-3">审核状态</div>
+                <div class="col-md-3">
+                    <select class="form-control" id='checkState'>
+                        <option value='0'>通过</option>
+                        <option value='8'>不通过</option>
+                    </select>
+                </div>
+                  <div class="col-md-3">审核人</div>
+                <div class="col-md-3" id="curUser"></div>
+            </li>
+            <li class="list-group-item row">
+              
+                <div class="col-md-3">下级审核人</div>
+                <div class="col-md-3">
+                    <select id="nextUsers" name="nextUsers" class="form-control selectpicker" data-hide-disabled="true" data-size="4" style="float:left" onchange="changeSave()"></select>
+                    <span id="err" class="modal-error"></span> 
+                </div>
+                <div class="col-md-3">审核备注</div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control commentMsg" id='comment' name="comment" style="resize: none;float:left" onchange="changeSave()">
+                    <span id="err" class="modal-error" style="float:left"></span>
+                </div>
+            </li>
+        </ul>
+        </div>             
+    	<!-- 添加报账点信息 -->
+        <div>
+            <ul class="list-group" id="entry_information">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">报账点信息</div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">报账点编码</div>
+                    <div class="col-md-4" >
+                        <input class="form-control" id="billaccountCode" type="text"/>
+                    </div>
+                    <div class="col-md-2">报账点名称</div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="billaccountName" type="text"/>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">所属地市</div>
+                    <div class="col-md-4" >
+                        <select id="modifyCity" name="city" class="form-control">
+								<option>-选择地市-</option>
+							</select>
+                    </div>
+                    <div class="col-md-2">所属区县</div>
+                    <div class="col-md-4">
+                        <select id="modifyRegion" name="region"  class="form-control">
+								<option>-选择区县-</option>
+							</select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">报账点状态</div>
+                    <div class="col-md-4" >
+                        <select id="billaccountState" class="form-control">
+                                 <option>-请选择-</option>
+                                 <option value="0">正常</option>
+                                 <option value="9">暂停</option>
+                                 <option value="10">终止</option>
+                              </select>
+                    </div>
+                    <div class="col-md-2">报账点类型</div>
+                    <div class="col-md-4">
+                        <select id="billaccountType" class="form-control">
+                                 <option value="1">电费报账点</option>
+                              </select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">计划缴费日期</div>
+                    <div class="col-md-4" >
+	                   <input type='text' class="form-control"  id="planDate"/>
+                    </div>
+                    <div class="col-md-2">报账点计量倍数</div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="calcMulti" type="text" placeholder="1.5"/>
+                    </div>
+                </li>
+                 <li class="list-group-item row">
+                    <div class="col-md-2">备注</div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="billaccountNote" type="text" />
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        
+                    </div>
+                    
+                </li>
+         
+            </ul>
+        </div>
+        
+        <!-- 关联合同信息-->
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">
+                    	 关联合同信息
+                    	<!--&nbsp;&nbsp;&nbsp;&nbsp;
+       					<a href="javascript:void(0)" onclick="selcontractPopup()" >选择关联合同</a>
+						<a href="javascript:void(0)" onclick="deselcontractPopup()">取消关联合同</a> -->
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <table id="contracttb"></table>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 关联资源信息-->
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">
+                    	关联资源信息
+                    	<!-- &nbsp;&nbsp;&nbsp;&nbsp;
+       					<a href="javascript:void(0)" onclick="selresourcePopup()" >选择关联资源</a>
+						<a href="javascript:void(0)" onclick="deselresourcePopup()">取消关联资源</a> -->
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <!-- <table id="resourcetb"></table> -->
+                    
+                    <table id="resourcetreetable" class="table table-hover table-striped">
+					        <thead>
+					          <tr>
+					            <th></th>
+					            <th>资源类型</th>
+					            <th>资源编码</th>
+					            <th>资源名称</th>
+					            <th>资源状态</th>
+					            <th></th>
+					          </tr>
+					        </thead>
+					        <tbody>
+					          
+					        </tbody>
+					</table>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="selRelationContractDiv" tabindex="-1" role="dialog" aria-labelledby="selContractDiv">
+  <div class="modal-dialog" role="document" style="width:800px;">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3>关联合同</h3>
+      </div>
+      <div class="modal-body">
+       		<table id="relationcontracttb"></table>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal" onclick="relationContractSubmit()">确定</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="selRelationResourceDiv" tabindex="-1" role="dialog" aria-labelledby="selResourceDiv">
+  <div class="modal-dialog" role="document" style="width:800px;">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h3>关联资源</h3>
+      </div>
+      <div class="modal-body">
+       		<table id="relationresourcetb"></table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="relationResourceSubmit()">确定</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="selRelationElectricmeterDiv" tabindex="-1" role="dialog" aria-labelledby="selRelationElectricmeterDiv">
+  <div class="modal-dialog" role="document" style="width:800px;">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h3>关联电表</h3>
+      </div>
+      <div class="modal-body">
+      		<input type="hidden" id="relationElectricmeterResourceId" />
+       		<table id="relationElectricmetertb"></table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="relationElectricmeterSubmit()">确定</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
+<div id="histoicFlowList" class="info_check"></div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 铁塔账单表 -->
+<mapper namespace="com.xunge.dao.TowerMobilerBillbalanceConfirmVOMapper" >
+ <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.settlement.TowerAndMobileBillConfirmVO">
+    <id column="towerbillbalance_id" jdbcType="VARCHAR" property="towerbillbalanceId" />
+    <result column="account_peroid" jdbcType="VARCHAR" property="accountPeroid" />
+    <result column="data_type" jdbcType="CHAR" property="dataType" />
+    <result column="business_confirm_number" jdbcType="VARCHAR" property="businessConfirmNumber" />
+    <result column="operator_reg_id" jdbcType="VARCHAR" property="operatorRegId" />
+    <result column="tower_station_code" jdbcType="VARCHAR" property="towerStationCode" />
+    <result column="tower_station_name" jdbcType="VARCHAR" property="towerStationName" />
+    <result column="agree_bill_code" jdbcType="VARCHAR" property="agreeBillCode" />
+    <result column="use_power_service_fee_out" jdbcType="DECIMAL" property="usePowerServiceFeeOut" />
+    <result column="hight_level_fee_out" jdbcType="DECIMAL" property="hightLevelFeeOut" />
+    <result column="batteryProtectionFee_out" jdbcType="DECIMAL" property="batteryprotectionfeeOut" />
+    <result column="current_tower_share_sum_price_out" jdbcType="DECIMAL" property="currentTowerShareSumPriceOut" />
+    <result column="current_room_share_sum_price_out" jdbcType="DECIMAL" property="currentRoomShareSumPriceOut" />
+    <result column="current_supporting_share_sum_price_out" jdbcType="DECIMAL" property="currentSupportingShareSumPriceOut" />
+    <result column="bbU_on_room_fee_back" jdbcType="DECIMAL" property="bbuOnRoomFeeBack" />
+    <result column="current_manager_fee_share_sum_price_out" jdbcType="DECIMAL" property="currentManagerFeeShareSumPriceOut" />
+    <result column="current_prace_fee_share_sum_price_out" jdbcType="DECIMAL" property="currentPraceFeeShareSumPriceOut" />
+    <result column="current_power_in_fee_share_sum_price_out" jdbcType="DECIMAL" property="currentPowerInFeeShareSumPriceOut" />
+    <result column="wlan_fee_out" jdbcType="DECIMAL" property="wlanFeeOut" />
+    <result column="microwave_fee_out" jdbcType="DECIMAL" property="microwaveFeeOut" />
+    <result column="other_fee1_out" jdbcType="DECIMAL" property="otherFee1Out" />
+    <result column="confirm_state" jdbcType="INTEGER" property="confirmState" />
+    <result column="order_prop" jdbcType="VARCHAR" property="orderProp" />
+    <result column="right_prop" jdbcType="VARCHAR" property="rightProp" />
+    <result column="ori_right" jdbcType="VARCHAR" property="oriRight" />
+    <result column="res_compare" jdbcType="INTEGER" property="resCompare" />
+    <result column="total_amount_month_out" jdbcType="DECIMAL" property="totalAmountMonthOut" />
+    <result column="elec_fee_out" jdbcType="DECIMAL" property="elecFeeOut" />
+    
+    <result column="data_type1" jdbcType="CHAR" property="dataType1" />
+    <result column="use_power_service_fee_out1" jdbcType="DECIMAL" property="usePowerServiceFeeOut1" />
+    <result column="hight_level_fee_out1" jdbcType="DECIMAL" property="hightLevelFeeOut1" />
+    <result column="batteryProtectionFee_out1" jdbcType="DECIMAL" property="batteryprotectionfeeOut1" />
+    <result column="current_tower_share_sum_price_out1" jdbcType="DECIMAL" property="currentTowerShareSumPriceOut1" />
+    <result column="current_room_share_sum_price_out1" jdbcType="DECIMAL" property="currentRoomShareSumPriceOut1" />
+    <result column="current_supporting_share_sum_price_out1" jdbcType="DECIMAL" property="currentSupportingShareSumPriceOut1" />
+    <result column="bbU_on_room_fee_back1" jdbcType="DECIMAL" property="bbuOnRoomFeeBack1" />
+    <result column="current_manager_fee_share_sum_price_out1" jdbcType="DECIMAL" property="currentManagerFeeShareSumPriceOut1" />
+    <result column="current_prace_fee_share_sum_price_out1" jdbcType="DECIMAL" property="currentPraceFeeShareSumPriceOut1" />
+    <result column="current_power_in_fee_share_sum_price_out1" jdbcType="DECIMAL" property="currentPowerInFeeShareSumPriceOut1" />
+    <result column="wlan_fee_out1" jdbcType="DECIMAL" property="wlanFeeOut1" />
+    <result column="microwave_fee_out1" jdbcType="DECIMAL" property="microwaveFeeOut1" />
+    <result column="other_fee1_out1" jdbcType="DECIMAL" property="otherFee1Out1" />
+    <result column="total_amount_month_out1" jdbcType="DECIMAL" property="totalAmountMonthOut1" />
+    <result column="elec_fee_out1" jdbcType="DECIMAL" property="elecFeeOut1" />
+  	<association property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+		    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+		    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+		    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+		    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+		    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+     </association>
+  </resultMap>
+  <!-- 塔维结算账单确认 -->
+  <select id="queryTowerAndMobileConfirmBill" resultMap="BaseResultMap" parameterType="Map" >
+			SELECT
+				ttb.towerbillbalance_id,
+				ttb.account_peroid,
+				ttb.data_type,
+				ttb.business_confirm_number,
+				ttb.operator_reg_id,
+				ttb.tower_station_code,
+				ttb.tower_station_name,
+				ttb.agree_bill_code,
+				ttb.use_power_service_fee_out,
+				ttb.hight_level_fee_out,
+				ttb.batteryProtectionFee_out,
+				ttb.current_tower_share_sum_price_out,
+				ttb.current_room_share_sum_price_out,
+				ttb.current_supporting_share_sum_price_out,
+				ttb.bbU_on_room_fee_back,
+				ttb.current_manager_fee_share_sum_price_out,
+				ttb.current_prace_fee_share_sum_price_out,
+				ttb.current_power_in_fee_share_sum_price_out,
+				ttb.wlan_fee_out,
+				ttb.microwave_fee_out,
+				ttb.other_fee1_out,
+				ttb.elec_fee_out,
+				ttb.total_amount_month_out,
+				ttb.right_prop,
+				ttb.ori_right,
+				ttb.confirm_state,
+				ttb.order_prop,
+				ttb.res_compare,
+				t.data_type1,
+				t.use_power_service_fee_out1,
+				t.tower_station_code1,
+				t.agree_bill_code1,
+				t.hight_level_fee_out1,
+				t.batteryProtectionFee_out1,
+				t.current_tower_share_sum_price_out1,
+				t.current_room_share_sum_price_out1,
+				t.current_supporting_share_sum_price_out1,
+				t.bbU_on_room_fee_back1,
+				t.current_manager_fee_share_sum_price_out1,
+				t.current_prace_fee_share_sum_price_out1,
+				t.current_power_in_fee_share_sum_price_out1,
+				t.wlan_fee_out1,
+				t.microwave_fee_out1,
+				t.other_fee1_out1,
+				t.elec_fee_out1,
+				t.total_amount_month_out1,
+				vsr.reg_id,
+				vsr.reg_name,
+				vsr.preg_id,
+				vsr.preg_name
+			FROM
+				twr_towerbillbalance ttb
+			INNER JOIN (
+				select 
+				b.data_type data_type1,
+				b.business_confirm_number business_confirm_number1,
+			  b.agree_bill_code agree_bill_code1,
+			  b.use_power_service_fee_out use_power_service_fee_out1,
+				b.hight_level_fee_out hight_level_fee_out1,
+				b.batteryProtectionFee_out batteryProtectionFee_out1,
+				b.current_tower_share_sum_price_out current_tower_share_sum_price_out1,
+				b.current_room_share_sum_price_out current_room_share_sum_price_out1,
+				b.current_supporting_share_sum_price_out current_supporting_share_sum_price_out1,
+				b.bbU_on_room_fee_back bbU_on_room_fee_back1,
+				b.current_manager_fee_share_sum_price_out current_manager_fee_share_sum_price_out1,
+				b.current_prace_fee_share_sum_price_out current_prace_fee_share_sum_price_out1,
+				b.current_power_in_fee_share_sum_price_out current_power_in_fee_share_sum_price_out1,
+				b.wlan_fee_out wlan_fee_out1,
+				b.microwave_fee_out microwave_fee_out1,
+				b.other_fee1_out other_fee1_out1,
+				b.elec_fee_out elec_fee_out1,
+				b.tower_station_code tower_station_code1,
+				b.total_amount_month_out total_amount_month_out1
+			FROM
+				twr_towerbillbalance b
+			WHERE
+				b.data_type =#{dataTypeMobile}
+			) t ON ttb.business_confirm_number = t.business_confirm_number1
+			AND ttb.tower_station_code = t.tower_station_code1
+			INNER JOIN v_sys_region vsr ON vsr.reg_id = ttb.operator_reg_id
+				WHERE
+			ttb.data_type = #{dataTypeTower}
+			<if test="accountPeroid != null and accountPeroid !='' ">
+				AND ttb.account_peroid = #{accountPeroid,jdbcType=VARCHAR}
+			</if>
+			<if test="businessConfirmNumber != null and businessConfirmNumber !='' ">
+				AND ttb.business_confirm_number = #{businessConfirmNumber,jdbcType=VARCHAR }
+			</if>
+			<if test="towerStationCodeOrName != '' and towerStationCodeOrName != null">
+				and (ttb.tower_station_code like
+				CONCAT('%',#{towerStationCodeOrName,jdbcType=VARCHAR},'%')
+				or ttb.tower_station_name like
+				CONCAT('%',#{towerStationCodeOrName,jdbcType=VARCHAR},'%'))
+			</if>
+			<if test="pregId != '' and pregId != null">
+				and vsr.preg_id = #{pregId,jdbcType=VARCHAR}
+			</if>
+			<if test="regId != '' and regId != null">
+				and vsr.reg_id = #{regId,jdbcType=VARCHAR}
+			</if>
+			<if test="regId == '' or regId == null">
+			and vsr.reg_id in (
+				select reg_id from sys_userregion 
+				where relation_state=#{state}
+					and user_id = #{userId, jdbcType=VARCHAR}
+				)
+			</if>
+			<if test="resCompare != '' and resCompare != null">
+				and ttb.res_compare = #{resCompare,jdbcType=VARCHAR}
+			</if>
+  </select>
+  	<!--   	批量账单修改 -->
+  	<update id="updateTowerMobileBillState" parameterType="java.util.List">
+          <foreach collection="list" item="BillConfirm" index="index" open="" close="" separator=";">  
+                update twr_towerbillbalance t   
+                <set> 
+                <if test="BillConfirm.afterAdjustmentFee !=null and BillConfirm.afterAdjustmentFee !='' ">
+                  t.after_adjustment_fee=#{BillConfirm.afterAdjustmentFee}, 
+                 </if>  
+                  t.confirm_state=#{BillConfirm.confirmState} 
+                </set>  
+                where t.towerbillbalance_id = #{BillConfirm.towerbillbalanceId}  
+         </foreach>  
+    </update> 
+    
+    	<!--   	批量账单确认 -->
+	<update id="updateTowerMobileBillConfirmState" parameterType="Map">
+		update twr_towerbillbalance t
+		SET	t.confirm_state=1
+		<where>
+			<if test="towerbillbalanceIds !=null and towerbillbalanceIds.size()>0 ">
+				and t.towerbillbalance_id in
+				<foreach collection="towerbillbalanceIds" item="item" index="index"
+					open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</update> 
+<!--     批量取消账单确认 -->
+  	<update id="updateCancleConfirmState" parameterType="Map">
+  		update twr_towerbillbalance t 
+  		SET  t.after_adjustment_fee=#{afterAdjustmentFee},
+  			 t.confirm_state=#{confirmState}
+  		where t.towerbillbalance_id in 
+  		 <foreach collection="towerbillbalanceIds" item="towerbillbalanceId" index="index" open="(" close=")" separator=",">  
+  			#{towerbillbalanceId}
+  		</foreach>
+    </update> 
+ 
+  
+</mapper>

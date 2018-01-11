@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.system.SysRegionVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.system.region.SysRegionVO" >
+    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+    <result column="regCode" property="rCode" jdbcType="VARCHAR" />
+    <result column="regName" property="rName" jdbcType="VARCHAR" />
+    <result column="preg_name" property="pregName" jdbcType="VARCHAR" />
+     <result column="pRegCode" property="pRegCode" jdbcType="VARCHAR" />
+    <result column="pRegName" property="pRegName" jdbcType="VARCHAR"/>
+    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+    <association property="province" javaType="com.xunge.model.system.province.SysProvinceVO">
+     <id column="prv_id" property="prvId" jdbcType="VARCHAR" />
+      <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+ 	<result column="prv_group" property="prvGroup" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+   <resultMap id="prvGroupResultMap" type="com.xunge.model.system.province.SysProvinceGroupVO" >
+     	<result column="prv_group" property="prvGroup" jdbcType="VARCHAR" />
+     	<collection property="sysProvince" ofType="com.xunge.model.system.province.SysProvinceVO">
+	      <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+	      <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+	      <result column="prv_sname" property="prvSname" jdbcType="VARCHAR" />
+	      <result column="prv_code" property="prvCode" jdbcType="VARCHAR" />
+      	  <result column="prv_flag" property="prvFlag" jdbcType="VARCHAR" />
+      	  <result column="prv_state" property="prvState" jdbcType="VARCHAR" />
+     	</collection>
+   </resultMap>
+    <resultMap id="prvResultMap" type="com.xunge.model.system.province.SysProvinceVO" >
+      <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+      <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+      <result column="prv_sname" property="prvSname" jdbcType="VARCHAR" />
+      <result column="prv_code" property="prvCode" jdbcType="VARCHAR" />
+      <result column="prv_flag" property="prvFlag" jdbcType="VARCHAR" />
+      <result column="prv_state" property="prvState" jdbcType="VARCHAR" />
+   	  <result column="prv_group" property="prvGroup" jdbcType="VARCHAR" />
+   </resultMap>
+    <select id="selectByPrvGroup" parameterType="Map" resultMap="prvGroupResultMap">
+  	SELECT 
+		sp.prv_id,
+		sp.prv_code,
+		sp.prv_name,
+		sp.prv_sname,
+		sp.prv_flag,
+		sp.prv_state,
+		sp.prv_group
+	FROM
+		sys_province sp
+	order by sp.prv_order
+  </select>
+    <select id="selectProvinceByIds" parameterType="Map" resultMap="prvResultMap">
+  	SELECT 
+		sp.prv_id,
+		sp.prv_code,
+		sp.prv_name,
+		sp.prv_sname,
+		sp.prv_flag,
+		sp.prv_state,
+		sp.prv_group
+	FROM
+		sys_province sp
+	<where>
+		<if test="regState !=null and regState !='' ">
+			sp.prv_state = 9
+		</if>
+		<if test="prvIds!=null and prvIds !='' ">
+			and sp.prv_id in
+			<foreach collection="prvIds" item="item" index="index" open="(" separator="," close=")">  
+	            #{item}
+	        </foreach> 
+		</if>
+	</where>
+	order by sp.prv_order
+  </select>
+  <!-- 权限过滤模块 -->
+  <sql id="queryRegionByUserIds">
+  	 <if test="regIds !=null and regIds.size()>0"> <!--所有的必须过滤权限-->
+	  	and 
+	  	<if test="alias !=null and alias!=''">
+	  	${alias}
+	  	</if>
+	  	<if test="alias ==null or alias==''">
+	  	reg
+	  	</if>
+	  	.reg_id in <foreach collection="regIds" item="item" index="index" open="(" separator="," close=")">  
+			                #{item}
+		            	</foreach> 
+	 </if>
+	 <if test="regIds ==null or regIds.size()==0 "> <!--如果没有权限，则不查-->
+	  	and 1!=1
+	 </if>
+	<if test="pregIds !=null and pregIds.size()>0">
+		  	and 
+		  	<if test="alias !=null and alias!=''">
+		  	${alias}
+		  	</if>
+		  	<if test="alias ==null or alias==''">
+		  	reg
+		  	</if>
+		  	.preg_id in <foreach collection="pregIds" item="item" index="index" open="(" separator="," close=")">  
+			                #{item}
+			            </foreach> 
+	</if>
+  </sql>
+  
+  <select id="queryRegionByConditions" parameterType="map" resultMap="BaseResultMap">
+	SELECT
+		sp.prv_id AS reg_id,
+		sp.prv_code AS regCode,
+		sp.prv_name AS regName,
+		sp.prv_order AS reg_order,
+		sp.prv_state AS prv_state,
+		'' AS preg_id,
+		'中国移动集团公司' AS pRegName
+	FROM
+		sys_province sp
+	WHERE 1=1
+	<if test="prvId != '' and prvId != null">
+  		and  sp.prv_id= #{prvId,jdbcType=VARCHAR}
+  	</if>
+  	<if test="prvState != '' and prvState != null">
+     		and sp.prv_state= #{prvState}
+    </if>
+	UNION ALL
+	SELECT
+		reg.reg_id,
+		reg.reg_code,
+		reg.reg_name,
+		reg.reg_order,
+		reg.reg_state,
+		reg.preg_id,
+		preg.reg_name AS pRegName
+	FROM
+	sys_region reg 
+	LEFT JOIN sys_region preg
+	on reg.preg_id = preg.reg_id
+	WHERE reg.reg_state = 0
+  	<if test="prvId != '' and prvId != null">
+  		and  reg.prv_id= #{prvId,jdbcType=VARCHAR}
+  	</if>
+  	<if test="prvId == '' or prvId == null">
+  		and reg.prv_id in (
+  			select spe.prv_id
+  			from sys_province spe
+  			where prv_state = #{prvState}
+  		)
+  	</if>
+  </select>
+ 
+  <select id="queryByCons" parameterType="Map" resultMap="BaseResultMap">
+  	SELECT
+		sp.prv_id AS reg_id,
+		sp.prv_code AS regCode,
+		sp.prv_name AS regName,
+		sp.prv_order AS reg_order,
+		sp.prv_state AS prv_state,
+		'' AS preg_id,
+		'中国移动集团公司' AS pRegName
+	FROM
+		sys_province sp
+	WHERE 1=1
+	<if test="prvId != '' and prvId != null">
+  		and  sp.prv_id= #{prvId,jdbcType=VARCHAR}
+  	</if>
+	UNION ALL
+	SELECT
+		reg.reg_id,
+		reg.reg_code,
+		reg.reg_name,
+		reg.reg_order,
+		reg.reg_state,
+		reg.preg_id,
+		preg.reg_name AS pRegName
+	FROM
+		sys_region reg
+	LEFT JOIN sys_region preg
+	on reg.preg_id = preg.reg_id
+	WHERE reg.reg_state = 0
+  		<if test="regCode!='' and regCode!=null">
+  		and  reg.reg_code like CONCAT('%',#{regCode,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test="regName!='' and regName!=null">
+  		and reg.reg_name like CONCAT('%',#{regName,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test="regState != '' and regState != null">
+     		and reg.reg_state=0
+     	</if>
+     	<if test="prvId != '' and prvId != null">
+  			and  reg.prv_id= #{prvId,jdbcType=VARCHAR}
+  		</if>
+  </select>
+  
+  <select id="getRegionById" parameterType="String" resultMap="BaseResultMap">
+  	select  reg_id, reg_code, reg_state, reg_name, preg_id, reg_order
+  	from sys_region where reg_id=#{regId}
+  </select>
+  
+  <select id="getRegionIdByName" parameterType="String" resultType="java.lang.String">
+  	select reg_id from sys_region where reg_name=#{regName}
+  </select>
+  
+  <select id="getPrvNameById" parameterType="String" resultType="java.lang.String">
+  	select prv_name
+  	from v_sys_region where reg_id=#{regId}
+  </select>
+  <select id="getPrvIdByCode" parameterType="String" resultType="java.lang.String">
+  	select prv_id from sys_province where prv_code=#{prvcode}
+  </select>
+  <select id="getRegIdByCode" parameterType="String" resultType="java.lang.String">
+  	select reg_id from sys_region where reg_code=#{regcode}
+  </select>
+  
+   <select id="getRegIdByprvId" parameterType="String" resultType="java.lang.String">
+  	select reg_id
+  	from sys_region where prv_id=#{prvId}
+  </select>
+  
+     <update id="deleteByCons" parameterType="Map">
+		update sys_region s set s.reg_state=#{state}
+	    where 1=1
+		<if test="idsList != null and idsList.size()>0">  
+	        and s.reg_id in  
+	        <foreach collection="idsList" item="item" index="index" open="(" separator="," close=")">  
+                #{item}  
+            </foreach>  
+    	</if>
+	</update>
+  
+    <insert id="insertRegion" parameterType="com.xunge.model.system.region.SysRegionVO">
+		insert into sys_region
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="regId != null">
+				reg_id,
+			</if>
+			<if test="prvId != null">
+				prv_id,
+			</if>
+			<if test="regCode != null">
+				reg_code,
+			</if>
+			<if test="regName != null">
+				reg_name,
+			</if>
+			<if test="pregId != null">
+				preg_id,
+			</if>
+			<if test="regOrder != null">
+				reg_order,
+			</if>
+			<if test="level != null">
+				level,
+			</if>
+			<if test="isValid != null">
+				is_Valid,
+			</if>
+			<if test="regState != null">
+				reg_state,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="regId != null">
+				#{regId,jdbcType=VARCHAR},
+			</if>
+			<if test="prvId != null">
+				 #{prvId,jdbcType=VARCHAR},
+			</if>
+   
+			<if test="regCode != null">
+					#{regCode,jdbcType=VARCHAR}, 
+			</if>
+			<if test="regName != null">
+				 #{regName,jdbcType=VARCHAR}, 
+			</if>
+			<if test="pregId != null">
+			 #{pregId,jdbcType=VARCHAR}, 
+			</if>
+				<if test="regOrder != null">
+			 #{regOrder,jdbcType=INTEGER}, 
+			</if>
+				<if test="level != null">
+			 #{level,jdbcType=INTEGER}, 
+			</if>
+				<if test="isValid != null">
+			 #{isValid,jdbcType=INTEGER}, 
+			</if>
+			<if test="regState != null">
+			 #{regState,jdbcType=INTEGER}
+			 </if>
+		</trim>
+	</insert>
+  
+  
+  <update id="updateRegion" parameterType="com.xunge.model.system.region.SysRegionVO">
+    update sys_region
+    <set>
+      <if test="regCode != null">
+        reg_code = #{regCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null">
+        reg_name = #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null">
+        preg_id = #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrder != null">
+        reg_order = #{regOrder,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        is_Valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="regState != null">
+        reg_state = #{regState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reg_id = #{regId,jdbcType=VARCHAR}
+  </update>
+	
+  	<!-- 根据集团省份id查询所有省id[9启用] -->
+	<select id="queryPrvRegionIdsByPrvId" resultType="java.lang.String" parameterType="Map">
+		select prv_id 
+		from sys_province 
+		<where>
+			prv_state=9
+			<if test="prv_id != '' and prv_id != null">
+				and prv_id != #{prv_id,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+  	<!-- 根据省份id查询所有市id -->
+	<select id="queryPRegionIdsByPrvId" resultType="java.lang.String" parameterType="Map">
+		select reg_id from sys_region
+		<where>
+			reg_state=0
+			<if test="prv_id != '' and prv_id != null">
+				and preg_id = #{prv_id,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+  	<!-- 根据直辖市省份id查询所有区id -->
+	<select id="queryRegionIdsByPrvId" resultType="java.lang.String" parameterType="Map">
+		select reg_id 
+		from sys_region where preg_id in (
+			select reg_id from sys_region
+			<where>
+				reg_state=0
+				<if test="prv_id != '' and prv_id != null">
+					and preg_id = #{prv_id,jdbcType=VARCHAR}
+				</if>
+			</where>
+		)
+	</select>
+	
+  	<!-- 根据用户regId 查找用户区域信息 -->
+	<select id="getUserAddress" resultMap="BaseResultMap" parameterType="Map">
+		select
+		prv_id,prv_name,reg_id,reg_name,preg_id,preg_name
+		from v_sys_region
+		<where>
+		reg_state = 0
+			<if test="prvId != '' and prvId != null">
+				and prv_id = #{prvId,jdbcType=VARCHAR}
+			</if>
+			<if test="pregId != '' and pregId != null">
+				and preg_id = #{pregId,jdbcType=VARCHAR}
+			</if>
+			<if test="regId != '' and regId != null">
+				and reg_id = #{regId,jdbcType=VARCHAR}
+			</if>
+			<if test="state != '' and state != null">
+				and reg_state = #{state,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询所有区域信息 -->
+	<select id="getAddress" resultMap="BaseResultMap" parameterType="Map">
+		select
+		prv_id,prv_name,reg_id,reg_name,preg_id,preg_name,reg_code,preg_code
+		from v_sys_region where reg_state = #{state,jdbcType=VARCHAR}
+		<if test="prvId != '' and prvId != null">
+			and prv_id = #{prvId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<resultMap id="ManRegionResultMap" type="com.xunge.model.system.region.RegionVO" >
+	    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+	    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+	    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+	    <result column="reg_order" property="regOrder" jdbcType="VARCHAR" />
+	    <result column="preg_id" property="pRegId" jdbcType="VARCHAR" />
+  	</resultMap>
+  
+	<!-- 查询管理区对应的省 -->
+	<select id="queryManaProvs" resultMap="ManRegionResultMap" parameterType="Map">
+		select 
+			sr.reg_id, 
+			sr.reg_name, 
+			sr.reg_code, 
+			sr.reg_order, 
+			sr.preg_id 
+		from sys_region sr where sr.reg_id in (
+			select srr.preg_id 
+			from sys_region srr where srr.reg_id in (
+				select sur.reg_id from sys_userregion sur 
+				where sur.relation_state=#{state,jdbcType=VARCHAR}
+				<if test="userId != '' and userId != null">
+					and sur.user_id = #{userId, jdbcType=VARCHAR}
+				</if>
+			)
+		)
+		<if test="prvId != '' and prvId != null">
+			and prv_id = #{prvId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<!-- 查询管理区 -->
+	<select id="queryManaRegions" resultMap="ManRegionResultMap" parameterType="Map">
+		select
+			sr.reg_id, 
+			sr.reg_name, 
+			sr.reg_code, 
+			sr.reg_order, 
+			sr.preg_id 
+		from sys_region sr where sr.reg_id in (
+			select sur.reg_id from sys_userregion sur 
+			where sur.relation_state=#{state,jdbcType=VARCHAR}
+			<if test="userId != '' and userId != null">
+				and sur.user_id = #{userId, jdbcType=VARCHAR}
+			</if>
+		)
+		<if test="cityId != '' and cityId != null">
+			and sr.preg_id = #{cityId, jdbcType=VARCHAR}
+		</if>
+		<if test="state != '' and state != null">
+			and sr.reg_state = #{state}
+		</if>
+	</select>
+	
+  	<!-- 根据pregId查询regId和name -->
+  	<select id="queryRegMsgById" parameterType="Map" resultMap="BaseResultMap">
+  		select reg_id,reg_name
+  		from sys_region
+  		where reg_state = #{state}
+		<if test="pregId != '' and pregId != null">
+			and preg_id = #{pregId}
+		</if>
+		<if test="regId != '' and regId != null">
+			and reg_id = #{regId}
+		</if>
+  	</select>
+  	<!-- 根据regid查询name -->
+  	<select id="queryNameById" parameterType="Map" resultType="java.lang.String">
+  		select reg_name
+  		from sys_region
+  		where reg_id = #{regId}
+  	</select>
+</mapper>

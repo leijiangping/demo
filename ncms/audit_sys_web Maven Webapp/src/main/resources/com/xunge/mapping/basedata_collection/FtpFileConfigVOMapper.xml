@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.collection.FtpFileConfigVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.basedata.colletion.FtpFileConfigVO" >
+    <id column="file_id" property="fileId" jdbcType="VARCHAR" />
+    <result column="file_perfix" property="filePerfix" jdbcType="VARCHAR" />
+    <result column="field_config" property="fieldConfig" jdbcType="INTEGER" />
+    <result column="file_data_type" property="fileDataType" jdbcType="VARCHAR" />
+    <result column="task_id" property="taskId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    file_id, file_perfix, field_config, file_data_type, task_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ftp_file_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ftp_file_config
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ftp_file_config
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVOExample" >
+    delete from ftp_file_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVO" >
+    insert into ftp_file_config (file_id, file_perfix, field_config, 
+      file_data_type, task_id)
+    values (#{fileId,jdbcType=VARCHAR}, #{filePerfix,jdbcType=VARCHAR}, #{fieldConfig,jdbcType=INTEGER}, 
+      #{fileDataType,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVO" >
+    insert into ftp_file_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="filePerfix != null" >
+        file_perfix,
+      </if>
+      <if test="fieldConfig != null" >
+        field_config,
+      </if>
+      <if test="fileDataType != null" >
+        file_data_type,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePerfix != null" >
+        #{filePerfix,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldConfig != null" >
+        #{fieldConfig,jdbcType=INTEGER},
+      </if>
+      <if test="fileDataType != null" >
+        #{fileDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVOExample" resultType="java.lang.Integer" >
+    select count(*) from ftp_file_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ftp_file_config
+    <set >
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePerfix != null" >
+        file_perfix = #{record.filePerfix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldConfig != null" >
+        field_config = #{record.fieldConfig,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileDataType != null" >
+        file_data_type = #{record.fileDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ftp_file_config
+    set file_id = #{record.fileId,jdbcType=VARCHAR},
+      file_perfix = #{record.filePerfix,jdbcType=VARCHAR},
+      field_config = #{record.fieldConfig,jdbcType=INTEGER},
+      file_data_type = #{record.fileDataType,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVO" >
+    update ftp_file_config
+    <set >
+      <if test="filePerfix != null" >
+        file_perfix = #{filePerfix,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldConfig != null" >
+        field_config = #{fieldConfig,jdbcType=INTEGER},
+      </if>
+      <if test="fileDataType != null" >
+        file_data_type = #{fileDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.colletion.FtpFileConfigVO" >
+    update ftp_file_config
+    set file_perfix = #{filePerfix,jdbcType=VARCHAR},
+      field_config = #{fieldConfig,jdbcType=INTEGER},
+      file_data_type = #{fileDataType,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR}
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </update>
+  
+     <!--根据taskid获取-->
+    <select id="getByTaskId" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from ftp_file_config
+        where task_id = #{taskId,jdbcType=VARCHAR}
+    </select>
+    
+       <!--删除-->
+    <delete id="deleteFtpFileConfigs">
+        DELETE from ftp_file_config
+        WHERE file_id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

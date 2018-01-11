@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.CostDifferVO" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizbasedata.CostDifferVO" >
+	    <id column="chargediff_id" property="chargediffId" jdbcType="VARCHAR" />
+	    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+	    <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+	    <result column="chargediff_upnum" property="chargediffUpnum" jdbcType="DECIMAL" />
+	    <result column="chargediff_dnnum" property="chargediffDnnum" jdbcType="DECIMAL" />
+	    <result column="chargediff_note" property="chargediffNote" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询费用差异对象-->
+  <select id="queryAllObj" resultMap="BaseResultMap" parameterType="Map">
+    select 
+        cha.chargediff_id,
+	    cha.prv_id,
+	    pro.prv_name,
+	    cha.chargediff_upnum,
+        cha.chargediff_dnnum,
+	    cha.chargediff_note
+	from twr_chargediff cha 
+	inner join sys_province pro
+	on cha.prv_id = pro.prv_id
+	<if test="prvId != null and prvId != ''">
+    	where cha.prv_id=#{prvId}
+	</if>
+	</select>
+	
+	<!-- 删除费用差异对象-->
+	<delete id="deleteObjById" parameterType="Map">
+		delete from
+		    twr_chargediff
+		where chargediff_id in 
+		<foreach collection="objIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改费用差异对象-->
+	<update id="updateObjById" parameterType="com.xunge.model.towerrent.bizbasedata.CostDifferVO">
+		update twr_chargediff
+		set
+			prv_id = #{prvId,jdbcType=VARCHAR},
+			chargediff_upnum = #{chargediffUpnum,jdbcType=DECIMAL},
+			chargediff_dnnum = #{chargediffDnnum,jdbcType=DECIMAL},
+			chargediff_note = #{chargediffNote,jdbcType=VARCHAR}
+		where chargediff_id = #{chargediffId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 新增费用差异对象-->
+	<insert id="addObj" parameterType="com.xunge.model.towerrent.bizbasedata.CostDifferVO">
+		insert into twr_chargediff
+		    (chargediff_id,
+			prv_id,
+			chargediff_upnum,
+		    chargediff_dnnum,
+		    chargediff_note)
+		values(
+		#{chargediffId,jdbcType=VARCHAR},
+		#{prvId,jdbcType=VARCHAR},
+		#{chargediffUpnum,jdbcType=VARCHAR},
+		#{chargediffDnnum,jdbcType=DECIMAL},
+		#{chargediffNote,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	 <!-- 过滤差异对象-->
+	<select id="queryObjByCondition" resultMap="BaseResultMap" parameterType="Map">
+        select 
+		    cha.chargediff_id,
+			cha.prv_id,
+			cha.chargediff_upnum,
+		    cha.chargediff_dnnum,
+		    pro.prv_name,
+			cha.chargediff_note
+			from twr_chargediff cha inner join sys_province pro
+	    on cha.prv_id = pro.prv_id
+        where cha.chargediff_id != ''
+        <if test="prvId != null and prvId != ''">
+    	    and cha.prv_id = #{prvId,jdbcType=VARCHAR}
+	    </if>
+	</select>
+</mapper>

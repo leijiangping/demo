@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	
+ 	<bean id="twrProductTypeDao" class="com.xunge.dao.twrrent.bizbasedata.impl.TwrProductTypeDaoImpl"> 
+ 	</bean> 
+ 	<bean id="twrWindPressureDao" class="com.xunge.dao.twrrent.bizbasedata.impl.TwrWindPressureDaoImpl"> 
+ 	</bean> 
+ 	<bean id="twrHighUpDao" class="com.xunge.dao.twrrent.bizbasedata.impl.TwrHighUpDaoImpl"> 
+ 	</bean> 
+ 	<bean id="calParamDao" class="com.xunge.dao.twrrent.bizbasedata.impl.CalParameterDaoImpl"> 
+ 	</bean> 
+ 	<bean id="proCostDao" class="com.xunge.dao.twrrent.bizbasedata.impl.TwrProductCostDaoImpl"> 
+ 	</bean> 
+ 	<bean id="chargeDao" class="com.xunge.dao.twrrent.bizbasedata.impl.TwrChargeDiffDaoImpl"> 
+ 	</bean> 
+ 	<bean id="proConfDao" class="com.xunge.dao.twrrent.bizbasedata.impl.TwrProductConfDaoImpl"> 
+ 	</bean> 
+ 	
+ 	<!-- 移动起租表dao -->
+ 	<bean id="twrRentInformationDao" class="com.xunge.dao.towerrent.mobile.impl.TwrRentInformationDaoImpl"> 
+ 	</bean> 
+ 	
+ 	<bean id="twrPrvCheckIndexFineDao" class="com.xunge.dao.towerrent.checkmanage.impl.TwrPrvCheckIndexFineDaoImpl"> 
+ 	</bean> 
+</beans>

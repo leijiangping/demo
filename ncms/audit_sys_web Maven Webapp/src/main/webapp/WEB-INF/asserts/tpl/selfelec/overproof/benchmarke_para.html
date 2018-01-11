@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-table.min.css" >
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+    <title>标杆参数设置</title>
+</head>
+<body>
+    <form class="form-inline">
+        <div class="form-group">
+            <select id="City">
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="month">
+            	<option value>请选择月份</option>
+            	<option value="1">1月</option>
+            	<option value="2">2月</option>
+            	<option value="3">3月</option>
+            	<option value="4">4月</option>
+            	<option value="5">5月</option>
+            	<option value="6">6月</option>
+            	<option value="7">7月</option>
+            	<option value="8">8月</option>
+            	<option value="9">9月</option>
+            	<option value="10">10月</option>
+            	<option value="11">11月</option>
+            	<option value="12">12月</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-success" onclick="loadTableData();">查询</button>
+    </form>
+    <div class="btn-toolbar">
+        <button class="btn btn-primary" type="button" onclick="addRow();">新增</button>
+        <button class="btn btn-primary" type="button" onclick="revamp();">修改</button>
+        <button class="btn btn-primary" type="button" onclick="exportResourceInfo();">导出</button>
+        <table id="tb"></table>
+    </div>
+     <!-- 新增、修改 -->
+    <div class="modal hide fade special" id="EditPanel" tabindex="-1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form class="form-horizontal" id="dataForm">
+					<div class="modal-header">
+						<button class="close" type="button" data-dismiss="modal">×</button>
+						<h4 id="myModalLabel">标杆参数设置</h4>
+					</div>
+					<div class="modal-body" style="min-height: 200px;">
+						 <table id="reportTable2" class="table table-bordered table-hover">
+						 	<thead>
+						 		<tr>
+						 			<th>地市</th>
+						 			<th>月份</th>
+						 			<th>PUE</th>
+						 			<th>空调运行时长</th>
+						 		</tr>
+						 	</thead>
+						 	<tbody>
+						 		<tr>
+						 			<td>
+						 				<select id="regId" name="regId" style="width:100px;height:26px;">
+            							</select>
+            							<span id="err" class="modal-error"><span>
+						 			</td>
+						 			<td>
+						 				<select id="months" name="monthNo" style="width:100px;height:26px;">
+							            	<option value="1">1月</option>
+							            	<option value="2">2月</option>
+							            	<option value="3">3月</option>
+							            	<option value="4">4月</option>
+							            	<option value="5">5月</option>
+							            	<option value="6">6月</option>
+							            	<option value="7">7月</option>
+							            	<option value="8">8月</option>
+							            	<option value="9">9月</option>
+							            	<option value="10">10月</option>
+							            	<option value="11">11月</option>
+							            	<option value="12">12月</option>
+							            </select>
+							            <span id="err" class="modal-error"><span>
+						 			</td>
+						 			<td>
+						 				<input type="text" id="pue" name="pue" style="width:100px;padding: 0 5px;"/>
+						 				<span id="err" class="modal-error"><span>
+						 			</td>
+						 			<td>
+						 				<input type="text" id="t" name="t" style="width:100px;padding: 0 5px;"/>
+						 				<span id="err" class="modal-error"><span>
+						 			</td>
+						 		</tr>
+						 	</tbody>
+						 </table>
+					</div>
+					<div class="modal-footer">
+						<a href="#"  class="btn" data-dismiss="modal">关闭</a> 
+						<button id="saveSet" class="btn btn-primary" type="button" onclick="formSubmit();">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+    <script src="../../../../asserts/lib/jquery.js"></script>
+    <script src="../../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../bootstrap/js/ui.loading.js"></script>
+    <!--[if lte IE 9]>
+	 <script src="../../../bootstrap/js/html5shiv.js"></script>
+	 <script src="../../../bootstrap/js/respond.min.js"></script>
+	 <script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+	<script src="../../../js/common.js"></script>
+    <script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<!-- <script src="../../../bootstrap/js/bootstrap-select.min.js"></script> -->
+	<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+	<script src="../../../bootstrap/js/additional-methods.min.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+    <script src="../../../js/page/selfelec/overproof/benchmarke_para.js"></script>
+    
+</body>
+</html>

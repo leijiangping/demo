@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.ProductConfigVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizbasedata.ProductConfigVO" >
+	    <id column="productconfig_id" property="productconfigId" jdbcType="VARCHAR" />
+	    <result column="producttype_id" property="producttypeId" jdbcType="VARCHAR" />
+	    <result column="producttype_name" property="producttypeName" jdbcType="VARCHAR" />
+	    <result column="roomtype_id" property="roomtypeId" jdbcType="VARCHAR" />
+	    <result column="roomtype_name" property="roomtypeName" jdbcType="VARCHAR" />
+	    <result column="supttype_id" property="supttypeId" jdbcType="VARCHAR" />
+	    <result column="supttype_name" property="supttypeName" jdbcType="VARCHAR" />
+	    <result column="productconfig_name" property="productconfigName" jdbcType="VARCHAR" />
+	    <result column="productconfig_state" property="productconfigState" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <!-- 查询产品配置库对象-->
+  <select id="queryAllObj" resultMap="BaseResultMap" parameterType="Map">
+	    select 
+		    con.productconfig_id,
+		    con.productconfig_name,
+		    con.productconfig_state,
+		    con.producttype_id,
+		    typ.producttype_name,
+			con.roomtype_id, 
+			(select commtype_name from twr_commtype where commtype_id = con.roomtype_id) roomtype_name,
+			con.supttype_id, 
+			(select commtype_name from twr_commtype where commtype_id = con.supttype_id) supttype_name
+		from twr_productconfig con 
+		inner join 
+		twr_producttype typ on con.producttype_id = typ.producttype_id
+		where con.productconfig_state != -1
+	</select>
+	
+	 <!-- 删除产品配置库对象-->
+	<delete id="deleteObjById" parameterType="Map">
+		update twr_productconfig
+		set productconfig_state = -1
+		where productconfig_id in 
+		<foreach collection="objIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	 <!-- 更新配置库对象-->
+	<update id="updateObjById" parameterType="com.xunge.model.towerrent.bizbasedata.ProductConfigVO">
+		update twr_productconfig
+		set
+		<if test="producttypeId != null and producttypeId != ''" >
+			producttype_id = #{producttypeId,jdbcType=VARCHAR},
+		</if>
+		<if test="roomtypeId != null and roomtypeId != ''" >
+			roomtype_id = #{roomtypeId,jdbcType=VARCHAR},
+		</if>
+		<if test="supttypeId != null and supttypeId != ''" >
+			supttype_id = #{supttypeId,jdbcType=VARCHAR},
+		</if>
+			productconfig_name = #{productconfigName,jdbcType=VARCHAR},
+			productconfig_state = #{productconfigState,jdbcType=INTEGER}
+		where productconfig_id = #{productconfigId,jdbcType=VARCHAR}
+	</update>
+	
+	 <!-- 新增产品配置库对象-->
+	<insert id="addObj" parameterType="com.xunge.model.towerrent.bizbasedata.ProductConfigVO">
+		insert into twr_productconfig
+		    (
+		    productconfig_id,
+		    <if test="producttypeId != null and producttypeId != ''" >
+			producttype_id,
+		    </if>
+			<if test="roomtypeId != null and roomtypeId != ''" >
+			roomtype_id,
+			</if>
+			<if test="supttypeId != null and supttypeId != ''" >
+		    supttype_id,
+		    </if>
+		    productconfig_name,
+		    productconfig_state)
+		values(
+		<if test="producttypeId != null and producttypeId != ''" >
+		#{productconfigId,jdbcType=VARCHAR},
+		</if>
+		#{producttypeId,jdbcType=VARCHAR},
+		<if test="roomtypeId != null and roomtypeId != ''" >
+		#{roomtypeId,jdbcType=VARCHAR},
+		</if>
+		<if test="supttypeId != null and supttypeId != ''" >
+		#{supttypeId,jdbcType=DECIMAL},
+		</if>
+		#{productconfigName,jdbcType=VARCHAR},
+		0
+		)
+	</insert>
+	
+	 <!-- 修改产品配置库对象-->
+	<update id="updateObjState" parameterType="Map">
+		update twr_productconfig tp set tp.productconfig_state = #{productconfigState,jdbcType=INTEGER} 
+		where tp.productconfig_id in 
+		<foreach collection="objIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	 <!-- 查询产品配置库对象-->
+	<select id="queryObjByCondition" resultMap="BaseResultMap" parameterType="Map">
+        select 
+		    con.productconfig_id,
+		    con.productconfig_name,
+		    con.productconfig_state,
+		    con.producttype_id,
+		    typ.producttype_name,
+			con.roomtype_id, 
+			(select commtype_name from twr_commtype where commtype_id = con.roomtype_id) roomtype_name,
+			con.supttype_id, 
+			(select commtype_name from twr_commtype where commtype_id = con.supttype_id) supttype_name
+		from twr_productconfig con 
+		INNER JOIN 
+		twr_producttype typ on con.producttype_id = typ.producttype_id
+        where con.productconfig_id != '' and con.productconfig_state != -1
+    <if test="productconfigName != null and productconfigName != ''">
+   	    and con.productconfig_name = #{productconfigName,jdbcType=INTEGER}
+	 </if>
+    <if test="productconfigState != null and productconfigState != ''">
+   	    and con.productconfig_state = #{productconfigState,jdbcType=INTEGER}
+	 </if>
+	 <if test="roomtypeId != null and roomtypeId != ''">
+	   	and con.roomtype_id = #{roomtypeId,jdbcType=VARCHAR}
+	 </if>
+	 <if test="supttypeId != null and supttypeId != ''">
+	   	and con.supttype_id = #{supttypeId,jdbcType=VARCHAR}
+	 </if>
+	 <if test="producttypeId != null and producttypeId != ''">
+		and con.producttype_id = #{producttypeId,jdbcType=VARCHAR}
+	  </if>
+	</select>
+</mapper>

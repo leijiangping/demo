@@ -1,0 +1,3006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 铁塔租赁侧账单 -->
+<mapper namespace="com.xunge.mapping.TowerBillbalanceVOMapper">
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.settlement.TowerBillbalanceVO">
+    <id column="towerbillbalance_id" jdbcType="VARCHAR" property="towerbillbalanceId" />
+    <result column="resources_type_id" jdbcType="VARCHAR" property="resourcesTypeId" />
+    <result column="account_peroid" jdbcType="VARCHAR" property="accountPeroid" />
+    <result column="data_type" jdbcType="CHAR" property="dataType" />
+    <result column="business_confirm_number" jdbcType="VARCHAR" property="businessConfirmNumber" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operator_reg_id" jdbcType="VARCHAR" property="operatorRegId" />
+    <result column="agree_area_name" jdbcType="VARCHAR" property="agreeAreaName" />
+    <result column="tower_station_area_name" jdbcType="VARCHAR" property="towerStationAreaName" />
+    <result column="tower_station_code" jdbcType="VARCHAR" property="towerStationCode" />
+    <result column="tower_station_name" jdbcType="VARCHAR" property="towerStationName" />
+    <result column="agree_bill_code" jdbcType="VARCHAR" property="agreeBillCode" />
+    <result column="service_attribute" jdbcType="VARCHAR" property="serviceAttribute" />
+    <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="product_type_id" jdbcType="VARCHAR" property="productTypeId" />
+    <result column="room_type_id" jdbcType="VARCHAR" property="roomTypeId" />
+    <result column="oil_generate_electric_method_id" jdbcType="VARCHAR" property="oilGenerateElectricMethodId" />
+    <result column="use_power_service_fee_out" jdbcType="DECIMAL" property="usePowerServiceFeeOut" />
+    <result column="oil_generator_electric_fee_deductible" jdbcType="DECIMAL" property="oilGeneratorElectricFeeDeductible" />
+    <result column="oil_generator_electric_fee" jdbcType="DECIMAL" property="oilGeneratorElectricFee" />
+    <result column="oil_generator_electric_fee_wait_return" jdbcType="DECIMAL" property="oilGeneratorElectricFeeWaitReturn" />
+    <result column="hight_level_fee_out" jdbcType="DECIMAL" property="hightLevelFeeOut" />
+    <result column="hight_level_fee_deductible" jdbcType="DECIMAL" property="hightLevelFeeDeductible" />
+    <result column="hight_level_fee" jdbcType="DECIMAL" property="hightLevelFee" />
+    <result column="hight_level_fee_wait_return" jdbcType="DECIMAL" property="hightLevelFeeWaitReturn" />
+    <result column="batteryProtectionFee_out" jdbcType="DECIMAL" property="batteryprotectionfeeOut" />
+    <result column="batteryProtectionFee_deductible" jdbcType="DECIMAL" property="batteryprotectionfeeDeductible" />
+    <result column="batteryProtectionFee" jdbcType="DECIMAL" property="batteryprotectionfee" />
+    <result column="batteryProtectionFee_wait_return" jdbcType="DECIMAL" property="batteryprotectionfeeWaitReturn" />
+    <result column="unit_product_number1" jdbcType="DECIMAL" property="unitProductNumber1" />
+    <result column="height1" jdbcType="VARCHAR" property="height1" />
+    <result column="ifBBU_on_room1" jdbcType="BIT" property="ifbbuOnRoom1" />
+    <result column="other_dis1" jdbcType="DECIMAL" property="otherDis1" />
+    <result column="tower_price1" jdbcType="DECIMAL" property="towerPrice1" />
+    <result column="unit_product_number2" jdbcType="DECIMAL" property="unitProductNumber2" />
+    <result column="height2" jdbcType="VARCHAR" property="height2" />
+    <result column="ifBBU_on_room2" jdbcType="BIT" property="ifbbuOnRoom2" />
+    <result column="other_dis2" jdbcType="DECIMAL" property="otherDis2" />
+    <result column="tower_price2" jdbcType="DECIMAL" property="towerPrice2" />
+    <result column="unit_product_number3" jdbcType="DECIMAL" property="unitProductNumber3" />
+    <result column="height3" jdbcType="VARCHAR" property="height3" />
+    <result column="ifBBU_on_room3" jdbcType="BIT" property="ifbbuOnRoom3" />
+    <result column="other_dis3" jdbcType="DECIMAL" property="otherDis3" />
+    <result column="tower_price3" jdbcType="DECIMAL" property="towerPrice3" />
+    <result column="current_tower_share_num" jdbcType="INTEGER" property="currentTowerShareNum" />
+    <result column="tower_operator_startdate1" jdbcType="TIMESTAMP" property="towerOperatorStartdate1" />
+    <result column="tower_supporting_share_dis1" jdbcType="DECIMAL" property="towerSupportingShareDis1" />
+    <result column="tower_operator_startdate2" jdbcType="TIMESTAMP" property="towerOperatorStartdate2" />
+    <result column="tower_supporting_share_dis2" jdbcType="DECIMAL" property="towerSupportingShareDis2" />
+    <result column="current_tower_share_sum_price_out" jdbcType="DECIMAL" property="currentTowerShareSumPriceOut" />
+    <result column="current_tower_share_sum_price_deductible" jdbcType="DECIMAL" property="currentTowerShareSumPriceDeductible" />
+    <result column="current_tower_share_sum_price" jdbcType="DECIMAL" property="currentTowerShareSumPrice" />
+    <result column="current_tower_share_sum_price_wait_return" jdbcType="DECIMAL" property="currentTowerShareSumPriceWaitReturn" />
+    <result column="room_base_price1" jdbcType="DECIMAL" property="roomBasePrice1" />
+    <result column="room_base_price2" jdbcType="DECIMAL" property="roomBasePrice2" />
+    <result column="room_base_price3" jdbcType="DECIMAL" property="roomBasePrice3" />
+    <result column="current_room_share_num" jdbcType="INTEGER" property="currentRoomShareNum" />
+    <result column="room_operator_startdate1" jdbcType="TIMESTAMP" property="roomOperatorStartdate1" />
+    <result column="room_supporting_share_dis1" jdbcType="DECIMAL" property="roomSupportingShareDis1" />
+    <result column="room_operator_startdate2" jdbcType="TIMESTAMP" property="roomOperatorStartdate2" />
+    <result column="room_supporting_share_dis2" jdbcType="DECIMAL" property="roomSupportingShareDis2" />
+    <result column="current_room_share_sum_price_out" jdbcType="DECIMAL" property="currentRoomShareSumPriceOut" />
+    <result column="current_room_share_sum_price_deductible" jdbcType="DECIMAL" property="currentRoomShareSumPriceDeductible" />
+    <result column="current_room_share_sum_price" jdbcType="DECIMAL" property="currentRoomShareSumPrice" />
+    <result column="current_room_share_sum_price_wait_return" jdbcType="DECIMAL" property="currentRoomShareSumPriceWaitReturn" />
+    <result column="supporting_base_price1" jdbcType="DECIMAL" property="supportingBasePrice1" />
+    <result column="supporting_base_price2" jdbcType="DECIMAL" property="supportingBasePrice2" />
+    <result column="supporting_base_price3" jdbcType="DECIMAL" property="supportingBasePrice3" />
+    <result column="current_supporting_share_num" jdbcType="INTEGER" property="currentSupportingShareNum" />
+    <result column="supporting_operator_startdate1" jdbcType="TIMESTAMP" property="supportingOperatorStartdate1" />
+    <result column="supporting_share_dis1" jdbcType="DECIMAL" property="supportingShareDis1" />
+    <result column="supporting_operator_startdate2" jdbcType="TIMESTAMP" property="supportingOperatorStartdate2" />
+    <result column="supporting_share_dis2" jdbcType="DECIMAL" property="supportingShareDis2" />
+    <result column="current_supporting_share_sum_price_out" jdbcType="DECIMAL" property="currentSupportingShareSumPriceOut" />
+    <result column="current_supporting_share_sum_price_deductible" jdbcType="DECIMAL" property="currentSupportingShareSumPriceDeductible" />
+    <result column="current_supporting_share_sum_price" jdbcType="DECIMAL" property="currentSupportingShareSumPrice" />
+    <result column="current_supporting_share_sum_price_wait_return" jdbcType="DECIMAL" property="currentSupportingShareSumPriceWaitReturn" />
+    <result column="bbU_on_room_fee_back" jdbcType="DECIMAL" property="bbuOnRoomFeeBack" />
+    <result column="bbU_on_room_fee_deductible" jdbcType="DECIMAL" property="bbuOnRoomFeeDeductible" />
+    <result column="bbU_on_room_fee" jdbcType="DECIMAL" property="bbuOnRoomFee" />
+    <result column="bbU_on_room_fee_wait_return" jdbcType="DECIMAL" property="bbuOnRoomFeeWaitReturn" />
+    <result column="manager_fee1" jdbcType="DECIMAL" property="managerFee1" />
+    <result column="manager_fee2" jdbcType="DECIMAL" property="managerFee2" />
+    <result column="manager_fee3" jdbcType="DECIMAL" property="managerFee3" />
+    <result column="manager_fee_share_num" jdbcType="INTEGER" property="managerFeeShareNum" />
+    <result column="manager_fee_operator_startdate1" jdbcType="TIMESTAMP" property="managerFeeOperatorStartdate1" />
+    <result column="manager_fee_share_dis1" jdbcType="DECIMAL" property="managerFeeShareDis1" />
+    <result column="manager_fee_operator_startdate2" jdbcType="TIMESTAMP" property="managerFeeOperatorStartdate2" />
+    <result column="manager_fee_share_dis2" jdbcType="DECIMAL" property="managerFeeShareDis2" />
+    <result column="current_manager_fee_share_sum_price_out" jdbcType="DECIMAL" property="currentManagerFeeShareSumPriceOut" />
+    <result column="current_manager_fee_share_sum_price_deductible" jdbcType="DECIMAL" property="currentManagerFeeShareSumPriceDeductible" />
+    <result column="current_manager_fee_share_sum_price" jdbcType="DECIMAL" property="currentManagerFeeShareSumPrice" />
+    <result column="current_manager_fee_share_sum_price_wait_return" jdbcType="DECIMAL" property="currentManagerFeeShareSumPriceWaitReturn" />
+    <result column="prace_fee" jdbcType="DECIMAL" property="praceFee" />
+    <result column="prace_fee_share_num" jdbcType="INTEGER" property="praceFeeShareNum" />
+    <result column="prace_fee_operator_startdate1" jdbcType="TIMESTAMP" property="praceFeeOperatorStartdate1" />
+    <result column="prace_feeShare_dis1" jdbcType="DECIMAL" property="praceFeeshareDis1" />
+    <result column="prace_fee_operator_startdate2" jdbcType="TIMESTAMP" property="praceFeeOperatorStartdate2" />
+    <result column="prace_fee_share_dis2" jdbcType="DECIMAL" property="praceFeeShareDis2" />
+    <result column="current_prace_fee_share_sum_price_out" jdbcType="DECIMAL" property="currentPraceFeeShareSumPriceOut" />
+    <result column="current_prace_fee_share_sum_price_deductible" jdbcType="DECIMAL" property="currentPraceFeeShareSumPriceDeductible" />
+    <result column="current_prace_fee_share_sum_price" jdbcType="DECIMAL" property="currentPraceFeeShareSumPrice" />
+    <result column="current_prace_fee_share_sum_price_wait_return" jdbcType="DECIMAL" property="currentPraceFeeShareSumPriceWaitReturn" />
+    <result column="power_in_fee" jdbcType="DECIMAL" property="powerInFee" />
+    <result column="power_in_fee_share_num" jdbcType="INTEGER" property="powerInFeeShareNum" />
+    <result column="power_in_fee_operator_startdate1" jdbcType="TIMESTAMP" property="powerInFeeOperatorStartdate1" />
+    <result column="power_in_fee_share_dis1" jdbcType="DECIMAL" property="powerInFeeShareDis1" />
+    <result column="power_in_fee_operator_startdate2" jdbcType="TIMESTAMP" property="powerInFeeOperatorStartdate2" />
+    <result column="power_in_fee_share_dis2" jdbcType="DECIMAL" property="powerInFeeShareDis2" />
+    <result column="current_power_in_fee_share_sum_price_out" jdbcType="DECIMAL" property="currentPowerInFeeShareSumPriceOut" />
+    <result column="current_power_in_fee_share_sum_price_deductible" jdbcType="DECIMAL" property="currentPowerInFeeShareSumPriceDeductible" />
+    <result column="current_power_in_fee_share_sum_price" jdbcType="DECIMAL" property="currentPowerInFeeShareSumPrice" />
+    <result column="current_power_in_fee_share_sum_price_wait_deductible" jdbcType="DECIMAL" property="currentPowerInFeeShareSumPriceWaitDeductible" />
+    <result column="wlan_fee_out" jdbcType="DECIMAL" property="wlanFeeOut" />
+    <result column="wlan_fee_deductible" jdbcType="DECIMAL" property="wlanFeeDeductible" />
+    <result column="wlan_fee" jdbcType="DECIMAL" property="wlanFee" />
+    <result column="wlan_fee_wait_return" jdbcType="DECIMAL" property="wlanFeeWaitReturn" />
+    <result column="microwave_fee_out" jdbcType="DECIMAL" property="microwaveFeeOut" />
+    <result column="microwave_fee_deductible" jdbcType="DECIMAL" property="microwaveFeeDeductible" />
+    <result column="microwave_fee" jdbcType="DECIMAL" property="microwaveFee" />
+    <result column="microwave_fee_wait_return" jdbcType="DECIMAL" property="microwaveFeeWaitReturn" />
+    <result column="other_fee1_out" jdbcType="DECIMAL" property="otherFee1Out" />
+    <result column="other_fee1_deductible" jdbcType="DECIMAL" property="otherFee1Deductible" />
+    <result column="other_fee1" jdbcType="DECIMAL" property="otherFee1" />
+    <result column="other_fee1_wait_return" jdbcType="DECIMAL" property="otherFee1WaitReturn" />
+    <result column="total_amount_month_out" jdbcType="DECIMAL" property="totalAmountMonthOut" />
+    <result column="total_amount_month_deductible" jdbcType="DECIMAL" property="totalAmountMonthDeductible" />
+    <result column="total_amount_month" jdbcType="DECIMAL" property="totalAmountMonth" />
+    <result column="total_amount_month_wait_return" jdbcType="DECIMAL" property="totalAmountMonthWaitReturn" />
+    <result column="if_servicefee_change" jdbcType="DECIMAL" property="ifServicefeeChange" />
+    <result column="servicefee_change" jdbcType="DECIMAL" property="servicefeeChange" />
+    <result column="elec_fee_out" jdbcType="DECIMAL" property="elecFeeOut" />
+    <result column="elec_fee_deductible" jdbcType="DECIMAL" property="elecFeeDeductible" />
+    <result column="elec_fee" jdbcType="DECIMAL" property="elecFee" />
+    <result column="elec_fee_wait_return" jdbcType="DECIMAL" property="elecFeeWaitReturn" />
+    <result column="use_power_service_fee_out2" jdbcType="DECIMAL" property="usePowerServiceFeeOut2" />
+    <result column="oil_generator_electric_fee_deductible2" jdbcType="DECIMAL" property="oilGeneratorElectricFeeDeductible2" />
+    <result column="oil_generator_electric_fee2" jdbcType="DECIMAL" property="oilGeneratorElectricFee2" />
+    <result column="oil_generator_electric_fee_wait_return2" jdbcType="DECIMAL" property="oilGeneratorElectricFeeWaitReturn2" />
+    <result column="total_actual_amount" jdbcType="DECIMAL" property="totalActualAmount" />
+    <result column="adjustment_fee_type" jdbcType="VARCHAR" property="adjustmentFeeType" />
+    <result column="adjustment_fee" jdbcType="DECIMAL" property="adjustmentFee" />
+    <result column="after_adjustment_fee" jdbcType="DECIMAL" property="afterAdjustmentFee" />
+    <result column="adjustment_fee_note" jdbcType="VARCHAR" property="adjustmentFeeNote" />
+    <result column="dispute_fee" jdbcType="DECIMAL" property="disputeFee" />
+    <result column="loca_operator" jdbcType="BIT" property="locaOperator" />
+    <result column="reimbursement_state" jdbcType="INTEGER" property="reimbursementState" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+    <result column="order_prop" jdbcType="VARCHAR" property="orderProp" />
+    <result column="right_prop" jdbcType="VARCHAR" property="rightProp" />
+    <result column="ori_right" jdbcType="VARCHAR" property="oriRight" />
+    <result column="res_compare" jdbcType="INTEGER" property="resCompare" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xunge.model.towerrent.settlement.TowerBillbalanceVO" extends="BaseResultMap" >
+    <result column="create_user_id" property="createUserId" jdbcType="VARBINARY" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    towerbillbalance_id, resources_type_id, account_peroid, data_type, business_confirm_number, 
+    operator, operator_reg_id, agree_area_name, tower_station_area_name, tower_station_code, 
+    tower_station_name, agree_bill_code, service_attribute, start_date, product_type_id, 
+    room_type_id, oil_generate_electric_method_id, use_power_service_fee_out, oil_generator_electric_fee_deductible, 
+    oil_generator_electric_fee, oil_generator_electric_fee_wait_return, hight_level_fee_out, 
+    hight_level_fee_deductible, hight_level_fee, hight_level_fee_wait_return, batteryProtectionFee_out, 
+    batteryProtectionFee_deductible, batteryProtectionFee, batteryProtectionFee_wait_return, 
+    unit_product_number1, height1, ifBBU_on_room1, other_dis1, tower_price1, unit_product_number2, 
+    height2, ifBBU_on_room2, other_dis2, tower_price2, unit_product_number3, height3, 
+    ifBBU_on_room3, other_dis3, tower_price3, current_tower_share_num, tower_operator_startdate1, 
+    tower_supporting_share_dis1, tower_operator_startdate2, tower_supporting_share_dis2, 
+    current_tower_share_sum_price_out, current_tower_share_sum_price_deductible, current_tower_share_sum_price, 
+    current_tower_share_sum_price_wait_return, room_base_price1, room_base_price2, room_base_price3, 
+    current_room_share_num, room_operator_startdate1, room_supporting_share_dis1, room_operator_startdate2, 
+    room_supporting_share_dis2, current_room_share_sum_price_out, current_room_share_sum_price_deductible, 
+    current_room_share_sum_price, current_room_share_sum_price_wait_return, supporting_base_price1, 
+    supporting_base_price2, supporting_base_price3, current_supporting_share_num, supporting_operator_startdate1, 
+    supporting_share_dis1, supporting_operator_startdate2, supporting_share_dis2, current_supporting_share_sum_price_out, 
+    current_supporting_share_sum_price_deductible, current_supporting_share_sum_price, 
+    current_supporting_share_sum_price_wait_return, bbU_on_room_fee_back, bbU_on_room_fee_deductible, 
+    bbU_on_room_fee, bbU_on_room_fee_wait_return, manager_fee1, manager_fee2, manager_fee3, 
+    manager_fee_share_num, manager_fee_operator_startdate1, manager_fee_share_dis1, manager_fee_operator_startdate2, 
+    manager_fee_share_dis2, current_manager_fee_share_sum_price_out, current_manager_fee_share_sum_price_deductible, 
+    current_manager_fee_share_sum_price, current_manager_fee_share_sum_price_wait_return, 
+    prace_fee, prace_fee_share_num, prace_fee_operator_startdate1, prace_feeShare_dis1, 
+    prace_fee_operator_startdate2, prace_fee_share_dis2, current_prace_fee_share_sum_price_out, 
+    current_prace_fee_share_sum_price_deductible, current_prace_fee_share_sum_price, 
+    current_prace_fee_share_sum_price_wait_return, power_in_fee, power_in_fee_share_num, 
+    power_in_fee_operator_startdate1, power_in_fee_share_dis1, power_in_fee_operator_startdate2, 
+    power_in_fee_share_dis2, current_power_in_fee_share_sum_price_out, current_power_in_fee_share_sum_price_deductible, 
+    current_power_in_fee_share_sum_price, current_power_in_fee_share_sum_price_wait_deductible, 
+    wlan_fee_out, wlan_fee_deductible, wlan_fee, wlan_fee_wait_return, microwave_fee_out, 
+    microwave_fee_deductible, microwave_fee, microwave_fee_wait_return, other_fee1_out, 
+    other_fee1_deductible, other_fee1, other_fee1_wait_return, total_amount_month_out, 
+    total_amount_month_deductible, total_amount_month, total_amount_month_wait_return, 
+    if_servicefee_change, servicefee_change, elec_fee_out, elec_fee_deductible, 
+    elec_fee, elec_fee_wait_return, use_power_service_fee_out2, oil_generator_electric_fee_deductible2, 
+    oil_generator_electric_fee2, oil_generator_electric_fee_wait_return2, total_actual_amount, 
+    adjustment_fee_type, adjustment_fee, after_adjustment_fee, adjustment_fee_note, dispute_fee, 
+    loca_operator, reimbursement_state, check_state, order_prop, right_prop, ori_right, 
+    res_compare, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    create_user_id, update_user_id
+  </sql>
+  
+   <!-- 查询分页塔维账单数据 -->
+  <select id="queryPageTowerBillbalance" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from twr_towerbillbalance tb 
+	INNER JOIN v_sys_region reg on reg.reg_id = tb.operator_reg_id
+    <where>
+    		<if test="dataType != null and dataType != ''">
+				and tb.data_type = #{dataType}
+			</if>
+    		<if test="businessConfirmNumber != null and businessConfirmNumber != ''">
+				and tb.business_confirm_number = #{businessConfirmNumber}
+			</if>
+			<if test="towerStationName != null and towerStationName != ''">
+				and (tb.tower_station_code like CONCAT('%,', #{towerStationName}, ',%')
+					or tb.tower_station_name like CONCAT('%,', #{towerStationName}, ',%')
+				)
+			</if>
+    		
+    		<if test="accountPeroid != null and accountPeroid != ''">
+				and tb.account_peroid = #{accountPeroid}
+			</if>
+			<if test="operatorRegId != null and operatorRegId != ''">
+				and tb.operator_reg_id = #{operatorRegId}
+			</if>
+    		<if test="prvId != null and prvId != ''">
+				and reg.prv_id = #{prvId}
+			</if>
+			<if test=" pregId != null and pregId != ''">
+				and reg.preg_id = #{pregId}
+			</if>
+			<if test=" towerbillbalanceIds != null and towerbillbalanceIds != ''">
+				and reg.towerbillbalance_id in
+				<foreach collection="towerbillbalanceIds" index="index" item="item" open="(" separator="," close=")">    
+		            #{item}    
+		        </foreach>  
+			</if>
+			
+			
+			<!-- 根据权限过滤 -->
+   			<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from twr_towerbillbalance
+    where towerbillbalance_id = #{towerbillbalanceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from twr_towerbillbalance
+    where towerbillbalance_id = #{towerbillbalanceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO" >
+    insert into twr_towerbillbalance (towerbillbalance_id, resources_type_id, 
+      account_peroid, data_type, business_confirm_number, 
+      operator, operator_reg_id, agree_area_name, 
+      tower_station_area_name, tower_station_code, 
+      tower_station_name, agree_bill_code, service_attribute, 
+      start_date, product_type_id, room_type_id, 
+      oil_generate_electric_method_id, use_power_service_fee_out, 
+      oil_generator_electric_fee_deductible, oil_generator_electric_fee, 
+      oil_generator_electric_fee_wait_return, hight_level_fee_out, 
+      hight_level_fee_deductible, hight_level_fee, 
+      hight_level_fee_wait_return, batteryProtectionFee_out, 
+      batteryProtectionFee_deductible, batteryProtectionFee, 
+      batteryProtectionFee_wait_return, unit_product_number1, 
+      height1, ifBBU_on_room1, other_dis1, 
+      tower_price1, unit_product_number2, height2, 
+      ifBBU_on_room2, other_dis2, tower_price2, 
+      unit_product_number3, height3, ifBBU_on_room3, 
+      other_dis3, tower_price3, current_tower_share_num, 
+      tower_operator_startdate1, tower_supporting_share_dis1, 
+      tower_operator_startdate2, tower_supporting_share_dis2, 
+      current_tower_share_sum_price_out, current_tower_share_sum_price_deductible, 
+      current_tower_share_sum_price, current_tower_share_sum_price_wait_return, 
+      room_base_price1, room_base_price2, room_base_price3, 
+      current_room_share_num, room_operator_startdate1, 
+      room_supporting_share_dis1, room_operator_startdate2, 
+      room_supporting_share_dis2, current_room_share_sum_price_out, 
+      current_room_share_sum_price_deductible, current_room_share_sum_price, 
+      current_room_share_sum_price_wait_return, supporting_base_price1, 
+      supporting_base_price2, supporting_base_price3, 
+      current_supporting_share_num, supporting_operator_startdate1, 
+      supporting_share_dis1, supporting_operator_startdate2, 
+      supporting_share_dis2, current_supporting_share_sum_price_out, 
+      current_supporting_share_sum_price_deductible, current_supporting_share_sum_price, 
+      current_supporting_share_sum_price_wait_return, bbU_on_room_fee_back, 
+      bbU_on_room_fee_deductible, bbU_on_room_fee, bbU_on_room_fee_wait_return, 
+      manager_fee1, manager_fee2, manager_fee3, 
+      manager_fee_share_num, manager_fee_operator_startdate1, 
+      manager_fee_share_dis1, manager_fee_operator_startdate2, 
+      manager_fee_share_dis2, current_manager_fee_share_sum_price_out, 
+      current_manager_fee_share_sum_price_deductible, current_manager_fee_share_sum_price, 
+      current_manager_fee_share_sum_price_wait_return, prace_fee, 
+      prace_fee_share_num, prace_fee_operator_startdate1, 
+      prace_feeShare_dis1, prace_fee_operator_startdate2, 
+      prace_fee_share_dis2, current_prace_fee_share_sum_price_out, 
+      current_prace_fee_share_sum_price_deductible, current_prace_fee_share_sum_price, 
+      current_prace_fee_share_sum_price_wait_return, power_in_fee, 
+      power_in_fee_share_num, power_in_fee_operator_startdate1, 
+      power_in_fee_share_dis1, power_in_fee_operator_startdate2, 
+      power_in_fee_share_dis2, current_power_in_fee_share_sum_price_out, 
+      current_power_in_fee_share_sum_price_deductible, current_power_in_fee_share_sum_price, 
+      current_power_in_fee_share_sum_price_wait_deductible, wlan_fee_out, 
+      wlan_fee_deductible, wlan_fee, wlan_fee_wait_return, 
+      microwave_fee_out, microwave_fee_deductible, 
+      microwave_fee, microwave_fee_wait_return, other_fee1_out, 
+      other_fee1_deductible, other_fee1, other_fee1_wait_return, 
+      total_amount_month_out, total_amount_month_deductible, 
+      total_amount_month, total_amount_month_wait_return, 
+      if_servicefee_change, servicefee_change,
+      elec_fee_out, elec_fee_deductible, elec_fee, 
+      elec_fee_wait_return, use_power_service_fee_out2, 
+      oil_generator_electric_fee_deductible2, oil_generator_electric_fee2, 
+      oil_generator_electric_fee_wait_return2, total_actual_amount, 
+      adjustment_fee_type, adjustment_fee, after_adjustment_fee, 
+      adjustment_fee_note, dispute_fee, loca_operator, 
+      reimbursement_state, check_state, order_prop, 
+      right_prop, ori_right, res_compare, 
+      create_time, update_time, create_user_id, 
+      update_user_id)
+    values (#{towerbillbalanceId,jdbcType=VARCHAR}, #{resourcesTypeId,jdbcType=VARCHAR}, 
+      #{accountPeroid,jdbcType=VARCHAR}, #{dataType,jdbcType=CHAR}, #{businessConfirmNumber,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{operatorRegId,jdbcType=VARCHAR}, #{agreeAreaName,jdbcType=VARCHAR}, 
+      #{towerStationAreaName,jdbcType=VARCHAR}, #{towerStationCode,jdbcType=VARCHAR}, 
+      #{towerStationName,jdbcType=VARCHAR}, #{agreeBillCode,jdbcType=VARCHAR}, #{serviceAttribute,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{productTypeId,jdbcType=VARCHAR}, #{roomTypeId,jdbcType=VARCHAR}, 
+      #{oilGenerateElectricMethodId,jdbcType=VARCHAR}, #{usePowerServiceFeeOut,jdbcType=DECIMAL}, 
+      #{oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL}, #{oilGeneratorElectricFee,jdbcType=DECIMAL}, 
+      #{oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL}, #{hightLevelFeeOut,jdbcType=DECIMAL}, 
+      #{hightLevelFeeDeductible,jdbcType=DECIMAL}, #{hightLevelFee,jdbcType=DECIMAL}, 
+      #{hightLevelFeeWaitReturn,jdbcType=DECIMAL}, #{batteryprotectionfeeOut,jdbcType=DECIMAL}, 
+      #{batteryprotectionfeeDeductible,jdbcType=DECIMAL}, #{batteryprotectionfee,jdbcType=DECIMAL}, 
+      #{batteryprotectionfeeWaitReturn,jdbcType=DECIMAL}, #{unitProductNumber1,jdbcType=DECIMAL}, 
+      #{height1,jdbcType=VARCHAR}, #{ifbbuOnRoom1,jdbcType=BIT}, #{otherDis1,jdbcType=DECIMAL}, 
+      #{towerPrice1,jdbcType=DECIMAL}, #{unitProductNumber2,jdbcType=DECIMAL}, #{height2,jdbcType=VARCHAR}, 
+      #{ifbbuOnRoom2,jdbcType=BIT}, #{otherDis2,jdbcType=DECIMAL}, #{towerPrice2,jdbcType=DECIMAL}, 
+      #{unitProductNumber3,jdbcType=DECIMAL}, #{height3,jdbcType=VARCHAR}, #{ifbbuOnRoom3,jdbcType=BIT}, 
+      #{otherDis3,jdbcType=DECIMAL}, #{towerPrice3,jdbcType=DECIMAL}, #{currentTowerShareNum,jdbcType=INTEGER}, 
+      #{towerOperatorStartdate1,jdbcType=TIMESTAMP}, #{towerSupportingShareDis1,jdbcType=DECIMAL}, 
+      #{towerOperatorStartdate2,jdbcType=TIMESTAMP}, #{towerSupportingShareDis2,jdbcType=DECIMAL}, 
+      #{currentTowerShareSumPriceOut,jdbcType=DECIMAL}, #{currentTowerShareSumPriceDeductible,jdbcType=DECIMAL}, 
+      #{currentTowerShareSumPrice,jdbcType=DECIMAL}, #{currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL}, 
+      #{roomBasePrice1,jdbcType=DECIMAL}, #{roomBasePrice2,jdbcType=DECIMAL}, #{roomBasePrice3,jdbcType=DECIMAL}, 
+      #{currentRoomShareNum,jdbcType=INTEGER}, #{roomOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{roomSupportingShareDis1,jdbcType=DECIMAL}, #{roomOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{roomSupportingShareDis2,jdbcType=DECIMAL}, #{currentRoomShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{currentRoomShareSumPriceDeductible,jdbcType=DECIMAL}, #{currentRoomShareSumPrice,jdbcType=DECIMAL}, 
+      #{currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{supportingBasePrice1,jdbcType=DECIMAL}, 
+      #{supportingBasePrice2,jdbcType=DECIMAL}, #{supportingBasePrice3,jdbcType=DECIMAL}, 
+      #{currentSupportingShareNum,jdbcType=INTEGER}, #{supportingOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{supportingShareDis1,jdbcType=DECIMAL}, #{supportingOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{supportingShareDis2,jdbcType=DECIMAL}, #{currentSupportingShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL}, #{currentSupportingShareSumPrice,jdbcType=DECIMAL}, 
+      #{currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{bbuOnRoomFeeBack,jdbcType=DECIMAL}, 
+      #{bbuOnRoomFeeDeductible,jdbcType=DECIMAL}, #{bbuOnRoomFee,jdbcType=DECIMAL}, #{bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL}, 
+      #{managerFee1,jdbcType=DECIMAL}, #{managerFee2,jdbcType=DECIMAL}, #{managerFee3,jdbcType=DECIMAL}, 
+      #{managerFeeShareNum,jdbcType=INTEGER}, #{managerFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{managerFeeShareDis1,jdbcType=DECIMAL}, #{managerFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{managerFeeShareDis2,jdbcType=DECIMAL}, #{currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{currentManagerFeeShareSumPrice,jdbcType=DECIMAL}, 
+      #{currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{praceFee,jdbcType=DECIMAL}, 
+      #{praceFeeShareNum,jdbcType=INTEGER}, #{praceFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{praceFeeshareDis1,jdbcType=DECIMAL}, #{praceFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{praceFeeShareDis2,jdbcType=DECIMAL}, #{currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{currentPraceFeeShareSumPrice,jdbcType=DECIMAL}, 
+      #{currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{powerInFee,jdbcType=DECIMAL}, 
+      #{powerInFeeShareNum,jdbcType=INTEGER}, #{powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{powerInFeeShareDis1,jdbcType=DECIMAL}, #{powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{powerInFeeShareDis2,jdbcType=DECIMAL}, #{currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{currentPowerInFeeShareSumPrice,jdbcType=DECIMAL}, 
+      #{currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL}, #{wlanFeeOut,jdbcType=DECIMAL}, 
+      #{wlanFeeDeductible,jdbcType=DECIMAL}, #{wlanFee,jdbcType=DECIMAL}, #{wlanFeeWaitReturn,jdbcType=DECIMAL}, 
+      #{microwaveFeeOut,jdbcType=DECIMAL}, #{microwaveFeeDeductible,jdbcType=DECIMAL}, 
+      #{microwaveFee,jdbcType=DECIMAL}, #{microwaveFeeWaitReturn,jdbcType=DECIMAL}, #{otherFee1Out,jdbcType=DECIMAL}, 
+      #{otherFee1Deductible,jdbcType=DECIMAL}, #{otherFee1,jdbcType=DECIMAL}, #{otherFee1WaitReturn,jdbcType=DECIMAL}, 
+      #{totalAmountMonthOut,jdbcType=DECIMAL}, #{totalAmountMonthDeductible,jdbcType=DECIMAL}, 
+      #{totalAmountMonth,jdbcType=DECIMAL}, #{totalAmountMonthWaitReturn,jdbcType=DECIMAL}, 
+      #{ifServicefeeChange,jdbcType=DECIMAL}, #{servicefeeChange,jdbcType=DECIMAL}, 
+      #{elecFeeOut,jdbcType=DECIMAL}, #{elecFeeDeductible,jdbcType=DECIMAL}, #{elecFee,jdbcType=DECIMAL}, 
+      #{elecFeeWaitReturn,jdbcType=DECIMAL}, #{usePowerServiceFeeOut2,jdbcType=DECIMAL}, 
+      #{oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL}, #{oilGeneratorElectricFee2,jdbcType=DECIMAL}, 
+      #{oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL}, #{totalActualAmount,jdbcType=DECIMAL}, 
+      #{adjustmentFeeType,jdbcType=VARCHAR}, #{adjustmentFee,jdbcType=DECIMAL}, #{afterAdjustmentFee,jdbcType=DECIMAL}, 
+      #{adjustmentFeeNote,jdbcType=VARCHAR}, #{disputeFee,jdbcType=DECIMAL}, #{locaOperator,jdbcType=BIT}, 
+      #{reimbursementState,jdbcType=INTEGER}, #{checkState,jdbcType=INTEGER}, #{orderProp,jdbcType=VARCHAR}, 
+      #{rightProp,jdbcType=VARCHAR}, #{oriRight,jdbcType=VARCHAR}, #{resCompare,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARBINARY}, 
+      #{updateUserId,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO" >
+    insert into twr_towerbillbalance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="towerbillbalanceId != null" >
+        towerbillbalance_id,
+      </if>
+      <if test="resourcesTypeId != null" >
+        resources_type_id,
+      </if>
+      <if test="accountPeroid != null" >
+        account_peroid,
+      </if>
+      <if test="dataType != null" >
+        data_type,
+      </if>
+      <if test="businessConfirmNumber != null" >
+        business_confirm_number,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operatorRegId != null" >
+        operator_reg_id,
+      </if>
+      <if test="agreeAreaName != null" >
+        agree_area_name,
+      </if>
+      <if test="towerStationAreaName != null" >
+        tower_station_area_name,
+      </if>
+      <if test="towerStationCode != null" >
+        tower_station_code,
+      </if>
+      <if test="towerStationName != null" >
+        tower_station_name,
+      </if>
+      <if test="agreeBillCode != null" >
+        agree_bill_code,
+      </if>
+      <if test="serviceAttribute != null" >
+        service_attribute,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="productTypeId != null" >
+        product_type_id,
+      </if>
+      <if test="roomTypeId != null" >
+        room_type_id,
+      </if>
+      <if test="oilGenerateElectricMethodId != null" >
+        oil_generate_electric_method_id,
+      </if>
+      <if test="usePowerServiceFeeOut != null" >
+        use_power_service_fee_out,
+      </if>
+      <if test="oilGeneratorElectricFeeDeductible != null" >
+        oil_generator_electric_fee_deductible,
+      </if>
+      <if test="oilGeneratorElectricFee != null" >
+        oil_generator_electric_fee,
+      </if>
+      <if test="oilGeneratorElectricFeeWaitReturn != null" >
+        oil_generator_electric_fee_wait_return,
+      </if>
+      <if test="hightLevelFeeOut != null" >
+        hight_level_fee_out,
+      </if>
+      <if test="hightLevelFeeDeductible != null" >
+        hight_level_fee_deductible,
+      </if>
+      <if test="hightLevelFee != null" >
+        hight_level_fee,
+      </if>
+      <if test="hightLevelFeeWaitReturn != null" >
+        hight_level_fee_wait_return,
+      </if>
+      <if test="batteryprotectionfeeOut != null" >
+        batteryProtectionFee_out,
+      </if>
+      <if test="batteryprotectionfeeDeductible != null" >
+        batteryProtectionFee_deductible,
+      </if>
+      <if test="batteryprotectionfee != null" >
+        batteryProtectionFee,
+      </if>
+      <if test="batteryprotectionfeeWaitReturn != null" >
+        batteryProtectionFee_wait_return,
+      </if>
+      <if test="unitProductNumber1 != null" >
+        unit_product_number1,
+      </if>
+      <if test="height1 != null" >
+        height1,
+      </if>
+      <if test="ifbbuOnRoom1 != null" >
+        ifBBU_on_room1,
+      </if>
+      <if test="otherDis1 != null" >
+        other_dis1,
+      </if>
+      <if test="towerPrice1 != null" >
+        tower_price1,
+      </if>
+      <if test="unitProductNumber2 != null" >
+        unit_product_number2,
+      </if>
+      <if test="height2 != null" >
+        height2,
+      </if>
+      <if test="ifbbuOnRoom2 != null" >
+        ifBBU_on_room2,
+      </if>
+      <if test="otherDis2 != null" >
+        other_dis2,
+      </if>
+      <if test="towerPrice2 != null" >
+        tower_price2,
+      </if>
+      <if test="unitProductNumber3 != null" >
+        unit_product_number3,
+      </if>
+      <if test="height3 != null" >
+        height3,
+      </if>
+      <if test="ifbbuOnRoom3 != null" >
+        ifBBU_on_room3,
+      </if>
+      <if test="otherDis3 != null" >
+        other_dis3,
+      </if>
+      <if test="towerPrice3 != null" >
+        tower_price3,
+      </if>
+      <if test="currentTowerShareNum != null" >
+        current_tower_share_num,
+      </if>
+      <if test="towerOperatorStartdate1 != null" >
+        tower_operator_startdate1,
+      </if>
+      <if test="towerSupportingShareDis1 != null" >
+        tower_supporting_share_dis1,
+      </if>
+      <if test="towerOperatorStartdate2 != null" >
+        tower_operator_startdate2,
+      </if>
+      <if test="towerSupportingShareDis2 != null" >
+        tower_supporting_share_dis2,
+      </if>
+      <if test="currentTowerShareSumPriceOut != null" >
+        current_tower_share_sum_price_out,
+      </if>
+      <if test="currentTowerShareSumPriceDeductible != null" >
+        current_tower_share_sum_price_deductible,
+      </if>
+      <if test="currentTowerShareSumPrice != null" >
+        current_tower_share_sum_price,
+      </if>
+      <if test="currentTowerShareSumPriceWaitReturn != null" >
+        current_tower_share_sum_price_wait_return,
+      </if>
+      <if test="roomBasePrice1 != null" >
+        room_base_price1,
+      </if>
+      <if test="roomBasePrice2 != null" >
+        room_base_price2,
+      </if>
+      <if test="roomBasePrice3 != null" >
+        room_base_price3,
+      </if>
+      <if test="currentRoomShareNum != null" >
+        current_room_share_num,
+      </if>
+      <if test="roomOperatorStartdate1 != null" >
+        room_operator_startdate1,
+      </if>
+      <if test="roomSupportingShareDis1 != null" >
+        room_supporting_share_dis1,
+      </if>
+      <if test="roomOperatorStartdate2 != null" >
+        room_operator_startdate2,
+      </if>
+      <if test="roomSupportingShareDis2 != null" >
+        room_supporting_share_dis2,
+      </if>
+      <if test="currentRoomShareSumPriceOut != null" >
+        current_room_share_sum_price_out,
+      </if>
+      <if test="currentRoomShareSumPriceDeductible != null" >
+        current_room_share_sum_price_deductible,
+      </if>
+      <if test="currentRoomShareSumPrice != null" >
+        current_room_share_sum_price,
+      </if>
+      <if test="currentRoomShareSumPriceWaitReturn != null" >
+        current_room_share_sum_price_wait_return,
+      </if>
+      <if test="supportingBasePrice1 != null" >
+        supporting_base_price1,
+      </if>
+      <if test="supportingBasePrice2 != null" >
+        supporting_base_price2,
+      </if>
+      <if test="supportingBasePrice3 != null" >
+        supporting_base_price3,
+      </if>
+      <if test="currentSupportingShareNum != null" >
+        current_supporting_share_num,
+      </if>
+      <if test="supportingOperatorStartdate1 != null" >
+        supporting_operator_startdate1,
+      </if>
+      <if test="supportingShareDis1 != null" >
+        supporting_share_dis1,
+      </if>
+      <if test="supportingOperatorStartdate2 != null" >
+        supporting_operator_startdate2,
+      </if>
+      <if test="supportingShareDis2 != null" >
+        supporting_share_dis2,
+      </if>
+      <if test="currentSupportingShareSumPriceOut != null" >
+        current_supporting_share_sum_price_out,
+      </if>
+      <if test="currentSupportingShareSumPriceDeductible != null" >
+        current_supporting_share_sum_price_deductible,
+      </if>
+      <if test="currentSupportingShareSumPrice != null" >
+        current_supporting_share_sum_price,
+      </if>
+      <if test="currentSupportingShareSumPriceWaitReturn != null" >
+        current_supporting_share_sum_price_wait_return,
+      </if>
+      <if test="bbuOnRoomFeeBack != null" >
+        bbU_on_room_fee_back,
+      </if>
+      <if test="bbuOnRoomFeeDeductible != null" >
+        bbU_on_room_fee_deductible,
+      </if>
+      <if test="bbuOnRoomFee != null" >
+        bbU_on_room_fee,
+      </if>
+      <if test="bbuOnRoomFeeWaitReturn != null" >
+        bbU_on_room_fee_wait_return,
+      </if>
+      <if test="managerFee1 != null" >
+        manager_fee1,
+      </if>
+      <if test="managerFee2 != null" >
+        manager_fee2,
+      </if>
+      <if test="managerFee3 != null" >
+        manager_fee3,
+      </if>
+      <if test="managerFeeShareNum != null" >
+        manager_fee_share_num,
+      </if>
+      <if test="managerFeeOperatorStartdate1 != null" >
+        manager_fee_operator_startdate1,
+      </if>
+      <if test="managerFeeShareDis1 != null" >
+        manager_fee_share_dis1,
+      </if>
+      <if test="managerFeeOperatorStartdate2 != null" >
+        manager_fee_operator_startdate2,
+      </if>
+      <if test="managerFeeShareDis2 != null" >
+        manager_fee_share_dis2,
+      </if>
+      <if test="currentManagerFeeShareSumPriceOut != null" >
+        current_manager_fee_share_sum_price_out,
+      </if>
+      <if test="currentManagerFeeShareSumPriceDeductible != null" >
+        current_manager_fee_share_sum_price_deductible,
+      </if>
+      <if test="currentManagerFeeShareSumPrice != null" >
+        current_manager_fee_share_sum_price,
+      </if>
+      <if test="currentManagerFeeShareSumPriceWaitReturn != null" >
+        current_manager_fee_share_sum_price_wait_return,
+      </if>
+      <if test="praceFee != null" >
+        prace_fee,
+      </if>
+      <if test="praceFeeShareNum != null" >
+        prace_fee_share_num,
+      </if>
+      <if test="praceFeeOperatorStartdate1 != null" >
+        prace_fee_operator_startdate1,
+      </if>
+      <if test="praceFeeshareDis1 != null" >
+        prace_feeShare_dis1,
+      </if>
+      <if test="praceFeeOperatorStartdate2 != null" >
+        prace_fee_operator_startdate2,
+      </if>
+      <if test="praceFeeShareDis2 != null" >
+        prace_fee_share_dis2,
+      </if>
+      <if test="currentPraceFeeShareSumPriceOut != null" >
+        current_prace_fee_share_sum_price_out,
+      </if>
+      <if test="currentPraceFeeShareSumPriceDeductible != null" >
+        current_prace_fee_share_sum_price_deductible,
+      </if>
+      <if test="currentPraceFeeShareSumPrice != null" >
+        current_prace_fee_share_sum_price,
+      </if>
+      <if test="currentPraceFeeShareSumPriceWaitReturn != null" >
+        current_prace_fee_share_sum_price_wait_return,
+      </if>
+      <if test="powerInFee != null" >
+        power_in_fee,
+      </if>
+      <if test="powerInFeeShareNum != null" >
+        power_in_fee_share_num,
+      </if>
+      <if test="powerInFeeOperatorStartdate1 != null" >
+        power_in_fee_operator_startdate1,
+      </if>
+      <if test="powerInFeeShareDis1 != null" >
+        power_in_fee_share_dis1,
+      </if>
+      <if test="powerInFeeOperatorStartdate2 != null" >
+        power_in_fee_operator_startdate2,
+      </if>
+      <if test="powerInFeeShareDis2 != null" >
+        power_in_fee_share_dis2,
+      </if>
+      <if test="currentPowerInFeeShareSumPriceOut != null" >
+        current_power_in_fee_share_sum_price_out,
+      </if>
+      <if test="currentPowerInFeeShareSumPriceDeductible != null" >
+        current_power_in_fee_share_sum_price_deductible,
+      </if>
+      <if test="currentPowerInFeeShareSumPrice != null" >
+        current_power_in_fee_share_sum_price,
+      </if>
+      <if test="currentPowerInFeeShareSumPriceWaitDeductible != null" >
+        current_power_in_fee_share_sum_price_wait_deductible,
+      </if>
+      <if test="wlanFeeOut != null" >
+        wlan_fee_out,
+      </if>
+      <if test="wlanFeeDeductible != null" >
+        wlan_fee_deductible,
+      </if>
+      <if test="wlanFee != null" >
+        wlan_fee,
+      </if>
+      <if test="wlanFeeWaitReturn != null" >
+        wlan_fee_wait_return,
+      </if>
+      <if test="microwaveFeeOut != null" >
+        microwave_fee_out,
+      </if>
+      <if test="microwaveFeeDeductible != null" >
+        microwave_fee_deductible,
+      </if>
+      <if test="microwaveFee != null" >
+        microwave_fee,
+      </if>
+      <if test="microwaveFeeWaitReturn != null" >
+        microwave_fee_wait_return,
+      </if>
+      <if test="otherFee1Out != null" >
+        other_fee1_out,
+      </if>
+      <if test="otherFee1Deductible != null" >
+        other_fee1_deductible,
+      </if>
+      <if test="otherFee1 != null" >
+        other_fee1,
+      </if>
+      <if test="otherFee1WaitReturn != null" >
+        other_fee1_wait_return,
+      </if>
+      <if test="totalAmountMonthOut != null" >
+        total_amount_month_out,
+      </if>
+      <if test="totalAmountMonthDeductible != null" >
+        total_amount_month_deductible,
+      </if>
+      <if test="totalAmountMonth != null" >
+        total_amount_month,
+      </if>
+      <if test="totalAmountMonthWaitReturn != null" >
+        total_amount_month_wait_return,
+      </if>
+      <if test="ifServicefeeChange != null" >
+        if_servicefee_change,
+      </if>
+      <if test="servicefeeChange != null" >
+        servicefee_change,
+      </if>
+      <if test="elecFeeOut != null" >
+        elec_fee_out,
+      </if>
+      <if test="elecFeeDeductible != null" >
+        elec_fee_deductible,
+      </if>
+      <if test="elecFee != null" >
+        elec_fee,
+      </if>
+      <if test="elecFeeWaitReturn != null" >
+        elec_fee_wait_return,
+      </if>
+      <if test="usePowerServiceFeeOut2 != null" >
+        use_power_service_fee_out2,
+      </if>
+      <if test="oilGeneratorElectricFeeDeductible2 != null" >
+        oil_generator_electric_fee_deductible2,
+      </if>
+      <if test="oilGeneratorElectricFee2 != null" >
+        oil_generator_electric_fee2,
+      </if>
+      <if test="oilGeneratorElectricFeeWaitReturn2 != null" >
+        oil_generator_electric_fee_wait_return2,
+      </if>
+      <if test="totalActualAmount != null" >
+        total_actual_amount,
+      </if>
+      <if test="adjustmentFeeType != null" >
+        adjustment_fee_type,
+      </if>
+      <if test="adjustmentFee != null" >
+        adjustment_fee,
+      </if>
+      <if test="afterAdjustmentFee != null" >
+        after_adjustment_fee,
+      </if>
+      <if test="adjustmentFeeNote != null" >
+        adjustment_fee_note,
+      </if>
+      <if test="disputeFee != null" >
+        dispute_fee,
+      </if>
+      <if test="locaOperator != null" >
+        loca_operator,
+      </if>
+      <if test="reimbursementState != null" >
+        reimbursement_state,
+      </if>
+      <if test="checkState != null" >
+        check_state,
+      </if>
+      <if test="orderProp != null" >
+        order_prop,
+      </if>
+      <if test="rightProp != null" >
+        right_prop,
+      </if>
+      <if test="oriRight != null" >
+        ori_right,
+      </if>
+      <if test="resCompare != null" >
+        res_compare,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="towerbillbalanceId != null" >
+        #{towerbillbalanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesTypeId != null" >
+        #{resourcesTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPeroid != null" >
+        #{accountPeroid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=CHAR},
+      </if>
+      <if test="businessConfirmNumber != null" >
+        #{businessConfirmNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorRegId != null" >
+        #{operatorRegId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeAreaName != null" >
+        #{agreeAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationAreaName != null" >
+        #{towerStationAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationCode != null" >
+        #{towerStationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationName != null" >
+        #{towerStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeBillCode != null" >
+        #{agreeBillCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAttribute != null" >
+        #{serviceAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productTypeId != null" >
+        #{productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTypeId != null" >
+        #{roomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="oilGenerateElectricMethodId != null" >
+        #{oilGenerateElectricMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="usePowerServiceFeeOut != null" >
+        #{usePowerServiceFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeDeductible != null" >
+        #{oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFee != null" >
+        #{oilGeneratorElectricFee,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeWaitReturn != null" >
+        #{oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFeeOut != null" >
+        #{hightLevelFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFeeDeductible != null" >
+        #{hightLevelFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFee != null" >
+        #{hightLevelFee,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFeeWaitReturn != null" >
+        #{hightLevelFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfeeOut != null" >
+        #{batteryprotectionfeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfeeDeductible != null" >
+        #{batteryprotectionfeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfee != null" >
+        #{batteryprotectionfee,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfeeWaitReturn != null" >
+        #{batteryprotectionfeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="unitProductNumber1 != null" >
+        #{unitProductNumber1,jdbcType=DECIMAL},
+      </if>
+      <if test="height1 != null" >
+        #{height1,jdbcType=VARCHAR},
+      </if>
+      <if test="ifbbuOnRoom1 != null" >
+        #{ifbbuOnRoom1,jdbcType=BIT},
+      </if>
+      <if test="otherDis1 != null" >
+        #{otherDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="towerPrice1 != null" >
+        #{towerPrice1,jdbcType=DECIMAL},
+      </if>
+      <if test="unitProductNumber2 != null" >
+        #{unitProductNumber2,jdbcType=DECIMAL},
+      </if>
+      <if test="height2 != null" >
+        #{height2,jdbcType=VARCHAR},
+      </if>
+      <if test="ifbbuOnRoom2 != null" >
+        #{ifbbuOnRoom2,jdbcType=BIT},
+      </if>
+      <if test="otherDis2 != null" >
+        #{otherDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="towerPrice2 != null" >
+        #{towerPrice2,jdbcType=DECIMAL},
+      </if>
+      <if test="unitProductNumber3 != null" >
+        #{unitProductNumber3,jdbcType=DECIMAL},
+      </if>
+      <if test="height3 != null" >
+        #{height3,jdbcType=VARCHAR},
+      </if>
+      <if test="ifbbuOnRoom3 != null" >
+        #{ifbbuOnRoom3,jdbcType=BIT},
+      </if>
+      <if test="otherDis3 != null" >
+        #{otherDis3,jdbcType=DECIMAL},
+      </if>
+      <if test="towerPrice3 != null" >
+        #{towerPrice3,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareNum != null" >
+        #{currentTowerShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="towerOperatorStartdate1 != null" >
+        #{towerOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="towerSupportingShareDis1 != null" >
+        #{towerSupportingShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="towerOperatorStartdate2 != null" >
+        #{towerOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="towerSupportingShareDis2 != null" >
+        #{towerSupportingShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPriceOut != null" >
+        #{currentTowerShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPriceDeductible != null" >
+        #{currentTowerShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPrice != null" >
+        #{currentTowerShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPriceWaitReturn != null" >
+        #{currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="roomBasePrice1 != null" >
+        #{roomBasePrice1,jdbcType=DECIMAL},
+      </if>
+      <if test="roomBasePrice2 != null" >
+        #{roomBasePrice2,jdbcType=DECIMAL},
+      </if>
+      <if test="roomBasePrice3 != null" >
+        #{roomBasePrice3,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareNum != null" >
+        #{currentRoomShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="roomOperatorStartdate1 != null" >
+        #{roomOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomSupportingShareDis1 != null" >
+        #{roomSupportingShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="roomOperatorStartdate2 != null" >
+        #{roomOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomSupportingShareDis2 != null" >
+        #{roomSupportingShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPriceOut != null" >
+        #{currentRoomShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPriceDeductible != null" >
+        #{currentRoomShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPrice != null" >
+        #{currentRoomShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPriceWaitReturn != null" >
+        #{currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingBasePrice1 != null" >
+        #{supportingBasePrice1,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingBasePrice2 != null" >
+        #{supportingBasePrice2,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingBasePrice3 != null" >
+        #{supportingBasePrice3,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareNum != null" >
+        #{currentSupportingShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="supportingOperatorStartdate1 != null" >
+        #{supportingOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportingShareDis1 != null" >
+        #{supportingShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingOperatorStartdate2 != null" >
+        #{supportingOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportingShareDis2 != null" >
+        #{supportingShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPriceOut != null" >
+        #{currentSupportingShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPriceDeductible != null" >
+        #{currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPrice != null" >
+        #{currentSupportingShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPriceWaitReturn != null" >
+        #{currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFeeBack != null" >
+        #{bbuOnRoomFeeBack,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFeeDeductible != null" >
+        #{bbuOnRoomFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFee != null" >
+        #{bbuOnRoomFee,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFeeWaitReturn != null" >
+        #{bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFee1 != null" >
+        #{managerFee1,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFee2 != null" >
+        #{managerFee2,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFee3 != null" >
+        #{managerFee3,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFeeShareNum != null" >
+        #{managerFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="managerFeeOperatorStartdate1 != null" >
+        #{managerFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerFeeShareDis1 != null" >
+        #{managerFeeShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFeeOperatorStartdate2 != null" >
+        #{managerFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerFeeShareDis2 != null" >
+        #{managerFeeShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPriceOut != null" >
+        #{currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPriceDeductible != null" >
+        #{currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPrice != null" >
+        #{currentManagerFeeShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPriceWaitReturn != null" >
+        #{currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="praceFee != null" >
+        #{praceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="praceFeeShareNum != null" >
+        #{praceFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="praceFeeOperatorStartdate1 != null" >
+        #{praceFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praceFeeshareDis1 != null" >
+        #{praceFeeshareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="praceFeeOperatorStartdate2 != null" >
+        #{praceFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praceFeeShareDis2 != null" >
+        #{praceFeeShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPriceOut != null" >
+        #{currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPriceDeductible != null" >
+        #{currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPrice != null" >
+        #{currentPraceFeeShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPriceWaitReturn != null" >
+        #{currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="powerInFee != null" >
+        #{powerInFee,jdbcType=DECIMAL},
+      </if>
+      <if test="powerInFeeShareNum != null" >
+        #{powerInFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="powerInFeeOperatorStartdate1 != null" >
+        #{powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="powerInFeeShareDis1 != null" >
+        #{powerInFeeShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="powerInFeeOperatorStartdate2 != null" >
+        #{powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="powerInFeeShareDis2 != null" >
+        #{powerInFeeShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPriceOut != null" >
+        #{currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPriceDeductible != null" >
+        #{currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPrice != null" >
+        #{currentPowerInFeeShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPriceWaitDeductible != null" >
+        #{currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFeeOut != null" >
+        #{wlanFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFeeDeductible != null" >
+        #{wlanFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFee != null" >
+        #{wlanFee,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFeeWaitReturn != null" >
+        #{wlanFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFeeOut != null" >
+        #{microwaveFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFeeDeductible != null" >
+        #{microwaveFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFee != null" >
+        #{microwaveFee,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFeeWaitReturn != null" >
+        #{microwaveFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1Out != null" >
+        #{otherFee1Out,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1Deductible != null" >
+        #{otherFee1Deductible,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1 != null" >
+        #{otherFee1,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1WaitReturn != null" >
+        #{otherFee1WaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonthOut != null" >
+        #{totalAmountMonthOut,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonthDeductible != null" >
+        #{totalAmountMonthDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonth != null" >
+        #{totalAmountMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonthWaitReturn != null" >
+        #{totalAmountMonthWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="ifServicefeeChange != null" >
+        #{ifServicefeeChange,jdbcType=DECIMAL},
+      </if>
+      <if test="servicefeeChange != null" >
+        #{servicefeeChange,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFeeOut != null" >
+        #{elecFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFeeDeductible != null" >
+        #{elecFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFee != null" >
+        #{elecFee,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFeeWaitReturn != null" >
+        #{elecFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="usePowerServiceFeeOut2 != null" >
+        #{usePowerServiceFeeOut2,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeDeductible2 != null" >
+        #{oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFee2 != null" >
+        #{oilGeneratorElectricFee2,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeWaitReturn2 != null" >
+        #{oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL},
+      </if>
+      <if test="totalActualAmount != null" >
+        #{totalActualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustmentFeeType != null" >
+        #{adjustmentFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="adjustmentFee != null" >
+        #{adjustmentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="afterAdjustmentFee != null" >
+        #{afterAdjustmentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustmentFeeNote != null" >
+        #{adjustmentFeeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="disputeFee != null" >
+        #{disputeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="locaOperator != null" >
+        #{locaOperator,jdbcType=BIT},
+      </if>
+      <if test="reimbursementState != null" >
+        #{reimbursementState,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null" >
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="orderProp != null" >
+        #{orderProp,jdbcType=VARCHAR},
+      </if>
+      <if test="rightProp != null" >
+        #{rightProp,jdbcType=VARCHAR},
+      </if>
+      <if test="oriRight != null" >
+        #{oriRight,jdbcType=VARCHAR},
+      </if>
+      <if test="resCompare != null" >
+        #{resCompare,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARBINARY},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <!-- 批量保存 -->
+  <insert id="insertBatchSelective" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO">
+  	insert into twr_towerbillbalance (towerbillbalance_id, resources_type_id, 
+      account_peroid, data_type, business_confirm_number, 
+      operator, operator_reg_id, agree_area_name, 
+      tower_station_area_name, tower_station_code, 
+      tower_station_name, agree_bill_code, service_attribute, 
+      start_date, product_type_id, room_type_id, 
+      oil_generate_electric_method_id, use_power_service_fee_out, 
+      oil_generator_electric_fee_deductible, oil_generator_electric_fee, 
+      oil_generator_electric_fee_wait_return, hight_level_fee_out, 
+      hight_level_fee_deductible, hight_level_fee, 
+      hight_level_fee_wait_return, batteryProtectionFee_out, 
+      batteryProtectionFee_deductible, batteryProtectionFee, 
+      batteryProtectionFee_wait_return, unit_product_number1, 
+      height1, ifBBU_on_room1, other_dis1, 
+      tower_price1, unit_product_number2, height2, 
+      ifBBU_on_room2, other_dis2, tower_price2, 
+      unit_product_number3, height3, ifBBU_on_room3, 
+      other_dis3, tower_price3, current_tower_share_num, 
+      tower_operator_startdate1, tower_supporting_share_dis1, 
+      tower_operator_startdate2, tower_supporting_share_dis2, 
+      current_tower_share_sum_price_out, current_tower_share_sum_price_deductible, 
+      current_tower_share_sum_price, current_tower_share_sum_price_wait_return, 
+      room_base_price1, room_base_price2, room_base_price3, 
+      current_room_share_num, room_operator_startdate1, 
+      room_supporting_share_dis1, room_operator_startdate2, 
+      room_supporting_share_dis2, current_room_share_sum_price_out, 
+      current_room_share_sum_price_deductible, current_room_share_sum_price, 
+      current_room_share_sum_price_wait_return, supporting_base_price1, 
+      supporting_base_price2, supporting_base_price3, 
+      current_supporting_share_num, supporting_operator_startdate1, 
+      supporting_share_dis1, supporting_operator_startdate2, 
+      supporting_share_dis2, current_supporting_share_sum_price_out, 
+      current_supporting_share_sum_price_deductible, current_supporting_share_sum_price, 
+      current_supporting_share_sum_price_wait_return, bbU_on_room_fee_back, 
+      bbU_on_room_fee_deductible, bbU_on_room_fee, bbU_on_room_fee_wait_return, 
+      manager_fee1, manager_fee2, manager_fee3, 
+      manager_fee_share_num, manager_fee_operator_startdate1, 
+      manager_fee_share_dis1, manager_fee_operator_startdate2, 
+      manager_fee_share_dis2, current_manager_fee_share_sum_price_out, 
+      current_manager_fee_share_sum_price_deductible, current_manager_fee_share_sum_price, 
+      current_manager_fee_share_sum_price_wait_return, prace_fee, 
+      prace_fee_share_num, prace_fee_operator_startdate1, 
+      prace_feeShare_dis1, prace_fee_operator_startdate2, 
+      prace_fee_share_dis2, current_prace_fee_share_sum_price_out, 
+      current_prace_fee_share_sum_price_deductible, current_prace_fee_share_sum_price, 
+      current_prace_fee_share_sum_price_wait_return, power_in_fee, 
+      power_in_fee_share_num, power_in_fee_operator_startdate1, 
+      power_in_fee_share_dis1, power_in_fee_operator_startdate2, 
+      power_in_fee_share_dis2, current_power_in_fee_share_sum_price_out, 
+      current_power_in_fee_share_sum_price_deductible, current_power_in_fee_share_sum_price, 
+      current_power_in_fee_share_sum_price_wait_deductible, wlan_fee_out, 
+      wlan_fee_deductible, wlan_fee, wlan_fee_wait_return, 
+      microwave_fee_out, microwave_fee_deductible, 
+      microwave_fee, microwave_fee_wait_return, other_fee1_out, 
+      other_fee1_deductible, other_fee1, other_fee1_wait_return, 
+      total_amount_month_out, total_amount_month_deductible, 
+      total_amount_month, total_amount_month_wait_return, 
+      if_servicefee_change, servicefee_change, 
+      elec_fee_out, elec_fee_deductible, elec_fee, 
+      elec_fee_wait_return, use_power_service_fee_out2, 
+      oil_generator_electric_fee_deductible2, oil_generator_electric_fee2, 
+      oil_generator_electric_fee_wait_return2, total_actual_amount, 
+      adjustment_fee_type, adjustment_fee, after_adjustment_fee, 
+      adjustment_fee_note, dispute_fee, loca_operator, 
+      reimbursement_state, check_state, order_prop, 
+      right_prop, ori_right, res_compare, 
+      create_time, update_time, create_user_id, 
+      update_user_id)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+    (#{item.towerbillbalanceId,jdbcType=VARCHAR}, #{item.resourcesTypeId,jdbcType=VARCHAR}, 
+      #{item.accountPeroid,jdbcType=VARCHAR}, #{item.dataType,jdbcType=CHAR}, #{item.businessConfirmNumber,jdbcType=VARCHAR}, 
+      #{item.operator,jdbcType=VARCHAR}, #{item.operatorRegId,jdbcType=VARCHAR}, #{item.agreeAreaName,jdbcType=VARCHAR}, 
+      #{item.towerStationAreaName,jdbcType=VARCHAR}, #{item.towerStationCode,jdbcType=VARCHAR}, 
+      #{item.towerStationName,jdbcType=VARCHAR}, #{item.agreeBillCode,jdbcType=VARCHAR}, #{item.serviceAttribute,jdbcType=VARCHAR}, 
+      #{item.startDate,jdbcType=TIMESTAMP}, #{item.productTypeId,jdbcType=VARCHAR}, #{item.roomTypeId,jdbcType=VARCHAR}, 
+      #{item.oilGenerateElectricMethodId,jdbcType=VARCHAR}, #{item.usePowerServiceFeeOut,jdbcType=DECIMAL}, 
+      #{item.oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL}, #{item.oilGeneratorElectricFee,jdbcType=DECIMAL}, 
+      #{item.oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL}, #{item.hightLevelFeeOut,jdbcType=DECIMAL}, 
+      #{item.hightLevelFeeDeductible,jdbcType=DECIMAL}, #{item.hightLevelFee,jdbcType=DECIMAL}, 
+      #{item.hightLevelFeeWaitReturn,jdbcType=DECIMAL}, #{item.batteryprotectionfeeOut,jdbcType=DECIMAL}, 
+      #{item.batteryprotectionfeeDeductible,jdbcType=DECIMAL}, #{item.batteryprotectionfee,jdbcType=DECIMAL}, 
+      #{item.batteryprotectionfeeWaitReturn,jdbcType=DECIMAL}, #{item.unitProductNumber1,jdbcType=DECIMAL}, 
+      #{item.height1,jdbcType=VARCHAR}, #{item.ifbbuOnRoom1,jdbcType=BIT}, #{item.otherDis1,jdbcType=DECIMAL}, 
+      #{item.towerPrice1,jdbcType=DECIMAL}, #{item.unitProductNumber2,jdbcType=DECIMAL}, #{item.height2,jdbcType=VARCHAR}, 
+      #{item.ifbbuOnRoom2,jdbcType=BIT}, #{item.otherDis2,jdbcType=DECIMAL}, #{item.towerPrice2,jdbcType=DECIMAL}, 
+      #{item.unitProductNumber3,jdbcType=DECIMAL}, #{item.height3,jdbcType=VARCHAR}, #{item.ifbbuOnRoom3,jdbcType=BIT}, 
+      #{item.otherDis3,jdbcType=DECIMAL}, #{item.towerPrice3,jdbcType=DECIMAL}, #{item.currentTowerShareNum,jdbcType=INTEGER}, 
+      #{item.towerOperatorStartdate1,jdbcType=TIMESTAMP}, #{item.towerSupportingShareDis1,jdbcType=DECIMAL}, 
+      #{item.towerOperatorStartdate2,jdbcType=TIMESTAMP}, #{item.towerSupportingShareDis2,jdbcType=DECIMAL}, 
+      #{item.currentTowerShareSumPriceOut,jdbcType=DECIMAL}, #{item.currentTowerShareSumPriceDeductible,jdbcType=DECIMAL}, 
+      #{item.currentTowerShareSumPrice,jdbcType=DECIMAL}, #{item.currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL}, 
+      #{item.roomBasePrice1,jdbcType=DECIMAL}, #{item.roomBasePrice2,jdbcType=DECIMAL}, #{item.roomBasePrice3,jdbcType=DECIMAL}, 
+      #{item.currentRoomShareNum,jdbcType=INTEGER}, #{item.roomOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{item.roomSupportingShareDis1,jdbcType=DECIMAL}, #{item.roomOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{item.roomSupportingShareDis2,jdbcType=DECIMAL}, #{item.currentRoomShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{item.currentRoomShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentRoomShareSumPrice,jdbcType=DECIMAL}, 
+      #{item.currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.supportingBasePrice1,jdbcType=DECIMAL}, 
+      #{item.supportingBasePrice2,jdbcType=DECIMAL}, #{item.supportingBasePrice3,jdbcType=DECIMAL}, 
+      #{item.currentSupportingShareNum,jdbcType=INTEGER}, #{item.supportingOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{item.supportingShareDis1,jdbcType=DECIMAL}, #{item.supportingOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{item.supportingShareDis2,jdbcType=DECIMAL}, #{item.currentSupportingShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{item.currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentSupportingShareSumPrice,jdbcType=DECIMAL}, 
+      #{item.currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.bbuOnRoomFeeBack,jdbcType=DECIMAL}, 
+      #{item.bbuOnRoomFeeDeductible,jdbcType=DECIMAL}, #{item.bbuOnRoomFee,jdbcType=DECIMAL}, #{item.bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL}, 
+      #{item.managerFee1,jdbcType=DECIMAL}, #{item.managerFee2,jdbcType=DECIMAL}, #{item.managerFee3,jdbcType=DECIMAL}, 
+      #{item.managerFeeShareNum,jdbcType=INTEGER}, #{item.managerFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{item.managerFeeShareDis1,jdbcType=DECIMAL}, #{item.managerFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{item.managerFeeShareDis2,jdbcType=DECIMAL}, #{item.currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{item.currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentManagerFeeShareSumPrice,jdbcType=DECIMAL}, 
+      #{item.currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.praceFee,jdbcType=DECIMAL}, 
+      #{item.praceFeeShareNum,jdbcType=INTEGER}, #{item.praceFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{item.praceFeeshareDis1,jdbcType=DECIMAL}, #{item.praceFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{item.praceFeeShareDis2,jdbcType=DECIMAL}, #{item.currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{item.currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentPraceFeeShareSumPrice,jdbcType=DECIMAL}, 
+      #{item.currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.powerInFee,jdbcType=DECIMAL}, 
+      #{item.powerInFeeShareNum,jdbcType=INTEGER}, #{item.powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+      #{item.powerInFeeShareDis1,jdbcType=DECIMAL}, #{item.powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+      #{item.powerInFeeShareDis2,jdbcType=DECIMAL}, #{item.currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+      #{item.currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentPowerInFeeShareSumPrice,jdbcType=DECIMAL}, 
+      #{item.currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL}, #{item.wlanFeeOut,jdbcType=DECIMAL}, 
+      #{item.wlanFeeDeductible,jdbcType=DECIMAL}, #{item.wlanFee,jdbcType=DECIMAL}, #{item.wlanFeeWaitReturn,jdbcType=DECIMAL}, 
+      #{item.microwaveFeeOut,jdbcType=DECIMAL}, #{item.microwaveFeeDeductible,jdbcType=DECIMAL}, 
+      #{item.microwaveFee,jdbcType=DECIMAL}, #{item.microwaveFeeWaitReturn,jdbcType=DECIMAL}, #{item.otherFee1Out,jdbcType=DECIMAL}, 
+      #{item.otherFee1Deductible,jdbcType=DECIMAL}, #{item.otherFee1,jdbcType=DECIMAL}, #{item.otherFee1WaitReturn,jdbcType=DECIMAL}, 
+      #{item.totalAmountMonthOut,jdbcType=DECIMAL}, #{item.totalAmountMonthDeductible,jdbcType=DECIMAL}, 
+      #{item.totalAmountMonth,jdbcType=DECIMAL}, #{item.totalAmountMonthWaitReturn,jdbcType=DECIMAL}, 
+      #{item.ifServicefeeChange,jdbcType=DECIMAL}, #{item.servicefeeChange,jdbcType=DECIMAL}, 
+      #{item.elecFeeOut,jdbcType=DECIMAL}, #{item.elecFeeDeductible,jdbcType=DECIMAL}, #{item.elecFee,jdbcType=DECIMAL}, 
+      #{item.elecFeeWaitReturn,jdbcType=DECIMAL}, #{item.usePowerServiceFeeOut2,jdbcType=DECIMAL}, 
+      #{item.oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL}, #{item.oilGeneratorElectricFee2,jdbcType=DECIMAL}, 
+      #{item.oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL}, #{item.totalActualAmount,jdbcType=DECIMAL}, 
+      #{item.adjustmentFeeType,jdbcType=VARCHAR}, #{item.adjustmentFee,jdbcType=DECIMAL}, #{item.afterAdjustmentFee,jdbcType=DECIMAL}, 
+      #{item.adjustmentFeeNote,jdbcType=VARCHAR}, #{item.disputeFee,jdbcType=DECIMAL}, #{item.locaOperator,jdbcType=BIT}, 
+      #{item.reimbursementState,jdbcType=INTEGER}, #{item.checkState,jdbcType=INTEGER}, #{item.orderProp,jdbcType=VARCHAR}, 
+      #{item.rightProp,jdbcType=VARCHAR}, #{item.oriRight,jdbcType=VARCHAR}, #{item.resCompare,jdbcType=INTEGER}, 
+      #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=VARBINARY}, 
+      #{item.updateUserId,jdbcType=VARBINARY})
+      </foreach>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO" >
+    update twr_towerbillbalance
+    <set >
+      <if test="resourcesTypeId != null" >
+        resources_type_id = #{resourcesTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPeroid != null" >
+        account_peroid = #{accountPeroid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        data_type = #{dataType,jdbcType=CHAR},
+      </if>
+      <if test="businessConfirmNumber != null" >
+        business_confirm_number = #{businessConfirmNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorRegId != null" >
+        operator_reg_id = #{operatorRegId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeAreaName != null" >
+        agree_area_name = #{agreeAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationAreaName != null" >
+        tower_station_area_name = #{towerStationAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationCode != null" >
+        tower_station_code = #{towerStationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationName != null" >
+        tower_station_name = #{towerStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeBillCode != null" >
+        agree_bill_code = #{agreeBillCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAttribute != null" >
+        service_attribute = #{serviceAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productTypeId != null" >
+        product_type_id = #{productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTypeId != null" >
+        room_type_id = #{roomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="oilGenerateElectricMethodId != null" >
+        oil_generate_electric_method_id = #{oilGenerateElectricMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="usePowerServiceFeeOut != null" >
+        use_power_service_fee_out = #{usePowerServiceFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeDeductible != null" >
+        oil_generator_electric_fee_deductible = #{oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFee != null" >
+        oil_generator_electric_fee = #{oilGeneratorElectricFee,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeWaitReturn != null" >
+        oil_generator_electric_fee_wait_return = #{oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFeeOut != null" >
+        hight_level_fee_out = #{hightLevelFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFeeDeductible != null" >
+        hight_level_fee_deductible = #{hightLevelFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFee != null" >
+        hight_level_fee = #{hightLevelFee,jdbcType=DECIMAL},
+      </if>
+      <if test="hightLevelFeeWaitReturn != null" >
+        hight_level_fee_wait_return = #{hightLevelFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfeeOut != null" >
+        batteryProtectionFee_out = #{batteryprotectionfeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfeeDeductible != null" >
+        batteryProtectionFee_deductible = #{batteryprotectionfeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfee != null" >
+        batteryProtectionFee = #{batteryprotectionfee,jdbcType=DECIMAL},
+      </if>
+      <if test="batteryprotectionfeeWaitReturn != null" >
+        batteryProtectionFee_wait_return = #{batteryprotectionfeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="unitProductNumber1 != null" >
+        unit_product_number1 = #{unitProductNumber1,jdbcType=DECIMAL},
+      </if>
+      <if test="height1 != null" >
+        height1 = #{height1,jdbcType=VARCHAR},
+      </if>
+      <if test="ifbbuOnRoom1 != null" >
+        ifBBU_on_room1 = #{ifbbuOnRoom1,jdbcType=BIT},
+      </if>
+      <if test="otherDis1 != null" >
+        other_dis1 = #{otherDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="towerPrice1 != null" >
+        tower_price1 = #{towerPrice1,jdbcType=DECIMAL},
+      </if>
+      <if test="unitProductNumber2 != null" >
+        unit_product_number2 = #{unitProductNumber2,jdbcType=DECIMAL},
+      </if>
+      <if test="height2 != null" >
+        height2 = #{height2,jdbcType=VARCHAR},
+      </if>
+      <if test="ifbbuOnRoom2 != null" >
+        ifBBU_on_room2 = #{ifbbuOnRoom2,jdbcType=BIT},
+      </if>
+      <if test="otherDis2 != null" >
+        other_dis2 = #{otherDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="towerPrice2 != null" >
+        tower_price2 = #{towerPrice2,jdbcType=DECIMAL},
+      </if>
+      <if test="unitProductNumber3 != null" >
+        unit_product_number3 = #{unitProductNumber3,jdbcType=DECIMAL},
+      </if>
+      <if test="height3 != null" >
+        height3 = #{height3,jdbcType=VARCHAR},
+      </if>
+      <if test="ifbbuOnRoom3 != null" >
+        ifBBU_on_room3 = #{ifbbuOnRoom3,jdbcType=BIT},
+      </if>
+      <if test="otherDis3 != null" >
+        other_dis3 = #{otherDis3,jdbcType=DECIMAL},
+      </if>
+      <if test="towerPrice3 != null" >
+        tower_price3 = #{towerPrice3,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareNum != null" >
+        current_tower_share_num = #{currentTowerShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="towerOperatorStartdate1 != null" >
+        tower_operator_startdate1 = #{towerOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="towerSupportingShareDis1 != null" >
+        tower_supporting_share_dis1 = #{towerSupportingShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="towerOperatorStartdate2 != null" >
+        tower_operator_startdate2 = #{towerOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="towerSupportingShareDis2 != null" >
+        tower_supporting_share_dis2 = #{towerSupportingShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPriceOut != null" >
+        current_tower_share_sum_price_out = #{currentTowerShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPriceDeductible != null" >
+        current_tower_share_sum_price_deductible = #{currentTowerShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPrice != null" >
+        current_tower_share_sum_price = #{currentTowerShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTowerShareSumPriceWaitReturn != null" >
+        current_tower_share_sum_price_wait_return = #{currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="roomBasePrice1 != null" >
+        room_base_price1 = #{roomBasePrice1,jdbcType=DECIMAL},
+      </if>
+      <if test="roomBasePrice2 != null" >
+        room_base_price2 = #{roomBasePrice2,jdbcType=DECIMAL},
+      </if>
+      <if test="roomBasePrice3 != null" >
+        room_base_price3 = #{roomBasePrice3,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareNum != null" >
+        current_room_share_num = #{currentRoomShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="roomOperatorStartdate1 != null" >
+        room_operator_startdate1 = #{roomOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomSupportingShareDis1 != null" >
+        room_supporting_share_dis1 = #{roomSupportingShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="roomOperatorStartdate2 != null" >
+        room_operator_startdate2 = #{roomOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomSupportingShareDis2 != null" >
+        room_supporting_share_dis2 = #{roomSupportingShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPriceOut != null" >
+        current_room_share_sum_price_out = #{currentRoomShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPriceDeductible != null" >
+        current_room_share_sum_price_deductible = #{currentRoomShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPrice != null" >
+        current_room_share_sum_price = #{currentRoomShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentRoomShareSumPriceWaitReturn != null" >
+        current_room_share_sum_price_wait_return = #{currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingBasePrice1 != null" >
+        supporting_base_price1 = #{supportingBasePrice1,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingBasePrice2 != null" >
+        supporting_base_price2 = #{supportingBasePrice2,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingBasePrice3 != null" >
+        supporting_base_price3 = #{supportingBasePrice3,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareNum != null" >
+        current_supporting_share_num = #{currentSupportingShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="supportingOperatorStartdate1 != null" >
+        supporting_operator_startdate1 = #{supportingOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportingShareDis1 != null" >
+        supporting_share_dis1 = #{supportingShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingOperatorStartdate2 != null" >
+        supporting_operator_startdate2 = #{supportingOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportingShareDis2 != null" >
+        supporting_share_dis2 = #{supportingShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPriceOut != null" >
+        current_supporting_share_sum_price_out = #{currentSupportingShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPriceDeductible != null" >
+        current_supporting_share_sum_price_deductible = #{currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPrice != null" >
+        current_supporting_share_sum_price = #{currentSupportingShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentSupportingShareSumPriceWaitReturn != null" >
+        current_supporting_share_sum_price_wait_return = #{currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFeeBack != null" >
+        bbU_on_room_fee_back = #{bbuOnRoomFeeBack,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFeeDeductible != null" >
+        bbU_on_room_fee_deductible = #{bbuOnRoomFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFee != null" >
+        bbU_on_room_fee = #{bbuOnRoomFee,jdbcType=DECIMAL},
+      </if>
+      <if test="bbuOnRoomFeeWaitReturn != null" >
+        bbU_on_room_fee_wait_return = #{bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFee1 != null" >
+        manager_fee1 = #{managerFee1,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFee2 != null" >
+        manager_fee2 = #{managerFee2,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFee3 != null" >
+        manager_fee3 = #{managerFee3,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFeeShareNum != null" >
+        manager_fee_share_num = #{managerFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="managerFeeOperatorStartdate1 != null" >
+        manager_fee_operator_startdate1 = #{managerFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerFeeShareDis1 != null" >
+        manager_fee_share_dis1 = #{managerFeeShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="managerFeeOperatorStartdate2 != null" >
+        manager_fee_operator_startdate2 = #{managerFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerFeeShareDis2 != null" >
+        manager_fee_share_dis2 = #{managerFeeShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPriceOut != null" >
+        current_manager_fee_share_sum_price_out = #{currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPriceDeductible != null" >
+        current_manager_fee_share_sum_price_deductible = #{currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPrice != null" >
+        current_manager_fee_share_sum_price = #{currentManagerFeeShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentManagerFeeShareSumPriceWaitReturn != null" >
+        current_manager_fee_share_sum_price_wait_return = #{currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="praceFee != null" >
+        prace_fee = #{praceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="praceFeeShareNum != null" >
+        prace_fee_share_num = #{praceFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="praceFeeOperatorStartdate1 != null" >
+        prace_fee_operator_startdate1 = #{praceFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praceFeeshareDis1 != null" >
+        prace_feeShare_dis1 = #{praceFeeshareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="praceFeeOperatorStartdate2 != null" >
+        prace_fee_operator_startdate2 = #{praceFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praceFeeShareDis2 != null" >
+        prace_fee_share_dis2 = #{praceFeeShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPriceOut != null" >
+        current_prace_fee_share_sum_price_out = #{currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPriceDeductible != null" >
+        current_prace_fee_share_sum_price_deductible = #{currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPrice != null" >
+        current_prace_fee_share_sum_price = #{currentPraceFeeShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPraceFeeShareSumPriceWaitReturn != null" >
+        current_prace_fee_share_sum_price_wait_return = #{currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="powerInFee != null" >
+        power_in_fee = #{powerInFee,jdbcType=DECIMAL},
+      </if>
+      <if test="powerInFeeShareNum != null" >
+        power_in_fee_share_num = #{powerInFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="powerInFeeOperatorStartdate1 != null" >
+        power_in_fee_operator_startdate1 = #{powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="powerInFeeShareDis1 != null" >
+        power_in_fee_share_dis1 = #{powerInFeeShareDis1,jdbcType=DECIMAL},
+      </if>
+      <if test="powerInFeeOperatorStartdate2 != null" >
+        power_in_fee_operator_startdate2 = #{powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="powerInFeeShareDis2 != null" >
+        power_in_fee_share_dis2 = #{powerInFeeShareDis2,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPriceOut != null" >
+        current_power_in_fee_share_sum_price_out = #{currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPriceDeductible != null" >
+        current_power_in_fee_share_sum_price_deductible = #{currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPrice != null" >
+        current_power_in_fee_share_sum_price = #{currentPowerInFeeShareSumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPowerInFeeShareSumPriceWaitDeductible != null" >
+        current_power_in_fee_share_sum_price_wait_deductible = #{currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFeeOut != null" >
+        wlan_fee_out = #{wlanFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFeeDeductible != null" >
+        wlan_fee_deductible = #{wlanFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFee != null" >
+        wlan_fee = #{wlanFee,jdbcType=DECIMAL},
+      </if>
+      <if test="wlanFeeWaitReturn != null" >
+        wlan_fee_wait_return = #{wlanFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFeeOut != null" >
+        microwave_fee_out = #{microwaveFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFeeDeductible != null" >
+        microwave_fee_deductible = #{microwaveFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFee != null" >
+        microwave_fee = #{microwaveFee,jdbcType=DECIMAL},
+      </if>
+      <if test="microwaveFeeWaitReturn != null" >
+        microwave_fee_wait_return = #{microwaveFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1Out != null" >
+        other_fee1_out = #{otherFee1Out,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1Deductible != null" >
+        other_fee1_deductible = #{otherFee1Deductible,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1 != null" >
+        other_fee1 = #{otherFee1,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee1WaitReturn != null" >
+        other_fee1_wait_return = #{otherFee1WaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonthOut != null" >
+        total_amount_month_out = #{totalAmountMonthOut,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonthDeductible != null" >
+        total_amount_month_deductible = #{totalAmountMonthDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonth != null" >
+        total_amount_month = #{totalAmountMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmountMonthWaitReturn != null" >
+        total_amount_month_wait_return = #{totalAmountMonthWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="ifServicefeeChange != null" >
+        if_servicefee_change = #{ifServicefeeChange,jdbcType=DECIMAL},
+      </if>
+      <if test="servicefeeChange != null" >
+        servicefee_change = #{servicefeeChange,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFeeOut != null" >
+        elec_fee_out = #{elecFeeOut,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFeeDeductible != null" >
+        elec_fee_deductible = #{elecFeeDeductible,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFee != null" >
+        elec_fee = #{elecFee,jdbcType=DECIMAL},
+      </if>
+      <if test="elecFeeWaitReturn != null" >
+        elec_fee_wait_return = #{elecFeeWaitReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="usePowerServiceFeeOut2 != null" >
+        use_power_service_fee_out2 = #{usePowerServiceFeeOut2,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeDeductible2 != null" >
+        oil_generator_electric_fee_deductible2 = #{oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFee2 != null" >
+        oil_generator_electric_fee2 = #{oilGeneratorElectricFee2,jdbcType=DECIMAL},
+      </if>
+      <if test="oilGeneratorElectricFeeWaitReturn2 != null" >
+        oil_generator_electric_fee_wait_return2 = #{oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL},
+      </if>
+      <if test="totalActualAmount != null" >
+        total_actual_amount = #{totalActualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustmentFeeType != null" >
+        adjustment_fee_type = #{adjustmentFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="adjustmentFee != null" >
+        adjustment_fee = #{adjustmentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="afterAdjustmentFee != null" >
+        after_adjustment_fee = #{afterAdjustmentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustmentFeeNote != null" >
+        adjustment_fee_note = #{adjustmentFeeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="disputeFee != null" >
+        dispute_fee = #{disputeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="locaOperator != null" >
+        loca_operator = #{locaOperator,jdbcType=BIT},
+      </if>
+      <if test="reimbursementState != null" >
+        reimbursement_state = #{reimbursementState,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null" >
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="orderProp != null" >
+        order_prop = #{orderProp,jdbcType=VARCHAR},
+      </if>
+      <if test="rightProp != null" >
+        right_prop = #{rightProp,jdbcType=VARCHAR},
+      </if>
+      <if test="oriRight != null" >
+        ori_right = #{oriRight,jdbcType=VARCHAR},
+      </if>
+      <if test="resCompare != null" >
+        res_compare = #{resCompare,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARBINARY},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where towerbillbalance_id = #{towerbillbalanceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO" >
+    update twr_towerbillbalance
+    set resources_type_id = #{resourcesTypeId,jdbcType=VARCHAR},
+      account_peroid = #{accountPeroid,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=CHAR},
+      business_confirm_number = #{businessConfirmNumber,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operator_reg_id = #{operatorRegId,jdbcType=VARCHAR},
+      agree_area_name = #{agreeAreaName,jdbcType=VARCHAR},
+      tower_station_area_name = #{towerStationAreaName,jdbcType=VARCHAR},
+      tower_station_code = #{towerStationCode,jdbcType=VARCHAR},
+      tower_station_name = #{towerStationName,jdbcType=VARCHAR},
+      agree_bill_code = #{agreeBillCode,jdbcType=VARCHAR},
+      service_attribute = #{serviceAttribute,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      product_type_id = #{productTypeId,jdbcType=VARCHAR},
+      room_type_id = #{roomTypeId,jdbcType=VARCHAR},
+      oil_generate_electric_method_id = #{oilGenerateElectricMethodId,jdbcType=VARCHAR},
+      use_power_service_fee_out = #{usePowerServiceFeeOut,jdbcType=DECIMAL},
+      oil_generator_electric_fee_deductible = #{oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL},
+      oil_generator_electric_fee = #{oilGeneratorElectricFee,jdbcType=DECIMAL},
+      oil_generator_electric_fee_wait_return = #{oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL},
+      hight_level_fee_out = #{hightLevelFeeOut,jdbcType=DECIMAL},
+      hight_level_fee_deductible = #{hightLevelFeeDeductible,jdbcType=DECIMAL},
+      hight_level_fee = #{hightLevelFee,jdbcType=DECIMAL},
+      hight_level_fee_wait_return = #{hightLevelFeeWaitReturn,jdbcType=DECIMAL},
+      batteryProtectionFee_out = #{batteryprotectionfeeOut,jdbcType=DECIMAL},
+      batteryProtectionFee_deductible = #{batteryprotectionfeeDeductible,jdbcType=DECIMAL},
+      batteryProtectionFee = #{batteryprotectionfee,jdbcType=DECIMAL},
+      batteryProtectionFee_wait_return = #{batteryprotectionfeeWaitReturn,jdbcType=DECIMAL},
+      unit_product_number1 = #{unitProductNumber1,jdbcType=DECIMAL},
+      height1 = #{height1,jdbcType=VARCHAR},
+      ifBBU_on_room1 = #{ifbbuOnRoom1,jdbcType=BIT},
+      other_dis1 = #{otherDis1,jdbcType=DECIMAL},
+      tower_price1 = #{towerPrice1,jdbcType=DECIMAL},
+      unit_product_number2 = #{unitProductNumber2,jdbcType=DECIMAL},
+      height2 = #{height2,jdbcType=VARCHAR},
+      ifBBU_on_room2 = #{ifbbuOnRoom2,jdbcType=BIT},
+      other_dis2 = #{otherDis2,jdbcType=DECIMAL},
+      tower_price2 = #{towerPrice2,jdbcType=DECIMAL},
+      unit_product_number3 = #{unitProductNumber3,jdbcType=DECIMAL},
+      height3 = #{height3,jdbcType=VARCHAR},
+      ifBBU_on_room3 = #{ifbbuOnRoom3,jdbcType=BIT},
+      other_dis3 = #{otherDis3,jdbcType=DECIMAL},
+      tower_price3 = #{towerPrice3,jdbcType=DECIMAL},
+      current_tower_share_num = #{currentTowerShareNum,jdbcType=INTEGER},
+      tower_operator_startdate1 = #{towerOperatorStartdate1,jdbcType=TIMESTAMP},
+      tower_supporting_share_dis1 = #{towerSupportingShareDis1,jdbcType=DECIMAL},
+      tower_operator_startdate2 = #{towerOperatorStartdate2,jdbcType=TIMESTAMP},
+      tower_supporting_share_dis2 = #{towerSupportingShareDis2,jdbcType=DECIMAL},
+      current_tower_share_sum_price_out = #{currentTowerShareSumPriceOut,jdbcType=DECIMAL},
+      current_tower_share_sum_price_deductible = #{currentTowerShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_tower_share_sum_price = #{currentTowerShareSumPrice,jdbcType=DECIMAL},
+      current_tower_share_sum_price_wait_return = #{currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      room_base_price1 = #{roomBasePrice1,jdbcType=DECIMAL},
+      room_base_price2 = #{roomBasePrice2,jdbcType=DECIMAL},
+      room_base_price3 = #{roomBasePrice3,jdbcType=DECIMAL},
+      current_room_share_num = #{currentRoomShareNum,jdbcType=INTEGER},
+      room_operator_startdate1 = #{roomOperatorStartdate1,jdbcType=TIMESTAMP},
+      room_supporting_share_dis1 = #{roomSupportingShareDis1,jdbcType=DECIMAL},
+      room_operator_startdate2 = #{roomOperatorStartdate2,jdbcType=TIMESTAMP},
+      room_supporting_share_dis2 = #{roomSupportingShareDis2,jdbcType=DECIMAL},
+      current_room_share_sum_price_out = #{currentRoomShareSumPriceOut,jdbcType=DECIMAL},
+      current_room_share_sum_price_deductible = #{currentRoomShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_room_share_sum_price = #{currentRoomShareSumPrice,jdbcType=DECIMAL},
+      current_room_share_sum_price_wait_return = #{currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      supporting_base_price1 = #{supportingBasePrice1,jdbcType=DECIMAL},
+      supporting_base_price2 = #{supportingBasePrice2,jdbcType=DECIMAL},
+      supporting_base_price3 = #{supportingBasePrice3,jdbcType=DECIMAL},
+      current_supporting_share_num = #{currentSupportingShareNum,jdbcType=INTEGER},
+      supporting_operator_startdate1 = #{supportingOperatorStartdate1,jdbcType=TIMESTAMP},
+      supporting_share_dis1 = #{supportingShareDis1,jdbcType=DECIMAL},
+      supporting_operator_startdate2 = #{supportingOperatorStartdate2,jdbcType=TIMESTAMP},
+      supporting_share_dis2 = #{supportingShareDis2,jdbcType=DECIMAL},
+      current_supporting_share_sum_price_out = #{currentSupportingShareSumPriceOut,jdbcType=DECIMAL},
+      current_supporting_share_sum_price_deductible = #{currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_supporting_share_sum_price = #{currentSupportingShareSumPrice,jdbcType=DECIMAL},
+      current_supporting_share_sum_price_wait_return = #{currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      bbU_on_room_fee_back = #{bbuOnRoomFeeBack,jdbcType=DECIMAL},
+      bbU_on_room_fee_deductible = #{bbuOnRoomFeeDeductible,jdbcType=DECIMAL},
+      bbU_on_room_fee = #{bbuOnRoomFee,jdbcType=DECIMAL},
+      bbU_on_room_fee_wait_return = #{bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL},
+      manager_fee1 = #{managerFee1,jdbcType=DECIMAL},
+      manager_fee2 = #{managerFee2,jdbcType=DECIMAL},
+      manager_fee3 = #{managerFee3,jdbcType=DECIMAL},
+      manager_fee_share_num = #{managerFeeShareNum,jdbcType=INTEGER},
+      manager_fee_operator_startdate1 = #{managerFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      manager_fee_share_dis1 = #{managerFeeShareDis1,jdbcType=DECIMAL},
+      manager_fee_operator_startdate2 = #{managerFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      manager_fee_share_dis2 = #{managerFeeShareDis2,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price_out = #{currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price_deductible = #{currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price = #{currentManagerFeeShareSumPrice,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price_wait_return = #{currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      prace_fee = #{praceFee,jdbcType=DECIMAL},
+      prace_fee_share_num = #{praceFeeShareNum,jdbcType=INTEGER},
+      prace_fee_operator_startdate1 = #{praceFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      prace_feeShare_dis1 = #{praceFeeshareDis1,jdbcType=DECIMAL},
+      prace_fee_operator_startdate2 = #{praceFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      prace_fee_share_dis2 = #{praceFeeShareDis2,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price_out = #{currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price_deductible = #{currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price = #{currentPraceFeeShareSumPrice,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price_wait_return = #{currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      power_in_fee = #{powerInFee,jdbcType=DECIMAL},
+      power_in_fee_share_num = #{powerInFeeShareNum,jdbcType=INTEGER},
+      power_in_fee_operator_startdate1 = #{powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      power_in_fee_share_dis1 = #{powerInFeeShareDis1,jdbcType=DECIMAL},
+      power_in_fee_operator_startdate2 = #{powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      power_in_fee_share_dis2 = #{powerInFeeShareDis2,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price_out = #{currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price_deductible = #{currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price = #{currentPowerInFeeShareSumPrice,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price_wait_deductible = #{currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL},
+      wlan_fee_out = #{wlanFeeOut,jdbcType=DECIMAL},
+      wlan_fee_deductible = #{wlanFeeDeductible,jdbcType=DECIMAL},
+      wlan_fee = #{wlanFee,jdbcType=DECIMAL},
+      wlan_fee_wait_return = #{wlanFeeWaitReturn,jdbcType=DECIMAL},
+      microwave_fee_out = #{microwaveFeeOut,jdbcType=DECIMAL},
+      microwave_fee_deductible = #{microwaveFeeDeductible,jdbcType=DECIMAL},
+      microwave_fee = #{microwaveFee,jdbcType=DECIMAL},
+      microwave_fee_wait_return = #{microwaveFeeWaitReturn,jdbcType=DECIMAL},
+      other_fee1_out = #{otherFee1Out,jdbcType=DECIMAL},
+      other_fee1_deductible = #{otherFee1Deductible,jdbcType=DECIMAL},
+      other_fee1 = #{otherFee1,jdbcType=DECIMAL},
+      other_fee1_wait_return = #{otherFee1WaitReturn,jdbcType=DECIMAL},
+      total_amount_month_out = #{totalAmountMonthOut,jdbcType=DECIMAL},
+      total_amount_month_deductible = #{totalAmountMonthDeductible,jdbcType=DECIMAL},
+      total_amount_month = #{totalAmountMonth,jdbcType=DECIMAL},
+      total_amount_month_wait_return = #{totalAmountMonthWaitReturn,jdbcType=DECIMAL},
+      if_servicefee_change = #{ifServicefeeChange,jdbcType=DECIMAL},
+      servicefee_change = #{servicefeeChange,jdbcType=DECIMAL},
+      elec_fee_out = #{elecFeeOut,jdbcType=DECIMAL},
+      elec_fee_deductible = #{elecFeeDeductible,jdbcType=DECIMAL},
+      elec_fee = #{elecFee,jdbcType=DECIMAL},
+      elec_fee_wait_return = #{elecFeeWaitReturn,jdbcType=DECIMAL},
+      use_power_service_fee_out2 = #{usePowerServiceFeeOut2,jdbcType=DECIMAL},
+      oil_generator_electric_fee_deductible2 = #{oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL},
+      oil_generator_electric_fee2 = #{oilGeneratorElectricFee2,jdbcType=DECIMAL},
+      oil_generator_electric_fee_wait_return2 = #{oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL},
+      total_actual_amount = #{totalActualAmount,jdbcType=DECIMAL},
+      adjustment_fee_type = #{adjustmentFeeType,jdbcType=VARCHAR},
+      adjustment_fee = #{adjustmentFee,jdbcType=DECIMAL},
+      after_adjustment_fee = #{afterAdjustmentFee,jdbcType=DECIMAL},
+      adjustment_fee_note = #{adjustmentFeeNote,jdbcType=VARCHAR},
+      dispute_fee = #{disputeFee,jdbcType=DECIMAL},
+      loca_operator = #{locaOperator,jdbcType=BIT},
+      reimbursement_state = #{reimbursementState,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER},
+      order_prop = #{orderProp,jdbcType=VARCHAR},
+      right_prop = #{rightProp,jdbcType=VARCHAR},
+      ori_right = #{oriRight,jdbcType=VARCHAR},
+      res_compare = #{resCompare,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARBINARY},
+      update_user_id = #{updateUserId,jdbcType=VARBINARY}
+    where towerbillbalance_id = #{towerbillbalanceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateBatchByPrimaryKey" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO">
+    
+    <foreach collection="list" item="item" index="index" separator=";" > 
+    update twr_towerbillbalance
+    set resources_type_id = #{item.resourcesTypeId,jdbcType=VARCHAR},
+      account_peroid = #{item.accountPeroid,jdbcType=VARCHAR},
+      data_type = #{item.dataType,jdbcType=CHAR},
+      operator = #{item.operator,jdbcType=VARCHAR},
+      operator_reg_id = #{item.operatorRegId,jdbcType=VARCHAR},
+      agree_area_name = #{item.agreeAreaName,jdbcType=VARCHAR},
+      tower_station_area_name = #{item.towerStationAreaName,jdbcType=VARCHAR},
+      tower_station_code = #{item.towerStationCode,jdbcType=VARCHAR},
+      tower_station_name = #{item.towerStationName,jdbcType=VARCHAR},
+      agree_bill_code = #{item.agreeBillCode,jdbcType=VARCHAR},
+      service_attribute = #{item.serviceAttribute,jdbcType=VARCHAR},
+      start_date = #{item.startDate,jdbcType=TIMESTAMP},
+      product_type_id = #{item.productTypeId,jdbcType=VARCHAR},
+      room_type_id = #{item.roomTypeId,jdbcType=VARCHAR},
+      oil_generate_electric_method_id = #{item.oilGenerateElectricMethodId,jdbcType=VARCHAR},
+      use_power_service_fee_out = #{item.usePowerServiceFeeOut,jdbcType=DECIMAL},
+      oil_generator_electric_fee_deductible = #{item.oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL},
+      oil_generator_electric_fee = #{item.oilGeneratorElectricFee,jdbcType=DECIMAL},
+      oil_generator_electric_fee_wait_return = #{item.oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL},
+      hight_level_fee_out = #{item.hightLevelFeeOut,jdbcType=DECIMAL},
+      hight_level_fee_deductible = #{item.hightLevelFeeDeductible,jdbcType=DECIMAL},
+      hight_level_fee = #{item.hightLevelFee,jdbcType=DECIMAL},
+      hight_level_fee_wait_return = #{item.hightLevelFeeWaitReturn,jdbcType=DECIMAL},
+      batteryProtectionFee_out = #{item.batteryprotectionfeeOut,jdbcType=DECIMAL},
+      batteryProtectionFee_deductible = #{item.batteryprotectionfeeDeductible,jdbcType=DECIMAL},
+      batteryProtectionFee = #{item.batteryprotectionfee,jdbcType=DECIMAL},
+      batteryProtectionFee_wait_return = #{item.batteryprotectionfeeWaitReturn,jdbcType=DECIMAL},
+      unit_product_number1 = #{item.unitProductNumber1,jdbcType=DECIMAL},
+      height1 = #{item.height1,jdbcType=VARCHAR},
+      ifBBU_on_room1 = #{item.ifbbuOnRoom1,jdbcType=BIT},
+      other_dis1 = #{item.otherDis1,jdbcType=DECIMAL},
+      tower_price1 = #{item.towerPrice1,jdbcType=DECIMAL},
+      unit_product_number2 = #{item.unitProductNumber2,jdbcType=DECIMAL},
+      height2 = #{item.height2,jdbcType=VARCHAR},
+      ifBBU_on_room2 = #{item.ifbbuOnRoom2,jdbcType=BIT},
+      other_dis2 = #{item.otherDis2,jdbcType=DECIMAL},
+      tower_price2 = #{item.towerPrice2,jdbcType=DECIMAL},
+      unit_product_number3 = #{item.unitProductNumber3,jdbcType=DECIMAL},
+      height3 = #{item.height3,jdbcType=VARCHAR},
+      ifBBU_on_room3 = #{item.ifbbuOnRoom3,jdbcType=BIT},
+      other_dis3 = #{item.otherDis3,jdbcType=DECIMAL},
+      tower_price3 = #{item.towerPrice3,jdbcType=DECIMAL},
+      current_tower_share_num = #{item.currentTowerShareNum,jdbcType=INTEGER},
+      tower_operator_startdate1 = #{item.towerOperatorStartdate1,jdbcType=TIMESTAMP},
+      tower_supporting_share_dis1 = #{item.towerSupportingShareDis1,jdbcType=DECIMAL},
+      tower_operator_startdate2 = #{item.towerOperatorStartdate2,jdbcType=TIMESTAMP},
+      tower_supporting_share_dis2 = #{item.towerSupportingShareDis2,jdbcType=DECIMAL},
+      current_tower_share_sum_price_out = #{item.currentTowerShareSumPriceOut,jdbcType=DECIMAL},
+      current_tower_share_sum_price_deductible = #{item.currentTowerShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_tower_share_sum_price = #{item.currentTowerShareSumPrice,jdbcType=DECIMAL},
+      current_tower_share_sum_price_wait_return = #{item.currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      room_base_price1 = #{item.roomBasePrice1,jdbcType=DECIMAL},
+      room_base_price2 = #{item.roomBasePrice2,jdbcType=DECIMAL},
+      room_base_price3 = #{item.roomBasePrice3,jdbcType=DECIMAL},
+      current_room_share_num = #{item.currentRoomShareNum,jdbcType=INTEGER},
+      room_operator_startdate1 = #{item.roomOperatorStartdate1,jdbcType=TIMESTAMP},
+      room_supporting_share_dis1 = #{item.roomSupportingShareDis1,jdbcType=DECIMAL},
+      room_operator_startdate2 = #{item.roomOperatorStartdate2,jdbcType=TIMESTAMP},
+      room_supporting_share_dis2 = #{item.roomSupportingShareDis2,jdbcType=DECIMAL},
+      current_room_share_sum_price_out = #{item.currentRoomShareSumPriceOut,jdbcType=DECIMAL},
+      current_room_share_sum_price_deductible = #{item.currentRoomShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_room_share_sum_price = #{item.currentRoomShareSumPrice,jdbcType=DECIMAL},
+      current_room_share_sum_price_wait_return = #{item.currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      supporting_base_price1 = #{item.supportingBasePrice1,jdbcType=DECIMAL},
+      supporting_base_price2 = #{item.supportingBasePrice2,jdbcType=DECIMAL},
+      supporting_base_price3 = #{item.supportingBasePrice3,jdbcType=DECIMAL},
+      current_supporting_share_num = #{item.currentSupportingShareNum,jdbcType=INTEGER},
+      supporting_operator_startdate1 = #{item.supportingOperatorStartdate1,jdbcType=TIMESTAMP},
+      supporting_share_dis1 = #{item.supportingShareDis1,jdbcType=DECIMAL},
+      supporting_operator_startdate2 = #{item.supportingOperatorStartdate2,jdbcType=TIMESTAMP},
+      supporting_share_dis2 = #{item.supportingShareDis2,jdbcType=DECIMAL},
+      current_supporting_share_sum_price_out = #{item.currentSupportingShareSumPriceOut,jdbcType=DECIMAL},
+      current_supporting_share_sum_price_deductible = #{item.currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_supporting_share_sum_price = #{item.currentSupportingShareSumPrice,jdbcType=DECIMAL},
+      current_supporting_share_sum_price_wait_return = #{item.currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      bbU_on_room_fee_back = #{item.bbuOnRoomFeeBack,jdbcType=DECIMAL},
+      bbU_on_room_fee_deductible = #{item.bbuOnRoomFeeDeductible,jdbcType=DECIMAL},
+      bbU_on_room_fee = #{item.bbuOnRoomFee,jdbcType=DECIMAL},
+      bbU_on_room_fee_wait_return = #{item.bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL},
+      manager_fee1 = #{item.managerFee1,jdbcType=DECIMAL},
+      manager_fee2 = #{item.managerFee2,jdbcType=DECIMAL},
+      manager_fee3 = #{item.managerFee3,jdbcType=DECIMAL},
+      manager_fee_share_num = #{item.managerFeeShareNum,jdbcType=INTEGER},
+      manager_fee_operator_startdate1 = #{item.managerFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      manager_fee_share_dis1 = #{item.managerFeeShareDis1,jdbcType=DECIMAL},
+      manager_fee_operator_startdate2 = #{item.managerFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      manager_fee_share_dis2 = #{item.managerFeeShareDis2,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price_out = #{item.currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price_deductible = #{item.currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price = #{item.currentManagerFeeShareSumPrice,jdbcType=DECIMAL},
+      current_manager_fee_share_sum_price_wait_return = #{item.currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      prace_fee = #{item.praceFee,jdbcType=DECIMAL},
+      prace_fee_share_num = #{item.praceFeeShareNum,jdbcType=INTEGER},
+      prace_fee_operator_startdate1 = #{item.praceFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      prace_feeShare_dis1 = #{item.praceFeeshareDis1,jdbcType=DECIMAL},
+      prace_fee_operator_startdate2 = #{item.praceFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      prace_fee_share_dis2 = #{item.praceFeeShareDis2,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price_out = #{item.currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price_deductible = #{item.currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price = #{item.currentPraceFeeShareSumPrice,jdbcType=DECIMAL},
+      current_prace_fee_share_sum_price_wait_return = #{item.currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+      power_in_fee = #{item.powerInFee,jdbcType=DECIMAL},
+      power_in_fee_share_num = #{item.powerInFeeShareNum,jdbcType=INTEGER},
+      power_in_fee_operator_startdate1 = #{item.powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+      power_in_fee_share_dis1 = #{item.powerInFeeShareDis1,jdbcType=DECIMAL},
+      power_in_fee_operator_startdate2 = #{item.powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+      power_in_fee_share_dis2 = #{item.powerInFeeShareDis2,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price_out = #{item.currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price_deductible = #{item.currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price = #{item.currentPowerInFeeShareSumPrice,jdbcType=DECIMAL},
+      current_power_in_fee_share_sum_price_wait_deductible = #{item.currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL},
+      wlan_fee_out = #{item.wlanFeeOut,jdbcType=DECIMAL},
+      wlan_fee_deductible = #{item.wlanFeeDeductible,jdbcType=DECIMAL},
+      wlan_fee = #{item.wlanFee,jdbcType=DECIMAL},
+      wlan_fee_wait_return = #{item.wlanFeeWaitReturn,jdbcType=DECIMAL},
+      microwave_fee_out = #{item.microwaveFeeOut,jdbcType=DECIMAL},
+      microwave_fee_deductible = #{item.microwaveFeeDeductible,jdbcType=DECIMAL},
+      microwave_fee = #{item.microwaveFee,jdbcType=DECIMAL},
+      microwave_fee_wait_return = #{item.microwaveFeeWaitReturn,jdbcType=DECIMAL},
+      other_fee1_out = #{item.otherFee1Out,jdbcType=DECIMAL},
+      other_fee1_deductible = #{item.otherFee1Deductible,jdbcType=DECIMAL},
+      other_fee1 = #{item.otherFee1,jdbcType=DECIMAL},
+      other_fee1_wait_return = #{item.otherFee1WaitReturn,jdbcType=DECIMAL},
+      total_amount_month_out = #{item.totalAmountMonthOut,jdbcType=DECIMAL},
+      total_amount_month_deductible = #{item.totalAmountMonthDeductible,jdbcType=DECIMAL},
+      total_amount_month = #{item.totalAmountMonth,jdbcType=DECIMAL},
+      total_amount_month_wait_return = #{item.totalAmountMonthWaitReturn,jdbcType=DECIMAL},
+      if_servicefee_change = #{item.ifServicefeeChange,jdbcType=DECIMAL},
+      servicefee_change = #{item.servicefeeChange,jdbcType=DECIMAL},
+      elec_fee_out = #{item.elecFeeOut,jdbcType=DECIMAL},
+      elec_fee_deductible = #{item.elecFeeDeductible,jdbcType=DECIMAL},
+      elec_fee = #{item.elecFee,jdbcType=DECIMAL},
+      elec_fee_wait_return = #{item.elecFeeWaitReturn,jdbcType=DECIMAL},
+      use_power_service_fee_out2 = #{item.usePowerServiceFeeOut2,jdbcType=DECIMAL},
+      oil_generator_electric_fee_deductible2 = #{item.oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL},
+      oil_generator_electric_fee2 = #{item.oilGeneratorElectricFee2,jdbcType=DECIMAL},
+      oil_generator_electric_fee_wait_return2 = #{item.oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL},
+      total_actual_amount = #{item.totalActualAmount,jdbcType=DECIMAL},
+      adjustment_fee_type = #{item.adjustmentFeeType,jdbcType=VARCHAR},
+      adjustment_fee = #{item.adjustmentFee,jdbcType=DECIMAL},
+      after_adjustment_fee = #{item.afterAdjustmentFee,jdbcType=DECIMAL},
+      adjustment_fee_note = #{item.adjustmentFeeNote,jdbcType=VARCHAR},
+      dispute_fee = #{item.disputeFee,jdbcType=DECIMAL},
+      loca_operator = #{item.locaOperator,jdbcType=BIT},
+      reimbursement_state = #{item.reimbursementState,jdbcType=INTEGER},
+      check_state = #{item.checkState,jdbcType=INTEGER},
+      order_prop = #{item.orderProp,jdbcType=VARCHAR},
+      right_prop = #{item.rightProp,jdbcType=VARCHAR},
+      ori_right = #{item.oriRight,jdbcType=VARCHAR},
+      res_compare = #{item.resCompare,jdbcType=INTEGER},
+      update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+      update_user_id = #{item.updateUserId,jdbcType=VARBINARY}
+    where business_confirm_number = #{item.businessConfirmNumber,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+  
+  <!-- 查询移动账单数据  wangz-->
+  <select id="queryPageMobileBillbalance" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from twr_towerbillbalance tb 
+    INNER JOIN v_sys_region reg on reg.reg_id = tb.operator_reg_id
+    <where>
+   		<if test="dataType != null and dataType != ''">
+			and tb.data_type = #{dataType}
+		</if>
+   		<if test="businessConfirmNumber != null and businessConfirmNumber != ''">
+			and tb.business_confirm_number = #{businessConfirmNumber}
+		</if>
+		<if test="towerStationName != null and towerStationName != ''">
+			and ( INSTR(tb.tower_station_code,#{towerStationName})
+				or INSTR(tb.tower_station_name,#{towerStationName})
+				)
+		</if>
+   		<if test="accountPeroid != null and accountPeroid != ''">
+			and tb.account_peroid = #{accountPeroid}
+		</if>
+   		<if test="operatorRegId != null and operatorRegId != ''">
+			and tb.operator_reg_id = #{operatorRegId}
+		</if>
+		<!-- 区县ID 
+		<if test="pregId != null and pregId != ''">
+			and reg.reg_id = #{pregId}
+		</if> 
+		-->
+		<!-- 根据权限过滤 -->
+		<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+		<!-- 选中的导出数据 --> 
+		<if test=" towerbillbalanceIds != null and towerbillbalanceIds != ''">
+			and tb.towerbillbalance_id in
+			<foreach collection="towerbillbalanceIds" index="index" item="item" open="(" separator="," close=")">    
+	            #{item}    
+	        </foreach>  
+		</if>
+    </where>
+  </select>
+  <!-- 生成账单批量添加 wangz-->
+  <insert id="insertBatchMobileBill" parameterType="com.xunge.model.towerrent.settlement.TowerBillbalanceVO">
+      insert into twr_towerbillbalance (towerbillbalance_id, resources_type_id,
+      account_peroid, data_type, business_confirm_number, 
+      operator, operator_reg_id, agree_area_name, 
+      tower_station_area_name, tower_station_code, 
+      tower_station_name, agree_bill_code, service_attribute, 
+      start_date, product_type_id, room_type_id, 
+      oil_generate_electric_method_id, use_power_service_fee_out, 
+      oil_generator_electric_fee_deductible, oil_generator_electric_fee, 
+      oil_generator_electric_fee_wait_return, hight_level_fee_out, 
+      hight_level_fee_deductible, hight_level_fee, 
+      hight_level_fee_wait_return, batteryProtectionFee_out, 
+      batteryProtectionFee_deductible, batteryProtectionFee, 
+      batteryProtectionFee_wait_return, unit_product_number1, 
+      height1, ifBBU_on_room1, other_dis1, 
+      tower_price1, unit_product_number2, height2, 
+      ifBBU_on_room2, other_dis2, tower_price2, 
+      unit_product_number3, height3, ifBBU_on_room3, 
+      other_dis3, tower_price3, current_tower_share_num, 
+      tower_operator_startdate1, tower_supporting_share_dis1, 
+      tower_operator_startdate2, tower_supporting_share_dis2, 
+      current_tower_share_sum_price_out, current_tower_share_sum_price_deductible, 
+      current_tower_share_sum_price, current_tower_share_sum_price_wait_return, 
+      room_base_price1, room_base_price2, room_base_price3, 
+      current_room_share_num, room_operator_startdate1, 
+      room_supporting_share_dis1, room_operator_startdate2, 
+      room_supporting_share_dis2, current_room_share_sum_price_out, 
+      current_room_share_sum_price_deductible, current_room_share_sum_price, 
+      current_room_share_sum_price_wait_return, supporting_base_price1, 
+      supporting_base_price2, supporting_base_price3, 
+      current_supporting_share_num, supporting_operator_startdate1, 
+      supporting_share_dis1, supporting_operator_startdate2, 
+      supporting_share_dis2, current_supporting_share_sum_price_out, 
+      current_supporting_share_sum_price_deductible, current_supporting_share_sum_price, 
+      current_supporting_share_sum_price_wait_return, bbU_on_room_fee_back, 
+      bbU_on_room_fee_deductible, bbU_on_room_fee, bbU_on_room_fee_wait_return, 
+      manager_fee1, manager_fee2, manager_fee3, 
+      manager_fee_share_num, manager_fee_operator_startdate1, 
+      manager_fee_share_dis1, manager_fee_operator_startdate2, 
+      manager_fee_share_dis2, current_manager_fee_share_sum_price_out, 
+      current_manager_fee_share_sum_price_deductible, current_manager_fee_share_sum_price, 
+      current_manager_fee_share_sum_price_wait_return, prace_fee, 
+      prace_fee_share_num, prace_fee_operator_startdate1, 
+      prace_feeShare_dis1, prace_fee_operator_startdate2, 
+      prace_fee_share_dis2, current_prace_fee_share_sum_price_out, 
+      current_prace_fee_share_sum_price_deductible, current_prace_fee_share_sum_price, 
+      current_prace_fee_share_sum_price_wait_return, power_in_fee, 
+      power_in_fee_share_num, power_in_fee_operator_startdate1, 
+      power_in_fee_share_dis1, power_in_fee_operator_startdate2, 
+      power_in_fee_share_dis2, current_power_in_fee_share_sum_price_out, 
+      current_power_in_fee_share_sum_price_deductible, current_power_in_fee_share_sum_price, 
+      current_power_in_fee_share_sum_price_wait_deductible, wlan_fee_out, 
+      wlan_fee_deductible, wlan_fee, wlan_fee_wait_return, 
+      microwave_fee_out, microwave_fee_deductible, 
+      microwave_fee, microwave_fee_wait_return, other_fee1_out, 
+      other_fee1_deductible, other_fee1, other_fee1_wait_return, 
+      total_amount_month_out, total_amount_month_deductible, 
+      total_amount_month, total_amount_month_wait_return, 
+      if_servicefee_change, servicefee_change, confirm_state, 
+      elec_fee_out, elec_fee_deductible, elec_fee, 
+      elec_fee_wait_return, use_power_service_fee_out2, 
+      oil_generator_electric_fee_deductible2, oil_generator_electric_fee2, 
+      oil_generator_electric_fee_wait_return2, total_actual_amount, 
+      adjustment_fee_type, adjustment_fee, after_adjustment_fee, 
+      adjustment_fee_note, dispute_fee, loca_operator, 
+      reimbursement_state, check_state, order_prop, 
+      right_prop, ori_right, res_compare, 
+      create_time, update_time)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," > 
+	    ( #{item.towerbillbalanceId,jdbcType=VARCHAR}, #{item.resourcesTypeId,jdbcType=VARCHAR}, 
+	      #{item.accountPeroid,jdbcType=VARCHAR}, #{item.dataType,jdbcType=CHAR}, #{item.businessConfirmNumber,jdbcType=VARCHAR}, 
+	      #{item.operator,jdbcType=VARCHAR}, #{item.operatorRegId,jdbcType=VARCHAR}, #{item.agreeAreaName,jdbcType=VARCHAR}, 
+	      #{item.towerStationAreaName,jdbcType=VARCHAR}, #{item.towerStationCode,jdbcType=VARCHAR}, 
+	      #{item.towerStationName,jdbcType=VARCHAR}, #{item.agreeBillCode,jdbcType=VARCHAR}, #{item.serviceAttribute,jdbcType=VARCHAR}, 
+	      #{item.startDate,jdbcType=TIMESTAMP}, #{item.productTypeId,jdbcType=VARCHAR}, #{item.roomTypeId,jdbcType=VARCHAR}, 
+	      #{item.oilGenerateElectricMethodId,jdbcType=VARCHAR}, #{item.usePowerServiceFeeOut,jdbcType=DECIMAL}, 
+	      #{item.oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL}, #{item.oilGeneratorElectricFee,jdbcType=DECIMAL}, 
+	      #{item.oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL}, #{item.hightLevelFeeOut,jdbcType=DECIMAL}, 
+	      #{item.hightLevelFeeDeductible,jdbcType=DECIMAL}, #{item.hightLevelFee,jdbcType=DECIMAL}, 
+	      #{item.hightLevelFeeWaitReturn,jdbcType=DECIMAL}, #{item.batteryprotectionfeeOut,jdbcType=DECIMAL}, 
+	      #{item.batteryprotectionfeeDeductible,jdbcType=DECIMAL}, #{item.batteryprotectionfee,jdbcType=DECIMAL}, 
+	      #{item.batteryprotectionfeeWaitReturn,jdbcType=DECIMAL}, #{item.unitProductNumber1,jdbcType=DECIMAL}, 
+	      #{item.height1,jdbcType=VARCHAR}, #{item.ifbbuOnRoom1,jdbcType=BIT}, #{item.otherDis1,jdbcType=DECIMAL}, 
+	      #{item.towerPrice1,jdbcType=DECIMAL}, #{item.unitProductNumber2,jdbcType=DECIMAL}, #{item.height2,jdbcType=VARCHAR}, 
+	      #{item.ifbbuOnRoom2,jdbcType=BIT}, #{item.otherDis2,jdbcType=DECIMAL}, #{item.towerPrice2,jdbcType=DECIMAL}, 
+	      #{item.unitProductNumber3,jdbcType=DECIMAL}, #{item.height3,jdbcType=VARCHAR}, #{item.ifbbuOnRoom3,jdbcType=BIT}, 
+	      #{item.otherDis3,jdbcType=DECIMAL}, #{item.towerPrice3,jdbcType=DECIMAL}, #{item.currentTowerShareNum,jdbcType=INTEGER}, 
+	      #{item.towerOperatorStartdate1,jdbcType=TIMESTAMP}, #{item.towerSupportingShareDis1,jdbcType=DECIMAL}, 
+	      #{item.towerOperatorStartdate2,jdbcType=TIMESTAMP}, #{item.towerSupportingShareDis2,jdbcType=DECIMAL}, 
+	      #{item.currentTowerShareSumPriceOut,jdbcType=DECIMAL}, #{item.currentTowerShareSumPriceDeductible,jdbcType=DECIMAL}, 
+	      #{item.currentTowerShareSumPrice,jdbcType=DECIMAL}, #{item.currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL}, 
+	      #{item.roomBasePrice1,jdbcType=DECIMAL}, #{item.roomBasePrice2,jdbcType=DECIMAL}, #{item.roomBasePrice3,jdbcType=DECIMAL}, 
+	      #{item.currentRoomShareNum,jdbcType=INTEGER}, #{item.roomOperatorStartdate1,jdbcType=TIMESTAMP}, 
+	      #{item.roomSupportingShareDis1,jdbcType=DECIMAL}, #{item.roomOperatorStartdate2,jdbcType=TIMESTAMP}, 
+	      #{item.roomSupportingShareDis2,jdbcType=DECIMAL}, #{item.currentRoomShareSumPriceOut,jdbcType=DECIMAL}, 
+	      #{item.currentRoomShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentRoomShareSumPrice,jdbcType=DECIMAL}, 
+	      #{item.currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.supportingBasePrice1,jdbcType=DECIMAL}, 
+	      #{item.supportingBasePrice2,jdbcType=DECIMAL}, #{item.supportingBasePrice3,jdbcType=DECIMAL}, 
+	      #{item.currentSupportingShareNum,jdbcType=INTEGER}, #{item.supportingOperatorStartdate1,jdbcType=TIMESTAMP}, 
+	      #{item.supportingShareDis1,jdbcType=DECIMAL}, #{item.supportingOperatorStartdate2,jdbcType=TIMESTAMP}, 
+	      #{item.supportingShareDis2,jdbcType=DECIMAL}, #{item.currentSupportingShareSumPriceOut,jdbcType=DECIMAL}, 
+	      #{item.currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentSupportingShareSumPrice,jdbcType=DECIMAL}, 
+	      #{item.currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.bbuOnRoomFeeBack,jdbcType=DECIMAL}, 
+	      #{item.bbuOnRoomFeeDeductible,jdbcType=DECIMAL}, #{item.bbuOnRoomFee,jdbcType=DECIMAL}, #{item.bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL}, 
+	      #{item.managerFee1,jdbcType=DECIMAL}, #{item.managerFee2,jdbcType=DECIMAL}, #{item.managerFee3,jdbcType=DECIMAL}, 
+	      #{item.managerFeeShareNum,jdbcType=INTEGER}, #{item.managerFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+	      #{item.managerFeeShareDis1,jdbcType=DECIMAL}, #{item.managerFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+	      #{item.managerFeeShareDis2,jdbcType=DECIMAL}, #{item.currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+	      #{item.currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentManagerFeeShareSumPrice,jdbcType=DECIMAL}, 
+	      #{item.currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.praceFee,jdbcType=DECIMAL}, 
+	      #{item.praceFeeShareNum,jdbcType=INTEGER}, #{item.praceFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+	      #{item.praceFeeshareDis1,jdbcType=DECIMAL}, #{item.praceFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+	      #{item.praceFeeShareDis2,jdbcType=DECIMAL}, #{item.currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+	      #{item.currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentPraceFeeShareSumPrice,jdbcType=DECIMAL}, 
+	      #{item.currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL}, #{item.powerInFee,jdbcType=DECIMAL}, 
+	      #{item.powerInFeeShareNum,jdbcType=INTEGER}, #{item.powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP}, 
+	      #{item.powerInFeeShareDis1,jdbcType=DECIMAL}, #{item.powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP}, 
+	      #{item.powerInFeeShareDis2,jdbcType=DECIMAL}, #{item.currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL}, 
+	      #{item.currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL}, #{item.currentPowerInFeeShareSumPrice,jdbcType=DECIMAL}, 
+	      #{item.currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL}, #{item.wlanFeeOut,jdbcType=DECIMAL}, 
+	      #{item.wlanFeeDeductible,jdbcType=DECIMAL}, #{item.wlanFee,jdbcType=DECIMAL}, #{item.wlanFeeWaitReturn,jdbcType=DECIMAL}, 
+	      #{item.microwaveFeeOut,jdbcType=DECIMAL}, #{item.microwaveFeeDeductible,jdbcType=DECIMAL}, 
+	      #{item.microwaveFee,jdbcType=DECIMAL}, #{item.microwaveFeeWaitReturn,jdbcType=DECIMAL}, #{item.otherFee1Out,jdbcType=DECIMAL}, 
+	      #{item.otherFee1Deductible,jdbcType=DECIMAL}, #{item.otherFee1,jdbcType=DECIMAL}, #{item.otherFee1WaitReturn,jdbcType=DECIMAL}, 
+	      #{item.totalAmountMonthOut,jdbcType=DECIMAL}, #{item.totalAmountMonthDeductible,jdbcType=DECIMAL}, 
+	      #{item.totalAmountMonth,jdbcType=DECIMAL}, #{item.totalAmountMonthWaitReturn,jdbcType=DECIMAL}, 
+	      #{item.ifServicefeeChange,jdbcType=DECIMAL}, #{item.servicefeeChange,jdbcType=DECIMAL}, #{item.confirmState,jdbcType=DECIMAL}, 
+	      #{item.elecFeeOut,jdbcType=DECIMAL}, #{item.elecFeeDeductible,jdbcType=DECIMAL}, #{item.elecFee,jdbcType=DECIMAL}, 
+	      #{item.elecFeeWaitReturn,jdbcType=DECIMAL}, #{item.usePowerServiceFeeOut2,jdbcType=DECIMAL}, 
+	      #{item.oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL}, #{item.oilGeneratorElectricFee2,jdbcType=DECIMAL}, 
+	      #{item.oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL}, #{item.totalActualAmount,jdbcType=DECIMAL}, 
+	      #{item.adjustmentFeeType,jdbcType=VARCHAR}, #{item.adjustmentFee,jdbcType=DECIMAL}, #{item.afterAdjustmentFee,jdbcType=DECIMAL}, 
+	      #{item.adjustmentFeeNote,jdbcType=VARCHAR}, #{item.disputeFee,jdbcType=DECIMAL}, #{item.locaOperator,jdbcType=BIT}, 
+	      #{item.reimbursementState,jdbcType=INTEGER}, #{item.checkState,jdbcType=INTEGER}, #{item.orderProp,jdbcType=VARCHAR}, 
+	      #{item.rightProp,jdbcType=VARCHAR}, #{item.oriRight,jdbcType=VARCHAR}, #{item.resCompare,jdbcType=INTEGER}, 
+	      #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+  	<select id="queryTowerBillbalanceByIds" parameterType="Map" resultMap="BaseResultMap">
+  		select towerbillbalance_id,business_confirm_number,tower_station_name,agree_bill_code,total_actual_amount,after_adjustment_fee
+  		from twr_towerbillbalance 
+  		<where>
+  		  		and res_compare is not null
+  		  		 <if test="towerbillbalanceIds !=null and towerbillbalanceIds.size()>0 ">
+  		  		 	and towerbillbalance_id in 
+                   <foreach collection="towerbillbalanceIds" item="item" index="index" open="(" close=")" separator=",">  
+			  			#{item}
+			  		</foreach>
+                 </if>   
+  		</where>
+  	</select>
+
+  <!-- 生成账单批量修改 wangz -->
+  <update id="updateBatchMobileBill" parameterType="java.util.List">
+	<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+    	update twr_towerbillbalance
+	    <set>
+	      <if test="item.resourcesTypeId != null">
+	        resources_type_id = #{item.resourcesTypeId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.accountPeroid != null">
+	        account_peroid = #{item.accountPeroid,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.dataType != null">
+	        data_type = #{item.dataType,jdbcType=CHAR},
+	      </if>
+	      <if test="item.businessConfirmNumber != null">
+	        business_confirm_number = #{item.businessConfirmNumber,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.operator != null">
+	        operator = #{item.operator,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.operatorRegId != null">
+	        operator_reg_id = #{item.operatorRegId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.agreeAreaName != null">
+	        agree_area_name = #{item.agreeAreaName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.towerStationAreaName != null">
+	        tower_station_area_name = #{item.towerStationAreaName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.towerStationCode != null">
+	        tower_station_code = #{item.towerStationCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.towerStationName != null">
+	        tower_station_name = #{item.towerStationName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.agreeBillCode != null">
+	        agree_bill_code = #{item.agreeBillCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.serviceAttribute != null">
+	        service_attribute = #{item.serviceAttribute,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.startDate != null">
+	        start_date = #{item.startDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.productTypeId != null">
+	        product_type_id = #{item.productTypeId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.roomTypeId != null">
+	        room_type_id = #{item.roomTypeId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.oilGenerateElectricMethodId != null">
+	        oil_generate_electric_method_id = #{item.oilGenerateElectricMethodId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.usePowerServiceFeeOut != null">
+	        use_power_service_fee_out = #{item.usePowerServiceFeeOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.oilGeneratorElectricFeeDeductible != null">
+	        oil_generator_electric_fee_deductible = #{item.oilGeneratorElectricFeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.oilGeneratorElectricFee != null">
+	        oil_generator_electric_fee = #{item.oilGeneratorElectricFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.oilGeneratorElectricFeeWaitReturn != null">
+	        oil_generator_electric_fee_wait_return = #{item.oilGeneratorElectricFeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.hightLevelFeeOut != null">
+	        hight_level_fee_out = #{item.hightLevelFeeOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.hightLevelFeeDeductible != null">
+	        hight_level_fee_deductible = #{item.hightLevelFeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.hightLevelFee != null">
+	        hight_level_fee = #{item.hightLevelFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.hightLevelFeeWaitReturn != null">
+	        hight_level_fee_wait_return = #{item.hightLevelFeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.batteryprotectionfeeOut != null">
+	        batteryProtectionFee_out = #{item.batteryprotectionfeeOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.batteryprotectionfeeDeductible != null">
+	        batteryProtectionFee_deductible = #{item.batteryprotectionfeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.batteryprotectionfee != null">
+	        batteryProtectionFee = #{item.batteryprotectionfee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.batteryprotectionfeeWaitReturn != null">
+	        batteryProtectionFee_wait_return = #{item.batteryprotectionfeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.unitProductNumber1 != null">
+	        unit_product_number1 = #{item.unitProductNumber1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.height1 != null">
+	        height1 = #{item.height1,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.ifbbuOnRoom1 != null">
+	        ifBBU_on_room1 = #{item.ifbbuOnRoom1,jdbcType=BIT},
+	      </if>
+	      <if test="item.otherDis1 != null">
+	        other_dis1 = #{item.otherDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.towerPrice1 != null">
+	        tower_price1 = #{item.towerPrice1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.unitProductNumber2 != null">
+	        unit_product_number2 = #{item.unitProductNumber2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.height2 != null">
+	        height2 = #{item.height2,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.ifbbuOnRoom2 != null">
+	        ifBBU_on_room2 = #{item.ifbbuOnRoom2,jdbcType=BIT},
+	      </if>
+	      <if test="item.otherDis2 != null">
+	        other_dis2 = #{item.otherDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.towerPrice2 != null">
+	        tower_price2 = #{item.towerPrice2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.unitProductNumber3 != null">
+	        unit_product_number3 = #{item.unitProductNumber3,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.height3 != null">
+	        height3 = #{item.height3,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.ifbbuOnRoom3 != null">
+	        ifBBU_on_room3 = #{item.ifbbuOnRoom3,jdbcType=BIT},
+	      </if>
+	      <if test="item.otherDis3 != null">
+	        other_dis3 = #{item.otherDis3,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.towerPrice3 != null">
+	        tower_price3 = #{item.towerPrice3,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentTowerShareNum != null">
+	        current_tower_share_num = #{item.currentTowerShareNum,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.towerOperatorStartdate1 != null">
+	        tower_operator_startdate1 = #{item.towerOperatorStartdate1,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.towerSupportingShareDis1 != null">
+	        tower_supporting_share_dis1 = #{item.towerSupportingShareDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.towerOperatorStartdate2 != null">
+	        tower_operator_startdate2 = #{item.towerOperatorStartdate2,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.towerSupportingShareDis2 != null">
+	        tower_supporting_share_dis2 = #{item.towerSupportingShareDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentTowerShareSumPriceOut != null">
+	        current_tower_share_sum_price_out = #{item.currentTowerShareSumPriceOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentTowerShareSumPriceDeductible != null">
+	        current_tower_share_sum_price_deductible = #{item.currentTowerShareSumPriceDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentTowerShareSumPrice != null">
+	        current_tower_share_sum_price = #{item.currentTowerShareSumPrice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentTowerShareSumPriceWaitReturn != null">
+	        current_tower_share_sum_price_wait_return = #{item.currentTowerShareSumPriceWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.roomBasePrice1 != null">
+	        room_base_price1 = #{item.roomBasePrice1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.roomBasePrice2 != null">
+	        room_base_price2 = #{item.roomBasePrice2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.roomBasePrice3 != null">
+	        room_base_price3 = #{item.roomBasePrice3,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentRoomShareNum != null">
+	        current_room_share_num = #{item.currentRoomShareNum,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.roomOperatorStartdate1 != null">
+	        room_operator_startdate1 = #{item.roomOperatorStartdate1,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.roomSupportingShareDis1 != null">
+	        room_supporting_share_dis1 = #{item.roomSupportingShareDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.roomOperatorStartdate2 != null">
+	        room_operator_startdate2 = #{item.roomOperatorStartdate2,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.roomSupportingShareDis2 != null">
+	        room_supporting_share_dis2 = #{item.roomSupportingShareDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentRoomShareSumPriceOut != null">
+	        current_room_share_sum_price_out = #{item.currentRoomShareSumPriceOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentRoomShareSumPriceDeductible != null">
+	        current_room_share_sum_price_deductible = #{item.currentRoomShareSumPriceDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentRoomShareSumPrice != null">
+	        current_room_share_sum_price = #{item.currentRoomShareSumPrice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentRoomShareSumPriceWaitReturn != null">
+	        current_room_share_sum_price_wait_return = #{item.currentRoomShareSumPriceWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.supportingBasePrice1 != null">
+	        supporting_base_price1 = #{item.supportingBasePrice1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.supportingBasePrice2 != null">
+	        supporting_base_price2 = #{item.supportingBasePrice2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.supportingBasePrice3 != null">
+	        supporting_base_price3 = #{item.supportingBasePrice3,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentSupportingShareNum != null">
+	        current_supporting_share_num = #{item.currentSupportingShareNum,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.supportingOperatorStartdate1 != null">
+	        supporting_operator_startdate1 = #{item.supportingOperatorStartdate1,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.supportingShareDis1 != null">
+	        supporting_share_dis1 = #{item.supportingShareDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.supportingOperatorStartdate2 != null">
+	        supporting_operator_startdate2 = #{item.supportingOperatorStartdate2,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.supportingShareDis2 != null">
+	        supporting_share_dis2 = #{item.supportingShareDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentSupportingShareSumPriceOut != null">
+	        current_supporting_share_sum_price_out = #{item.currentSupportingShareSumPriceOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentSupportingShareSumPriceDeductible != null">
+	        current_supporting_share_sum_price_deductible = #{item.currentSupportingShareSumPriceDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentSupportingShareSumPrice != null">
+	        current_supporting_share_sum_price = #{item.currentSupportingShareSumPrice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentSupportingShareSumPriceWaitReturn != null">
+	        current_supporting_share_sum_price_wait_return = #{item.currentSupportingShareSumPriceWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.bbuOnRoomFeeBack != null">
+	        bbU_on_room_fee_back = #{item.bbuOnRoomFeeBack,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.bbuOnRoomFeeDeductible != null">
+	        bbU_on_room_fee_deductible = #{item.bbuOnRoomFeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.bbuOnRoomFee != null">
+	        bbU_on_room_fee = #{item.bbuOnRoomFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.bbuOnRoomFeeWaitReturn != null">
+	        bbU_on_room_fee_wait_return = #{item.bbuOnRoomFeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.managerFee1 != null">
+	        manager_fee1 = #{item.managerFee1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.managerFee2 != null">
+	        manager_fee2 = #{item.managerFee2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.managerFee3 != null">
+	        manager_fee3 = #{item.managerFee3,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.managerFeeShareNum != null">
+	        manager_fee_share_num = #{item.managerFeeShareNum,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.managerFeeOperatorStartdate1 != null">
+	        manager_fee_operator_startdate1 = #{item.managerFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.managerFeeShareDis1 != null">
+	        manager_fee_share_dis1 = #{item.managerFeeShareDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.managerFeeOperatorStartdate2 != null">
+	        manager_fee_operator_startdate2 = #{item.managerFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.managerFeeShareDis2 != null">
+	        manager_fee_share_dis2 = #{item.managerFeeShareDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentManagerFeeShareSumPriceOut != null">
+	        current_manager_fee_share_sum_price_out = #{item.currentManagerFeeShareSumPriceOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentManagerFeeShareSumPriceDeductible != null">
+	        current_manager_fee_share_sum_price_deductible = #{item.currentManagerFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentManagerFeeShareSumPrice != null">
+	        current_manager_fee_share_sum_price = #{item.currentManagerFeeShareSumPrice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentManagerFeeShareSumPriceWaitReturn != null">
+	        current_manager_fee_share_sum_price_wait_return = #{item.currentManagerFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.praceFee != null">
+	        prace_fee = #{item.praceFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.praceFeeShareNum != null">
+	        prace_fee_share_num = #{item.praceFeeShareNum,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.praceFeeOperatorStartdate1 != null">
+	        prace_fee_operator_startdate1 = #{item.praceFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.praceFeeshareDis1 != null">
+	        prace_feeShare_dis1 = #{item.praceFeeshareDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.praceFeeOperatorStartdate2 != null">
+	        prace_fee_operator_startdate2 = #{item.praceFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.praceFeeShareDis2 != null">
+	        prace_fee_share_dis2 = #{item.praceFeeShareDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPraceFeeShareSumPriceOut != null">
+	        current_prace_fee_share_sum_price_out = #{item.currentPraceFeeShareSumPriceOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPraceFeeShareSumPriceDeductible != null">
+	        current_prace_fee_share_sum_price_deductible = #{item.currentPraceFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPraceFeeShareSumPrice != null">
+	        current_prace_fee_share_sum_price = #{item.currentPraceFeeShareSumPrice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPraceFeeShareSumPriceWaitReturn != null">
+	        current_prace_fee_share_sum_price_wait_return = #{item.currentPraceFeeShareSumPriceWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.powerInFee != null">
+	        power_in_fee = #{item.powerInFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.powerInFeeShareNum != null">
+	        power_in_fee_share_num = #{item.powerInFeeShareNum,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.powerInFeeOperatorStartdate1 != null">
+	        power_in_fee_operator_startdate1 = #{item.powerInFeeOperatorStartdate1,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.powerInFeeShareDis1 != null">
+	        power_in_fee_share_dis1 = #{item.powerInFeeShareDis1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.powerInFeeOperatorStartdate2 != null">
+	        power_in_fee_operator_startdate2 = #{item.powerInFeeOperatorStartdate2,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.powerInFeeShareDis2 != null">
+	        power_in_fee_share_dis2 = #{item.powerInFeeShareDis2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPowerInFeeShareSumPriceOut != null">
+	        current_power_in_fee_share_sum_price_out = #{item.currentPowerInFeeShareSumPriceOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPowerInFeeShareSumPriceDeductible != null">
+	        current_power_in_fee_share_sum_price_deductible = #{item.currentPowerInFeeShareSumPriceDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPowerInFeeShareSumPrice != null">
+	        current_power_in_fee_share_sum_price = #{item.currentPowerInFeeShareSumPrice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.currentPowerInFeeShareSumPriceWaitDeductible != null">
+	        current_power_in_fee_share_sum_price_wait_deductible = #{item.currentPowerInFeeShareSumPriceWaitDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.wlanFeeOut != null">
+	        wlan_fee_out = #{item.wlanFeeOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.wlanFeeDeductible != null">
+	        wlan_fee_deductible = #{item.wlanFeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.wlanFee != null">
+	        wlan_fee = #{item.wlanFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.wlanFeeWaitReturn != null">
+	        wlan_fee_wait_return = #{item.wlanFeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.microwaveFeeOut != null">
+	        microwave_fee_out = #{item.microwaveFeeOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.microwaveFeeDeductible != null">
+	        microwave_fee_deductible = #{item.microwaveFeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.microwaveFee != null">
+	        microwave_fee = #{item.microwaveFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.microwaveFeeWaitReturn != null">
+	        microwave_fee_wait_return = #{item.microwaveFeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.otherFee1Out != null">
+	        other_fee1_out = #{item.otherFee1Out,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.otherFee1Deductible != null">
+	        other_fee1_deductible = #{item.otherFee1Deductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.otherFee1 != null">
+	        other_fee1 = #{item.otherFee1,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.otherFee1WaitReturn != null">
+	        other_fee1_wait_return = #{item.otherFee1WaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.totalAmountMonthOut != null">
+	        total_amount_month_out = #{item.totalAmountMonthOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.totalAmountMonthDeductible != null">
+	        total_amount_month_deductible = #{item.totalAmountMonthDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.totalAmountMonth != null">
+	        total_amount_month = #{item.totalAmountMonth,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.totalAmountMonthWaitReturn != null">
+	        total_amount_month_wait_return = #{item.totalAmountMonthWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.ifServicefeeChange != null">
+	        if_servicefee_change = #{item.ifServicefeeChange,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.servicefeeChange != null">
+	        servicefee_change = #{item.servicefeeChange,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.confirmState != null">
+	        confirm_state = #{item.confirmState,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.elecFeeOut != null">
+	        elec_fee_out = #{item.elecFeeOut,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.elecFeeDeductible != null">
+	        elec_fee_deductible = #{item.elecFeeDeductible,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.elecFee != null">
+	        elec_fee = #{item.elecFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.elecFeeWaitReturn != null">
+	        elec_fee_wait_return = #{item.elecFeeWaitReturn,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.usePowerServiceFeeOut2 != null">
+	        use_power_service_fee_out2 = #{item.usePowerServiceFeeOut2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.oilGeneratorElectricFeeDeductible2 != null">
+	        oil_generator_electric_fee_deductible2 = #{item.oilGeneratorElectricFeeDeductible2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.oilGeneratorElectricFee2 != null">
+	        oil_generator_electric_fee2 = #{item.oilGeneratorElectricFee2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.oilGeneratorElectricFeeWaitReturn2 != null">
+	        oil_generator_electric_fee_wait_return2 = #{item.oilGeneratorElectricFeeWaitReturn2,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.totalActualAmount != null">
+	        total_actual_amount = #{item.totalActualAmount,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.adjustmentFeeType != null">
+	        adjustment_fee_type = #{item.adjustmentFeeType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.adjustmentFee != null">
+	        adjustment_fee = #{item.adjustmentFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.afterAdjustmentFee != null">
+	        after_adjustment_fee = #{item.afterAdjustmentFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.adjustmentFeeNote != null">
+	        adjustment_fee_note = #{item.adjustmentFeeNote,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.disputeFee != null">
+	        dispute_fee = #{item.disputeFee,jdbcType=DECIMAL},
+	      </if>
+	      <if test="item.locaOperator != null">
+	        loca_operator = #{item.locaOperator,jdbcType=BIT},
+	      </if>
+	      <if test="item.reimbursementState != null">
+	        reimbursement_state = #{item.reimbursementState,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.checkState != null">
+	        check_state = #{item.checkState,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.orderProp != null">
+	        order_prop = #{item.orderProp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.rightProp != null">
+	        right_prop = #{item.rightProp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.oriRight != null">
+	        ori_right = #{item.oriRight,jdbcType=VARCHAR},
+	      </if>
+	      <if test="item.resCompare != null">
+	        res_compare = #{item.resCompare,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.createTime != null">
+	        create_time = #{item.createTime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.updateTime != null">
+	        update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="item.createUserId != null">
+	        create_user_id = #{item.createUserId,jdbcType=VARBINARY},
+	      </if>
+	      <if test="item.updateUserId != null">
+	        update_user_id = #{item.updateUserId,jdbcType=VARBINARY},
+	      </if>
+	    </set>
+	    where 
+	    business_confirm_number = #{item.businessConfirmNumber,jdbcType=VARCHAR}
+	    and tower_station_code = #{item.towerStationCode,jdbcType=VARCHAR}
+	    and account_peroid = #{item.accountPeroid,jdbcType=VARCHAR} 
+    </foreach>
+  </update>
+  
+  <!-- 查询已存在的移动账单数据  wangz-->
+  <select id="queryMobielBill" resultMap="BaseResultMap" parameterType="Map" >
+    select tb.business_confirm_number,tb.tower_station_code,tb.account_peroid
+    from twr_towerbillbalance as tb 
+    <where>
+   		<if test="dataType != null and dataType != ''">
+			and tb.data_type = #{dataType}
+		</if>
+   		<if test="businessConfirmNumber != null and businessConfirmNumber != ''">
+			and tb.business_confirm_number = #{businessConfirmNumber}
+		</if>
+		<if test="towerStationName != null and towerStationName != ''">
+			and ( INSTR(tb.tower_station_code,#{towerStationName})
+				or INSTR(tb.tower_station_name,#{towerStationName})
+				)
+		</if>
+   		<if test="accountPeroid != null and accountPeroid != ''">
+			and tb.account_peroid = #{accountPeroid}
+		</if>
+   		<if test="operatorRegId != null and operatorRegId != ''">
+			and tb.operator_reg_id = #{operatorRegId}
+		</if>
+		<!-- 区县ID 
+		<if test="pregId != null and pregId != ''">
+			and reg.reg_id = #{pregId}
+		</if> 
+		-->
+		<!-- 根据权限过滤 -->
+		<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+    </where>
+  </select>
+  <!-- 根据铁塔站址编码和月份查询账单数据 -->
+  <select id="queryParameter" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  	current_tower_share_sum_price_out,
+	current_room_share_sum_price_out,
+	current_supporting_share_sum_price_out,
+	current_prace_fee_share_sum_price_out,
+	current_power_in_fee_share_sum_price_out
+	from twr_towerbillbalance
+	where towerbillbalance_id = #{towerbillbalanceId}
+  </select>
+  <!-- 根据铁塔站址编码和账期查询账单  wangz-->
+  	<select id="queryBalance" parameterType="Map" resultType="java.lang.String">
+  		select towerbillbalance_id
+  		from twr_towerbillbalance
+  		where account_peroid = #{accountPeroid}
+  		and tower_station_code = #{towerStationCode}
+  		and data_type = #{dataType}
+  	</select>
+</mapper>

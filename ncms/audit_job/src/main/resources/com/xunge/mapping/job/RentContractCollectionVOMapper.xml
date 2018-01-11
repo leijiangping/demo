@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.job.RentContractCollectionVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.job.RentContractCollectionVO" >
+    <id column="rentcontract_id" property="rentcontractId" jdbcType="VARCHAR" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
+    <result column="paymentperiod_id" property="paymentperiodId" jdbcType="VARCHAR" />
+    <result column="total_amountnotax" property="totalAmountnotax" jdbcType="DECIMAL" />
+    <result column="include_tax" property="includeTax" jdbcType="INTEGER" />
+    <result column="billamount_taxratio" property="billamountTaxratio" jdbcType="DECIMAL" />
+    <result column="tax_amount" property="taxAmount" jdbcType="DECIMAL" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="year_amount" property="yearAmount" jdbcType="DECIMAL" />
+    <result column="address_type" property="addressType" jdbcType="INTEGER" />
+    <result column="house_type" property="houseType" jdbcType="INTEGER" />
+    <result column="charge_type" property="chargeType" jdbcType="INTEGER" />
+    <result column="property_type" property="propertyType" jdbcType="INTEGER" />
+    <result column="property_area" property="propertyArea" jdbcType="DECIMAL" />
+    <result column="property_address" property="propertyAddress" jdbcType="VARCHAR" />
+    <result column="property_name" property="propertyName" jdbcType="VARCHAR" />
+    <result column="rentcontract_note" property="rentcontractNote" jdbcType="VARCHAR" />
+    <result column="rentcontract_state" property="rentcontractState" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="supplier_site" property="supplierSite" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rentcontract_id, contract_id, supplier_id, paymentperiod_id, total_amountnotax, include_tax, 
+    billamount_taxratio, tax_amount, total_amount, year_amount, address_type, house_type, 
+    charge_type, property_type, property_area, property_address, property_name, rentcontract_note, 
+    rentcontract_state, supplier_code, supplier_name, supplier_site
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from rent_contract_collection
+    where rentcontract_id = #{rentcontractId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rent_contract_collection
+    where rentcontract_id = #{rentcontractId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.job.RentContractCollectionVO" >
+    insert into rent_contract_collection (rentcontract_id, contract_id, supplier_id, 
+      paymentperiod_id, total_amountnotax, include_tax, 
+      billamount_taxratio, tax_amount, total_amount, 
+      year_amount, address_type, house_type, 
+      charge_type, property_type, property_area, 
+      property_address, property_name, rentcontract_note, 
+      rentcontract_state, supplier_code, supplier_name, 
+      supplier_site)
+    values (#{rentcontractId,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR}, 
+      #{paymentperiodId,jdbcType=VARCHAR}, #{totalAmountnotax,jdbcType=DECIMAL}, #{includeTax,jdbcType=INTEGER}, 
+      #{billamountTaxratio,jdbcType=DECIMAL}, #{taxAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{yearAmount,jdbcType=DECIMAL}, #{addressType,jdbcType=INTEGER}, #{houseType,jdbcType=INTEGER}, 
+      #{chargeType,jdbcType=INTEGER}, #{propertyType,jdbcType=INTEGER}, #{propertyArea,jdbcType=DECIMAL}, 
+      #{propertyAddress,jdbcType=VARCHAR}, #{propertyName,jdbcType=VARCHAR}, #{rentcontractNote,jdbcType=VARCHAR}, 
+      #{rentcontractState,jdbcType=VARCHAR}, #{supplierCode,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
+      #{supplierSite,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.job.RentContractCollectionVO" >
+    insert into rent_contract_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rentcontractId != null" >
+        rentcontract_id,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="paymentperiodId != null" >
+        paymentperiod_id,
+      </if>
+      <if test="totalAmountnotax != null" >
+        total_amountnotax,
+      </if>
+      <if test="includeTax != null" >
+        include_tax,
+      </if>
+      <if test="billamountTaxratio != null" >
+        billamount_taxratio,
+      </if>
+      <if test="taxAmount != null" >
+        tax_amount,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="yearAmount != null" >
+        year_amount,
+      </if>
+      <if test="addressType != null" >
+        address_type,
+      </if>
+      <if test="houseType != null" >
+        house_type,
+      </if>
+      <if test="chargeType != null" >
+        charge_type,
+      </if>
+      <if test="propertyType != null" >
+        property_type,
+      </if>
+      <if test="propertyArea != null" >
+        property_area,
+      </if>
+      <if test="propertyAddress != null" >
+        property_address,
+      </if>
+      <if test="propertyName != null" >
+        property_name,
+      </if>
+      <if test="rentcontractNote != null" >
+        rentcontract_note,
+      </if>
+      <if test="rentcontractState != null" >
+        rentcontract_state,
+      </if>
+      <if test="supplierCode != null" >
+        supplier_code,
+      </if>
+      <if test="supplierName != null" >
+        supplier_name,
+      </if>
+      <if test="supplierSite != null" >
+        supplier_site,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rentcontractId != null" >
+        #{rentcontractId,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentperiodId != null" >
+        #{paymentperiodId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmountnotax != null" >
+        #{totalAmountnotax,jdbcType=DECIMAL},
+      </if>
+      <if test="includeTax != null" >
+        #{includeTax,jdbcType=INTEGER},
+      </if>
+      <if test="billamountTaxratio != null" >
+        #{billamountTaxratio,jdbcType=DECIMAL},
+      </if>
+      <if test="taxAmount != null" >
+        #{taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="yearAmount != null" >
+        #{yearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="addressType != null" >
+        #{addressType,jdbcType=INTEGER},
+      </if>
+      <if test="houseType != null" >
+        #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="chargeType != null" >
+        #{chargeType,jdbcType=INTEGER},
+      </if>
+      <if test="propertyType != null" >
+        #{propertyType,jdbcType=INTEGER},
+      </if>
+      <if test="propertyArea != null" >
+        #{propertyArea,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyAddress != null" >
+        #{propertyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyName != null" >
+        #{propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="rentcontractNote != null" >
+        #{rentcontractNote,jdbcType=VARCHAR},
+      </if>
+      <if test="rentcontractState != null" >
+        #{rentcontractState,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCode != null" >
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null" >
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierSite != null" >
+        #{supplierSite,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.job.RentContractCollectionVO" >
+    update rent_contract_collection
+    <set >
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentperiodId != null" >
+        paymentperiod_id = #{paymentperiodId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmountnotax != null" >
+        total_amountnotax = #{totalAmountnotax,jdbcType=DECIMAL},
+      </if>
+      <if test="includeTax != null" >
+        include_tax = #{includeTax,jdbcType=INTEGER},
+      </if>
+      <if test="billamountTaxratio != null" >
+        billamount_taxratio = #{billamountTaxratio,jdbcType=DECIMAL},
+      </if>
+      <if test="taxAmount != null" >
+        tax_amount = #{taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="yearAmount != null" >
+        year_amount = #{yearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="addressType != null" >
+        address_type = #{addressType,jdbcType=INTEGER},
+      </if>
+      <if test="houseType != null" >
+        house_type = #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="chargeType != null" >
+        charge_type = #{chargeType,jdbcType=INTEGER},
+      </if>
+      <if test="propertyType != null" >
+        property_type = #{propertyType,jdbcType=INTEGER},
+      </if>
+      <if test="propertyArea != null" >
+        property_area = #{propertyArea,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyAddress != null" >
+        property_address = #{propertyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyName != null" >
+        property_name = #{propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="rentcontractNote != null" >
+        rentcontract_note = #{rentcontractNote,jdbcType=VARCHAR},
+      </if>
+      <if test="rentcontractState != null" >
+        rentcontract_state = #{rentcontractState,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCode != null" >
+        supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null" >
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierSite != null" >
+        supplier_site = #{supplierSite,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rentcontract_id = #{rentcontractId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.job.RentContractCollectionVO" >
+    update rent_contract_collection
+    set contract_id = #{contractId,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=VARCHAR},
+      paymentperiod_id = #{paymentperiodId,jdbcType=VARCHAR},
+      total_amountnotax = #{totalAmountnotax,jdbcType=DECIMAL},
+      include_tax = #{includeTax,jdbcType=INTEGER},
+      billamount_taxratio = #{billamountTaxratio,jdbcType=DECIMAL},
+      tax_amount = #{taxAmount,jdbcType=DECIMAL},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      year_amount = #{yearAmount,jdbcType=DECIMAL},
+      address_type = #{addressType,jdbcType=INTEGER},
+      house_type = #{houseType,jdbcType=INTEGER},
+      charge_type = #{chargeType,jdbcType=INTEGER},
+      property_type = #{propertyType,jdbcType=INTEGER},
+      property_area = #{propertyArea,jdbcType=DECIMAL},
+      property_address = #{propertyAddress,jdbcType=VARCHAR},
+      property_name = #{propertyName,jdbcType=VARCHAR},
+      rentcontract_note = #{rentcontractNote,jdbcType=VARCHAR},
+      rentcontract_state = #{rentcontractState,jdbcType=VARCHAR},
+      supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      supplier_site = #{supplierSite,jdbcType=VARCHAR}
+    where rentcontract_id = #{rentcontractId,jdbcType=VARCHAR}
+  </update>
+  
+ <insert id="batchInsertColl" useGeneratedKeys="true" parameterType="java.util.List">   
+  insert into rent_contract_collection (rentcontract_id, contract_id, supplier_id, 
+      paymentperiod_id, total_amountnotax, include_tax, 
+      billamount_taxratio, tax_amount, total_amount, 
+      year_amount, address_type, house_type, 
+      charge_type, property_type, property_area, 
+      property_address, property_name, rentcontract_note, 
+      rentcontract_state, supplier_code, supplier_name, 
+      supplier_site)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+      (#{item.rentcontractId,jdbcType=VARCHAR}, #{item.contractId,jdbcType=VARCHAR}, #{item.supplierId,jdbcType=VARCHAR}, 
+      #{item.paymentperiodId,jdbcType=VARCHAR}, #{item.totalAmountnotax,jdbcType=DECIMAL}, #{item.includeTax,jdbcType=INTEGER}, 
+      #{item.billamountTaxratio,jdbcType=DECIMAL}, #{item.taxAmount,jdbcType=DECIMAL}, #{item.totalAmount,jdbcType=DECIMAL}, 
+      #{item.yearAmount,jdbcType=DECIMAL}, #{item.addressType,jdbcType=INTEGER}, #{item.houseType,jdbcType=INTEGER}, 
+      #{item.chargeType,jdbcType=INTEGER}, #{item.propertyType,jdbcType=INTEGER}, #{item.propertyArea,jdbcType=DECIMAL}, 
+      #{item.propertyAddress,jdbcType=VARCHAR}, #{item.propertyName,jdbcType=VARCHAR}, #{item.rentcontractNote,jdbcType=VARCHAR}, 
+      #{item.rentcontractState,jdbcType=VARCHAR}, #{item.supplierCode,jdbcType=VARCHAR}, #{item.supplierName,jdbcType=VARCHAR}, 
+      #{item.supplierSite,jdbcType=VARCHAR})
+    </foreach>  
+</insert>  
+    <insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">  
+  		insert into rent_contract (
+	  		rentcontract_id,contract_id,supplier_id,paymentperiod_id,total_amountnotax,
+	  		include_tax,billamount_taxratio,tax_amount,total_amount,year_amount,address_type,
+	  		house_type,charge_type,property_type,property_area,property_address,property_name,
+	  		rentcontract_note,audit_state
+  		)
+  		values 
+    	<foreach collection="list" item="item" index="index" separator="," >  
+  			(#{item.rentcontractId},#{item.contractId},#{item.supplierId},#{item.paymentperiodId},#{item.totalAmountnotax},
+	  		#{item.includeTax},#{item.billamountTaxratio},#{item.taxAmount},#{item.totalAmount},#{item.yearAmount},
+	  		#{item.addressType},#{item.houseType},#{item.chargeType},#{item.propertyType},#{item.propertyArea},#{item.propertyAddress},
+	  		#{item.propertyName},#{item.rentcontractNote},#{item.auditState}) 
+		</foreach>
+  	</insert>
+	<update id="batchUpdate"  parameterType="java.util.List">
+	      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+    	update rent_contract
+		<set>
+		  supplier_id = #{item.supplierId,jdbcType=VARCHAR},
+	      paymentperiod_id = #{item.paymentperiodId,jdbcType=VARCHAR},
+	      total_amountnotax = #{item.totalAmountnotax,jdbcType=DECIMAL},
+	      include_tax = #{item.includeTax,jdbcType=INTEGER},
+	      billamount_taxratio = #{item.billamountTaxratio,jdbcType=DECIMAL},
+	      tax_amount = #{item.taxAmount,jdbcType=DECIMAL},
+	      total_amount = #{item.totalAmount,jdbcType=DECIMAL},
+	      year_amount = #{item.yearAmount,jdbcType=DECIMAL},
+	      address_type = #{item.addressType,jdbcType=INTEGER},
+	      house_type = #{item.houseType,jdbcType=INTEGER},
+	      charge_type = #{item.chargeType,jdbcType=INTEGER},
+	      property_type = #{item.propertyType,jdbcType=INTEGER},
+	      property_area = #{item.propertyArea,jdbcType=DECIMAL},
+	      property_address = #{item.propertyAddress,jdbcType=VARCHAR},
+	      property_name = #{item.propertyName,jdbcType=VARCHAR},
+	      audit_state = #{item.auditState,jdbcType=VARCHAR}
+		</set>				
+		where contract_id = (
+			select contract_id from dat_contract 
+			where 
+			old_contract_id=#{item.rentcontractNote}
+		)
+	</foreach>
+  </update>
+</mapper>

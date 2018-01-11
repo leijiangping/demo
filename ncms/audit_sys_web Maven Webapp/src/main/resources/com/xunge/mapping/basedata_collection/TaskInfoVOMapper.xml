@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.collection.TaskInfoVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.basedata.colletion.TaskInfoVO" >
+    <id column="task_id" property="taskId" jdbcType="VARCHAR" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_type" property="taskType" jdbcType="INTEGER" />
+    <result column="task_desc" property="taskDesc" jdbcType="VARCHAR" />
+    <result column="task_time" property="taskTime" jdbcType="VARCHAR" />
+    <result column="task_period" property="taskPeriod" jdbcType="INTEGER" />
+    <result column="task_crontab" property="taskCrontab" jdbcType="VARCHAR" />
+    <result column="collection_type" property="collectionType" jdbcType="INTEGER" />
+    <result column="collection_url" property="collectionUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="ftp_url" property="ftpUrl" jdbcType="VARCHAR" />
+    <result column="ftp_user" property="ftpUser" jdbcType="VARCHAR" />
+    <result column="ftp_password" property="ftpPassword" jdbcType="VARCHAR" />
+    <result column="ftp_filepath" property="ftpFilepath" jdbcType="VARCHAR" />
+    <result column="ftp_port" property="ftpPort" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    task_id, task_name, task_type, task_desc, task_time, task_period, task_crontab, collection_type, 
+    collection_url, create_time, ftp_url, ftp_user, ftp_password, ftp_filepath, 
+    ftp_port, status, prv_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_info
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from task_info
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.basedata.colletion.TaskInfoVO" >
+    insert into task_info (task_id, task_name, task_type, 
+      task_desc, task_time, task_period, 
+      task_crontab, collection_type, collection_url, 
+      create_time, ftp_url, 
+      ftp_user, ftp_password, ftp_filepath, 
+      ftp_port, status, prv_id
+      )
+    values (#{taskId,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, #{taskType,jdbcType=INTEGER}, 
+      #{taskDesc,jdbcType=VARCHAR}, #{taskTime,jdbcType=VARCHAR}, #{taskPeriod,jdbcType=INTEGER}, 
+      #{taskCrontab,jdbcType=VARCHAR}, #{collectionType,jdbcType=INTEGER}, #{collectionUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{ftpUrl,jdbcType=VARCHAR}, 
+      #{ftpUser,jdbcType=VARCHAR}, #{ftpPassword,jdbcType=VARCHAR}, #{ftpFilepath,jdbcType=VARCHAR}, 
+      #{ftpPort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{prvId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.basedata.colletion.TaskInfoVO" >
+    insert into task_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="taskDesc != null" >
+        task_desc,
+      </if>
+      <if test="taskTime != null" >
+        task_time,
+      </if>
+      <if test="taskPeriod != null" >
+        task_period,
+      </if>
+      <if test="taskCrontab != null" >
+        task_crontab,
+      </if>
+      <if test="collectionType != null" >
+        collection_type,
+      </if>
+      <if test="collectionUrl != null" >
+        collection_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="ftpUrl != null" >
+        ftp_url,
+      </if>
+      <if test="ftpUser != null" >
+        ftp_user,
+      </if>
+      <if test="ftpPassword != null" >
+        ftp_password,
+      </if>
+      <if test="ftpFilepath != null" >
+        ftp_filepath,
+      </if>
+      <if test="ftpPort != null" >
+        ftp_port,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="prvId != null" >
+        prv_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=INTEGER},
+      </if>
+      <if test="taskDesc != null" >
+        #{taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTime != null" >
+        #{taskTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPeriod != null" >
+        #{taskPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="taskCrontab != null" >
+        #{taskCrontab,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionType != null" >
+        #{collectionType,jdbcType=INTEGER},
+      </if>
+      <if test="collectionUrl != null" >
+        #{collectionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUrl != null" >
+        #{ftpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUser != null" >
+        #{ftpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPassword != null" >
+        #{ftpPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpFilepath != null" >
+        #{ftpFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPort != null" >
+        #{ftpPort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="prvId != null" >
+        #{prvId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.colletion.TaskInfoVO" >
+    update task_info
+    <set >
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=INTEGER},
+      </if>
+      <if test="taskDesc != null" >
+        task_desc = #{taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTime != null" >
+        task_time = #{taskTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPeriod != null" >
+        task_period = #{taskPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="taskCrontab != null" >
+        task_crontab = #{taskCrontab,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionType != null" >
+        collection_type = #{collectionType,jdbcType=INTEGER},
+      </if>
+      <if test="collectionUrl != null" >
+        collection_url = #{collectionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUrl != null" >
+        ftp_url = #{ftpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUser != null" >
+        ftp_user = #{ftpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPassword != null" >
+        ftp_password = #{ftpPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpFilepath != null" >
+        ftp_filepath = #{ftpFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPort != null" >
+        ftp_port = #{ftpPort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="prvId != null" >
+        prv_id = #{prvId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.colletion.TaskInfoVO" >
+    update task_info
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=INTEGER},
+      task_desc = #{taskDesc,jdbcType=VARCHAR},
+      task_time = #{taskTime,jdbcType=VARCHAR},
+      task_period = #{taskPeriod,jdbcType=INTEGER},
+      task_crontab = #{taskCrontab,jdbcType=VARCHAR},
+      collection_type = #{collectionType,jdbcType=INTEGER},
+      collection_url = #{collectionUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      ftp_url = #{ftpUrl,jdbcType=VARCHAR},
+      ftp_user = #{ftpUser,jdbcType=VARCHAR},
+      ftp_password = #{ftpPassword,jdbcType=VARCHAR},
+      ftp_filepath = #{ftpFilepath,jdbcType=VARCHAR},
+      ftp_port = #{ftpPort,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      prv_id = #{prvId,jdbcType=VARCHAR}
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  
+  <!--根据collectiontype获取-->
+    <select id="getTaskInfoByCollectionType" parameterType="com.xunge.model.basedata.colletion.TaskInfoVO" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from task_info    
+        where collection_type = #{collectionType}
+          <if test="prvId != null ">
+                AND prv_id = #{prvId}
+            </if>
+    </select>
+</mapper>

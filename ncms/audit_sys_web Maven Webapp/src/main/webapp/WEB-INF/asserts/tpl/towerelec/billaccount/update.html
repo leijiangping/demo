@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	media="screen">
+
+<link href="../../../bootstrap/css/bootstrap-table.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="../../../bootstrap/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet"
+	href="../../../bootstrap/css/jquery.treetable.css">
+<link rel="stylesheet"
+	href="../../../bootstrap/css/jquery.treetable.theme.default.css">
+<link href="../../../css/ncms_page.css?v=2" rel="stylesheet"
+	media="screen">
+<script src="../../../../asserts/lib/jquery.2.0.3.min.js"
+	type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>	
+<script src="../../../bootstrap/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript" src="../../../js/cascade-common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript"
+	src="../../../js/page/towerelec/billaccount/update.js?v=15"></script>
+<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+<script src="../../../bootstrap/js/jquery.treetable.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$('#planDate').datetimepicker({
+			format : 'YYYY-MM-DD',
+			locale : moment.locale('zh-cn')
+		});
+	});
+</script>
+</head>
+<body>
+	<form id="addOrModifyForm" action="">
+		<input id="billaccountId" type="hidden" />
+		<div class="btn-toolbar">
+			<button type="button" class="btn btn-primary" onclick="save()">保存</button>
+			<button type="button" class="btn btn-default" onclick="back();">取消</button>
+		</div>
+		<input type="hidden" id="contracttbids" /> <input type="hidden"
+			id="elecontractId" /> <input type="hidden" id="ResourceIds" /> <input
+			type="hidden" id="Electricmeterids" /> 
+			<!-- <input type="hidden" id="meterIds" />  -->
+			<div id="meterIds" style='display:none;'></div>
+			<input type="hidden" id="resourceId" />
+			<!--   删除时获取当前id及父id -->
+			<input type="hidden" id="curChikdId" /> 
+			<input type="hidden" id="curParId" />
+			<input type="hidden" id="priceType">
+			<input type="hidden" id="isIncludeAll">
+			
+		<div class="B_box">
+			<!-- 添加报账点信息 -->
+			<div>
+				<ul class="list-group">
+					<li class="list-group-item row">
+						<div class="col-md-12   title">添加报账点信息</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">报账点编码</div>
+						<div class="col-md-4">
+							<input class="form-control" id="billaccountCode" type="text" readonly="readonly"/>
+						</div>
+						<div class="col-md-2">报账点名称</div>
+						<div class="col-md-4">
+							<input class="form-control" id="billaccountName" type="text" />
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">所属地市</div>
+						<div class="col-md-4">
+							<select id="modifyCity" name="city" class="form-control">
+								<option>-选择地市-</option>
+							</select>
+						</div>
+						<div class="col-md-2">所属区县</div>
+						<div class="col-md-4">
+							<select id="modifyRegion" name="region" class="form-control">
+								<option>-选择区县-</option>
+							</select>
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">报账点状态</div>
+						<div class="col-md-4">
+							<select id="billaccountState" class="form-control">
+								<option>-请选择-</option>
+								<option value="0">正常</option>
+								<option value="9">暂停</option>
+								<option value="10">终止</option>
+							</select>
+						</div>
+						<div class="col-md-2">报账点类型</div>
+						<div class="col-md-4">
+							<select id="billaccountType" class="form-control">
+								<option value="1">电费报账点</option>
+							</select>
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">计划缴费日期</div>
+						<div class="col-md-4">
+							<!-- <div class='input-group date' id='datetimepicker1'> -->
+								<input type='text' class="form-control" id="planDate" /> 
+								<!-- <span
+									class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div> -->
+						</div>
+						<div class="col-md-2">备注</div>
+						<div class="col-md-4">
+
+							<input class="form-control" id="billaccountNote" type="text" />
+
+						</div>
+					</li>
+					<li class="list-group-item row">
+						
+						<div class="col-md-2">报账点计量倍数</div>
+						<div class="col-md-4 ">
+							<input class="form-control" id="calcMulti" name="calcMulti" type="text"   style="display:inline-block;float:left;"/>
+							<a href="javascript:void(0)" id="calcbtn" style="background-color: #006dcc;padding: 5px 8px;
+                                                                color: #fff;  border-radius: 4px;margin-left: -26%;"
+                                                                  >计算</a>
+						</div>
+						<div class="col-md-2"></div>
+						<div class="col-md-4"></div>
+
+					</li>
+
+				</ul>
+			</div>
+
+			<!-- 关联合同信息-->
+			<div>
+				<ul class="list-group">
+					<li class="list-group-item row">
+						<div class="col-md-12   title">
+							关联合同信息 &nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:void(0)"
+								onclick="selcontractPopup()">选择关联合同</a>
+							<!-- <a href="javascript:void(0)" onclick="deselcontractPopup()">取消关联合同</a> -->
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<!-- <table id="contracttb"></table>   -->
+						<table class="table table-bordered table-striped table-hover"
+							id="contracttb">
+							<thead>
+								<tr>
+									<th style="width:20px;display:none;"><input type="hidden"
+										id="chooseAll_id" name="checkAll"></th>
+									<th>合同编码</th>
+									<th>合同名称</th>
+									<th>所属地市</th>
+									<th>所属区县</th>
+									<th>合同期始</th>
+									<th>合同期终</th>
+									<th>合同状态</th>
+								</tr>
+							</thead>
+						</table>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 关联资源信息-->
+			<div>
+				<ul class="list-group">
+					<li class="list-group-item row">
+						<div class="col-md-12   title">
+							关联资源信息 &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"
+								onclick="selresourcePopup()" id="chose_Btn">选择关联资源</a>
+							<a href="javascript:void(0)" onclick="deselresourcePopup()" id="cancle_Btn">取消关联资源</a>
+								
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<!-- <table id="resourcetb"></table> -->
+
+						<table id="resourcetreetable"
+							class="table table-hover table-striped  table-bordered ">
+							<thead>
+								<tr
+									style="height:40px;line-height:40px;background:#fff;vertical-align: middle;">
+									<th></th>
+									<th>资源类型</th>
+									<th>资源编码</th>
+									<th>资源名称</th>
+									<th>资源状态</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</form>
+
+	<!-- Modal 选择关联合同-->
+	<div class="modal fade" id="selRelationContractDiv" tabindex="-1"
+		role="dialog" aria-labelledby="selContractDiv">
+		<div class="modal-dialog" role="document" style="width:800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4>关联合同</h4>
+				</div>
+				<form class="form-inline"  style="margin: 15px 15px 0 15px;">
+					<div class="form-group">
+						<input type="text" id="contractNameFind" placeholder="合同编码或名称">
+					</div>
+					<button type="button" class="btn btn-success"
+						onclick="loadContractTableData(billaccountId)">查询</button>
+				</form>
+				<div class="modal-body">
+					<table id="relationcontracttb"></table>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="relationContractSubmitnew()">确定</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="selRelationResourceDiv" tabindex="-1"
+		role="dialog" aria-labelledby="selResourceDiv">
+		<div class="modal-dialog" role="document" style="width:800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4>关联资源</h4>
+				</div>
+				<form class="form-inline" style="margin: 15px 15px 0 15px;">
+					<div class="form-group">
+						<input type="text" id="baseresourceName" placeholder="资源编码或名称">
+					</div>
+					<button type="button" class="btn btn-success"
+						onclick="loadResourceTableData(billaccountId , regId)">查询</button>
+				</form>
+				<div class="modal-body">
+					<table id="relationresourcetb"></table>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="relationResource()">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="selRelationElectricmeterDiv" tabindex="-1"
+		role="dialog" aria-labelledby="selRelationElectricmeterDiv">
+		<div class="modal-dialog" role="document" style="width:800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4>关联电表</h4>
+				</div>
+				<form class="form-inline" style="margin: 15px 15px 0 15px;">
+					<div class="form-group">
+						<input type="text" id="relationElectricmeterCodeFind" placeholder="电表编码">
+					</div>
+					<button type="button" class="btn btn-success"
+						onclick="loadElectricmeterTableData('','','')">查询</button>
+					</form>
+				<div class="modal-body">
+					<input type="hidden" id="relationElectricmeterResourceId" />
+					<table id="relationElectricmetertb"></table>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="relationElectricmeter()">确定</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

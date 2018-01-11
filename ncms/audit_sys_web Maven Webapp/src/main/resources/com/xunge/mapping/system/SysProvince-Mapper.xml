@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.SysProvinceDao" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.SysProvinceTreeVO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="prvGroupResultMap" type="com.xunge.model.system.province.SysProvinceGroupVO" >
+     	<result column="prv_group" property="prvGroup" jdbcType="VARCHAR" />
+	    <collection property="sysProvince" javaType="com.xunge.model.system.province.SysProvinceVO">
+		    <id column="id" property="id" jdbcType="VARCHAR" />
+		    <result column="code" property="code" jdbcType="VARCHAR" />
+		    <result column="name" property="name" jdbcType="VARCHAR" />
+		    <result column="pid" property="pid" jdbcType="VARCHAR" />
+     		<result column="prv_group" property="prvGroup" jdbcType="VARCHAR" />
+	    </collection>
+   </resultMap>
+  <select id="queryByPrvGroup" parameterType="Map" resultMap="prvGroupResultMap">
+  	SELECT
+		sp.prv_id AS reg_id,
+		sp.prv_code AS regCode,
+		sp.prv_name AS regName,
+		sp.prv_order AS reg_order,
+		sp.prv_state AS prv_state,
+		'' AS preg_id,
+		'中国移动集团公司' AS pRegName,
+		sp.prv_group
+	FROM
+		sys_province sp
+	WHERE sp.prv_state = 0
+  </select>
+  
+  <!-- 查询所有菜单列表  -->
+  <select id="queryOnePro" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+	  p.prv_id as id,
+		p.prv_code as code,
+		p.prv_name as name,
+		'' as pid
+	from 
+		sys_province p
+	where 
+		p.prv_id = #{prvId} 
+	union all
+	select 
+		r.reg_id as id,
+		r.reg_code as code,
+		r.reg_name as name,
+		r.preg_id as pid
+	from 
+  		sys_region r
+  	where
+  		r.reg_state = #{state} and 
+	  	r.prv_id = (
+			select p.prv_id
+		  	from sys_province p
+		  	where p.prv_id = #{prvId}
+	  	)
+  </select>
+  <!-- 查询所有省份以及id -->
+  <select id="queryAllProvince" resultMap="BaseResultMap">
+  	select 
+  		prv_id as id,
+		prv_name as name
+	from
+		sys_province
+	where
+		prv_id != '000000'
+  </select>
+   <!-- 查询所有省份简称以及id -->
+  <select id="queryAllSimpleProvince" resultMap="BaseResultMap">
+  	select 
+  		prv_id as id,
+		prv_sname as name
+	from
+		sys_province
+	where
+		prv_id != '000000'
+  </select>
+</mapper>

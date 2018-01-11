@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <title>生成汇总单</title>
+	<link href="../../../bootstrap/css/bootstrap.css" rel="stylesheet"	media="screen">
+	<link href="../../../css/ncms_page.css?v=2" rel="stylesheet" media="screen">
+	<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="createBox">
+        <div class="search_title">汇总条件</div>
+        <form action="" class="form-inline">
+            <div class="form-group">
+                <label><span class="red">*</span></label>
+                <select id="City">
+				</select>
+				<select id="Village">
+				</select>
+			</div>
+			<div class="form-group">
+                <label><span class="red">*</span></label>
+				<select id="supplierId">
+					<option value="">-请选择供应商-</option>
+				</select>
+			</div>
+			<div class="form-group">
+                <label><span class="red">*</span></label>
+				<select id="billType">
+					<option value="">-请选中报账类型-</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<select id="paymentMethod">
+					<option value="">-请选中付款方式</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<div class='input-group date datetimepicker'>
+                    <input type='text' id="paymentDate" placeholder="报账日期" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+			</div>
+		
+            <div class="form-group">
+                <label>合同编号</label>
+                <input type="text" autocomplete="off" name="">
+            </div>
+            <button onclick="searchTableData()" type="button" class="btn btn-success" >查询</button>
+        </form>
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-primary" onclick="createBillamount()">生成汇总单</button>
+       		<button type="button" class="btn btn-primary" onclick="finishBillamount()">返回</button>
+        </div>
+        <div class="search_title">待汇总缴费信息</div>
+        <table class="table table-bordered table-striped table-hover" id="">
+
+        </table>
+        
+        <div class="table_summary">
+            <b>所选数量<span id="checkedNum">0</span>个</b><b>所选金额<span id="checkedAmount">0</span>元</b>
+        </div>
+        <table class="table table-bordered table-striped table-hover" id="tb">
+
+        </table>
+    </div>
+    
+	<table id="tb"></table>
+	<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<!--[if lte IE 9]>
+	<script src="../../../bootstrap/js/html5shiv.js"></script>
+	<script src="../../../bootstrap/js/respond.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+	<script type="text/javascript" src="../../../js/page/selfrent/rentbillamount/rentbillamount-create.js"></script> 
+    <script>
+        $(function(){
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD',
+                locale: moment.locale('zh-cn')
+            });
+        });
+    </script>
+</body>
+</html>

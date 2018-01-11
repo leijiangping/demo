@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title>电费固化信息</title>
+<link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../../bootstrap/css/fileinput.css" />
+<link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css" />
+<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../css/ncms_page.css" />
+<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+<script src="../../../bootstrap/js/file-input.js"></script>
+<script src="../../../bootstrap/js/fileinput_locale_zh.js"></script>
+<script src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+
+<script type="text/javascript" src="../../../js/common.js?v=2"></script>
+
+<link href="../../../../asserts/webuploader/webuploader.css" rel="stylesheet"><!-- 上传 -->
+<script src="../../../../asserts/webuploader/webuploader.js"></script>
+<script type="text/javascript" src="../../../js/page/common/common.js"></script>
+<script type="text/javascript" src="../../../js/page/common/selectElecPrice.js"></script>
+<script type="text/javascript" src="../../../js/page/common/selectSupplier.js"></script>
+<script type="text/javascript" src="../../../js/page/towerelec/eleccontract/edit.js?v=3"></script>
+<style>
+.list-group i.star{
+vertical-align: middle;
+    font-size: 20px;
+    line-height: 46px;
+    display: inline-block;
+    font-weight: bold;
+    color: red;
+    height: 40px;
+    margin-right: 3px;
+}
+
+
+</style>
+    
+</head>
+<body>
+<div id="selectElecPrice"></div>
+<div id="selectSupplier"></div>
+<form action="" id="dataForm">
+  <div class="btn-toolbar">
+    <button id="saveSet" type="button" class="btn btn-primary" onclick="formSubmitContract();">保存</button>
+    <button type="button" class="btn btn-primary" onclick="back();">返回</button>
+  </div>
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#basic_info" data-toggle="tab">基本信息</a></li>
+    <li><a href="#elec_info" data-toggle="tab">电费信息</a></li>
+    <li><a href="#sup_pay" data-toggle="tab">供应商</a></li>
+    <li><a href="#attach" data-toggle="tab">固化信息附件</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <!--基本信息-->
+    <div class="tab-pane fade in active" id="basic_info">
+      <ul class="list-group">
+        <input type="text" id="prvId" style="display: none;"/>
+        <input type="text" id="prvSname" style="display: none;"/>
+        <input type="text" id="pregName" style="display: none;"/>
+        <input type="text" id="regName" style="display: none;"/>
+        <input type="text" id="auditingState" style="display: none;"/>
+        <input type="text" id="auditingUserId" style="display: none;"/>
+        <input type="text" id="auditingDate" style="display: none;"/>
+        <li class="list-group-item row">
+          <div class="col-md-2">固化信息分类：</div>
+          <div class="col-md-4 contract"style="text-align: left;">电费固化信息</div>
+          <div class="col-md-2">固化信息状态：</div>
+          <div class="col-md-4">
+            <select id="contractState" name="contractState" class="form-control"style="float:left;width:30%;" >
+              <option value="">-固化信息状态-</option>
+              <option value="-2">无效</option>
+              <option value="-1">删除</option>
+              <option value="0">正常</option>
+              <option value="1">起草</option>
+              <option value="2">履行完毕</option>
+              <option value="3">审批中</option>
+              <option value="4">审批完毕</option>
+              <option value="8">异动</option>
+              <option value="9">停用</option>
+            </select>
+            <input type='text' class="form-control" id="contractChangeenddate"style="display: none;width:30%;float:left;"/>
+          </div>
+        </li>
+        <input type="hidden" id="contractId" >
+        <li class="list-group-item row">
+          <div class="col-md-2">固化信息编码：</div>
+          <div class="col-md-4 contract">
+            <input type="text" id="contractCode"
+              onblur="checkContractCode()"
+              name="contractCode" class="form-control" style="float: left;"><span id="codeMsg"></span>
+          </div>
+          <div class="col-md-2">固化信息名称：</div>
+          <div class="col-md-4">
+            <input type="text" id="contractName"
+              name="contractName" class="form-control">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">固化信息期始：</div>
+          <div class="col-md-4">
+              <input type='text' id="contractStartdate" name="contractStartdate" class="form-control"/>
+          </div>
+          <div class="col-md-2">固化信息期终：</div>
+          <div class="col-md-4">
+            <!--指定 date标记-->
+            <span id = "dateMsg" style="float:right;"></span>
+            <input type='text' id="contractEnddate" name="contractEnddate" onblur="checkContractEndDate(1)"
+               class="form-control"/>
+          </div>
+          <input type="hidden" name="enddate" id="enddate" />
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">签约日期：</div>
+          <div class="col-md-4">
+              <input type='text' id="contractSigndate" name="contractSigndate" class="form-control"/>
+          </div>
+          <div class="col-md-2">固化信息变更日期：</div>
+          <div class="col-md-4">
+            <input type="text" id="contractChangedate" class="form-control" disabled="disabled"/>
+         
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">地市/区县：</div>
+          <div class="col-md-4">
+            <select id="pregId" name="pregId" class="form-control"style="width:30%;float:left;"></select>
+            <select id="regId" name="regId" class="form-control"  onchange="checkIsDownShare()"style="width:30%;float:left;"></select>
+          </div> 
+          <!-- <div class="col-md-2">
+            <select id="regId" name="regId" class="form-control"  onchange="checkIsDownShare()"></select>
+          </div> -->
+          <div class="col-md-2">是否向下共享：</div>
+          <div class="col-md-4">
+            <select id="isDownshare" name="isDownshare" class="form-control">
+              <option value="1">是</option>
+              <option value="0" selected="selected">否</option>
+            </select>
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">我方起草部门：</div>
+          <div class="col-md-4">
+            <input type="text" id="contractCheckname1"
+              name="contractCheckname1" class="form-control">
+          </div>
+          <div class="col-md-2">对方签约单位名称：</div>
+          <div class="col-md-4">
+            <input type="text" id="contractCheckname2"
+              name="contractCheckname2" class="form-control">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">管理负责人：</div>
+          <div class="col-md-4">
+            <input type="text" id="userId"
+              name="userId" class="form-control">
+          </div>
+          <div class="col-md-2">管理部门:</div>
+          <div class="col-md-4">
+            <input type="text" id="sysDepId"
+              name="sysDepId" class="form-control">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">原固化信息编号：</div>
+          <div class="col-md-4">
+            <input type="text" id="oldContractCode" readonly="readonly"
+              name="oldContractCode" class="form-control">
+          </div>
+          <div class="col-md-2">固化信息流水号:</div>
+          <div class="col-md-4">
+            <input type="text" id="contractFlow" readonly="readonly"
+              name="contractFlow" class="form-control">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">固化信息简介：</div>
+          <div class="col-md-10">
+            <input type="text" id="contractIntroduction" name="contractIntroduction"
+              class="form-control">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">备注：</div>
+          <div class="col-md-10">
+            <input type="text" id="contractNote" name="contractNote"
+              class="form-control">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- 电费信息-->
+    <form class="form-horizontal" id="dataForm">
+    <div class="tab-pane fade" id="elec_info">
+    
+      <ul class="list-group">
+        <input type="text" id="elecontractId" style="display: none;"/>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>是否包干</div>
+          <div class="col-md-4">
+            <select id="isIncludeAll" name="isIncludeAll" class="form-control">
+              <option value="-1">-请选择-</option>
+              <option value="1">是</option>
+              <option value="0">否</option>
+            </select>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>电费缴费周期</div>
+          <div class="col-md-4">
+            <select id="paymentperiodId" name="paymentperiodId" class="form-control">
+            </select>
+          </div>
+        </li>
+        <li class="list-group-item row">
+        <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>单价是否含税</div>
+              <div class="col-md-4">
+                <select id="includePriceTax" name="includePriceTax" class="form-control">
+                  <option value="">-请选择-</option>
+                  <option value="1">是</option>
+                  <option value="0">否</option>
+                </select>
+              </div>
+         <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>电费税率：</div>
+              <div class="col-md-4">
+                <input type="text" id="taxRate" name="taxRate" class="form-control lfStyle">
+                <i class="percentStyle">%</i>
+              </div>
+        </li>
+        <li class="list-group-item row">
+           <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>供电类型：</div>
+                <div class="col-md-4">
+                  <select id="supplyMethod" name="supplyMethod" class="form-control">
+                    <option value="">-请选择-</option>
+                    <option value="1">直供电</option>
+                    <option value="2">转供电</option>
+                  </select>
+                  <span id="err" class="modal-error" style="position: absolute;top: 0px;right:20%"></span>
+                </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>购电方式：</div>
+          <div class="col-md-4">
+            <select id="buyMethod" name="buyMethod" class="form-control">
+              <option value="">-请选择-</option>
+              <option value="0">后付费</option>
+              <option value="1">预付费</option>
+              <option value="2">IC卡</option>
+            </select>
+          </div>
+          
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px">支付方式：</div>
+          <div class="col-md-4">
+            <select id="paymentMethod" name="paymentMethod" class="form-control">
+              <option value="">-请选择-</option>
+              <option value="1">转账</option>
+              <option value="2">托收</option>
+            </select>
+          </div>
+          <div class="col-md-6"></div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px">包干价款：</div>
+          <div class="col-md-4">
+	          <input type="text" id="contractMoney" name="contractMoney" class="form-control" style="margin-right:1px;float:left"/>
+	          <span style="float:left;margin-left:8px">元</span>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px">包干税款：</div>
+          <div class="col-md-4">
+            <input type="text" id="contractTax" name="contractTax" class="form-control" style="margin-right:1px;float:left"/>
+            <span style="float:left;margin-left:8px">元</span>
+          </div>
+          
+        </li>
+        <li class="list-group-item row">
+           <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>包干总金额
+           </div>
+          <div class="col-md-4">
+            <input type="text" id="contractTotalAmount" name="contractTotalAmount" class="form-control" style="margin-right:1px;float:left"/>
+            <span style="float:left;margin-left:8px">元</span>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>包干支付单价：</div>
+          <div class="col-md-2">
+            <select id="paySign" name="paySign" class="form-control">
+              <option value="1">日</option>
+              <option value="2" selected="selected">月</option>
+              <option value="3">年</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <input type="text" id="paySignAccount" name="paySignAccount" class="form-control" >
+            <span style="position: absolute;top: 0px;right: 30%;">元</span>
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>是否独立挂表</div>
+          <div class="col-md-4">
+            <select id="independentMeter" name="independentMeter" class="form-control">
+              <option value="">-请选择-</option>
+              <option value="1">是</option>
+              <option value="0">否</option>
+            </select>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>移动分摊比例</div>
+          <div class="col-md-4">
+            <input type="text" id="cmccRatio" name="cmccRatio" class="form-control lfStyle">
+            <i class="percentStyle">%</i>
+          </div>
+          
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px">联通分摊比例</div>
+          <div class="col-md-4">
+            <input type="text" id="unicomRatio" name="unicomRatio" class="form-control lfStyle">
+            <i class="percentStyle">%</i>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px">电信分摊比例</div>
+          <div class="col-md-4">
+            <input type="text" id="telcomRatio" name="telcomRatio" class="form-control lfStyle">
+            <i class="percentStyle">%</i>
+          </div>
+        
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>非包干单价类型：</div>
+          <div class="col-md-4">
+            <select id="priceType" name="priceType" class="form-control">
+              <option value="">-请选择-</option>
+              <option value="0">非平峰谷单价</option>
+              <option value="1">平峰谷单价</option>
+            </select>
+            <span id="err" class="modal-error" style="position: absolute;top: 0px;right: 20%;"></span>
+          </div>
+          <div class="col-md-2"><a href="#" class="btn btn-primary" onclick="showSetPrice()">录入电费单价</a></div>
+          <div class="col-md-4" ></div>
+          
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px">普通表单价：</div>
+          
+          <div class="col-md-4">
+          	<span id="elecontractPrice" ></span>&nbsp;&nbsp;元
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-4"></div>
+        </li>
+        
+        <li class="list-group-item row">
+          <div class="col-md-2">平单价：</div>
+          <div class="col-md-4" >
+          <span id="flatPrice" ></span>&nbsp;&nbsp;元
+          </div>
+          <div class="col-md-2">峰单价：</div>
+          <div class="col-md-4" >
+          <span id="peakPrice" ></span>&nbsp;&nbsp;元
+          </div>
+        </li>
+        <li class="list-group-item row">
+          
+          <div class="col-md-2">谷单价：</div>
+          <div class="col-md-4" >
+          <span id="valleyPrice" ></span>&nbsp;&nbsp;元
+          </div>
+          <div class="col-md-2">尖单价：</div>
+          <div class="col-md-4" >
+          <span id="TopPrice" ></span>&nbsp;&nbsp;元
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star'>*</i>是否有电损</div>
+          <div class="col-md-4">
+            <select id="includeLoss" name="includeLoss" class="form-control">
+              <option value="">-请选择-</option>
+              <option value="1">是</option>
+              <option value="0">否</option>
+            </select>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px;padding-right: 0px"><i class='star' style='display:none;'>*</i>电损计算方式</div>
+          <div class="col-md-4">
+            <select id="lossType" name="lossType" class="form-control">
+              <option value="">-请选择-</option>
+              <option value="0">按度数</option>
+              <option value="1">按金额</option>
+            </select>
+          </div>
+          
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">备注：</div>
+          <div class="col-md-10">
+            <input type="text" id="elecontractNote" name="elecontractNote" class="form-control">
+          </div>
+        </li>
+      </ul>
+    </div>
+    </form>
+    <!-- 供应商-->
+    <div class="tab-pane fade" id="sup_pay">
+      <ul class="list-group">
+        <li class="list-group-item row">
+          <div class="col-md-2">供应商编号</div>
+          <div class="col-md-2" id="supplierCode"></div>
+          <div class="col-md-2"><a href="#" class="btn btn-primary" onclick="supplierBind()">选择供应商</a></div>
+          <div class="col-md-2">供应商名称</div>
+          <div class="col-md-4" id="supplierName">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">供应商地址</div>
+          <div class="col-md-4" id="supplierAddress"></div>
+          <div class="col-md-2">地点(服务类别)</div>
+          <div class="col-md-4" id="supplierSite"></div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">联系人</div>
+          <div class="col-md-4" id="supplierContact"></div>
+          <div class="col-md-2">联系电话</div>
+          <div class="col-md-4" id="supplierTelephone"></div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">地市区县</div>
+          <div class="col-md-2" id="sPregName"></div>
+          <div class="col-md-2" id="sRegName"></div>
+          <div class="col-md-2">是否向下共享</div>
+          <div class="col-md-4" id="sIsDownshare"></div>
+          <input type="hidden" id="sPregId">
+          <input type="hidden" id="sRegId">
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">账户类型</div>
+          <div class="col-md-4" id="accountType"></div>
+          <div class="col-md-2">开户银行</div>
+          <div class="col-md-4" id="depositBank">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">银行账户</div>
+          <div class="col-md-4" id="bankAccount">
+          </div>
+          <div class="col-md-2">银行账号</div>
+          <div class="col-md-4" id="bankUser">
+          </div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">供应商类别</div>
+          <div class="col-md-4" id="supplierType"></div>
+          <div class="col-md-6"></div>
+        </li>
+        <li class="list-group-item row">
+          <div class="col-md-2">备注</div>
+          <div class="col-md-4" id="supplierNote"></div>
+          <div class="col-md-6"></div>
+        </li>
+        <input type="text" id="supplierId" style="display: none;"/>
+      </ul>
+    </div>
+    <!-- 固化信息附件-->
+    <div class="tab-pane fade" id="attach">
+      <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-2">附件</div>
+                    <div class="col-md-2">
+                        <a class="btn btn-default" onclick="uploadFile()">上传</a>
+                    </div>
+                </li>
+      </ul>
+      
+      <ul class="list-group" id="attachFile">
+      </ul>
+    </div>
+  </div>
+</form>
+
+<script>
+$(function() {
+  $('#myTab a:first').tab('show');
+  $('input[class="lefile"]').change(function() {
+    $(this).next('.input-append').children('input[type="text"]').val($(this).val());
+  });
+  $('#contractState').change(function (){
+    if($("#contractState option:selected").val() == "9"){
+      $('#contractChangeenddate').show();
+    }else{
+      $('#contractChangeenddate').hide();
+    }
+  });
+  $('#contractStartdate').datetimepicker({
+    format : 'YYYY-MM-DD',
+    locale : moment.locale('zh-cn')
+  });
+  $('#contractEnddate').datetimepicker({
+    format : 'YYYY-MM-DD',
+    locale : moment.locale('zh-cn')
+  });
+  $('#contractSigndate').datetimepicker({
+    format : 'YYYY-MM-DD',
+    locale : moment.locale('zh-cn')
+  });
+  $('#contractChangeenddate').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: moment.locale('zh-cn')
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.system.SysUserMapper">
+<!-- 用户与角色部门结果集 -->
+	<resultMap id="BaseResultMapUser" type="com.xunge.model.system.user.SysUserVO">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="reg_id" property="regId" jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="user_loginname" property="userLoginname"
+			jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_password" property="userPassword"
+			jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="user_note" property="userNote" jdbcType="VARCHAR" />
+		<result column="user_state" property="userState" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="user_class" property="userClass" jdbcType="VARCHAR" />
+		<result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		<collection property="listRoleUserVOs"
+			ofType="com.xunge.model.system.roleuser.RoleUserVO">
+			<id column="roleuser_id" property="roleUserId" jdbcType="VARCHAR" />
+			<id column="user_id" property="userId" jdbcType="VARCHAR" />
+			<id column="role_id" property="roleId" jdbcType="VARCHAR" />
+			<collection property="role"
+				javaType="com.xunge.model.system.user.SysRoleVO">
+				<id column="role_id" property="roleId" jdbcType="VARCHAR" />
+				<result column="role_state" property="roleState" jdbcType="VARCHAR" />
+				<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+			</collection>
+		</collection>
+		<collection property="listSysDepartmentUserVOs"
+			ofType="com.xunge.model.system.departmentuser.SysDepartmentUserVO">
+			<id column="user_id" property="userId" jdbcType="VARCHAR" />
+			<id column="dep_id" property="depId" jdbcType="VARCHAR" />
+			<collection property="sysDepartmentVO"
+				javaType="com.xunge.model.system.department.SysDepartmentVO">
+				<id column="dep_id" property="depId" jdbcType="VARCHAR" />
+				<result column="dep_name" property="depName" jdbcType="VARCHAR" />
+				<result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+			</collection>
+		</collection>
+	</resultMap>
+	
+	<!-- 用户和地市区县信息结果集 -->
+	<resultMap id="BaseResultMapUserPrvReg" type="com.xunge.model.system.user.SysUserVO">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="reg_id" property="regId" jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="user_loginname" property="userLoginname"
+			jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_password" property="userPassword"
+			jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="user_note" property="userNote" jdbcType="VARCHAR" />
+		<result column="user_state" property="userState" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="user_class" property="userClass" jdbcType="VARCHAR" />
+		<result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		<association property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+            <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+		    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+		    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+		    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+		    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+		    <result column="prv_code" property="prvCode" jdbcType="INTEGER" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+         </association>
+	</resultMap>
+	
+	<!-- 区域信息 -->
+	<resultMap type="com.xunge.model.system.region.SysRegionVO" id="sysRegionMsg">
+            <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+		    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+		    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+		    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+		    <result column="prv_code" property="prvCode" jdbcType="INTEGER" />
+		    <result column="prv_flag" property="prvFlag" jdbcType="VARCHAR" />
+		    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="BaseResultMapRoleAndUser" type="com.xunge.model.system.roleuser.RoleUserVO" >
+		<id column="roleuser_id" property="roleUserId" jdbcType="VARCHAR" />
+	    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+	    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+	    <result column="relation_state" property="relationState" jdbcType="INTEGER" />
+	    <result column="relation_startdate" property="relationStartdate" jdbcType="DATE" />
+	    <result column="relation_enddate" property="relationEnddate" jdbcType="DATE" />
+ 	 </resultMap>
+ 	 
+ 	<resultMap id="BaseResultMapDepartmentAndUser" type="com.xunge.model.system.departmentuser.SysDepartmentUserVO" >
+	   	<id column="depuser_id" property="depUserId" jdbcType="VARCHAR" />
+	    <id column="dep_id" property="depId" jdbcType="VARCHAR" />
+	    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+	    <result column="relation_state" property="relationState" jdbcType="INTEGER" />
+	    <result column="relation_startdate" property="relationStartdate" jdbcType="DATE" />
+	    <result column="relation_enddate" property="relationEnddate" jdbcType="DATE" />
+  	</resultMap>
+  	
+	<resultMap type="com.xunge.model.system.user.SysUserVO" id="BaseResultMapToUser">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+	   <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+	    <result column="user_loginname" property="userLoginname" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 通过 集团收集编码和省份编码查询用户 
+	<select id="">
+		select 
+	</select>-->
+	<!-- 用户角色配置 -->
+	<resultMap type="com.xunge.model.system.user.SysUserVO" id="BaseResultMapUR">
+	    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+	    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+	    <result column="user_loginname" property="userLoginname" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 根据角色id查询用户信息 -->
+	<select id="queryUserByRole" parameterType="Map" resultMap="BaseResultMapToUser">
+		select su.user_id,su.user_name,su.user_phone
+		from sys_user su
+		where su.user_id in (
+			select sru.user_id
+			from sys_roleuser sru
+			where sru.role_id = #{roleId}
+			and sru.relation_state = #{relationState}
+		)and su.user_state = #{userState}
+	</select>
+	<!-- 查询所有用户信息 -->
+	<select id="queryUserAll" resultMap="BaseResultMapUser" parameterType="Map" >
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		where 
+		user_state = #{onState}
+		or
+		user_state = #{downState}
+	</select>	
+	<!-- 根据roleId查询user对象 -->
+	<select id="queryAllUserByRoleId" parameterType="Map" 
+		resultMap="BaseResultMapUR">
+		select 
+			u.user_code,u.user_name,u.user_loginname 
+		from 
+			sys_user u
+		where 
+			u.user_id 
+		in(
+			select 
+				r.user_id
+			from
+				sys_roleuser r
+			where
+				r.role_id = #{roleId,jdbcType=VARCHAR} and 
+				r.relation_state = #{state,jdbcType=INTEGER}
+			)
+	</select>
+	
+		<!-- 根据roleId集合查询user对象 -->
+	<select id="queryUserByRoleName" parameterType="Map" 
+		resultMap="BaseResultMapToUser">
+		select 
+			u.user_id,u.user_loginname,u.user_email,u.user_phone 
+		from sys_user u 
+		INNER JOIN sys_roleuser r ON u.user_id =r.user_id and r.relation_state =0
+     	left join v_sys_region reg on reg.reg_id = u.reg_id 
+		<where> 
+		<if test="roleIdLists != null and roleIdLists.size()>0">  
+	        and r.role_id in  
+	        <foreach collection="roleIdLists" item="item" index="index" open="(" separator="," close=")">  
+                #{item}  
+            </foreach>  
+    	</if>
+    	<!-- <if test="regId != null and regId!='' ">  
+	        and u.reg_id=#{regId}
+    	</if> -->
+    	<if test="dataRegId==null or dataRegId ==''">  <!-- 1、数据所属区县不存在 -->
+    		<if test="prvId != null and prvId !='' "> <!-- 2、 使用用户省份去判断-->
+    			and reg.prv_id=#{prvId}
+	        </if>
+    	</if>
+    	<if test="dataRegId != null and dataRegId !='' ">  
+	        and u.user_id in(
+	        	select user_id from sys_userregion where relation_state=0 and reg_id =#{dataRegId}
+	        )
+    	</if>
+     </where>
+	</select>
+	
+	<!-- 根据userid查询用户对象 -->
+	<select id="queryAllUser" parameterType="java.lang.String"
+		resultMap="BaseResultMapUser">
+		select user_code,user_name,user_loginname
+		from sys_user
+		where
+		user_id = #{userId}
+	</select>
+
+	<sql id="Base_Column_List">
+		user_id, reg_id, user_code, user_loginname, user_name,
+		user_password,
+		user_phone,
+		user_email, user_note, user_state,user_class,
+		create_time, modify_time, is_valid
+	</sql>
+
+	<select id="getUserByLoginName" resultMap="BaseResultMapUser"
+		parameterType="java.lang.String">
+		select
+		user_id, reg_id, user_code, user_loginname, user_name,
+		user_password,user_class,
+		user_phone,
+		user_email, user_note, user_state,
+		create_time, modify_time, is_valid
+		from sys_user
+		where user_loginname = #{userLoginname,jdbcType=VARCHAR}
+	</select>
+	<select id="getByUserLoginNamePrvFlag" resultMap="BaseResultMapUser"
+		parameterType="Map">
+		select
+		u.user_id, u.reg_id, u.user_code, u.user_loginname, u.user_name,
+		u.user_password,u.user_class,
+		u.user_phone,
+		u.user_email, u.user_note, u.user_state,
+		u.create_time, u.modify_time, u.is_valid
+		from sys_user u
+		inner join v_sys_region r on r.reg_id = u.reg_id 
+		where u.user_loginname = #{userLoginname,jdbcType=VARCHAR}
+		and u.user_state != -1<!-- 已删除的用户不需要查询 -->
+		and r.prv_flag=#{prvFlag,jdbcType=VARCHAR}<!-- 省份标记必须和用户名一直 -->
+		and r.prv_state=9 <!-- 必须能是上线的省份 -->
+	</select>
+	<!-- 查询省份编码 prv_id -->
+	<select id="queryPrvIdByUser" resultMap="sysRegionMsg"
+		parameterType="com.xunge.model.system.user.SysUserVO">
+		select r.prv_id,r.prv_code,r.prv_flag,r.reg_state from v_sys_region r 
+		where r.reg_id=#{regId,jdbcType=VARCHAR}
+		and r.reg_state=0
+	</select>
+
+	<!-- 查询roleId -->
+	<select id="queryRoleIdsByUser" resultType="java.lang.String"
+		parameterType="com.xunge.model.system.user.SysUserVO">
+		select role_id from sys_roleuser ru 
+		where ru.user_id=#{userId,jdbcType=VARCHAR} 
+		and ru.relation_state=0
+	</select>
+
+	<select id="getUserById" resultMap="BaseResultMapUser"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询用户所有信息角色 部门信息 -->
+	<select id="queryUserMsg" resultMap="BaseResultMapUser" parameterType="Map">
+		select sys_user.* from sys_user INNER JOIN sys_region on
+		sys_region.reg_id= sys_user.reg_id
+		inner join sys_province on sys_province.prv_id=sys_region.prv_id
+		where sys_province.prv_id=#{prvId} and sys_user.user_state=0
+	</select>
+	
+	<!-- 查询用户所有信息地市区县门信息 -->
+	<select id="queryUserPrvRegMsg" resultMap="BaseResultMapUserPrvReg" parameterType="Map">
+		select 
+		user_id,user_code,user_loginname,user_password,
+		user_state,
+		user_class,user_name,user_email,
+		v_sys_region.reg_id,prv_id,reg_code,preg_id,reg_order,
+		reg_name,reg_state,preg_code,preg_name,prv_sname,prv_name,prv_state 
+		from sys_user inner join v_sys_region 
+		on v_sys_region.reg_id = sys_user.reg_id 
+		<where>
+			1=1
+			<if test="userLoginName != '' and userLoginName != null">
+				and sys_user.user_loginname like
+				CONCAT('%',#{userLoginName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="userName != '' and userName != null">
+				and sys_user.user_name like
+				CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="userState != '' and userState != null">
+				and sys_user.user_state != #{userState,jdbcType=INTEGER}
+			</if>
+			<if test="prvId != '' and prvId != null">
+				and v_sys_region.prv_id = #{prvId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据登陆用户名及省份ID查找用户 -->
+	<select id="queryUserByLoginNameAndPrvId" resultMap="BaseResultMapUserPrvReg" parameterType="Map">
+		select 
+		user_id,user_code,user_loginname,user_password,
+		user_state,
+		user_class,user_name,user_email,
+		v_sys_region.reg_id,prv_id,reg_code,preg_id,reg_order,
+		reg_name,reg_state,preg_code,preg_name,prv_sname,prv_name,prv_state 
+		from sys_user inner join v_sys_region 
+		on v_sys_region.reg_id = sys_user.reg_id 
+		<where>
+			sys_user.user_state != -1		<!-- 已删除的用户不查询 -->
+			<if test="userLoginName != '' and userLoginName != null">
+				and sys_user.user_loginname = #{userLoginName,jdbcType=VARCHAR}
+			</if>
+			<if test="userState != '' and userState != null">
+				and sys_user.user_state = #{userState,jdbcType=INTEGER}
+			</if>
+			<if test="prvId != '' and prvId != null">
+				and v_sys_region.prv_id = #{prvId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryUser" resultMap="BaseResultMapUser">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+	</select>
+
+	<select id="findUser" resultMap="BaseResultMapUser"
+		parameterType="Map">
+		SELECT sr.role_name,sr.role_state,sd.dep_name,sd.prv_id,
+		u.user_name,u.user_loginname,u.user_password,u.user_class,
+		u.user_note,u.reg_id,u.user_id,u.user_email,u.user_phone,
+		u.user_code,
+		user_state,
+		FROM
+		sys_user u
+		LEFT JOIN sys_departmentuser sdu on u.user_id=sdu.user_id
+		LEFT JOIN sys_department sd on sdu.dep_id=sd.dep_id
+		LEFT JOIN
+		sys_roleuser sru on u.user_id=sru.user_id
+		LEFT JOIN sys_role sr on
+		sr.role_id=sru.role_id
+		<where>
+			<if test="userLoginName != '' and userLoginName != null">
+				and user_loginname like
+				CONCAT('%',#{userLoginName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="userName != '' and userName != null">
+				and user_name like
+				CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="userState != '' and userState != null">
+				and user_state != #{userState,jdbcType=VARCHAR}
+			</if>
+			<if test="prvId != '' and prvId != null">
+				and prv_id = #{prvId,jdbcType=VARCHAR}
+			</if>
+		</where>
+		
+		
+		
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		sys_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 批量修改状态 -->
+	<update id="updateUserState" parameterType="Map">
+		update sys_user u set u.user_state=#{userState},u.modify_time=now()
+		where u.user_id in
+		<foreach collection="userIdsList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<insert id="addSysUser" parameterType="com.xunge.model.system.role.SystemRoleVO">
+		insert into sys_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userClass != null">
+				user_class,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="regId != null">
+				reg_id,
+			</if>
+			<if test="userCode != null">
+				user_code,
+			</if>
+			<if test="userLoginname != null">
+				user_loginname,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="userPassword != null">
+				user_password,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="userEmail != null">
+				user_email,
+			</if>
+			<if test="userNote != null">
+				user_note,
+			</if>
+			<if test="userState != null">
+				user_state,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="isValid != null">
+				is_valid,
+			</if>
+			create_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userClass != null">
+				#{userClass,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="regId != null">
+				#{regId,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userLoginname != null">
+				#{userLoginname,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassword != null">
+				#{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userNote != null">
+				#{userNote,jdbcType=VARCHAR},
+			</if>
+			<if test="userState != null">
+				#{userState,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isValid != null">
+				#{isValid,jdbcType=INTEGER}
+			</if>
+			now()
+		</trim>
+	</insert>
+
+	<update id="updateSysUserById" parameterType="com.xunge.model.system.user.SysUserVO">
+		update sys_user
+		<set>
+			<if test="userCode != null  and userCode != ''">
+				user_code = #{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="regId != null and regId != ''">
+				reg_id = #{regId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null  and userName != ''">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userNote != null  and userNote != ''">
+				user_note = #{userNote,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassword != null and userPassword != ''">
+				user_password = #{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null and userEmail != ''">
+				user_email = #{userEmail,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 新增角色用户关系  -->
+  <insert id="insert" parameterType="com.xunge.model.system.roleuser.RoleUserVO">
+    insert into sys_roleuser (role_id, user_id,relation_startdate)
+    values (#{roleId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},now())
+  </insert>
+  
+  <!-- 根据用户ID 获得此用户下的所有角色 -->
+  <select id="queryUserRole" parameterType="Map" resultType="java.lang.String">
+  	select role_id from sys_roleuser where user_id = #{userId,jdbcType=VARCHAR}
+  	and relation_state = #{state}
+  </select>
+  
+  <!-- 根据用户ID 获得此用户下的所有角色用户关系对象 -->
+  <select id="queryUserRoleVO" parameterType="Map" resultMap="BaseResultMapRoleAndUser">
+  	select role_id,relation_state,user_id from sys_roleuser where  relation_state = #{relationState} and role_id=#{roleId}
+  	<!-- ==================================================================================================== -->
+  	 <if test="userId != null and userId.size()>0">  
+	        and user_id in  
+	        <foreach collection="userId" item="item" index="index" open="("
+				separator="," close=")">
+				#{item}
+			</foreach> 
+    	</if>
+  </select>
+  
+  <!-- 根据用户ID 删除此用户下的所有角色 -->
+  <delete id="deleteRoleByUsreID" parameterType="string">
+  	delete from sys_roleuser where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  
+    <!-- 修改用户角色关系状态 -->
+	<update id="updateUserRoleState" parameterType="Map">
+       update sys_roleuser ru set ru.relation_state=#{userState},ru.relation_enddate = now() 
+	   where ru.user_id in  
+	        <foreach collection="userIdsList" item="item" index="index" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+    	<if test="idsListRole != null and idsListRole.size()>0">  
+	        and ru.role_id in  
+	        <foreach collection="idsListRole" item="item" index="index" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+    	</if>
+    </update>
+    
+    <!-- 修改用户部门关系状态 -->
+	<update id="updateUserDeptState" parameterType="Map">
+       update sys_departmentuser du set du.relation_state=#{userState},du.relation_enddate = now()
+	   where du.user_id in  
+       <foreach collection="userIdsList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach> 
+	   <if test="idsListDept != null and idsListDept.size()>0">  
+	        and du.dep_id in  
+	        <foreach collection="idsListDept" item="item" index="index" open="("
+				separator="," close=")">
+				#{item}
+			</foreach> 
+    	</if>
+		
+    	
+    </update>
+
+	<!-- 添加用户角色关系 -->
+	<insert id="patch" parameterType="Map">
+		insert into sys_roleuser (roleuser_id,role_id, user_id,relation_state,relation_startdate)
+		values
+		<foreach collection="idsList" item="item" index="index" 
+			separator="," >
+			(#{item.roleUserId},#{item.roleId},#{item.userId},#{item.relationState},now())
+		</foreach>
+	</insert>
+    
+     <!-- 删除用户角色关系 -->
+	<update id="deleteArray" parameterType="Map">
+       update  sys_roleuser set relation_state=#{state},relation_enddate=now()
+	   where 1=1 and role_id=#{roleId} 
+		<if test="idsLists != null and idsLists.size()>0">  
+	        and user_id in  
+	        <foreach collection="idsLists" item="item" index="index" >  
+	               (#{item})  
+	        </foreach>  
+	   	</if>
+    </update> 
+    
+    <!-- 添加用户部门关系 -->
+    <insert id="insertDeptUser" parameterType="com.xunge.model.system.departmentuser.SysDepartmentUserVO">
+		
+		insert into sys_departmentuser (depuser_id,dep_id, user_id,relation_state,relation_startdate)
+		values
+		<foreach collection="depidsList" item="item" index="index" 
+			separator="," >
+			(#{item.depUserId,jdbcType=VARCHAR},#{item.depId,jdbcType=VARCHAR},
+			#{item.userId,jdbcType=VARCHAR},#{item.relationState},now())
+		</foreach>
+  	</insert>
+  
+   <!-- 根据用户ID 获得此用户下的所有部门 -->
+  <select id="queryUserDept" parameterType="Map" resultType="java.lang.String">
+  	select dep_id from sys_departmentuser where user_id = #{userId,jdbcType=VARCHAR}
+  	and relation_state = #{state}
+  </select>
+  
+  <!-- 根据用户ID 删除此用户下的所有部门 -->
+  <delete id="deleteDeptByUsreID" parameterType="string">
+  	delete from sys_departmentuser where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <!-- 用户区县关系 -->
+  
+  <resultMap id="BaseResultMap" type="com.xunge.model.system.userregion.UserRegionVO" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="relation_state" property="relationState" jdbcType="INTEGER"/>
+    <result column="relation_startdate" property="relationStartDate" jdbcType="DATE"/>
+    <result column="relation_enddate" property="relationEndDate" jdbcType="DATE"/>
+  </resultMap>
+  <!-- 修改用户区县状态 -->
+  <update id="updateUserRegion" parameterType="Map">
+  	update sys_userregion set relation_state = #{newState},relation_enddate = NOW()
+  	where user_id = #{userId} and relation_state = #{oldState} 
+	  	and reg_id in
+	  		<foreach collection="deleteList" item="list" index="index" open="(" separator="," close=")">
+		  		#{list}
+	  		</foreach>
+	  
+  </update>
+  <!-- 根据用户id查询区县id列表 -->
+  <select id="queryRegionId" parameterType="Map" resultType="java.lang.String">
+  	select reg_id from sys_userregion where user_id = #{userId,jdbcType=VARCHAR}
+  	and relation_state = #{state,jdbcType=INTEGER}
+  </select>
+  <!-- 新增角色区县关系  -->
+  <insert id="insertUserRegion" parameterType="Map" >
+    insert into sys_userregion (userregion_id, user_id, reg_id,relation_state,relation_startdate)
+    values 
+	    <foreach collection="insertUserRegionList" item="insert" index="index" separator=",">
+		    (#{insert.userRegionId,jdbcType=VARCHAR},
+		    #{insert.userId,jdbcType=VARCHAR}, 
+		    #{insert.regId,jdbcType=VARCHAR},
+		    #{insert.relationState},
+		    CURDATE())
+	    </foreach>
+  </insert>
+  
+	<resultMap type="com.xunge.model.system.user.SysUserVO" id="UserInfoBaseResultMap">
+	   	<result column="user_id" property="userId" jdbcType="VARCHAR" />
+	   	<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+	    <result column="user_loginname" property="userLoginname" jdbcType="VARCHAR" />
+	    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+	</resultMap>
+	
+  	<!-- 根据用户id查询用户信息 -->
+  	<select id="queryUserInfo" parameterType="Map" resultMap="UserInfoBaseResultMap">
+		select 
+			u.user_id,u.user_loginname,u.user_email,u.user_phone,u.user_password  
+		from 
+			sys_user u 
+		where u.user_state =0
+		<if test="userId != null and userId!=''">  
+	        and u.user_id = #{userId,jdbcType=VARCHAR} 
+    	</if>
+	</select>
+  	<!-- 修改个人信息 -->
+ 	<update id="updateUserInfo" parameterType="Map">
+		update sys_user u
+		<set>
+			<if test="login_name != null and login_name !=''">  
+		 		u.user_loginname = #{login_name},
+		   	</if>
+			<if test="user_email != null and user_email !=''">  
+		 		u.user_email = #{user_email},
+		   	</if>
+			<if test="user_phone != null and user_phone !=''">  
+		 		u.user_phone = #{user_phone},
+		   	</if>
+			<if test="new_pswd != null and new_pswd !=''">  
+		 		u.user_password = #{new_pswd},
+		   	</if>
+		</set>
+	  	where user_id = #{user_id}
+		<if test="user_pswd != null and user_pswd !=''">  
+	 		and u.user_password = #{user_pswd}
+	   	</if>
+	</update>
+	<!-- 根据用户id查询用户名称和电话 -->
+	<select id="queryUserByUserId" parameterType="Map" resultMap="BaseResultMapToUser">
+		select user_name,user_phone
+		from sys_user
+		where user_id = #{userId}
+	</select>
+	<!-- 根据用户id查询用户名称和id -->
+	<select id="queryUserIdByUserId" parameterType="Map" resultMap="BaseResultMapToUser">
+		select user_id,user_name
+		from sys_user
+		where user_id = #{userId}
+	</select>
+</mapper>

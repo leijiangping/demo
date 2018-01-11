@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../../../bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="../../../css/ncms_page.css" rel="stylesheet">
+    <title>地市自设考核指标扣罚-详情</title>
+</head>
+<body>
+    <form id="dataForm">
+    	<div class="btn-toolbar">
+	        <button type="button" class="btn btn-primary detailsSubmit" onclick="detailsFormSubmit();">保存</button>
+	        <button type="button" class="btn btn-primary" id="detailsAuditSubmit" onclick="detailsAuditFormSubmit();">提交审核</button>
+	        <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>
+   		</div>
+   		
+        <div class="search_title">详情信息</div> 
+        <div id="myTabContent" class="tab-content">
+           	<!--基本信息-->
+           	<div class="tab-pane fade in active" id="rent_info">
+               	<ul class="list-group">
+               		<input type="hidden" id="twrRegPunishId">
+               		<li class="list-group-item row">
+                        <div class="col-md-2">所属地市</div>
+                        <div class="col-md-4" id="regId"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">扣罚日期</div>
+                        <div class="col-md-4" id="punishYearMonth"></div>
+                        <div class="col-md-2">其他扣罚名称</div>
+                        <div class="col-md-4" id="punishName"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">扣罚费用</div>
+                        <div class="col-md-4" id="punishAmount"></div>
+                        <div class="col-md-2">扣发申请人</div>
+                        <div class="col-md-4" id="punishPerson"></div>
+                    </li>
+                    </li><li class="list-group-item row auditCommon">
+                        <div class="col-md-2">扣罚原因详情说明</div>
+                        <div class="col-md-10">
+                        	<textarea rows="3"  id="punishCause" name="punishCause" class="form-control" readonly="readonly" style="resize: none;float:left"></textarea>
+                        	<span id='err' class='modal-error' style="float:left"></span>                       	
+                        </div>
+                    </li>
+               	</ul>
+          	 </div>
+        </div>   
+        
+        <div class="search_title" id="conductAudit_title">进行审核</div>
+        <div class="info_check" id="conductAudit_operation">        
+	        <ul class="list-group">
+	            <li class="list-group-item row">
+	                <div class="col-md-2">审核状态</div>
+	                <div class="col-md-4">
+	                    <select class="form-control" id='auditState'>
+	                        <option value='0'>通过</option>
+	                        <option value='8'>不通过</option>
+	                    </select>
+	                </div>
+	                <div class="col-md-2">审核人</div>
+	                <div class="col-md-4" id="curUser"></div>
+	            </li>
+	            <li class="list-group-item row">
+            		<div class="col-md-2">下级审核人</div>
+	                <div class="col-md-4">
+	                     <select id="nextUsers" name="nextUsers" class="form-control selectpicker" data-hide-disabled="true" data-size="4" style="float:left" onchange="changeSave()"></select>
+	                     <span id="err" class="modal-error"></span>
+	                </div>
+	                <div class="col-md-2"></div>
+	                <div class="col-md-4">
+	                </div>
+	            </li>
+	            <li class="list-group-item row auditCommon">
+            		<div class="col-md-2">审核备注</div>
+	                <div class="col-md-10">
+	                     <textarea rows="3"  id="auditNote" name="auditNote" class="form-control" style="resize: none;float:left" onchange="changeSave()"></textarea>
+	                     <span id="err" class="modal-error" style="float:left"></span>
+	                </div>
+	            </li>
+	        </ul>
+        </div>    
+    </form>
+    <div id="histoicFlowList" class="info_check"></div>
+	<script src="../../../../asserts/lib/jquery.2.0.3.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+	
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script><!-- 时间格式化 -->
+	<script src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../../js/common.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js"></script>
+	<script type="text/javascript" src="../../../js/page/twrrent/assessment/cityExaminationDetails.js"></script>
+</body>
+</html>

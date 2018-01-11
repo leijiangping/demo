@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xunge</groupId>
+		<artifactId>NCMS</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.xunge</groupId>
+	<artifactId>audit_sys_web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>audit_sys_web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- environment setting -->
+		<jdk.version>1.7</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.xunge</groupId>
+			<artifactId>audit_sys_model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xunge</groupId>
+			<artifactId>audit_sys_service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xunge</groupId>
+			<artifactId>audit_sys_comm</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xunge</groupId>
+			<artifactId>audit_sys_itf</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- dbcp数据 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<!-- logback -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+			<version>0.1.1</version>
+		</dependency>
+
+		<!-- iReport JasperReports -->
+		<dependency>
+		  <groupId>net.sf.jasperreports</groupId>
+		  <artifactId>jasperreports</artifactId>
+		  <version>5.5.2</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.codehaus.groovy</groupId>
+		  <artifactId>groovy-all</artifactId>
+		  <version>2.4.9</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>com.cmcc.iot</groupId>
+            <artifactId>siemens-smap-client</artifactId>
+            <version>3.1.4</version>
+        </dependency>
+		<dependency> 
+            <groupId>com.cmcc.iot</groupId>
+            <artifactId>siemens-xserver-client</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+		<dependency>
+            <groupId>com.cmcc.iot</groupId>
+            <artifactId>SmapAuthenticationCommon</artifactId>
+            <version>3.2.1.1</version>
+        </dependency>
+		<dependency> 
+            <groupId>com.cmcc.iot</groupId>
+            <artifactId>smap_res.ncms.hq.cmcc</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+		
+		<dependency>  
+		    <groupId>org.springframework.session</groupId>  
+		    <artifactId>spring-session-data-redis</artifactId>  
+		    <version>1.0.1.RELEASE</version>  
+		</dependency> 
+		
+	</dependencies>
+
+	<build>
+		<finalName>NCMS</finalName>
+		<plugins>
+		<!-- Compiler 插件, 设定JDK版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+      </plugins>
+	</build>
+</project>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css"/>
+    <link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+    <title>服务终止审核-终止审核</title>
+</head>
+<body>
+    <div id="towerAudit">
+        <div class="search_title">详细信息</div>
+        <ul class="list-group">
+            <li class="list-group-item row">
+                <div class="col-md-3">产品业务确认单编号</div>
+                <div class="col-md-3" id="businessConfirmNumber"></div>
+                <div class="col-md-3">省</div>
+                <div class="col-md-3" id="prvName"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">地市</div>
+                <div class="col-md-3" id="pRegName"></div>
+                <div class="col-md-3">区县</div>
+                <div class="col-md-3" id="regName"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">站点名称</div>
+                <div class="col-md-3" id="towerStationName"></div>
+                <div class="col-md-3">站点编号</div>
+                <div class="col-md-3" id="towerStationCode"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">起始时间</div>
+                <div class="col-md-3" id="startDate"></div>
+                <div class="col-md-3">截止时间</div>
+                <div class="col-md-3" id="endDate"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">服务终止生效日期</div>
+                <div class="col-md-3" id="stopUseDate"></div>
+                <div class="col-md-3">服务终止原因</div>
+                <div class="col-md-3" id="stopReason"></div>
+            </li>
+        </ul>
+        <div class="search_title">进行审核</div>
+        <form action="" class="form-horizontal" id="dataForm">
+        	<div class="container">
+				<div class="row">
+  					<div class="col-md-6">
+  						<label class="control-label">审核状态：</label>
+				        <select name="isverify" id="isverify" class="redColor">
+				             <option value="0">通过</option>
+				             <option value="8">退回</option>
+				        </select>
+  					</div>
+  					<div class="col-md-6" style="text-align:right;">
+  						<label class="control-label" id="auditor">下级审核人：</label>
+  						<select id="nextUsers" name="roleName" class="selectpicker" data-hide-disabled="true" data-size="4"></select>
+                  	  	<span id="err" class="modal-error"></span> 
+                		<!-- <input type="text" name="roleName" > -->
+  					</div>
+  				</div>
+  				<div class="row">
+  					<div class="col-md-6">
+  						<label class="control-label" style=" position: relative;top: -30px;">审核备注：</label>
+                		<textarea name="auditRemark" id="auditRemark" col="20" rows="2"></textarea>
+                		<span id="err" class="modal-error"></span> 
+  					</div>
+  					<div class="col-md-6"></div>
+  				</div>
+  				<input type="hidden" name="businessConfirmNumber" value=""/>
+  				<input type="hidden" name="towerStationCode" value=""/>
+  				<input type="hidden" name="endDate" value=""/>	
+  			</div>
+        </form>
+        <div id="histoicFlowList" class="info_check"></div>
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" type="button" onclick="formSubmit();">保存</button>
+            <button class="btn btn-primary" type="button" onclick="goBack();" style="float:right;">返回</button>
+    	</div>
+    </div>
+    <script src="../../../../asserts/lib/jquery.js"></script>
+    <script src="../../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+    <script src="../../../bootstrap/js/ui.loading.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+    <!--[if lte IE 9]>
+	 <script src="../../../bootstrap/js/html5shiv.js"></script>
+	 <script src="../../../bootstrap/js/respond.min.js"></script>
+	 <script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="../../../js/common.js?v=3"></script>
+    <script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js?v=3"></script>
+    <script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="../../../js/page/twrrent/rentmanage/serviceEndAudit.js"></script>
+</body>
+</html>

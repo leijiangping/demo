@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.GrpDatacollectPrvVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.datacollect.GrpDatacollectPrvVO" >
+    <id column="datacollect_prv_id" property="datacollectPrvId" jdbcType="VARCHAR" />
+    <result column="datacollect_id" property="datacollectId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_state" property="datacollectPrvState" jdbcType="INTEGER" />
+    <result column="datacollect_prv_date" property="datacollectPrvDate" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_user" property="datacollectPrvUser" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_user_id" property="datacollectPrvUserId" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_note" property="datacollectPrvNote" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_otherfilepath" property="datacollectPrvOtherfilepath" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_otherfilename" property="datacollectPrvOtherfilename" jdbcType="VARCHAR" />
+   	<result column="datacollect_group_opinion" property="datacollectGroupOpinion" jdbcType="VARCHAR" />
+    <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+    <association property="grpDatacollectVO" javaType="com.xunge.model.datacollect.GrpDatacollectVO">
+	   	<id column="datacollect_id" property="datacollectId" jdbcType="VARCHAR" />
+	    <result column="datacollect_title" property="datacollectTitle" jdbcType="VARCHAR" />
+	    <result column="datacollect_deadline" property="datacollectDeadline" jdbcType="VARCHAR" />
+	    <result column="datacollect_note" property="datacollectNote" jdbcType="VARCHAR" />
+	    <result column="datacollect_state" property="datacollectState" jdbcType="INTEGER" />
+	    <result column="datacollect_date" property="datacollectDate" jdbcType="VARCHAR" />
+	    <result column="datacollect_user" property="datacollectUser" jdbcType="VARCHAR" />
+	    <result column="datacollect_copy" property="datacollectCopy" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <resultMap id="prvResultMap" type="com.xunge.model.datacollect.GrpDatacollectPrvVO" >
+    <id column="datacollect_prv_id" property="datacollectPrvId" jdbcType="VARCHAR" />
+    <result column="datacollect_id" property="datacollectId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_state" property="datacollectPrvState" jdbcType="INTEGER" />
+    <result column="datacollect_prv_date" property="datacollectPrvDate" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_user" property="datacollectPrvUser" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_user_id" property="datacollectPrvUserId" jdbcType="VARCHAR" />
+     <result column="datacollect_prv_note" property="datacollectPrvNote" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_otherfilepath" property="datacollectPrvOtherfilepath" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_otherfilename" property="datacollectPrvOtherfilename" jdbcType="VARCHAR" />
+   	<result column="datacollect_group_opinion" property="datacollectGroupOpinion" jdbcType="VARCHAR" />
+    <result column="prv_name" property="prvName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    datacollect_prv_id, grp_datacollect_prv.datacollect_id, prv_id, datacollect_prv_state, datacollect_prv_date, 
+    datacollect_prv_user,datacollect_prv_note,datacollect_prv_otherfilepath,datacollect_prv_otherfilename,datacollect_group_opinion
+  </sql>
+  <sql id="data_collect_List" >
+    grp_datacollect.datacollect_id, datacollect_title, datacollect_deadline, datacollect_note, datacollect_state, 
+    datacollect_date, datacollect_user,datacollect_copy
+  </sql>
+  <!-- 根据集团收集表编号删除省级信息 -->
+  <delete id="deleteDataPrvById" parameterType="java.lang.String">
+  	delete from grp_datacollect_prv
+  	where datacollect_id = #{datacollectId}
+  </delete>
+  <!-- 新增省级上报数据 -->
+  <insert id="insertSelective" parameterType="com.xunge.model.datacollect.GrpDatacollectPrvVO" >
+    insert into grp_datacollect_prv
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="datacollectPrvId != null and datacollectPrvId != ''" >
+        datacollect_prv_id,
+      </if>
+      <if test="datacollectId != null and datacollectId != ''" >
+        datacollect_id,
+      </if>
+      <if test="prvId != null and prvId != ''" >
+        prv_id,
+      </if>
+      <if test="datacollectPrvState != null" >
+        datacollect_prv_state,
+      </if> 
+      <if test="datacollectPrvDate != null" >
+        datacollect_prv_date,
+      </if>
+      <if test="datacollectPrvUser != null and datacollectPrvUser != ''" >
+        datacollect_prv_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="datacollectPrvId != null and datacollectPrvId != ''" >
+        #{datacollectPrvId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollectId != null and datacollectId != ''" >
+        #{datacollectId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvId != null and prvId != ''" >
+        #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollectPrvState != null" >
+        #{datacollectPrvState,jdbcType=INTEGER},
+      </if>
+      <if test="datacollectPrvDate != null" >
+        #{datacollectPrvDate,jdbcType=DATE},
+      </if>
+      <if test="datacollectPrvUser != null and datacollectPrvUser != ''" >
+        #{datacollectPrvUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 修改上报状态 -->
+  <update id="updateDataPrvById" parameterType="Map">
+  	update grp_datacollect_prv
+  	set datacollect_prv_state = #{datacollectPrvState,jdbcType=INTEGER},
+    datacollect_prv_date = #{datacollectPrvDate,jdbcType=DATE}
+    where datacollect_prv_id = #{datacollectPrvId,jdbcType=VARCHAR}
+  </update>
+  <!-- 修改上报状态为已完结 -->
+  <update id="updatePrvStateToFinish" parameterType="Map">
+	update grp_datacollect_prv
+	set datacollect_prv_state = #{datacollectPrvState}
+	where datacollect_id = #{datacollectId}
+  </update>
+  <!-- 抢单-拦锅 -->
+  <update id="updateGrpToUserSelf" parameterType="Map">
+  	update grp_datacollect_prv
+  	set datacollect_prv_state = #{datacollectPrvState},
+  	datacollect_prv_user = #{datacollectPrvUser},
+  	datacollect_prv_user_id = #{datacollectPrvUserId}
+  	where datacollect_prv_id = #{datacollectPrvId}
+  	and datacollect_prv_user_id is null
+  </update>
+  <!-- 根据集团收集编码查找省份上报信息编码集合 -->
+  <select id="queryPrvIdBycollId" parameterType="Map" resultType="java.lang.String">
+  	select datacollect_prv_id
+  	from grp_datacollect_prv
+  	where datacollect_id = #{datacollectId}
+  	<if test="prvId != null">
+  		and prv_id = #{prvId}
+  	</if>
+  </select>
+  <!-- 省级上报信息条件查询 -->
+  <select id="queryDataCollectPrvVO" parameterType="map" resultMap="BaseResultMap">
+  	select
+  	gp.datacollect_prv_id,
+  	gp.prv_id,
+  	gp.datacollect_prv_state,
+  	gp.datacollect_prv_date, 
+    gp.datacollect_prv_user,
+    gp.datacollect_prv_user_id,
+    gp.datacollect_prv_note,
+    gp.datacollect_prv_otherfilepath,
+    gp.datacollect_prv_otherfilename,
+  	gd.datacollect_title, 
+  	gd.datacollect_deadline,
+  	gd.datacollect_note,
+  	gd.datacollect_state, 
+    gd.datacollect_date, 
+    gd.datacollect_user
+  	from grp_datacollect_prv gp,
+  		grp_datacollect gd
+  	<where>
+    	gd.datacollect_id = gp.datacollect_id
+    	and gp.prv_id = #{prvId}
+    	and gd.datacollect_state != #{datacollectState}
+    	<if test="datacollectTitle != null and datacollectTitle != ''">
+    		and gd.datacollect_title like CONCAT('%',#{datacollectTitle},'%')
+    	</if>
+    	<if test="state != null">
+    		and gp.datacollect_prv_state in 
+    		<foreach collection="state" open="(" close=")" separator="," item="item" index="index">
+    			#{item}
+    		</foreach>
+    	</if>
+    	<if test="startDatacollectPrvDate != null and startDatacollectPrvDate != ''">
+    		and gp.datacollect_prv_date &gt;= #{startDatacollectPrvDate}
+    	</if>
+		<if test="endDatacollectPrvDate !=null and endDatacollectPrvDate !=''"> 
+			and gp.datacollect_prv_date &lt;  #{endDatacollectPrvDate}
+		</if>
+		<if test="startDatacollectDeadline != null and startDatacollectDeadline != ''">
+    		and gd.datacollect_deadline &gt;= #{startDatacollectDeadline}
+    	</if>
+		<if test="endDatacollectDeadline !=null and endDatacollectDeadline !=''"> 
+			and gd.datacollect_deadline &lt;  #{endDatacollectDeadline}
+		</if>
+    </where>
+    	<if test="order == 1">
+    		ORDER BY gp.datacollect_prv_date desc
+    	</if>
+    	<if test="order == 2">
+    		ORDER BY gp.datacollect_prv_date
+    	</if>
+    	<if test="order == 3">
+    		ORDER BY gd.datacollect_deadline desc
+    	</if>
+    	<if test="order == 4">
+    		ORDER BY gd.datacollect_deadline
+    	</if>
+  </select>
+  <!-- 根据集团收集表id查询下派省份id -->
+  <select id="queryDownPrvIdByCollId" parameterType="java.lang.String" resultMap="prvResultMap">
+	select distinct grp_datacollect_prv.prv_id,sys_province.prv_sname as prv_name
+	from grp_datacollect_prv,sys_province
+	where datacollect_id = #{datacollectId}
+	and grp_datacollect_prv.prv_id = sys_province.prv_id
+  </select>
+  <!-- 根据集团收集表id查询上报省份id -->
+  <select id="queryPrvIdByUpCollId" parameterType="Map" resultType="java.lang.String">
+	select prv_id
+	from grp_datacollect_prv
+	where datacollect_id = #{datacollectId}
+	and datacollect_prv_state = #{datacollectPrvState}
+  </select>
+  <!-- 很据省份id查询表头 -->
+  <select id="queryPrvCollByPrvId" parameterType="Map" resultMap="BaseResultMap">
+  	select
+  		grp_datacollect_prv.datacollect_prv_id, 
+  		grp_datacollect_prv.datacollect_id,
+  		grp_datacollect_prv.datacollect_prv_note,
+  		grp_datacollect_prv.datacollect_prv_otherfilepath,
+  		grp_datacollect_prv.datacollect_prv_otherfilename,
+  		grp_datacollect_prv.datacollect_group_opinion,
+  		grp_datacollect.datacollect_title,
+	    grp_datacollect.datacollect_deadline,
+	   	grp_datacollect.datacollect_note,
+	   	grp_datacollect.datacollect_date
+	from
+		grp_datacollect_prv,grp_datacollect
+	where
+		grp_datacollect_prv.datacollect_id = grp_datacollect.datacollect_id
+		and grp_datacollect_prv.datacollect_prv_id = #{datacollectPrvId}
+  </select>
+  <!-- 新增省级上报备注和省级其他上报文件 -->
+  <update id="updatePrvFileAndNote" parameterType="Map">
+  	update grp_datacollect_prv
+  	<set>
+  		grp_datacollect_prv.datacollect_group_opinion = null,
+  		grp_datacollect_prv.datacollect_prv_date = null,
+  		<if test="datacollectPrvNote != null">
+  			grp_datacollect_prv.datacollect_prv_note = #{datacollectPrvNote},
+  		</if>
+  		<if test="datacollectPrvOtherfilepath != null">
+  			grp_datacollect_prv.datacollect_prv_otherfilepath = #{datacollectPrvOtherfilepath},
+  		</if>
+  		<if test="datacollectPrvOtherfilename != null">
+  			grp_datacollect_prv.datacollect_prv_otherfilename = #{datacollectPrvOtherfilename},
+  		</if>
+  		<if test="datacollectPrvState != null">
+  			grp_datacollect_prv.datacollect_prv_state = #{datacollectPrvState},
+  		</if>
+  	</set>
+  	where
+  		grp_datacollect_prv.datacollect_prv_id = #{datacollectPrvId}
+  </update>
+  <!-- 查询省级上报信息备注，其他文件路径，名字 -->
+  <select id="queryPrvSelfPathAndName" parameterType="Map" resultMap="prvResultMap">
+  	select 
+  		   datacollect_prv_id,
+  		   datacollect_prv_state,
+  		   datacollect_prv_note,
+  		   datacollect_prv_otherfilepath,
+  		   datacollect_prv_otherfilename,
+  		   datacollect_group_opinion
+	from grp_datacollect_prv
+	where datacollect_id = #{datacollectId}
+	and prv_id = #{prvId}
+  </select>
+  <!-- 省级其他文件上传修改数据库 -->
+  <update id="updatePrvOtherFile" parameterType="Map">
+  	update grp_datacollect_prv
+  	<set>
+  		<if test="datacollectPrvOtherfilepath != null">
+  			datacollect_prv_otherfilepath = #{datacollectPrvOtherfilepath},
+  		</if>
+  		<if test="datacollectPrvOtherfilename != null">
+  			datacollect_prv_otherfilename = #{datacollectPrvOtherfilename},
+  		</if>
+  	</set>
+  	where datacollect_prv_id = #{datacollectPrvId}
+  </update>
+  <!-- 集团按省份驳回上传文件 -->
+  <update id="updateStateReject" parameterType="Map">
+  	update grp_datacollect_prv
+  	<set>
+  		<if test="datacollectPrvState != null">
+  			grp_datacollect_prv.datacollect_prv_state = #{datacollectPrvState},
+  		</if>
+  		<if test="datacollectGroupOpinion != null">
+  			grp_datacollect_prv.datacollect_group_opinion = #{datacollectGroupOpinion},
+  		</if>
+  	</set>
+  	where datacollect_id = #{datacollectId}
+  	and prv_id = #{prvId}
+  </update>
+  <!-- 根据集团收集编码和省份编码查询省份上报编码和省份上报其他文件路径 -->
+  <select id="queryIdAndPath" parameterType="Map" resultMap="prvResultMap">
+  	select 	datacollect_prv_id,
+  			datacollect_prv_otherfilepath
+  	from grp_datacollect_prv
+  	where datacollect_id = #{datacollectId}
+  	and prv_id = #{prvId}
+  </select>
+  <!-- 根据省份上报编码查询省份上报其他文件路径 -->
+  <select id="queryOtherPathById" parameterType="Map" resultType="java.lang.String">
+  	select 	datacollect_prv_otherfilepath
+  	from grp_datacollect_prv
+  	where datacollect_prv_id = #{datacollectPrvId}
+  </select>
+  <!-- 根据省份上报编码查询工单负责人 -->
+  <select id="queryUserIdByPrvId" parameterType="java.lang.String" resultType="java.lang.String">
+  	select datacollect_prv_user_id
+  	from grp_datacollect_prv
+  	where datacollect_prv_id = #{datacollectPrvId}
+  </select>
+  <!-- 首页待办任务显示 -->
+  <select id="queryWiteToDoReject" parameterType="Map" resultType="com.xunge.model.activity.Act">
+  	select  grp_datacollect.datacollect_title as title,
+  			'集团派发工单' as taskName,
+  			grp_datacollect.datacollect_date as beginDate,
+  			grp_datacollect_prv.datacollect_prv_date as endDate,
+  			grp_datacollect_prv.datacollect_prv_state as status,
+  			grp_datacollect_prv.datacollect_prv_user_id as assignee,
+  			'grpDatacollect' as businessTable,
+  			grp_datacollect_prv.datacollect_prv_id as businessId
+  	from grp_datacollect_prv INNER JOIN grp_datacollect
+  	ON grp_datacollect_prv.datacollect_id = grp_datacollect.datacollect_id
+  	<where>
+  		prv_id = #{prvId}
+  		<if test="startDate!=null and startDate!=''">
+  			<![CDATA[and grp_datacollect.datacollect_date >=#{startDate}]]>  
+  		</if>
+  		<if test="endDate!=null and endDate!=''">
+  			<![CDATA[and grp_datacollect_prv.datacollect_prv_date<=#{startDate}]]>  
+  		</if>
+  		<if test="stateList!=null">
+  			and grp_datacollect_prv.datacollect_prv_state in
+	  		<foreach collection="stateList" item="item" index="index" open="(" separator="," close=")">
+  				#{item}
+  			</foreach>
+  		</if>
+  	</where>
+  </select>
+</mapper>

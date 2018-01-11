@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunge.dao.towerrent.rentinformation.TwrRentInformationChangeVODao">
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.rentinformation.TwrRentInformationChangeVO">
+    <id column="rentinformationchange_id" jdbcType="VARCHAR" property="rentinformationchangeId" />
+    <result column="rentinformationhistory_id" jdbcType="VARCHAR" property="rentinformationhistoryId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="old_value" jdbcType="VARCHAR" property="oldValue" />
+    <result column="new_value" jdbcType="VARCHAR" property="newValue" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+    <result column="old_start_date" jdbcType="DATE" property="oldStartDate" />
+    <result column="old_end_date" jdbcType="DATE" property="oldEndDate" />
+    <result column="new_start_date" jdbcType="DATE" property="newStartDate" />
+    <result column="new_end_date" jdbcType="DATE" property="newEndDate" />
+  </resultMap>
+  
+  <resultMap id="QueryTwrRentInformationChangeVoResultMap" type="com.xunge.model.towerrent.rentinformation.TwrRentInformationChangeVO">
+    <id column="rentinformationchange_id" jdbcType="VARCHAR" property="rentinformationchangeId" />
+    <result column="rentinformationhistory_id" jdbcType="VARCHAR" property="rentinformationhistoryId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="old_value" jdbcType="VARCHAR" property="oldValue" />
+    <result column="new_value" jdbcType="VARCHAR" property="newValue" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="operator_phy_station_code" jdbcType="VARCHAR" property="operatorPhyStationCode" />
+    <result column="operator_phy_station_name" jdbcType="VARCHAR" property="operatorPhyStationName" />
+    <result column="user_loginname" jdbcType="VARCHAR" property="userLoginname" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rentinformationchange_id, rentinformationhistory_id, field_name, old_value, new_value, update_user_id, 
+    update_time, check_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from twr_rentinformationchange
+    where rentinformationchange_id = #{rentinformationchangeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from twr_rentinformationchange
+    where rentinformationchange_id = #{rentinformationchangeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.towerrent.rentinformation.TwrRentInformationChangeVO">
+    insert into twr_rentinformationchange (rentinformationhistory_id,rentinformationchange_id, 
+      field_name, old_value, new_value, 
+      update_user_id, update_time, check_state)
+    values (#{rentinformationhistoryId,jdbcType=VARCHAR}, #{rentinformationchangeId,jdbcType=VARCHAR},  
+      #{fieldName,jdbcType=VARCHAR}, #{oldValue,jdbcType=VARCHAR}, #{newValue,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{checkState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.towerrent.rentinformation.TwrRentInformationChangeVO">
+    insert into twr_rentinformationchange
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rentinformationhistoryId != null">
+        rentinformationhistory_id,
+      </if>
+      <if test="rentinformationchangeId != null">
+        rentinformationchange_id,
+      </if>
+      <if test="fieldName != null">
+        field_name,
+      </if>
+      <if test="oldValue != null">
+        old_value,
+      </if>
+      <if test="newValue != null">
+        new_value,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="checkState != null">
+        check_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rentinformationhistoryId != null">
+        #{rentinformationhistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="rentinformationchangeId != null">
+        #{rentinformationchangeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldValue != null">
+        #{oldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="newValue != null">
+        #{newValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkState != null">
+        #{checkState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 根据参数查询移动资源变更日志集合 -->
+  <select id="queryTwrRentInformationChangeByCondition" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT
+	  tl.operator_phy_station_code,
+		tl.operator_phy_station_name,
+		ric.rentinformationchange_id,
+		ric.field_name,
+		ric.old_value,
+		ric.new_value,
+		ric.update_time,
+	  	u.user_loginname,
+		reg.preg_id,
+		reg.reg_id,
+		reg.reg_name,
+		reg.prv_id,
+		reg.reg_state,
+		reg.preg_name,
+		reg.prv_name
+	FROM
+		twr_rentinformationchange ric
+	INNER JOIN twr_rentinformationhistory rih on ric.rentinformationhistory_id = rih.rentinformationhistory_id
+	INNER JOIN twr_towerlink tl on tl.tower_station_code = rih.tower_station_code
+	INNER JOIN sys_user u on u.user_id = ric.update_user_id
+	INNER JOIN v_sys_region reg on reg.reg_id = rih.reg_id
+	<where>
+		<if test="operatorPhyStationCode != null and operatorPhyStationCode != ''">
+			and tl.operator_phy_station_code like CONCAT('%',#{operatorPhyStationCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="operatorPhyStationName != null and operatorPhyStationName != ''">
+			and tl.operator_phy_station_name like CONCAT('%',#{operatorPhyStationName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="fieldName != null and fieldName != ''">
+			and ric.field_name = #{fieldName}
+		</if>
+		<if test="oldValue != null and oldValue != ''">
+			and ric.old_value = #{oldValue}
+		</if>
+		<if test="newValue != null and newValue != ''">
+			and ric.new_value = #{newValue}
+		</if>
+		<if test="userLoginname != null and userLoginname != ''">
+			and u.user_loginname = #{userLoginname}
+		</if>
+		<if test="prvId != '' and prvId != null">
+			and reg.prv_id = #{prvId}
+		</if>
+		<if test="pregId != '' and pregId != null">
+			and reg.preg_id = #{pregId}
+		</if>
+		<if test="regId != null and regId != ''">
+  			and rent_billaccount.reg_id = #{regId}
+  		</if>
+  		<if test="regId == '' or regId == null">
+			and reg.reg_id in (
+			select reg_id from sys_userregion 
+			where relation_state=#{state}
+				and user_id = #{userId}
+			)
+		</if>
+	</where>
+  </select>
+  
+  
+  <!-- 根据参数查询移动资源变更日志集合 -->
+  <select id="queryTwrRentInformationChangeVoByCondition" parameterType="java.util.Map" resultMap="QueryTwrRentInformationChangeVoResultMap">
+	SELECT
+	  tl.operator_phy_station_code,
+		tl.operator_phy_station_name,
+		ric.rentinformationchange_id,
+		ric.field_name,
+		ric.old_value,
+		ric.new_value,
+		ric.update_time,
+	  	u.user_loginname,
+		reg.preg_id,
+		reg.reg_id,
+		reg.reg_name,
+		reg.prv_id,
+		reg.reg_state,
+		reg.preg_name,
+		reg.prv_name
+	FROM
+		twr_rentinformationchange ric
+	INNER JOIN twr_rentinformationhistory rih on ric.rentinformationhistory_id = rih.rentinformationhistory_id
+	INNER JOIN twr_towerlink tl on tl.tower_station_code = rih.tower_station_code
+	INNER JOIN sys_user u on u.user_id = ric.update_user_id
+	INNER JOIN v_sys_region reg on reg.reg_id = rih.reg_id
+	<where>
+		<if test="operatorPhyStationCode != null and operatorPhyStationCode != ''">
+			and tl.operator_phy_station_code like CONCAT('%',#{operatorPhyStationCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="operatorPhyStationName != null and operatorPhyStationName != ''">
+			and tl.operator_phy_station_name like CONCAT('%',#{operatorPhyStationName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="fieldName != null and fieldName != ''">
+			and ric.field_name = #{fieldName}
+		</if>
+		<if test="oldValue != null and oldValue != ''">
+			and ric.old_value = #{oldValue}
+		</if>
+		<if test="newValue != null and newValue != ''">
+			and ric.new_value = #{newValue}
+		</if>
+		<if test="userLoginname != null and userLoginname != ''">
+			and u.user_loginname = #{userLoginname}
+		</if>
+		<if test="prvId != '' and prvId != null">
+			and reg.prv_id = #{prvId}
+		</if>
+		<if test="pregId != '' and pregId != null">
+			and reg.preg_id = #{pregId}
+		</if>
+		<if test="regId != null and regId != ''">
+  			and rent_billaccount.reg_id = #{regId}
+  		</if>
+  		<if test="regId == '' or regId == null">
+			and reg.reg_id in (
+			select reg_id from sys_userregion 
+			where relation_state=#{state}
+				and user_id = #{userId}
+			)
+		</if>
+		<if test="idsList != null">
+			and ric.rentinformationchange_id in
+			<foreach collection="idsList" item="item" open="(" separator=","
+                 close=")">
+            	#{item}
+        	</foreach>
+		</if>
+	</where>
+  </select>
+  
+  <!-- 修改变更变审核状态  xup -->
+   <update id="updaterentinformationchange" parameterType="Map" >
+  	update twr_rentinformationchange set check_state=#{checkState} 
+  	where rentinformationhistory_id = #{rentinformationhistoryId,jdbcType=VARCHAR}
+  		and check_state=#{state}
+  </update> 
+  
+  <!-- add by jiacy 新增变更记录-->
+  <insert id="updateTempTwrRentInfo">
+		  insert into twr_rentinformationchange(
+		  rentinformationchange_id,
+		  rentinformationhistory_id,
+		  field_name,
+		  old_value,
+		  new_value,
+		  update_user_id,
+		  update_time,
+		  check_state,
+		  old_start_date,
+		  old_end_date,
+		  new_start_date,
+		  new_end_date)
+		  values  
+	      <foreach collection="twrRentInfoChangeList" item="item" index="index" separator="," >  
+	          (
+	          #{item.rentinformationchangeId},
+	          #{item.rentinformationhistoryId},
+	          #{item.fieldName},
+	          #{item.oldValue},
+	          #{item.newValue},
+	          #{item.updateUserId},
+	          #{item.updateTime},
+	          #{item.checkState},
+	          #{item.oldStartDate},
+	          #{item.oldEndDate},
+	          #{item.newStartDate},
+	          #{item.newEndDate}
+	          )  
+	      </foreach>  
+  </insert>
+	
+	 <!-- 修改变更变审核状态  xup -->
+   <select id="queryTwrRentInformationChange" resultMap="BaseResultMap" parameterType="Map" >
+  	select  field_name,old_value,new_value from twr_rentinformationchange 
+  	where rentinformationhistory_id = #{rentinformationhistoryId,jdbcType=VARCHAR}
+  		and check_state=#{state}
+  </select> 
+	
+</mapper>

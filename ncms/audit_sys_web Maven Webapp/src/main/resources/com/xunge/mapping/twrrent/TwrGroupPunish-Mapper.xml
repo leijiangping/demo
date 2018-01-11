@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.twrGroupPunishMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.punish.TwrGroupPunishVO" >
+    <id column="twr_group_punish_id" property="twrGroupPunishId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="twr_group_reg_punish_id" property="twrGroupRegPunishId" jdbcType="VARCHAR" />
+    <result column="towerbillbalance_id" property="towerbillbalanceId" jdbcType="VARCHAR" />
+    <result column="punish_year_month" property="punishYearMonth" jdbcType="VARCHAR" />
+    <result column="towerStationCode" property="towerstationcode" jdbcType="VARCHAR" />
+    <result column="takeBackTime" property="takebacktime" jdbcType="DECIMAL" />
+    <result column="punishAmount" property="punishamount" jdbcType="DECIMAL" />
+    <result column="maintenanceLevelId" property="maintenancelevelid" jdbcType="INTEGER" />
+    <result column="ifDuty" property="ifduty" jdbcType="BIT" />
+    <result column="coverSceneId" property="coversceneid" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="save_user_id" property="saveUserId" jdbcType="VARCHAR" />
+    <result column="save_time" property="saveTime" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+     <collection property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+        <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+	    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+	    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+	    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+	    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+	    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+	    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+     </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    twr_group_punish_id, twr_group_punish.reg_id, twr_group_reg_punish_id, towerbillbalance_id, punish_year_month, 
+    towerStationCode, takeBackTime, punishAmount, maintenanceLevelId, ifDuty, coverSceneId, 
+    state, save_user_id, save_time, update_user_id, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from twr_group_punish
+    where twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from twr_group_punish
+    where twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="Map" >
+    insert into twr_group_punish (twr_group_punish_id, reg_id, twr_group_reg_punish_id, 
+      towerbillbalance_id, punish_year_month, towerStationCode, 
+      takeBackTime, punishAmount, maintenanceLevelId, 
+      ifDuty, coverSceneId, state, 
+      save_user_id, save_time, update_user_id, 
+      update_time)
+    values 
+    <foreach collection="list" item="item" open="(" close=")" separator="," index="index">
+     #{item.twrGroupPunishId,jdbcType=VARCHAR}, #{item.regId,jdbcType=VARCHAR}, #{item.twrGroupRegPunishId,jdbcType=VARCHAR}, 
+      #{item.towerbillbalanceId,jdbcType=VARCHAR}, #{item.punishYearMonth,jdbcType=VARCHAR}, #{item.towerstationcode,jdbcType=VARCHAR}, 
+      #{item.takebacktime,jdbcType=DECIMAL}, #{item.punishamount,jdbcType=DECIMAL}, #{item.maintenancelevelid,jdbcType=INTEGER}, 
+      #{item.ifduty,jdbcType=BIT}, #{item.coversceneid,jdbcType=INTEGER}, #{item.state,jdbcType=INTEGER}, 
+      #{item.saveUserId,jdbcType=VARCHAR}, #{item.saveTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR}, 
+      #{item.updateTime,jdbcType=TIMESTAMP}) (#{item.twrGroupPunishId,jdbcType=VARCHAR}, #{item.regId,jdbcType=VARCHAR}, #{item.twrGroupRegPunishId,jdbcType=VARCHAR}, 
+      #{item.towerbillbalanceId,jdbcType=VARCHAR}, #{item.punishYearMonth,jdbcType=VARCHAR}, #{item.towerstationcode,jdbcType=VARCHAR}, 
+      #{item.takebacktime,jdbcType=DECIMAL}, #{item.punishamount,jdbcType=DECIMAL}, #{item.maintenancelevelid,jdbcType=INTEGER}, 
+      #{item.ifduty,jdbcType=BIT}, #{item.coversceneid,jdbcType=INTEGER}, #{item.state,jdbcType=INTEGER}, 
+      #{item.saveUserId,jdbcType=VARCHAR}, #{item.saveTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR}, 
+      #{item.updateTime,jdbcType=TIMESTAMP}
+    </foreach>
+  </insert>
+  <!-- 导入时修改 -->
+  <update id="update" parameterType="Map">
+  	update twr_group_punish
+  	<set>
+  		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+	      	towerbillbalance_id = #{towerbillbalanceId},
+	      	punish_year_month = #{punishYearMonth},
+	      	towerStationCode = #{towerstationcode},
+	      	takeBackTime = #{takebacktime},
+	      	ifDuty = #{ifduty},
+	      	coverSceneId = #{coversceneid},
+	      	save_user_id = #{saveUserId},
+	      	save_time = #{saveTime}
+  		</foreach>
+  	</set>
+    where twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+  </update>
+  <!-- 新增集团既定扣罚信息 -->
+  <insert id="insertSelective" parameterType="com.xunge.model.towerrent.punish.TwrGroupPunishVO" >
+    insert into twr_group_punish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="twrGroupPunishId != null" >
+        twr_group_punish_id,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="twrGroupRegPunishId != null" >
+        twr_group_reg_punish_id,
+      </if>
+      <if test="towerbillbalanceId != null" >
+        towerbillbalance_id,
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month,
+      </if>
+      <if test="towerstationcode != null" >
+        towerStationCode,
+      </if>
+      <if test="takebacktime != null" >
+        takeBackTime,
+      </if>
+      <if test="punishamount != null" >
+        punishAmount,
+      </if>
+      <if test="maintenancelevelid != null" >
+        maintenanceLevelId,
+      </if>
+      <if test="ifduty != null" >
+        ifDuty,
+      </if>
+      <if test="coversceneid != null" >
+        coverSceneId,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="saveUserId != null" >
+        save_user_id,
+      </if>
+      <if test="saveTime != null" >
+        save_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="twrGroupPunishId != null" >
+        #{twrGroupPunishId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="twrGroupRegPunishId != null" >
+        #{twrGroupRegPunishId,jdbcType=VARCHAR},
+      </if>
+      <if test="towerbillbalanceId != null" >
+        #{towerbillbalanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishYearMonth != null" >
+        #{punishYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="towerstationcode != null" >
+        #{towerstationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="takebacktime != null" >
+        #{takebacktime,jdbcType=DECIMAL},
+      </if>
+      <if test="punishamount != null" >
+        #{punishamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenancelevelid != null" >
+        #{maintenancelevelid,jdbcType=INTEGER},
+      </if>
+      <if test="ifduty != null" >
+        #{ifduty,jdbcType=BIT},
+      </if>
+      <if test="coversceneid != null" >
+        #{coversceneid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="saveUserId != null" >
+        #{saveUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="saveTime != null" >
+        #{saveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.towerrent.punish.TwrGroupPunishVO" >
+    update twr_group_punish
+    <set >
+      <if test="regId != null" >
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="twrGroupRegPunishId != null" >
+        twr_group_reg_punish_id = #{twrGroupRegPunishId,jdbcType=VARCHAR},
+      </if>
+      <if test="towerbillbalanceId != null" >
+        towerbillbalance_id = #{towerbillbalanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month = #{punishYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="towerstationcode != null" >
+        towerStationCode = #{towerstationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="takebacktime != null" >
+        takeBackTime = #{takebacktime,jdbcType=DECIMAL},
+      </if>
+      <if test="punishamount != null" >
+        punishAmount = #{punishamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenancelevelid != null" >
+        maintenanceLevelId = #{maintenancelevelid,jdbcType=INTEGER},
+      </if>
+      <if test="ifduty != null" >
+        ifDuty = #{ifduty,jdbcType=BIT},
+      </if>
+      <if test="coversceneid != null" >
+        coverSceneId = #{coversceneid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="saveUserId != null" >
+        save_user_id = #{saveUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="saveTime != null" >
+        save_time = #{saveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.towerrent.punish.TwrGroupPunishVO" >
+    update twr_group_punish
+    set reg_id = #{regId,jdbcType=VARCHAR},
+      twr_group_reg_punish_id = #{twrGroupRegPunishId,jdbcType=VARCHAR},
+      towerbillbalance_id = #{towerbillbalanceId,jdbcType=VARCHAR},
+      punish_year_month = #{punishYearMonth,jdbcType=VARCHAR},
+      towerStationCode = #{towerstationcode,jdbcType=VARCHAR},
+      takeBackTime = #{takebacktime,jdbcType=DECIMAL},
+      punishAmount = #{punishamount,jdbcType=DECIMAL},
+      maintenanceLevelId = #{maintenancelevelid,jdbcType=INTEGER},
+      ifDuty = #{ifduty,jdbcType=BIT},
+      coverSceneId = #{coversceneid,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      save_user_id = #{saveUserId,jdbcType=VARCHAR},
+      save_time = #{saveTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 删除集团既定考核扣罚信息 -->
+  <update id="deleteGroupPunish" parameterType="Map">
+  	update twr_group_punish
+  	set state = #{state}
+  	where twr_group_punish_id = #{twrGroupPunishId}
+  </update>
+  
+  <!-- 查询所有信息 -->
+  <select id="queryGroupPunish" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />,
+  		v_sys_region.preg_id,
+		v_sys_region.reg_name,
+		v_sys_region.prv_id,
+		v_sys_region.reg_state,
+		v_sys_region.preg_name,
+		v_sys_region.prv_name
+	from twr_group_punish INNER JOIN v_sys_region 
+  	ON v_sys_region.reg_id = twr_group_punish.reg_id
+  	<where>
+    	state = #{state}
+    	<if test="twrGroupPunishId != '' and twrGroupPunishId != null">
+    		and twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="punishYearMonth != null and punishYearMonth != ''">
+    		and punish_year_month = #{punishYearMonth}
+    	</if>
+    	<if test="towerStationCode != null and towerStationCode != ''">
+    		and towerStationCode = #{towerStationCode}
+    	</if>
+    	<if test="ifduty != null and ifduty != ''">
+    		and ifDuty = #{ifduty}
+    	</if>
+    	<if test="regId != '' and regId != null">
+			and v_sys_region.reg_id = #{regId,jdbcType=VARCHAR}
+		</if>
+		<if test="regId == '' or regId == null">
+			and v_sys_region.reg_id in (
+			select reg_id from sys_userregion 
+			where relation_state=#{relationState}
+				and user_id = #{userId, jdbcType=VARCHAR}
+			)
+		</if>
+    	<if test="pregId != '' and pregId != null">
+    		and preg_id = #{pregId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="ifcal == 9">
+    		and punishAmount = null or punishAmount == ''
+    	</if>
+    </where>
+  </select>
+  
+  <!-- 分页查询所有信息 -->
+  <select id="queryGroupPunishVO" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />,
+  		v_sys_region.preg_id,
+		v_sys_region.reg_name,
+		v_sys_region.prv_id,
+		v_sys_region.reg_state,
+		v_sys_region.preg_name,
+		v_sys_region.prv_name
+	from twr_group_punish INNER JOIN v_sys_region 
+  	ON v_sys_region.reg_id = twr_group_punish.reg_id
+  	<where>
+    	state = #{state}
+   		and v_sys_region.reg_id in (
+		select reg_id from sys_userregion 
+		where relation_state=#{relationState}
+			and user_id = #{userId, jdbcType=VARCHAR}
+		)
+    	<if test="twrGroupPunishId != '' and twrGroupPunishId != null">
+    		and twr_group_punish_id = #{twrGroupPunishId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="punishYearMonth != null and punishYearMonth != ''">
+    		and punish_year_month = #{punishYearMonth}
+    	</if>
+    	<if test="towerStationCode != null and towerStationCode != ''">
+    		and towerStationCode = #{towerStationCode}
+    	</if>
+    	<if test="ifduty != null">
+    		and ifDuty = #{ifduty,jdbcType=INTEGER}
+    	</if>
+    	<if test="pregId != '' and pregId != null">
+    		and preg_id = #{pregId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="ifcal == 0">
+    		and twr_group_reg_punish_id = null
+    	</if>
+    </where>
+  </select>
+  <!-- 根据省份id查询集团既定扣罚信息 -->
+  <select id="queryGroupPunishByPregId" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from twr_group_punish
+  	where state = #{state}
+   <if test="pregId != null and pregId != ''">
+   		and twr_group_punish.reg_id in (
+  		select reg_id
+  		from sys_region
+  		where preg_id = #{pregId}
+  	)
+   </if>
+   <if test="regId != null and regId != ''">
+  		and reg_id = #{regId}
+  	</if>
+  	<if test="punishYearMonth != null and punishYearMonth != ''">
+  		and punish_year_month = #{punishYearMonth}
+  	</if>
+  </select>
+  <!-- 根据扣罚信息id添加罚金 -->
+  <update id="updatePunishAmountById" parameterType="Map">
+  	update twr_group_punish
+  	set punishAmount = #{punishamount},
+  	update_user_id = #{updateUserId},
+    update_time = #{updateTime},
+    twr_group_reg_punish_id = #{twrGroupRegPunishId}
+  	where twr_group_punish_id = #{twrGroupPunishId}
+  </update>
+  <!-- 根据站址编码和年月查询集团扣罚信息 -->
+  <select id="queryIfGroupPunish" parameterType="Map" resultMap="BaseResultMap">
+  	select twr_group_punish_id,towerbillbalance_id
+  	from twr_group_punish
+  	where punish_year_month = #{punishYearMonth}
+    and towerStationCode = #{towerStationCode}
+  </select>
+</mapper>

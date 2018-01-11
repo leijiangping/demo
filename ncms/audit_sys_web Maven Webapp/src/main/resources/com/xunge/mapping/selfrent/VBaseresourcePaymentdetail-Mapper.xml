@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.VBaseresourcePaymentdetailVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.selfrent.billAccount.VBaseresourcePaymentdetailVO" >
+    <result column="dueamount" property="dueamount" jdbcType="DECIMAL" />
+    <result column="billamount_taxamount" property="billamountTaxamount" jdbcType="DECIMAL" />
+    <result column="payamount" property="payamount" jdbcType="DECIMAL" />
+    <result column="baseresource_code" property="baseresourceCode" jdbcType="VARCHAR" />
+    <result column="baseresource_name" property="baseresourceName" jdbcType="VARCHAR" />
+    <result column="paymentdetail_id" property="paymentdetailId" jdbcType="VARCHAR" />
+  </resultMap>
+ <select id="queryBaseresourcePaymentdetail" parameterType="Map" resultMap="BaseResultMap">
+ 	SELECT
+		rent_paymentdetail.dueamount,
+		rent_paymentdetail.billamount_taxamount,
+		rent_paymentdetail.payamount,
+		dat_baseresource.baseresource_code,
+		dat_baseresource.baseresource_name,
+		rent_paymentdetail.paymentdetail_id
+	FROM
+		rent_paymentdetail
+		inner JOIN  rent_payment ON rent_paymentdetail.payment_id=rent_payment.payment_id 
+		inner JOIN rent_billaccountresource ON rent_paymentdetail.billaccountresource_id = rent_billaccountresource.billaccountresource_id
+		inner JOIN dat_baseresource ON dat_baseresource.baseresource_id = rent_billaccountresource.baseresource_id
+	
+	<where>
+  			<if test="billaccountId != '' and billaccountId != null">
+				and rent_billaccountresource.billaccount_id=#{billaccountId} 
+			</if>
+			<if test="paymentId != '' and paymentId != null">
+				and rent_paymentdetail.payment_id=#{paymentId}
+			</if>
+			and rent_billaccountresource.relation_state='0'
+	</where>
+ </select>
+ <!--
+ SELECT
+		rent_paymentdetail.dueamount,
+		rent_paymentdetail.billamount_taxamount,
+		rent_paymentdetail.payamount,
+		dat_baseresource.baseresource_code,
+		dat_baseresource.baseresource_name,
+		rent_paymentdetail.paymentdetail_id
+	FROM
+		rent_paymentdetail
+		inner JOIN  rent_payment ON rent_paymentdetail.payment_id=rent_payment.payment_id 
+		inner JOIN rent_billaccountresource ON rent_paymentdetail.billaccountresource_id = rent_billaccountresource.billaccountresource_id
+		inner JOIN dat_baseresource ON dat_baseresource.baseresource_id = rent_billaccountresource.baseresource_id
+WHERE rent_billaccountresource.billaccount_id='1'and rent_paymentdetail.payment_id='7a4d2a9bb5944752922f418528b0e5d1' and rent_billaccountresource.relation_state='0'  -->
+ 
+</mapper>

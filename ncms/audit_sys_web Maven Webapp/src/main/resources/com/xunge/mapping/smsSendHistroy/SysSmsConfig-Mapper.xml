@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.SysSmsConfigVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.smsSendHistroy.SysSmsConfigVO" >
+    <id column="sms_sicode" property="smsSicode" jdbcType="VARCHAR" />
+    <id column="temp_code" property="tempCode" jdbcType="VARCHAR" />
+    <result column="temp_name" property="tempName" jdbcType="VARCHAR" />
+    <result column="sms_content" property="smsContent" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sms_sicode, temp_code, temp_name, sms_content, state
+  </sql>
+  <!-- 根据短信模板id来查找模板信息 -->
+  <select id="querySmsModelMsg" parameterType="Map" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from sys_sms_config
+  	where temp_code = #{tempCode}
+  	<if test="smsSicode != null">
+  		and sms_sicode = #{smsSicode}
+  	</if>
+  </select>
+</mapper>

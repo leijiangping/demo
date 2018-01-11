@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.DatBaseresourceVOMapper">
+	<resultMap id="BaseResultMap" type="com.xunge.model.basedata.DatBaseresourceVO">
+		<id column="baseresource_id" property="baseresourceId" jdbcType="VARCHAR" />
+		<result column="basesite_id" property="basesiteId" jdbcType="VARCHAR" />
+		<result column="basesite_name" property="basesiteName"
+			jdbcType="VARCHAR" />
+		<result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		<result column="prv_sname" property="prvSname" jdbcType="VARCHAR" />
+		<result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		<result column="preg_name" property="pregName" jdbcType="VARCHAR" />
+		<result column="reg_id" property="regId" jdbcType="VARCHAR" />
+		<result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		<result column="baseresource_type" property="baseresourceType"
+			jdbcType="INTEGER" />
+		<result column="baseresource_category" property="baseresourceCategory"
+			jdbcType="INTEGER" />
+		<result column="baseresource_cuid" property="baseresourceCuid"
+			jdbcType="VARCHAR" />
+		<result column="baseresource_code" property="baseresourceCode"
+			jdbcType="VARCHAR" />
+		<result column="baseresource_name" property="baseresourceName"
+			jdbcType="VARCHAR" />
+		<result column="baseresource_address" property="baseresourceAddress"
+			jdbcType="VARCHAR" />
+		<result column="baseresource_area" property="baseresourceArea"
+			jdbcType="DECIMAL" />
+		<result column="baseresource_maintenance" property="baseresourceMaintenance"
+			jdbcType="INTEGER" />
+		<result column="tower_site_code" property="towerSiteCode"
+			jdbcType="VARCHAR" />
+		<result column="baseresource_opendate" property="baseresourceOpendate"
+			jdbcType="TIMESTAMP" />
+		<result column="baseresource_stopdate" property="baseresourceStopdate"
+			jdbcType="TIMESTAMP" />
+		<result column="room_owner" property="roomOwner" jdbcType="INTEGER" />
+		<result column="room_property" property="roomProperty"
+			jdbcType="INTEGER" />
+		<result column="room_share" property="roomShare" jdbcType="INTEGER" />
+		<result column="baseresource_longitude" property="baseresourceLongitude"
+			jdbcType="DECIMAL" />
+		<result column="baseresource_latitude" property="baseresourceLatitude"
+			jdbcType="DECIMAL" />
+		<result column="airconditioner_power" property="airconditionerPower"
+			jdbcType="DECIMAL" />
+		<result column="baseresource_state" property="baseresourceState"
+			jdbcType="INTEGER" />
+		<result column="baseresource_note" property="baseresourceNote"
+			jdbcType="VARCHAR" />
+		<result column="auditing_state" property="auditingState"
+			jdbcType="INTEGER" />
+		<result column="auditing_user_id" property="auditingUserId"
+			jdbcType="VARCHAR" />
+		<result column="auditing_date" property="auditingDate"
+			jdbcType="TIMESTAMP" />
+		<result column="data_from" property="dataFrom" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		baseresource_id, basesite_id, prv_id, prv_sname, preg_id, preg_name, reg_id, reg_name,
+		baseresource_type, baseresource_category, baseresource_cuid,
+		baseresource_code, baseresource_name,
+		baseresource_address, baseresource_area, baseresource_maintenance, tower_site_code,
+		baseresource_opendate, baseresource_stopdate, room_owner,
+		room_property, room_share,
+		baseresource_longitude, baseresource_latitude, airconditioner_power, baseresource_state,
+		baseresource_note, auditing_state, auditing_user_id, auditing_date,
+		data_from
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.xunge.model.basedata.DatBaseresourceVOExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from dat_baseresource
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		,basesite_name
+		from v_dat_baseresource
+		where baseresource_id = #{baseresourceId,jdbcType=VARCHAR}
+	</select>
+	<!-- 根据站点ID 查找资源点信息 -->
+	<select id="getDatBaseresourceById" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from dat_baseresource
+		where basesite_id = #{basesiteId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据资源点Code查询基站信息 -->
+	<select id="checkBaseresourceCode" parameterType="Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dat_baseresource
+		<where>
+			<if test="baseresourceCode != null">
+				and baseresource_code = #{baseresourceCode}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from dat_baseresource
+		where baseresource_id = #{baseresourceId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.xunge.model.basedata.DatBaseresourceVOExample">
+		delete from dat_baseresource
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.xunge.model.basedata.DatBaseresourceVO">
+		insert into dat_baseresource (baseresource_id, basesite_id, prv_id,
+			prv_sname, preg_id, preg_name,
+			reg_id, reg_name, baseresource_type,
+			baseresource_cuid,
+			baseresource_code, baseresource_name, baseresource_address,
+			baseresource_area, baseresource_maintenance,
+			tower_site_code, baseresource_opendate,
+			baseresource_stopdate, room_property,
+			baseresource_longitude, baseresource_latitude,
+			airconditioner_power, baseresource_state,
+			baseresource_note, auditing_state, auditing_user_id,
+			auditing_date, data_from
+			<if test="baseresourceCategory != null and baseresourceCategory != ''">
+				,baseresource_category
+			</if>
+			<if test="roomShare != null and roomShare != ''">
+				,room_share
+			</if>
+			<if test="roomOwner != null and roomOwner != ''">
+				,room_owner
+			</if>
+		)
+		values (
+			#{baseresourceId,jdbcType=VARCHAR}, 
+			#{basesiteId,jdbcType=VARCHAR},
+			#{prvId,jdbcType=VARCHAR},
+			#{prvSname,jdbcType=VARCHAR}, 
+			#{pregId,jdbcType=VARCHAR}, 
+			#{pregName,jdbcType=VARCHAR},
+			#{regId,jdbcType=VARCHAR}, 
+			#{regName,jdbcType=VARCHAR},
+			#{baseresourceType,jdbcType=INTEGER},
+			#{baseresourceCuid,jdbcType=VARCHAR},
+			#{baseresourceCode,jdbcType=VARCHAR},
+			#{baseresourceName,jdbcType=VARCHAR},
+			#{baseresourceAddress,jdbcType=VARCHAR},
+			#{baseresourceArea,jdbcType=DECIMAL},
+			#{baseresourceMaintenance,jdbcType=INTEGER},
+			#{towerSiteCode,jdbcType=VARCHAR},
+			#{baseresourceOpendate,jdbcType=TIMESTAMP},
+			#{baseresourceStopdate,jdbcType=TIMESTAMP},
+			#{roomProperty,jdbcType=INTEGER},
+			#{baseresourceLongitude,jdbcType=DECIMAL},
+			#{baseresourceLatitude,jdbcType=DECIMAL},
+			#{airconditionerPower,jdbcType=DECIMAL},
+			#{baseresourceState,jdbcType=INTEGER},
+			#{baseresourceNote,jdbcType=VARCHAR},
+			#{auditingState,jdbcType=INTEGER}, 
+			#{auditingUserId,jdbcType=VARCHAR},
+			#{auditingDate,jdbcType=TIMESTAMP},
+			#{dataFrom,jdbcType=INTEGER}
+			<if test="baseresourceCategory != null and baseresourceCategory != ''">
+				,#{baseresourceCategory,jdbcType=INTEGER}
+			</if>
+			<if test="roomShare != null and roomShare != ''">
+				,#{roomShare,jdbcType=INTEGER}
+			</if>
+			<if test="roomOwner != null and roomOwner != ''">
+				,#{roomOwner,jdbcType=INTEGER}
+			</if>
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.xunge.model.basedata.DatBaseresourceVO">
+		insert into dat_baseresource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="baseresourceId != null">
+				baseresource_id,
+			</if>
+			<if test="basesiteId != null">
+				basesite_id,
+			</if>
+			<if test="prvId != null">
+				prv_id,
+			</if>
+			<if test="prvSname != null">
+				prv_sname,
+			</if>
+			<if test="pregId != null">
+				preg_id,
+			</if>
+			<if test="pregName != null">
+				preg_name,
+			</if>
+			<if test="regId != null">
+				reg_id,
+			</if>
+			<if test="regName != null">
+				reg_name,
+			</if>
+			<if test="baseresourceType != null">
+				baseresource_type,
+			</if>
+			<if test="baseresourceCategory != null">
+				baseresource_category,
+			</if>
+			<if test="baseresourceCuid != null">
+				baseresource_cuid,
+			</if>
+			<if test="baseresourceCode != null">
+				baseresource_code,
+			</if>
+			<if test="baseresourceName != null">
+				baseresource_name,
+			</if>
+			<if test="baseresourceAddress != null">
+				baseresource_address,
+			</if>
+			<if test="baseresourceArea != null">
+				baseresource_area,
+			</if>
+			<if test="baseresourceMaintenance != null">
+				baseresource_maintenance,
+			</if>
+			<if test="towerSiteCode != null">
+				tower_site_code,
+			</if>
+			<if test="baseresourceOpendate != null">
+				baseresource_opendate,
+			</if>
+			<if test="baseresourceStopdate != null">
+				baseresource_stopdate,
+			</if>
+			<if test="roomOwner != null">
+				room_owner,
+			</if>
+			<if test="roomProperty != null">
+				room_property,
+			</if>
+			<if test="roomShare != null">
+				room_share,
+			</if>
+			<if test="baseresourceLongitude != null">
+				baseresource_longitude,
+			</if>
+			<if test="baseresourceLatitude != null">
+				baseresource_latitude,
+			</if>
+			<if test="airconditionerPower != null">
+				airconditioner_power,
+			</if>
+			<if test="baseresourceState != null">
+				baseresource_state,
+			</if>
+			<if test="baseresourceNote != null">
+				baseresource_note,
+			</if>
+			<if test="auditingState != null">
+				auditing_state,
+			</if>
+			<if test="auditingUserId != null">
+				auditing_user_id,
+			</if>
+			<if test="auditingDate != null">
+				auditing_date,
+			</if>
+			<if test="dataFrom != null">
+				data_from,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="baseresourceId != null">
+				#{baseresourceId,jdbcType=VARCHAR},
+			</if>
+			<if test="basesiteId != null">
+				#{basesiteId,jdbcType=VARCHAR},
+			</if>
+			<if test="prvId != null">
+				#{prvId,jdbcType=VARCHAR},
+			</if>
+			<if test="prvSname != null">
+				#{prvSname,jdbcType=VARCHAR},
+			</if>
+			<if test="pregId != null">
+				#{pregId,jdbcType=VARCHAR},
+			</if>
+			<if test="pregName != null">
+				#{pregName,jdbcType=VARCHAR},
+			</if>
+			<if test="regId != null">
+				#{regId,jdbcType=VARCHAR},
+			</if>
+			<if test="regName != null">
+				#{regName,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceType != null">
+				#{baseresourceType,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceCategory != null">
+				#{baseresourceCategory,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceCuid != null">
+				#{baseresourceCuid,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceCode != null">
+				#{baseresourceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceName != null">
+				#{baseresourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceAddress != null">
+				#{baseresourceAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceArea != null">
+				#{baseresourceArea,jdbcType=DECIMAL},
+			</if>
+			<if test="baseresourceMaintenance != null">
+				#{baseresourceMaintenance,jdbcType=INTEGER},
+			</if>
+			<if test="towerSiteCode != null">
+				#{towerSiteCode,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceOpendate != null">
+				#{baseresourceOpendate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="baseresourceStopdate != null">
+				#{baseresourceStopdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roomOwner != null">
+				#{roomOwner,jdbcType=INTEGER},
+			</if>
+			<if test="roomProperty != null">
+				#{roomProperty,jdbcType=INTEGER},
+			</if>
+			<if test="roomShare != null">
+				#{roomShare,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceLongitude != null">
+				#{baseresourceLongitude,jdbcType=DECIMAL},
+			</if>
+			<if test="baseresourceLatitude != null">
+				#{baseresourceLatitude,jdbcType=DECIMAL},
+			</if>
+			<if test="airconditionerPower != null">
+				#{airconditionerPower,jdbcType=DECIMAL},
+			</if>
+			<if test="baseresourceState != null">
+				#{baseresourceState,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceNote != null">
+				#{baseresourceNote,jdbcType=VARCHAR},
+			</if>
+			<if test="auditingState != null">
+				#{auditingState,jdbcType=INTEGER},
+			</if>
+			<if test="auditingUserId != null">
+				#{auditingUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="auditingDate != null">
+				#{auditingDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dataFrom != null">
+				#{dataFrom,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.xunge.model.basedata.DatBaseresourceVOExample"
+		resultType="java.lang.Integer">
+		select count(*) from dat_baseresource
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update dat_baseresource
+		<set>
+			<if test="record.baseresourceId != null">
+				baseresource_id = #{record.baseresourceId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.basesiteId != null">
+				basesite_id = #{record.basesiteId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.prvId != null">
+				prv_id = #{record.prvId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.prvSname != null">
+				prv_sname = #{record.prvSname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pregId != null">
+				preg_id = #{record.pregId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pregName != null">
+				preg_name = #{record.pregName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.regId != null">
+				reg_id = #{record.regId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.regName != null">
+				reg_name = #{record.regName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.baseresourceType != null">
+				baseresource_type = #{record.baseresourceType,jdbcType=INTEGER},
+			</if>
+			<if test="record.baseresourceCategory != null">
+				baseresource_category =
+				#{record.baseresourceCategory,jdbcType=INTEGER},
+			</if>
+			<if test="record.baseresourceCuid != null">
+				baseresource_cuid = #{record.baseresourceCuid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.baseresourceCode != null">
+				baseresource_code = #{record.baseresourceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.baseresourceName != null">
+				baseresource_name = #{record.baseresourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.baseresourceAddress != null">
+				baseresource_address =
+				#{record.baseresourceAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="record.baseresourceArea != null">
+				baseresource_area = #{record.baseresourceArea,jdbcType=DECIMAL},
+			</if>
+			<if test="record.baseresourceMaintenance != null">
+				baseresource_maintenance =
+				#{record.baseresourceMaintenance,jdbcType=INTEGER},
+			</if>
+			<if test="record.towerSiteCode != null">
+				tower_site_code = #{record.towerSiteCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.baseresourceOpendate != null">
+				baseresource_opendate =
+				#{record.baseresourceOpendate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.baseresourceStopdate != null">
+				baseresource_stopdate =
+				#{record.baseresourceStopdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.roomOwner != null">
+				room_owner = #{record.roomOwner,jdbcType=INTEGER},
+			</if>
+			<if test="record.roomProperty != null">
+				room_property = #{record.roomProperty,jdbcType=INTEGER},
+			</if>
+			<if test="record.roomShare != null">
+				room_share = #{record.roomShare,jdbcType=INTEGER},
+			</if>
+			<if test="record.baseresourceLongitude != null">
+				baseresource_longitude =
+				#{record.baseresourceLongitude,jdbcType=DECIMAL},
+			</if>
+			<if test="record.baseresourceLatitude != null">
+				baseresource_latitude =
+				#{record.baseresourceLatitude,jdbcType=DECIMAL},
+			</if>
+			<if test="record.airconditionerPower != null">
+				airconditioner_power =
+				#{record.airconditionerPower,jdbcType=DECIMAL},
+			</if>
+			<if test="record.baseresourceState != null">
+				baseresource_state = #{record.baseresourceState,jdbcType=INTEGER},
+			</if>
+			<if test="record.baseresourceNote != null">
+				baseresource_note = #{record.baseresourceNote,jdbcType=VARCHAR},
+			</if>
+			<if test="record.auditingState != null">
+				auditing_state = #{record.auditingState,jdbcType=INTEGER},
+			</if>
+			<if test="record.auditingUserId != null">
+				auditing_user_id = #{record.auditingUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.auditingDate != null">
+				auditing_date = #{record.auditingDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.dataFrom != null">
+				data_from = #{record.dataFrom,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update dat_baseresource
+		set baseresource_id = #{record.baseresourceId,jdbcType=VARCHAR},
+		basesite_id = #{record.basesiteId,jdbcType=VARCHAR},
+		prv_id = #{record.prvId,jdbcType=VARCHAR},
+		prv_sname = #{record.prvSname,jdbcType=VARCHAR},
+		preg_id = #{record.pregId,jdbcType=VARCHAR},
+		preg_name = #{record.pregName,jdbcType=VARCHAR},
+		reg_id = #{record.regId,jdbcType=VARCHAR},
+		reg_name = #{record.regName,jdbcType=VARCHAR},
+		baseresource_type = #{record.baseresourceType,jdbcType=INTEGER},
+		baseresource_category = #{record.baseresourceCategory,jdbcType=INTEGER},
+		baseresource_cuid = #{record.baseresourceCuid,jdbcType=VARCHAR},
+		baseresource_code = #{record.baseresourceCode,jdbcType=VARCHAR},
+		baseresource_name = #{record.baseresourceName,jdbcType=VARCHAR},
+		baseresource_address = #{record.baseresourceAddress,jdbcType=VARCHAR},
+		baseresource_area = #{record.baseresourceArea,jdbcType=DECIMAL},
+		baseresource_maintenance =
+		#{record.baseresourceMaintenance,jdbcType=INTEGER},
+		tower_site_code = #{record.towerSiteCode,jdbcType=VARCHAR},
+		baseresource_opendate = #{record.baseresourceOpendate,jdbcType=TIMESTAMP},
+		baseresource_stopdate =
+		#{record.baseresourceStopdate,jdbcType=TIMESTAMP},
+		room_owner = #{record.roomOwner,jdbcType=INTEGER},
+		room_property = #{record.roomProperty,jdbcType=INTEGER},
+		room_share = #{record.roomShare,jdbcType=INTEGER},
+		baseresource_longitude = #{record.baseresourceLongitude,jdbcType=DECIMAL},
+		baseresource_latitude =
+		#{record.baseresourceLatitude,jdbcType=DECIMAL},
+		airconditioner_power = #{record.airconditionerPower,jdbcType=DECIMAL},
+		baseresource_state = #{record.baseresourceState,jdbcType=INTEGER},
+		baseresource_note = #{record.baseresourceNote,jdbcType=VARCHAR},
+		auditing_state = #{record.auditingState,jdbcType=INTEGER},
+		auditing_user_id = #{record.auditingUserId,jdbcType=VARCHAR},
+		auditing_date = #{record.auditingDate,jdbcType=TIMESTAMP},
+		data_from = #{record.dataFrom,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.DatBaseresourceVO">
+		update dat_baseresource
+		<set>
+			<if test="basesiteId != null">
+				basesite_id = #{basesiteId,jdbcType=VARCHAR},
+			</if>
+			<if test="prvId != null">
+				prv_id = #{prvId,jdbcType=VARCHAR},
+			</if>
+			<if test="prvSname != null">
+				prv_sname = #{prvSname,jdbcType=VARCHAR},
+			</if>
+			<if test="pregId != null">
+				preg_id = #{pregId,jdbcType=VARCHAR},
+			</if>
+			<if test="pregName != null">
+				preg_name = #{pregName,jdbcType=VARCHAR},
+			</if>
+			<if test="regId != null">
+				reg_id = #{regId,jdbcType=VARCHAR},
+			</if>
+			<if test="regName != null">
+				reg_name = #{regName,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceType != null">
+				baseresource_type = #{baseresourceType,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceCategory != null">
+				baseresource_category = #{baseresourceCategory,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceCuid != null">
+				baseresource_cuid = #{baseresourceCuid,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceCode != null">
+				baseresource_code = #{baseresourceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceName != null">
+				baseresource_name = #{baseresourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceAddress != null">
+				baseresource_address = #{baseresourceAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceArea != null">
+				baseresource_area = #{baseresourceArea,jdbcType=DECIMAL},
+			</if>
+			<if test="baseresourceMaintenance != null">
+				baseresource_maintenance =
+				#{baseresourceMaintenance,jdbcType=INTEGER},
+			</if>
+			<if test="towerSiteCode != null">
+				tower_site_code = #{towerSiteCode,jdbcType=VARCHAR},
+			</if>
+			<if test="baseresourceOpendate != null">
+				baseresource_opendate = #{baseresourceOpendate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="baseresourceStopdate != null">
+				baseresource_stopdate = #{baseresourceStopdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roomOwner != null">
+				room_owner = #{roomOwner,jdbcType=INTEGER},
+			</if>
+			<if test="roomProperty != null">
+				room_property = #{roomProperty,jdbcType=INTEGER},
+			</if>
+			<if test="roomShare != null">
+				room_share = #{roomShare,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceLongitude != null">
+				baseresource_longitude = #{baseresourceLongitude,jdbcType=DECIMAL},
+			</if>
+			<if test="baseresourceLatitude != null">
+				baseresource_latitude = #{baseresourceLatitude,jdbcType=DECIMAL},
+			</if>
+			<if test="airconditionerPower != null">
+				airconditioner_power = #{airconditionerPower,jdbcType=DECIMAL},
+			</if>
+			<if test="baseresourceState != null">
+				baseresource_state = #{baseresourceState,jdbcType=INTEGER},
+			</if>
+			<if test="baseresourceNote != null">
+				baseresource_note = #{baseresourceNote,jdbcType=VARCHAR},
+			</if>
+			<if test="auditingState != null">
+				auditing_state = #{auditingState,jdbcType=INTEGER},
+			</if>
+			<if test="auditingUserId != null">
+				auditing_user_id = #{auditingUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="auditingDate != null">
+				auditing_date = #{auditingDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dataFrom != null">
+				data_from = #{dataFrom,jdbcType=INTEGER},
+			</if>
+		</set>
+		where baseresource_id = #{baseresourceId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.DatBaseresourceVO">
+		update dat_baseresource
+		set basesite_id = #{basesiteId,jdbcType=VARCHAR},
+		prv_id = #{prvId,jdbcType=VARCHAR},
+		prv_sname = #{prvSname,jdbcType=VARCHAR},
+		preg_id = #{pregId,jdbcType=VARCHAR},
+		preg_name = #{pregName,jdbcType=VARCHAR},
+		reg_id = #{regId,jdbcType=VARCHAR},
+		reg_name = #{regName,jdbcType=VARCHAR},
+		baseresource_type = #{baseresourceType,jdbcType=INTEGER},
+		baseresource_category = #{baseresourceCategory,jdbcType=INTEGER},
+		baseresource_cuid = #{baseresourceCuid,jdbcType=VARCHAR},
+		baseresource_code = #{baseresourceCode,jdbcType=VARCHAR},
+		baseresource_name = #{baseresourceName,jdbcType=VARCHAR},
+		baseresource_address = #{baseresourceAddress,jdbcType=VARCHAR},
+		baseresource_area = #{baseresourceArea,jdbcType=DECIMAL},
+		baseresource_maintenance = #{baseresourceMaintenance,jdbcType=INTEGER},
+		tower_site_code = #{towerSiteCode,jdbcType=VARCHAR},
+		baseresource_opendate = #{baseresourceOpendate,jdbcType=TIMESTAMP},
+		baseresource_stopdate = #{baseresourceStopdate,jdbcType=TIMESTAMP},
+		room_owner = #{roomOwner,jdbcType=INTEGER},
+		room_property = #{roomProperty,jdbcType=INTEGER},
+		room_share = #{roomShare,jdbcType=INTEGER},
+		baseresource_longitude = #{baseresourceLongitude,jdbcType=DECIMAL},
+		baseresource_latitude = #{baseresourceLatitude,jdbcType=DECIMAL},
+		airconditioner_power = #{airconditionerPower,jdbcType=DECIMAL},
+		baseresource_state = #{baseresourceState,jdbcType=INTEGER},
+		baseresource_note = #{baseresourceNote,jdbcType=VARCHAR},
+		auditing_state = #{auditingState,jdbcType=INTEGER},
+		auditing_user_id = #{auditingUserId,jdbcType=VARCHAR},
+		auditing_date = #{auditingDate,jdbcType=TIMESTAMP},
+		data_from = #{dataFrom,jdbcType=INTEGER}
+		where baseresource_id = #{baseresourceId,jdbcType=VARCHAR}
+	</update>
+
+	<insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">
+		<!-- <selectKey resultType="long" keyProperty="id" order="AFTER"> SELECT 
+			LAST_INSERT_ID() </selectKey> -->
+		insert into dat_baseresource (baseresource_id, basesite_id, prv_id,
+		prv_sname, preg_id, preg_name,
+		reg_id, reg_name, baseresource_type,
+		baseresource_category, baseresource_cuid,
+		baseresource_code, baseresource_name, baseresource_address,
+		baseresource_area, baseresource_maintenance,
+		tower_site_code, baseresource_opendate,
+		baseresource_stopdate, room_owner, room_property,
+		room_share, baseresource_longitude, baseresource_latitude,
+		airconditioner_power, baseresource_state,
+		baseresource_note,auditing_state, auditing_user_id,
+		auditing_date,data_from)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.baseresourceId,jdbcType=VARCHAR}, #{item.basesiteId,jdbcType=VARCHAR}, #{item.prvId,jdbcType=VARCHAR},
+			#{item.prvSname,jdbcType=VARCHAR}, #{item.pregId,jdbcType=VARCHAR},
+			#{item.pregName,jdbcType=VARCHAR},
+			#{item.regId,jdbcType=VARCHAR}, #{item.regName,jdbcType=VARCHAR},
+			#{item.baseresourceType,jdbcType=INTEGER},
+			#{item.baseresourceCategory,jdbcType=INTEGER},
+			#{item.baseresourceCuid,jdbcType=VARCHAR},
+			#{item.baseresourceCode,jdbcType=VARCHAR},
+			#{item.baseresourceName,jdbcType=VARCHAR},
+			#{item.baseresourceAddress,jdbcType=VARCHAR},
+			#{item.baseresourceArea,jdbcType=DECIMAL},
+			#{item.baseresourceMaintenance,jdbcType=INTEGER},
+			#{item.towerSiteCode,jdbcType=VARCHAR},
+			#{item.baseresourceOpendate,jdbcType=TIMESTAMP},
+			#{item.baseresourceStopdate,jdbcType=TIMESTAMP},
+			#{item.roomOwner,jdbcType=INTEGER},
+			#{item.roomProperty,jdbcType=INTEGER},
+			#{item.roomShare,jdbcType=INTEGER},
+			#{item.baseresourceLongitude,jdbcType=DECIMAL},
+			#{item.baseresourceLatitude,jdbcType=DECIMAL},
+			#{item.airconditionerPower,jdbcType=DECIMAL},
+			#{item.baseresourceState,jdbcType=INTEGER},
+			#{item.baseresourceNote,jdbcType=VARCHAR},#{item.auditingState,jdbcType=INTEGER},#{item.auditingUserId,jdbcType=VARCHAR},
+			#{item.auditingDate,jdbcType=TIMESTAMP},
+			#{item.dataFrom,jdbcType=INTEGER})
+		</foreach>
+	</insert>
+
+	<update id="batchUpdate" parameterType="java.util.List">
+
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update dat_baseresource
+			<set>
+				basesite_id = #{item.basesiteId,jdbcType=VARCHAR},
+				prv_id = #{item.prvId,jdbcType=VARCHAR},
+				prv_sname = #{item.prvSname,jdbcType=VARCHAR},
+				preg_id = #{item.pregId,jdbcType=VARCHAR},
+				preg_name = #{item.pregName,jdbcType=VARCHAR},
+				reg_id = #{item.regId,jdbcType=VARCHAR},
+				reg_name = #{item.regName,jdbcType=VARCHAR},
+				baseresource_type = #{item.baseresourceType,jdbcType=INTEGER},
+				baseresource_category = #{item.baseresourceCategory,jdbcType=INTEGER},
+				baseresource_cuid = #{item.baseresourceCuid,jdbcType=VARCHAR},
+				baseresource_code = #{item.baseresourceCode,jdbcType=VARCHAR},
+				baseresource_name = #{item.baseresourceName,jdbcType=VARCHAR},
+				baseresource_address = #{item.baseresourceAddress,jdbcType=VARCHAR},
+				baseresource_area = #{item.baseresourceArea,jdbcType=DECIMAL},
+				baseresource_maintenance =
+				#{item.baseresourceMaintenance,jdbcType=INTEGER},
+				tower_site_code = #{item.towerSiteCode,jdbcType=VARCHAR},
+				baseresource_opendate = #{item.baseresourceOpendate,jdbcType=TIMESTAMP},
+				baseresource_stopdate =
+				#{item.baseresourceStopdate,jdbcType=TIMESTAMP},
+				room_owner = #{item.roomOwner,jdbcType=INTEGER},
+				room_property = #{item.roomProperty,jdbcType=INTEGER},
+				room_share = #{item.roomShare,jdbcType=INTEGER},
+				baseresource_longitude = #{item.baseresourceLongitude,jdbcType=DECIMAL},
+				baseresource_latitude =
+				#{item.baseresourceLatitude,jdbcType=DECIMAL},
+				airconditioner_power = #{item.airconditionerPower,jdbcType=DECIMAL},
+				baseresource_state = #{item.baseresourceState,jdbcType=INTEGER},
+				baseresource_note = #{item.baseresourceNote,jdbcType=VARCHAR},
+				auditing_state = #{item.auditingState,jdbcType=INTEGER},
+				auditing_user_id = #{item.auditingUserId,jdbcType=VARCHAR},
+				auditing_date = #{item.auditingDate,jdbcType=TIMESTAMP},
+				data_from = #{item.dataFrom,jdbcType=INTEGER}
+			</set>
+			where baseresource_cuid =#{item.baseresourceCuid} AND prv_id =
+			#{item.prvId}
+		</foreach>
+
+	</update>
+	<update id="batchUpdateForAudit" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update dat_baseresource
+			<set>
+				auditing_state = #{item.auditingState,jdbcType=INTEGER}
+			</set>
+			where baseresource_id = #{item.baseresourceId,jdbcType=VARCHAR}
+		</foreach>
+
+	</update>
+	<!--删除 -->
+	<delete id="delByCuidsAndPrvid" parameterType="java.util.Map">
+		DELETE from dat_baseresource
+		WHERE prv_id=#{prvId} AND baseresource_cuid IN
+		<foreach collection="list" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="queryDatBaseresource" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from dat_baseresource
+		<where>
+			<if test="baseresourceCodeOrName != '' and baseresourceCodeOrName != null">
+				and (baseresource_code like
+				CONCAT('%',#{baseresourceCodeOrName,jdbcType=VARCHAR},'%')
+				or
+				baseresource_name like
+				CONCAT('%',#{baseresourceCodeOrName,jdbcType=VARCHAR},'%'))
+			</if>
+			<if test="baseresourceState != '' and baseresourceState != null">
+				and baseresource_state =
+				#{basesiteState,jdbcType=INTEGER}
+			</if>
+			<if test="regId != '' and regId != null">
+				and reg_id = #{regId,jdbcType=VARCHAR}
+			</if>
+			<if test="pregId != '' and pregId != null">
+				and preg_id = #{pregId,jdbcType=VARCHAR}
+			</if>
+			<if test="auditingState != '' and auditingState != null">
+				and auditing_state = #{auditingState,jdbcType=VARCHAR}
+			</if>
+			<if test="queryType != null">
+				and baseresource_type = #{queryType,jdbcType=INTEGER}
+			</if>
+			<!-- 根据权限过滤 -->
+			<!-- <include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include> -->
+			<!-- 流程实例id集合 -->
+			<if test="idsList != null and idsList.size()>0">
+				and baseresource_id in
+				<foreach collection="idsList" item="item" index="index"
+					open="(" separator="," close=")">
+					#{item.businessId}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<select id="queryAllResourceNumByPrvid" parameterType="map"
+		resultType="java.util.Map">
+		SELECT
+		<if test="reg_ids != null">
+			reg.reg_name name,
+		</if>
+		<if test="prv_ids != null">
+			prv.prv_sname name,
+		</if>
+		count(rs.reg_id) value
+		FROM
+		dat_baseresource rs
+		<if test="reg_ids != null">
+			RIGHT JOIN sys_region reg ON reg.reg_id = rs.reg_id
+		</if>
+		<if test="prv_ids != null">
+			RIGHT JOIN sys_province prv ON prv.prv_id = rs.prv_id
+		</if>
+		<where>
+			rs.auditing_state=0 and rs.baseresource_state=1<!-- 审核状态启用，资源状态在网 -->
+			<if test="prv_ids != null">
+				and prv.prv_id in
+				<foreach collection="prv_ids" item="item" index="index"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="reg_ids != null">
+				and reg.reg_id in
+				<foreach collection="reg_ids" item="item" index="index"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+		GROUP BY
+		<if test="reg_ids != null">
+			reg.reg_id
+		</if>
+		<if test="prv_ids != null">
+			prv.prv_id
+		</if>
+	</select>
+
+	<select id="selectNolinkResource" parameterType="map"
+		resultType="java.lang.Integer">
+		select count(DISTINCT res.baseresource_id) from dat_baseresource res
+		left join ele_billaccountbaseresource ebres on
+		res.baseresource_id=ebres.baseresource_id
+		left join
+		rent_billaccountresource rbres on
+		res.baseresource_id=rbres.baseresource_id
+		where 
+			ebres.baseresource_id is null 
+		and rbres.baseresource_id is null
+		and res.baseresource_type=0 and res.auditing_state=0 and res.baseresource_state=1
+		<if test="prv_id != '' and prv_id != null">
+			and res.prv_id = #{prv_id,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectAllResource" parameterType="map" resultType="java.lang.Integer">
+		select count(DISTINCT res.baseresource_id) from dat_baseresource res
+		<where>
+			res.baseresource_type=0 and res.auditing_state=0 and res.baseresource_state=1
+			<if test="prv_id != null">
+				and res.prv_id = #{prv_id,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="queryBaseresourceByBillaccountId" parameterType="map" resultMap="BaseResultMap">
+		select 
+		db.baseresource_id, sum(airconditioner_power) airconditioner_power
+		 from dat_baseresource db RIGHT  JOIN ele_billaccountbaseresource eb
+			ON eb.baseresource_id=db.baseresource_id
+		<where>
+			 eb.relation_state=0
+			<if test="billaccountId != '' and billaccountId != null">
+				and eb.billaccount_id = #{billaccountId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	
+</mapper>

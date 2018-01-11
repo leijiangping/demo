@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.DatSupplierVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.selfrent.contract.DatSupplierVO" >
+    <id column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="supplier_address" property="supplierAddress" jdbcType="VARCHAR" />
+    <result column="supplier_contact" property="supplierContact" jdbcType="VARCHAR" />
+    <result column="supplier_telephone" property="supplierTelephone" jdbcType="VARCHAR" />
+    <result column="supplier_type" property="supplierType" jdbcType="INTEGER" />
+    <result column="account_type" property="accountType" jdbcType="INTEGER" />
+    <result column="bank_user" property="bankUser" jdbcType="VARCHAR" />
+    <result column="deposit_bank" property="depositBank" jdbcType="VARCHAR" />
+    <result column="bank_account" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="supplier_state" property="supplierState" jdbcType="INTEGER" />
+    <result column="supplier_note" property="supplierNote" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+    <result column="preg_name" property="pregName" jdbcType="VARCHAR" />
+    <result column="is_downshare" property="isDownShare" jdbcType="INTEGER" />
+    <result column="prv_sname" property="prvName" jdbcType="VARCHAR" />
+    <result column="data_from" property="dataFrom" jdbcType="INTEGER" />
+  </resultMap>
+  <!-- 新增DatSupplier对象 -->
+  	<insert id="insertDatSupplierVO" parameterType="com.xunge.model.selfrent.contract.DatSupplierVO">
+  		insert into dat_supplier (
+  		supplier_id,prv_id,reg_id,data_from,supplier_code,supplier_name,supplier_address,supplier_contact,
+  		supplier_telephone,supplier_type,account_type,bank_user,deposit_bank,bank_account,
+  		supplier_state,supplier_note
+  		)
+  		values (
+  		#{supplierId},
+  		#{prvId},
+  		#{regId},
+  		#{dataFrom},
+  		#{supplierCode},
+  		#{supplierName},
+  		#{supplierAddress},
+  		#{supplierContact},
+  		#{supplierTelephone},
+  		#{supplierType},
+  		#{accountType},
+  		#{bankUser},
+  		#{depositBank},
+  		#{bankAccount},
+  		#{supplierState},
+  		#{supplierNote}
+  		) 
+  	</insert>
+  	<!-- 补录DatSupplier对象 -->
+  	<update id="updateDatSupplierVO" parameterType="com.xunge.model.selfrent.contract.DatSupplierVO">
+  		update dat_supplier
+  		set 
+  		supplier_code = #{supplierCode},
+  		supplier_name = #{supplierName},
+  		supplier_address = #{supplierAddress},
+  		supplier_contact = #{supplierContact},
+  		supplier_telephone = #{supplierTelephone},
+  		account_type = #{accountType},
+  		bank_user = #{bankUser},
+  		deposit_bank = #{depositBank},
+  		bank_account = #{bankAccount}
+  		where 
+  			supplier_id = #{supplierId}
+  	</update>
+	  <!-- 根据租房合同id查询供应商信息 -->
+	<select id="queryDatSupplierById" resultMap="BaseResultMap" parameterType="Map">
+		SELECT
+			supplier_id,
+			prv_id,
+			supplier_code,
+			supplier_name,
+			supplier_address,
+			supplier_contact,
+			supplier_telephone,
+			supplier_type,
+			account_type,
+			bank_user,
+			deposit_bank,
+			bank_account,
+			supplier_state,
+			supplier_note,
+			reg_name,
+			preg_name,
+			is_downshare,
+			data_from
+			FROM
+			dat_supplier
+		where 
+		supplier_id = #{supplierId}
+	</select>
+	
+	  <!-- 根据省份id查询供应商信息 -->
+	<select id="queryDatSupplierByPrvID" resultMap="BaseResultMap" parameterType="Map">
+		SELECT
+			supplier_id,
+			reg_id,
+			reg_name,
+			prv_sname,
+			preg_id,
+			preg_name,
+			prv_id,
+			supplier_code,
+			supplier_name,
+			supplier_address,
+			supplier_contact,
+			supplier_telephone, 
+			supplier_type,
+			account_type,
+			bank_user,
+			deposit_bank,
+			bank_account,
+			supplier_state,
+			supplier_note,
+			is_downshare,
+			data_from
+			FROM
+			dat_supplier
+			<where>
+				<if test="supplierName != '' and supplierName != null">
+					and (supplier_name like
+					CONCAT('%',#{supplierName,jdbcType=VARCHAR},'%')
+					or supplier_code like
+					CONCAT('%',#{supplierName,jdbcType=VARCHAR},'%'))
+				</if>
+				<if test="supplierState != null">
+					and supplier_state =#{supplierState} 
+				</if>
+				<if test="prvId !='' and prvId != null">
+					and prv_id = #{prvId}
+				</if> 
+				<if test="supplierType != null">
+					and supplier_type =#{supplierType} 
+				</if>
+				<if test="regId !='' and regId != null">
+					and reg_id =#{regId} 
+				</if> 
+				<if test="pregId !='' and pregId != null">
+					and preg_id =#{pregId} 
+				</if> 
+				<if test="supplierCode !='' and supplierCode != null">
+					and supplier_code =#{supplierCode} 
+				</if> 
+				
+				and ((prv_id = #{prvId} and is_downshare = #{isDownShare})
+				<if test="regIds !=null and regIds.size()>0">
+					or reg_id in
+					<foreach collection="regIds" item="item" index="index" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test="pregIds !=null and pregIds.size()>0">
+					or (is_downshare = #{isDownShare} and preg_id in
+					<foreach collection="pregIds" item="item" index="index"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+					)
+				</if>
+				)
+			</where>
+	</select>
+</mapper>

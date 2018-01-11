@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.TwrProductTypeVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizbasedata.TwrProductTypeVO" >
+	    <id column="producttype_id" property="producttypeId" jdbcType="VARCHAR" />
+	    <result column="producttype_name" property="producttypeName" jdbcType="VARCHAR" />
+	    <result column="producttype_state" property="producttypeState" jdbcType="INTEGER" />
+	    <result column="producttype_note" property="producttypeNote" jdbcType="VARCHAR" />
+	    <result column="producttype_pid" property="producttypePid" jdbcType="VARCHAR" />
+	    <result column="pproduct_name" property="pproductName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="TwrProductTypeResultMap" type="com.xunge.model.towerrent.bizbasedata.ProductTypeVO" >
+  	    <id column="producttype_id" property="producttypeId" jdbcType="VARCHAR" />
+	    <result column="producttype_name" property="producttypeName" jdbcType="VARCHAR" />
+	    <result column="producttype_state" property="producttypeState" jdbcType="INTEGER" />
+	    <result column="producttype_note" property="producttypeNote" jdbcType="VARCHAR" />
+  </resultMap>
+	<!-- 所选铁塔的子集 -->
+	<select id="queryAllTwrProductTypeByMenuId" resultMap="BaseResultMap" parameterType="Map">
+		select
+			pt.producttype_id,
+			pt.producttype_name,
+			pt.producttype_state,
+			pt.producttype_note,
+			pt.producttype_pid,
+			(select type.producttype_name from twr_producttype type where type.producttype_id = pt.producttype_pid) pproduct_name
+		from
+		twr_producttype pt where pt.producttype_state != -1
+		<where>
+				<if test="menuId != null and menuId !=''">  
+	    		    pt.producttype_pid =  #{menuId,jdbcType=VARCHAR}  
+				</if>  
+		</where>
+	</select>
+	
+	<!-- 查询所有铁塔种类信息 -->
+	<select id="queryAllTwrProductType" resultMap="BaseResultMap" parameterType="Map">
+		select
+			pt.producttype_id,
+			pt.producttype_name,
+			pt.producttype_state,
+			pt.producttype_note,
+			pt.producttype_pid,
+			(select type.producttype_name from twr_producttype type where type.producttype_id = pt.producttype_pid) pproduct_name
+		from
+		twr_producttype pt where pt.producttype_state != -1
+	</select>
+	
+	<!-- 根据Id删除批量所选铁塔类型 -->
+	<delete id="deleteByTypeId" parameterType="Map">
+		update twr_producttype
+		set producttype_state = -1
+		where producttype_id in 
+		<foreach collection="twrIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改铁塔信息 -->	
+	<update id="updateTwrVOById" parameterType="com.xunge.model.towerrent.bizbasedata.TwrProductTypeVO">
+		update twr_producttype
+		set
+			producttype_name = #{producttypeName,jdbcType=VARCHAR},
+			producttype_note = #{producttypeNote,jdbcType=VARCHAR}
+		where producttype_id = #{producttypeId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 批量启用或停用铁塔状态 -->
+	<update id="updateTwrState" parameterType="Map">
+		update twr_producttype tp set tp.producttype_state = #{twrState,jdbcType=INTEGER} 
+		where tp.producttype_id in 
+		<foreach collection="twrIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 新增铁塔类型 -->
+	<insert id="addTwrObj" parameterType="com.xunge.model.towerrent.bizbasedata.TwrProductTypeVO">
+		insert into twr_producttype(producttype_id,
+			producttype_name,
+			producttype_state,
+		    producttype_note,
+			producttype_pid)
+		values(#{producttypeId,jdbcType=VARCHAR},#{producttypeName,jdbcType=VARCHAR},0,#{producttypeNote,jdbcType=VARCHAR},#{producttypePid,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 根据查询条件进行查询 -->
+	<select id="queryTwrVOByStateAndName" resultMap="BaseResultMap" parameterType="Map">
+        select 
+            pt.producttype_id,
+		    pt.producttype_name,
+			pt.producttype_state,
+		    pt.producttype_note,
+			pt.producttype_pid,
+			(select type.producttype_name from twr_producttype type where type.producttype_id = pt.producttype_pid) pproduct_name
+        from twr_producttype pt where pt.producttype_pid not in
+		(select twr1.producttype_id from twr_producttype twr1 where twr1.producttype_pid = '') and pt.producttype_pid != ''
+		and producttype_state != -1
+		<if test="productState != null and productState != ''">
+		    	and pt.producttype_state = #{productState,jdbcType=INTEGER}
+		</if>
+		 <if test="productName != null and productName != ''">
+		    	and pt.producttype_name like 
+		    	CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+		  </if>
+	</select>
+	<!-- 查询所有铁塔信息 -->
+	<select id="queryTwrProductTypeName" resultMap="TwrProductTypeResultMap" parameterType="Map">
+	    select 
+	    producttype_id,
+	    producttype_name,
+	    producttype_state,
+	    producttype_note from twr_producttype
+	    <where>
+	    producttype_state != -1
+	    <if test="producttypeState != null">
+		    and producttype_state = #{producttypeState,jdbcType=INTEGER}
+		</if>
+		<if test="producttypeName != null and producttypeName != ''">
+		    and producttype_name = #{producttypeName,jdbcType=VARCHAR}
+		</if>
+	    </where>
+	</select>
+	<!-- 按照条件查询铁塔信息以及父级铁塔 -->
+	<select id="queryTwrProductTypeInfoByCondition" resultMap="BaseResultMap" parameterType="Map">
+	    select
+			pt.producttype_id,
+			pt.producttype_name,
+			pt.producttype_state,
+			pt.producttype_note,
+			pt.producttype_pid,
+			(select type.producttype_name from twr_producttype type where type.producttype_id = pt.producttype_pid) pproduct_name
+		from
+		twr_producttype pt
+		<where>
+		   pt.producttype_state != -1
+		   <if test="productState != null">
+		    and pt.producttype_state = #{productState,jdbcType=INTEGER}
+		   </if>
+		   <if test="productName != null and productName != ''">
+		    and pt.producttype_name like CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+		   </if>
+		</where>
+	</select>
+</mapper>

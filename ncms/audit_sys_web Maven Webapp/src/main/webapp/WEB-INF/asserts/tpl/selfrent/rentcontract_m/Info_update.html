@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <title>信息补录</title>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+</head>
+<body>
+<form action="" id="dataForm">
+    <div class="btn-toolbar">
+        <button type="button" class="btn btn-primary" onclick="formSubmit();">保存</button>
+        <button type="button" class="btn btn-default" onclick="back();">取消</button>
+    </div>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#basic_info" data-toggle="tab">基本信息</a></li>
+        <li><a href="#rent_info" data-toggle="tab">租费信息</a></li>
+        <li><a href="#sup_pay" data-toggle="tab">付款供应商</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <!--基本信息-->
+        <div class="tab-pane fade in active" id="basic_info">
+            <ul class="list-group">
+             	<li class="list-group-item row">
+                    <div class="col-md-2">合同代码：</div>
+                    <div class="col-md-4 contract">
+                    	<input type="text" readonly="readonly" id="contractCode" name="datContractVO.contractCode" class="form-control" >
+                    	<span id="err" class="modal-error"></span>
+                    </div>
+                    <div class="col-md-2">合同名称：</div>
+                    <div class="col-md-4">
+                   		<input type="text" id="contractName" name="datContractVO.contractName" class="form-control" >
+                   		<span id="err" class="modal-error"></span>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">地市</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="pregId" name="pregId" class="form-control" >
+                    	<span id="err" class="modal-error"></span>
+                    </div>
+                    <div class="col-md-2">区县</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="regName" name="regName" class="form-control" >
+                    	
+                    	<input type="hidden" id="regId" name="datContractVO.regId" class="form-control" />
+                    	<span id="err" class="modal-error"></span>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">合同分类：</div>
+                    <div class="col-md-4">
+                     	<select id="contractType" name="datContractVO.contractType" class="form-control"
+                     	onfocus='this.defaultIndex=this.selectedIndex;' onchange='this.selectedIndex=this.defaultIndex;'></select>
+                     	<span id="err" class="modal-error"></span>
+                    </div>
+                    <div class="col-md-2">合同总金额</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="totalAmount" name="totalAmount" class="form-control" >
+                    	<span id="err" class="modal-error"></span>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">合同期始：</div>
+                    <div class="col-md-4">
+                    	
+	                        <!--指定 date标记-->
+	                        <div class='input-group date' id='datetimepicker1' style="top:2px;height:30px;line-height:30px;width:60%;">
+	                            <input type='text' style="padding-left: 6px;height:34px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;width:100%;"/>
+	                            <span class="input-group-addon" style="width:0;">
+	                                <span class="glyphicon glyphicon-calendar"></span>
+	                            </span>
+	                            <span id="err" class="modal-error"></span>
+	                        </div>
+                    	
+                    	<!-- <input type="date" id="contractStartdate" name="datContractVO.contractStartdate" class="form-control" > -->
+                    </div>
+                    <div class="col-md-2">合同期终：</div>
+                    <div class="col-md-4">
+                    	
+	                        <!--指定 date标记-->
+	                        <div class='input-group date' id='datetimepicker2' style="top:2px;height:30px;line-height:30px;width:60%;">
+	                            <input type='text' style="padding-left: 6px;height:34px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;width:100%;""/>
+	                            <span class="input-group-addon" style="width:0;">
+	                                <span class="glyphicon glyphicon-calendar"></span>
+	                            </span>
+	                            <span id="err" class="modal-error"></span>
+	                        </div>
+                    	
+                    	<!-- <input type="date" id="contractEnddate" name="datContractVO.contractEnddate" class="form-control" > -->
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">对方签约名称：</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="contractCheckname2" name="datContractVO.contractCheckname2" class="form-control" >
+                    </div>
+                    <div class="col-md-2">我方签约名称：</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="contractCheckname1" name="datContractVO.contractCheckname1" class="form-control" >
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">签约日期：</div>
+                    <div class="col-md-4">
+                    	
+	                        <!--指定 date标记-->
+	                        <div class='input-group date' id='datetimepicker3' style="top:2px;height:30px;line-height:30px;width:60%;">
+	                            <input type='text' name="contractSigndate" style="padding-left: 6px;height:34px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;width:100%;"/>
+	                            <span class="input-group-addon" style="width:0;">
+	                                <span class="glyphicon glyphicon-calendar"></span>
+	                            </span>
+	                            <span id="err" class="modal-error"></span>
+	                        </div>
+                    	
+                    	<!-- <input type="date" id="contractSigndate" name="datContractVO.contractSigndate" class="form-control" > -->
+                    </div>
+                    <div class="col-md-2">合同年限：</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="contractYearquantity" name="datContractVO.contractYearquantity" class="form-control" >
+                    	<span id="err" class="modal-error"></span>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">管理负责人：</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="managerUser" name="datContractVO.managerUser" class="form-control" >
+                    </div>
+                    <div class="col-md-2">管理部门:</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="managerDepartment" name="datContractVO.managerDepartment" class="form-control" >
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 租费信息-->
+        <div class="tab-pane fade" id="rent_info">
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-2">年租费：</div>
+                    <div class="col-md-4">
+                        <input type="text" id="yearAmount" name="yearAmount" class="form-control">
+                        <span id="err" class="modal-error"></span>
+                    </div>
+                    <div class="col-md-2">房屋类型：</div>
+                    <div class="col-md-4">
+                        <select id="houseType" name="houseType" class="form-control"></select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">合同分类：</div>
+                    <div class="col-md-4">
+                        <select id="contractType1" name="contractType1" class="form-control" 
+                        onfocus='this.defaultIndex=this.selectedIndex;' onchange='this.selectedIndex=this.defaultIndex;'></select>
+                        <span id="err" class="modal-error"></span>
+                    </div>
+                    <div class="col-md-2">缴费周期：</div>
+                    <div class="col-md-4">
+                        <select id="paymentperiodId" name="paymentperiodId" class="form-control"></select>
+                        <span id="err" class="modal-error"></span>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">物业地址：</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="propertyAddress" name="propertyAddress" class="form-control" >
+                    </div>
+                    <div class="col-md-2">费用类别：</div>
+                    <div class="col-md-4">
+                        <select id="chargeType" name="chargeType" class="form-control"></select>
+                    </div>
+                </li>
+                <li class="list-group-item row comment">
+                    <div class="col-md-2">备注:</div>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="rentcontractNote" name="rentcontractNote" rows="2"></textarea>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 付款供应商-->
+        <div class="tab-pane fade" id="sup_pay">
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-2">供应商代码</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="supplierCode" name="datSupplierVO.supplierCode" class="form-control" >
+                    </div>
+                    <div class="col-md-2">供应商名称</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="supplierName" name="datSupplierVO.supplierName" class="form-control" >
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">供应商类别</div>
+                    <div class="col-md-4">
+                    	<select id="supplierType" name="datSupplierVO.supplierType" class="form-control"></select>
+                    </div>
+                    <div class="col-md-2">供应商地址</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="supplierAddress" name="datSupplierVO.supplierAddress" class="form-control" >
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">联系人</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="supplierContact" name="datSupplierVO.supplierContact" class="form-control" >
+                    </div>
+                    <div class="col-md-2">联系电话</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="supplierTelephone" name="datSupplierVO.supplierTelephone" class="form-control" >
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">账户类型</div>
+                    <div class="col-md-4">
+                    	<select id="accountType" name="datSupplierVO.accountType" class="form-control"></select>
+                    </div>
+                    <div class="col-md-2">银行账户</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="bankAccount" name="datSupplierVO.bankAccount" class="form-control" >
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">开户银行</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="depositBank" name="datSupplierVO.depositBank" class="form-control" >
+                    </div>
+                    <div class="col-md-2">银行账号</div>
+                    <div class="col-md-4">
+                    	<input type="text" id="bankUser" name="datSupplierVO.bankUser" class="form-control" >
+                    </div>
+                    	<input type="text" id="contractId1" name="datContractVO.contractId" class="form-control" >
+                    	<input type="text" id="supplierId1" name="datSupplierVO.supplierId" class="form-control" >
+                    	<input type="text" id="contractId" name="contractId" class="form-control" >
+                    	<input type="text" id="supplierId" name="supplierId" class="form-control" >
+                    	<input type="text" id="rentcontractId" name="rentcontractId" class="form-control" >
+                    	<input type="text" id="prvId" name="datSupplierVO.prvId" class="form-control" >
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+<script src="../../../bootstrap/js/messages_zh.js"></script>
+
+<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lte IE 9]>
+	<script src="../../../bootstrap/js/html5shiv.js"></script>
+	<script src="../../../bootstrap/js/respond.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+<![endif]-->
+<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+<script  src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/selfrent/rentcontract_m/secondRecording.js"></script> 
+<script>
+    $(function () {
+        $('#myTab a:first').tab('show');
+        $('input[class="lefile"]').change(function(){
+            $(this).next('.input-append').children('input[type="text"]').val($(this).val());
+        });
+        $('#datetimepicker1').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+        $('#datetimepicker2').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+        $('#datetimepicker3').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+    })
+</script>
+</body>
+</html>

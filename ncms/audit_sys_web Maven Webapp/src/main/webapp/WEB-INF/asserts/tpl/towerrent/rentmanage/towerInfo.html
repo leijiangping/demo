@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-table.min.css" >
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-table-fixed-columns.css"> 
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+    <title>铁塔资源信息</title>
+</head>
+<body>
+    <form class="form-inline">
+        <div class="form-group">
+            <select id="City">
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="Village">
+            </select>
+        </div>
+        <button type="button" class="btn btn-success" onclick="loadTableData();">查询</button>
+    </form>
+    <div class="btn-toolbar">
+        <button class="btn btn-primary" type="button" onclick="importResourceInfo();">新增导入</button>
+        <button class="btn btn-primary" type="button" onclick="exportResourceInfo();">导出</button>
+        <table id="tb"></table>
+    </div>
+    
+    
+    <script src="../../../../asserts/lib/jquery.js"></script>
+    <script src="../../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../bootstrap/js/ui.loading.js"></script>
+    <!--[if lte IE 9]>
+	 <script src="../../../bootstrap/js/html5shiv.js"></script>
+	 <script src="../../../bootstrap/js/respond.min.js"></script>
+	 <script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+    <script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+     <script src="../../../bootstrap/js/bootstrap-table-fixed-columns.js"></script>
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/page/twrrent/rentmanage/towerInfo.js"></script>
+</body>
+</html>

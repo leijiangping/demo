@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.TowerRentinformationBizchangeVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizchange.TowerRentinformationBizchangeVO" >
+    <id column="twr_rentinformation_bizchange_id" property="twrRentinformationBizchangeId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="business_confirm_number" property="businessConfirmNumber" jdbcType="VARCHAR" />
+    <result column="tower_station_code" property="towerStationCode" jdbcType="VARCHAR" />
+    <result column="change_item" property="changeItem" jdbcType="VARCHAR" />
+    <result column="change_before_content" property="changeBeforeContent" jdbcType="VARCHAR" />
+    <result column="change_behind_content" property="changeBehindContent" jdbcType="VARCHAR" />
+    <result column="change_active_date" property="changeActiveDate" jdbcType="TIMESTAMP" />
+    <result column="if_ascend" property="ifAscend" jdbcType="INTEGER" />
+    <result column="ascend_fee" property="ascendFee" jdbcType="DECIMAL" />
+    <result column="change_reason" property="changeReason" jdbcType="VARCHAR" />
+    <result column="check_state" property="auditState" jdbcType="INTEGER" />
+    <collection property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+        <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+	    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+	    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+	    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+	    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+	    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+	    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+     </collection>
+     <collection property="towerLinkVO" javaType="com.xunge.model.towerrent.rentmanager.TowerLinkVO">
+        <id column="tower_station_code" property="towerStationCode" jdbcType="VARCHAR" />
+	    <result column="operator_phy_station_code" property="operatorPhyStationCode" jdbcType="VARCHAR" />
+    	<result column="operator_phy_station_name" property="operatorPhystationName" jdbcType="VARCHAR" />
+     </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    twr_rentinformation_bizchange_id, reg_id, operator, business_confirm_number, tower_station_code, 
+    change_item, change_before_content, change_behind_content, change_active_date, if_ascend, 
+    ascend_fee, change_reason, check_state
+  </sql>
+  <!-- 审核完成修改审核状态 -->
+  <update id="updateBizChangeCheckState" parameterType="Map">
+  	update twr_rentinformation_bizchange 
+  	set check_state = #{checkState} 
+  	where twr_rentinformation_bizchange_id = #{twrRentinformationBizchangeId}
+  </update>
+  <!-- 根据id查询信息变更表 -->
+  <select id="queryBizChangeById" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  		twr_rentinformation_bizchange.twr_rentinformation_bizchange_id,
+		twr_rentinformation_bizchange.reg_id,
+		twr_rentinformation_bizchange.operator,
+		twr_rentinformation_bizchange.business_confirm_number,
+		twr_rentinformation_bizchange.tower_station_code,
+		twr_rentinformation_bizchange.change_item,
+		twr_rentinformation_bizchange.change_before_content,
+		twr_rentinformation_bizchange.change_behind_content,
+		twr_rentinformation_bizchange.change_active_date,
+		twr_rentinformation_bizchange.if_ascend,
+		twr_rentinformation_bizchange.ascend_fee,
+		twr_rentinformation_bizchange.change_reason,
+		twr_rentinformation_bizchange.check_state,
+  		v_sys_region.preg_id,
+		v_sys_region.reg_name,
+		v_sys_region.prv_id,
+		v_sys_region.reg_state,
+		v_sys_region.preg_name,
+		v_sys_region.prv_name
+	from twr_rentinformation_bizchange INNER JOIN v_sys_region 
+  	ON v_sys_region.reg_id = twr_rentinformation_bizchange.reg_id
+  	<where>
+    	<if test="twrRentinformationBizchangeId != '' and twrRentinformationBizchangeId != null">
+    		and twr_rentinformation_bizchange_id = #{twrRentinformationBizchangeId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="changeItem != '' and changeItem != null">
+    		and change_item = #{changeItem}
+    	</if>
+    	<if test="changeBeforeContent != '' and changeBeforeContent != null">
+    		and change_before_content = #{changeBeforeContent}
+    	</if>
+    	<if test="changeBehindContent != '' and changeBehindContent != null">
+    		and change_behind_content = #{changeBehindContent}
+    	</if>
+    	<if test="changeActiveDate != '' and changeActiveDate != null">
+    		and change_active_date = #{changeActiveDate}
+    	</if>
+    	<if test="businessConfirmNumber != '' and businessConfirmNumber != null">
+    		and business_confirm_number = #{businessConfirmNumber}
+    	</if>
+    	<if test="towerStationCode != '' and towerStationCode != null">
+    		and tower_station_code = #{towerStationCode}
+    	</if>
+    	
+    </where>
+  </select>
+  <!-- 查询所有提交审核流程的业务变更信息 -->
+  <select id="queryInformationBizChangeCheckInfo" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  		twr_rentinformation_bizchange.twr_rentinformation_bizchange_id,
+		twr_rentinformation_bizchange.reg_id,
+		twr_rentinformation_bizchange.operator,
+		twr_rentinformation_bizchange.business_confirm_number,
+		twr_rentinformation_bizchange.tower_station_code,
+		twr_rentinformation_bizchange.change_item,
+		twr_rentinformation_bizchange.change_before_content,
+		twr_rentinformation_bizchange.change_behind_content,
+		twr_rentinformation_bizchange.change_active_date,
+		twr_rentinformation_bizchange.if_ascend,
+		twr_rentinformation_bizchange.ascend_fee,
+		twr_rentinformation_bizchange.change_reason,
+		twr_rentinformation_bizchange.check_state,
+		twr_towerlink.operator_phy_station_code,
+		twr_towerlink.operator_phy_station_name,
+  		v_sys_region.preg_id,
+		v_sys_region.reg_name,
+		v_sys_region.prv_id,
+		v_sys_region.reg_state,
+		v_sys_region.preg_name,
+		v_sys_region.prv_name
+  	from twr_rentinformation_bizchange INNER JOIN v_sys_region 
+  	ON v_sys_region.reg_id = twr_rentinformation_bizchange.reg_id
+  	INNER JOIN twr_towerlink ON twr_rentinformation_bizchange.tower_station_code = twr_towerlink.tower_station_code
+  	<where>
+    	1=1
+    	<if test="twrRentinformationBizchangeId != '' and twrRentinformationBizchangeId != null">
+    		and twr_rentinformation_bizchange_id = #{twrRentinformationBizchangeId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="checkState != '' and checkState != null">
+    		and check_state = #{checkState}
+    	</if>
+    	<if test="regId != '' and regId != null">
+			and v_sys_region.reg_id = #{regId,jdbcType=VARCHAR}
+		</if>
+			
+    	<if test="pregId != '' and pregId != null">
+    		and preg_id = #{pregId,jdbcType=VARCHAR}
+    	</if>
+    	<if test=" twrRentinformationBizchangeIds != null and twrRentinformationBizchangeIds != ''">
+				and twr_rentinformation_bizchange_id in
+				<foreach collection="twrRentinformationBizchangeIds" index="index" item="item" open="(" separator="," close=")">    
+		            #{item}    
+		        </foreach>  
+		</if>
+    	<!-- 流程实例id集合 -->
+		<if test="idsList != null and idsList.size()>0">  
+        	and twr_rentinformation_bizchange_id in  
+	        <foreach collection="idsList" item="item" index="index" open="(" separator="," close=")">  
+                #{item.businessId}
+            </foreach>  
+   		</if>
+   		<!-- 根据权限过滤 -->
+   	<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+    </where>
+  </select>
+  <!-- 新增变更信息 -->
+  <insert id="insertBizChangeInfo" parameterType="com.xunge.model.towerrent.bizchange.TowerRentinformationBizchangeVO" >
+    insert into twr_rentinformation_bizchange
+        (twr_rentinformation_bizchange_id,
+        reg_id,
+        operator,
+        business_confirm_number,
+        tower_station_code,
+        change_item,
+        change_before_content,
+        change_behind_content,
+        change_active_date,
+        if_ascend,
+        ascend_fee,
+        check_state,
+        change_reason)
+        values
+    <foreach collection="list" item="item" index="index" separator="," > 
+       ( #{item.twrRentinformationBizchangeId,jdbcType=VARCHAR},
+        #{item.regId,jdbcType=VARCHAR},
+        #{item.operator,jdbcType=VARCHAR},
+        #{item.businessConfirmNumber,jdbcType=VARCHAR},
+        #{item.towerStationCode,jdbcType=VARCHAR},
+        #{item.changeItem,jdbcType=VARCHAR},
+        #{item.changeBeforeContent,jdbcType=VARCHAR},
+        #{item.changeBehindContent,jdbcType=VARCHAR},
+        #{item.changeActiveDate,jdbcType=TIMESTAMP},
+        #{item.ifAscend,jdbcType=BIT},
+        #{item.ascendFee,jdbcType=DECIMAL},
+        #{item.auditState,jdbcType=INTEGER},
+        #{item.changeReason,jdbcType=VARCHAR})
+     </foreach>
+  </insert>
+</mapper>

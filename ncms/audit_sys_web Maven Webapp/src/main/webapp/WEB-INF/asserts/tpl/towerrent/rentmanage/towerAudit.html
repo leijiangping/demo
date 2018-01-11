@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css"/>
+    <link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+    <title>铁塔资源对比审核--审核</title>
+</head>
+<body>
+    <div id="towerAudit">
+        <div class="search_title">详细信息</div>
+        <ul class="list-group">
+            <li class="list-group-item row">
+                <div class="col-md-3">业务确认单号</div>
+                <div class="col-md-3" id="businessConfirmNumber"></div>
+                <div class="col-md-3">铁塔公司站址编码</div>
+                <div class="col-md-3" id="towerStationCode"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">地市</div>
+                <div class="col-md-3" id="pRegName"></div>
+                <div class="col-md-3">区县</div>
+                <div class="col-md-3" id="regName"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">详细地址</div>
+                <div class="col-md-3" id="detailAddress"></div>
+                <div class="col-md-3">实际最高天线挂高（米）</div>
+                <div class="col-md-3" id="antennaHeightRangeId"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">经度</div>
+                <div class="col-md-3" id="longitude"></div>
+                <div class="col-md-3">维度</div>
+                <div class="col-md-3" id="latitude"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">产品配置</div>
+                <div class="col-md-3" id="productConfigurationId"></div>
+                <div class="col-md-3">RRU拉远时BBU是否放在铁塔公司机房</div>
+                <div class="col-md-3" id="">否</div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">铁塔既有共享客户总数</div>
+                <div class="col-md-3" id="currentTowerShareNum"></div>
+                <div class="col-md-3">机房及配套既有共享客户总数</div>
+                <div class="col-md-3" id="currentRoomSupportingShareNum"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">铁塔存量新增共享客户数</div>
+                <div class="col-md-3" id="addTowerShareNum">20</div>
+                <div class="col-md-3">机房及配套存量新增共享客户数</div>
+                <div class="col-md-3" id="addRoomSupportingShareNum">0</div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">0-6点是否可上站</div>
+                <div class="col-md-3" id="isSpecEnterStation"></div>
+                <div class="col-md-3">维护等级</div>
+                <div class="col-md-3" id="maintenanceLevelId"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">电力保障服务费模式</div>
+                <div class="col-md-3" id="electricProtectionMethodId"></div>
+                <div class="col-md-3">是否具备发电条件</div>
+                <div class="col-md-3" id="ifHasPowerCondition"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">是否选择发电服务</div>
+                <div class="col-md-3" id="ifSelectPowerService"></div>
+                <div class="col-md-3">油机发电服务费模式</div>
+                <div class="col-md-3" id="oilGenerateElectricMethodId"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">包干电费（元/年）（不含税）</div>
+                <div class="col-md-3" id="electricProtectionFee"></div>
+                <div class="col-md-3">油机发电服务费（元/年）（不含税）</div>
+                <div class="col-md-3" id="oilGenerateElectricMethodId"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">超过10%高等级服务站址额外维护服务费（元/年）（不含税）</div>
+                <div class="col-md-3" id="hightLevelFee"></div>
+                <div class="col-md-3">BBU安装在铁塔机房的服务费（元/年）（不含税）</div>
+                <div class="col-md-3" id=""></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">其他费用（元/年）（不含税）</div>
+                <div class="col-md-3" id="otherFee"></div>
+                <div class="col-md-3">其他费用说明</div>
+                <div class="col-md-3" id="otherFeeRemark"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">铁塔基准价格（元/年）（不含税）</div>
+                <div class="col-md-3" id=""></div>
+                <div class="col-md-3">机房及配套基准价格（元/年）（不含税）</div>
+                <div class="col-md-3" id=""></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">维护费（元/年）（不含税）</div>
+                <div class="col-md-3" id="maintenanceFee"></div>
+                <div class="col-md-3">产品单元数</div>
+                <div class="col-md-3" id="unitProductNumber"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">场地费（元/年）（不含税）</div>
+                <div class="col-md-3" id="stageFee"></div>
+                <div class="col-md-3">电力引入费（元/年）（不含税）</div>
+                <div class="col-md-3" id="electricImportFee"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">维护费折扣</div>
+                <div class="col-md-3" id="maintenanceFeeDis"></div>
+                <div class="col-md-3">场地费折扣</div>
+                <div class="col-md-3" id="stageFeeDis"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">电力引入费折扣</div>
+                <div class="col-md-3" id="electricImportFeeDis"></div>
+                <div class="col-md-3">铁塔共享折扣</div>
+                <div class="col-md-3" id="towerShareDis"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">机房及配套享折扣</div>
+                <div class="col-md-3" id="roomSupportingShareDis"></div>
+                <div class="col-md-3">服务起始日期</div>
+                <div class="col-md-3" id="startDate"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-3">服务结束日期</div>
+                <div class="col-md-3" id="endDate"></div>
+                <div class="col-md-3">产品服务费合计（元/年）（不含税）</div>
+                <div class="col-md-3" id="totalAmount"></div>
+            </li>
+        </ul>
+        <div class="search_title">进行审核</div>
+        <form action="" class="form-horizontal" id="dataForm">
+        	<div class="container">
+				<div class="row">
+  					<div class="col-md-6">
+  						<label class="control-label">审核状态：</label>
+				        <select name="" id="isverify" class="redColor">
+				             <option value="0">通过</option>
+				             <option value="-1">退回</option>
+				        </select>
+  					</div>
+  					<div class="col-md-6" style="text-align:right;">
+  						<label class="control-label" >审核人：</label>
+  						<select id="nextUsers" name="roleName" class="selectpicker" data-hide-disabled="true" data-size="4"></select>
+                  	  	<span id="err" class="modal-error"></span>
+                		<!-- <input type="text" name="roleName" id="auditor"> -->
+  					</div>
+  				</div>
+  				<div class="row">
+  					<div class="col-md-6">
+  						<label class="control-label" style=" position: relative;top: -30px;">审核备注：</label>
+                		<textarea name="auditRemark" id="auditRemark" col="20" rows="2"></textarea>
+                		<span id="err" class="modal-error"></span>
+  					</div>
+  					<div class="col-md-6"></div>
+  				</div>
+  				<input type="hidden" name="businessConfirmNumber" value=""/>
+  				<input type="hidden" name="towerStationCode" value=""/>
+  			</div>
+        </form>
+        <div id="histoicFlowList" class="info_check"></div>
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" type="button" onclick="formSubmit();">保存</button>
+            <button class="btn btn-primary" type="button" onclick="goBack();" style="float:right;">返回</button>
+    	</div>
+    </div>
+    <script src="../../../../asserts/lib/jquery.js"></script>
+    <script src="../../../bootstrap/js/ui.loading.js"></script>
+    <script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+	
+    <script src="../../../bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lte IE 9]>
+	 <script src="../../../bootstrap/js/html5shiv.js"></script>
+	 <script src="../../../bootstrap/js/respond.min.js"></script>
+	 <script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="../../../js/common.js?v=3"></script>
+   	<script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js?v=3"></script>
+    <script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="../../../js/page/twrrent/rentmanage/towerAudit.js"></script>
+</body>
+</html>

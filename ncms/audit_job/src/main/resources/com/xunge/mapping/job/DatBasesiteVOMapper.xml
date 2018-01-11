@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.DatBasesiteVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.basedata.DatBasesiteVO" >
+    <id column="basesite_id" property="basesiteId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="prv_sname" property="prvSname" jdbcType="VARCHAR" />
+    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+    <result column="preg_name" property="pregName" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+    <result column="basesite_cuid" property="basesiteCuid" jdbcType="VARCHAR" />
+    <result column="basesite_code" property="basesiteCode" jdbcType="VARCHAR" />
+    <result column="basesite_name" property="basesiteName" jdbcType="VARCHAR" />
+    <result column="basesite_address" property="basesiteAddress" jdbcType="VARCHAR" />
+    <result column="basesite_type" property="basesiteType" jdbcType="INTEGER" />
+    <result column="basesite_state" property="basesiteState" jdbcType="INTEGER" />
+    <result column="basesite_maintenance" property="basesiteMaintenance" jdbcType="INTEGER" />
+    <result column="tower_site_code" property="towerSiteCode" jdbcType="VARCHAR" />
+    <result column="basesite_opendate" property="basesiteOpendate" jdbcType="TIMESTAMP" />
+    <result column="basesite_stopdate" property="basesiteStopdate" jdbcType="TIMESTAMP" />
+    <result column="basesite_belong" property="basesiteBelong" jdbcType="INTEGER" />
+    <result column="basesite_property" property="basesiteProperty" jdbcType="INTEGER" />
+    <result column="basesite_share" property="basesiteShare" jdbcType="INTEGER" />
+    <result column="basesite_longitude" property="basesiteLongitude" jdbcType="DECIMAL" />
+    <result column="basesite_latitude" property="basesiteLatitude" jdbcType="DECIMAL" />
+    <result column="auditing_state" property="auditingState" jdbcType="INTEGER" />
+    <result column="auditing_user_id" property="auditingUserId" jdbcType="VARCHAR" />
+    <result column="auditing_date" property="auditingDate" jdbcType="TIMESTAMP" />
+    <result column="data_from" property="dataFrom" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    basesite_id, prv_id, prv_sname, preg_id, preg_name, reg_id, reg_name, basesite_cuid, 
+    basesite_code, basesite_name, basesite_address, basesite_type, basesite_state, basesite_maintenance, 
+    tower_site_code, basesite_opendate, basesite_stopdate, basesite_belong, basesite_property, 
+    basesite_share, basesite_longitude, basesite_latitude, auditing_state, auditing_user_id, 
+    auditing_date, data_from
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunge.dao.basedata.DatBasesiteVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dat_basesite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dat_basesite
+    where basesite_id = #{basesiteId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dat_basesite
+    where basesite_id = #{basesiteId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunge.dao.basedata.DatBasesiteVOExample" >
+    delete from dat_basesite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.basedata.DatBasesiteVO" >
+    insert into dat_basesite (basesite_id, prv_id, prv_sname, 
+      preg_id, preg_name, reg_id, 
+      reg_name, basesite_cuid, basesite_code, 
+      basesite_name, basesite_address, basesite_type, 
+      basesite_state, basesite_maintenance, tower_site_code, 
+      basesite_opendate, basesite_stopdate, 
+      basesite_belong, basesite_property, basesite_share, 
+      basesite_longitude, basesite_latitude, auditing_state, 
+      auditing_user_id, auditing_date, data_from
+      )
+    values (#{basesiteId,jdbcType=VARCHAR}, #{prvId,jdbcType=VARCHAR}, #{prvSname,jdbcType=VARCHAR}, 
+      #{pregId,jdbcType=VARCHAR}, #{pregName,jdbcType=VARCHAR}, #{regId,jdbcType=VARCHAR}, 
+      #{regName,jdbcType=VARCHAR}, #{basesiteCuid,jdbcType=VARCHAR}, #{basesiteCode,jdbcType=VARCHAR}, 
+      #{basesiteName,jdbcType=VARCHAR}, #{basesiteAddress,jdbcType=VARCHAR}, #{basesiteType,jdbcType=INTEGER}, 
+      #{basesiteState,jdbcType=INTEGER}, #{basesiteMaintenance,jdbcType=INTEGER}, #{towerSiteCode,jdbcType=VARCHAR}, 
+      #{basesiteOpendate,jdbcType=TIMESTAMP}, #{basesiteStopdate,jdbcType=TIMESTAMP}, 
+      #{basesiteBelong,jdbcType=INTEGER}, #{basesiteProperty,jdbcType=INTEGER}, #{basesiteShare,jdbcType=INTEGER}, 
+      #{basesiteLongitude,jdbcType=DECIMAL}, #{basesiteLatitude,jdbcType=DECIMAL}, #{auditingState,jdbcType=INTEGER}, 
+      #{auditingUserId,jdbcType=VARCHAR}, #{auditingDate,jdbcType=TIMESTAMP}, #{dataFrom,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.basedata.DatBasesiteVO" >
+    insert into dat_basesite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="basesiteId != null" >
+        basesite_id,
+      </if>
+      <if test="prvId != null" >
+        prv_id,
+      </if>
+      <if test="prvSname != null" >
+        prv_sname,
+      </if>
+      <if test="pregId != null" >
+        preg_id,
+      </if>
+      <if test="pregName != null" >
+        preg_name,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="regName != null" >
+        reg_name,
+      </if>
+      <if test="basesiteCuid != null" >
+        basesite_cuid,
+      </if>
+      <if test="basesiteCode != null" >
+        basesite_code,
+      </if>
+      <if test="basesiteName != null" >
+        basesite_name,
+      </if>
+      <if test="basesiteAddress != null" >
+        basesite_address,
+      </if>
+      <if test="basesiteType != null" >
+        basesite_type,
+      </if>
+      <if test="basesiteState != null" >
+        basesite_state,
+      </if>
+      <if test="basesiteMaintenance != null" >
+        basesite_maintenance,
+      </if>
+      <if test="towerSiteCode != null" >
+        tower_site_code,
+      </if>
+      <if test="basesiteOpendate != null" >
+        basesite_opendate,
+      </if>
+      <if test="basesiteStopdate != null" >
+        basesite_stopdate,
+      </if>
+      <if test="basesiteBelong != null" >
+        basesite_belong,
+      </if>
+      <if test="basesiteProperty != null" >
+        basesite_property,
+      </if>
+      <if test="basesiteShare != null" >
+        basesite_share,
+      </if>
+      <if test="basesiteLongitude != null" >
+        basesite_longitude,
+      </if>
+      <if test="basesiteLatitude != null" >
+        basesite_latitude,
+      </if>
+      <if test="auditingState != null" >
+        auditing_state,
+      </if>
+      <if test="auditingUserId != null" >
+        auditing_user_id,
+      </if>
+      <if test="auditingDate != null" >
+        auditing_date,
+      </if>
+      <if test="dataFrom != null" >
+        data_from,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="basesiteId != null" >
+        #{basesiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvId != null" >
+        #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvSname != null" >
+        #{prvSname,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null" >
+        #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="pregName != null" >
+        #{pregName,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null" >
+        #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteCuid != null" >
+        #{basesiteCuid,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteCode != null" >
+        #{basesiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteName != null" >
+        #{basesiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteAddress != null" >
+        #{basesiteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteType != null" >
+        #{basesiteType,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteState != null" >
+        #{basesiteState,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteMaintenance != null" >
+        #{basesiteMaintenance,jdbcType=INTEGER},
+      </if>
+      <if test="towerSiteCode != null" >
+        #{towerSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteOpendate != null" >
+        #{basesiteOpendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basesiteStopdate != null" >
+        #{basesiteStopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basesiteBelong != null" >
+        #{basesiteBelong,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteProperty != null" >
+        #{basesiteProperty,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteShare != null" >
+        #{basesiteShare,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteLongitude != null" >
+        #{basesiteLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="basesiteLatitude != null" >
+        #{basesiteLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="auditingState != null" >
+        #{auditingState,jdbcType=INTEGER},
+      </if>
+      <if test="auditingUserId != null" >
+        #{auditingUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditingDate != null" >
+        #{auditingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataFrom != null" >
+        #{dataFrom,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunge.dao.basedata.DatBasesiteVOExample" resultType="java.lang.Integer" >
+    select count(*) from dat_basesite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dat_basesite
+    <set >
+    	update_time = now(),
+      <if test="record.basesiteId != null" >
+        basesite_id = #{record.basesiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prvId != null" >
+        prv_id = #{record.prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prvSname != null" >
+        prv_sname = #{record.prvSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pregId != null" >
+        preg_id = #{record.pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pregName != null" >
+        preg_name = #{record.pregName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regId != null" >
+        reg_id = #{record.regId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regName != null" >
+        reg_name = #{record.regName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basesiteCuid != null" >
+        basesite_cuid = #{record.basesiteCuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basesiteCode != null" >
+        basesite_code = #{record.basesiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basesiteName != null" >
+        basesite_name = #{record.basesiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basesiteAddress != null" >
+        basesite_address = #{record.basesiteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basesiteType != null" >
+        basesite_type = #{record.basesiteType,jdbcType=INTEGER},
+      </if>
+      <if test="record.basesiteState != null" >
+        basesite_state = #{record.basesiteState,jdbcType=INTEGER},
+      </if>
+      <if test="record.basesiteMaintenance != null" >
+        basesite_maintenance = #{record.basesiteMaintenance,jdbcType=INTEGER},
+      </if>
+      <if test="record.towerSiteCode != null" >
+        tower_site_code = #{record.towerSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basesiteOpendate != null" >
+        basesite_opendate = #{record.basesiteOpendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.basesiteStopdate != null" >
+        basesite_stopdate = #{record.basesiteStopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.basesiteBelong != null" >
+        basesite_belong = #{record.basesiteBelong,jdbcType=INTEGER},
+      </if>
+      <if test="record.basesiteProperty != null" >
+        basesite_property = #{record.basesiteProperty,jdbcType=INTEGER},
+      </if>
+      <if test="record.basesiteShare != null" >
+        basesite_share = #{record.basesiteShare,jdbcType=INTEGER},
+      </if>
+      <if test="record.basesiteLongitude != null" >
+        basesite_longitude = #{record.basesiteLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.basesiteLatitude != null" >
+        basesite_latitude = #{record.basesiteLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.auditingState != null" >
+        auditing_state = #{record.auditingState,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditingUserId != null" >
+        auditing_user_id = #{record.auditingUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditingDate != null" >
+        auditing_date = #{record.auditingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataFrom != null" >
+        data_from = #{record.dataFrom,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dat_basesite
+    set update_time = now(),
+      basesite_id = #{record.basesiteId,jdbcType=VARCHAR},
+      prv_id = #{record.prvId,jdbcType=VARCHAR},
+      prv_sname = #{record.prvSname,jdbcType=VARCHAR},
+      preg_id = #{record.pregId,jdbcType=VARCHAR},
+      preg_name = #{record.pregName,jdbcType=VARCHAR},
+      reg_id = #{record.regId,jdbcType=VARCHAR},
+      reg_name = #{record.regName,jdbcType=VARCHAR},
+      basesite_cuid = #{record.basesiteCuid,jdbcType=VARCHAR},
+      basesite_code = #{record.basesiteCode,jdbcType=VARCHAR},
+      basesite_name = #{record.basesiteName,jdbcType=VARCHAR},
+      basesite_address = #{record.basesiteAddress,jdbcType=VARCHAR},
+      basesite_type = #{record.basesiteType,jdbcType=INTEGER},
+      basesite_state = #{record.basesiteState,jdbcType=INTEGER},
+      basesite_maintenance = #{record.basesiteMaintenance,jdbcType=INTEGER},
+      tower_site_code = #{record.towerSiteCode,jdbcType=VARCHAR},
+      basesite_opendate = #{record.basesiteOpendate,jdbcType=TIMESTAMP},
+      basesite_stopdate = #{record.basesiteStopdate,jdbcType=TIMESTAMP},
+      basesite_belong = #{record.basesiteBelong,jdbcType=INTEGER},
+      basesite_property = #{record.basesiteProperty,jdbcType=INTEGER},
+      basesite_share = #{record.basesiteShare,jdbcType=INTEGER},
+      basesite_longitude = #{record.basesiteLongitude,jdbcType=DECIMAL},
+      basesite_latitude = #{record.basesiteLatitude,jdbcType=DECIMAL},
+      auditing_state = #{record.auditingState,jdbcType=INTEGER},
+      auditing_user_id = #{record.auditingUserId,jdbcType=VARCHAR},
+      auditing_date = #{record.auditingDate,jdbcType=TIMESTAMP},
+      data_from = #{record.dataFrom,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.DatBasesiteVO" >
+    update dat_basesite
+    <set >update_time = now(),
+      <if test="prvId != null" >
+        prv_id = #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvSname != null" >
+        prv_sname = #{prvSname,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null" >
+        preg_id = #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="pregName != null" >
+        preg_name = #{pregName,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null" >
+        reg_name = #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteCuid != null" >
+        basesite_cuid = #{basesiteCuid,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteCode != null" >
+        basesite_code = #{basesiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteName != null" >
+        basesite_name = #{basesiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteAddress != null" >
+        basesite_address = #{basesiteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteType != null" >
+        basesite_type = #{basesiteType,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteState != null" >
+        basesite_state = #{basesiteState,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteMaintenance != null" >
+        basesite_maintenance = #{basesiteMaintenance,jdbcType=INTEGER},
+      </if>
+      <if test="towerSiteCode != null" >
+        tower_site_code = #{towerSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="basesiteOpendate != null" >
+        basesite_opendate = #{basesiteOpendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basesiteStopdate != null" >
+        basesite_stopdate = #{basesiteStopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basesiteBelong != null" >
+        basesite_belong = #{basesiteBelong,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteProperty != null" >
+        basesite_property = #{basesiteProperty,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteShare != null" >
+        basesite_share = #{basesiteShare,jdbcType=INTEGER},
+      </if>
+      <if test="basesiteLongitude != null" >
+        basesite_longitude = #{basesiteLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="basesiteLatitude != null" >
+        basesite_latitude = #{basesiteLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="auditingState != null" >
+        auditing_state = #{auditingState,jdbcType=INTEGER},
+      </if>
+      <if test="auditingUserId != null" >
+        auditing_user_id = #{auditingUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditingDate != null" >
+        auditing_date = #{auditingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataFrom != null" >
+        data_from = #{dataFrom,jdbcType=INTEGER},
+      </if>
+    </set>
+    where basesite_id = #{basesiteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.DatBasesiteVO" >
+    update dat_basesite
+    set update_time = now(), 
+      prv_id = #{prvId,jdbcType=VARCHAR},
+      prv_sname = #{prvSname,jdbcType=VARCHAR},
+      preg_id = #{pregId,jdbcType=VARCHAR},
+      preg_name = #{pregName,jdbcType=VARCHAR},
+      reg_id = #{regId,jdbcType=VARCHAR},
+      reg_name = #{regName,jdbcType=VARCHAR},
+      basesite_cuid = #{basesiteCuid,jdbcType=VARCHAR},
+      basesite_code = #{basesiteCode,jdbcType=VARCHAR},
+      basesite_name = #{basesiteName,jdbcType=VARCHAR},
+      basesite_address = #{basesiteAddress,jdbcType=VARCHAR},
+      basesite_type = #{basesiteType,jdbcType=INTEGER},
+      basesite_state = #{basesiteState,jdbcType=INTEGER},
+      basesite_maintenance = #{basesiteMaintenance,jdbcType=INTEGER},
+      tower_site_code = #{towerSiteCode,jdbcType=VARCHAR},
+      basesite_opendate = #{basesiteOpendate,jdbcType=TIMESTAMP},
+      basesite_stopdate = #{basesiteStopdate,jdbcType=TIMESTAMP},
+      basesite_belong = #{basesiteBelong,jdbcType=INTEGER},
+      basesite_property = #{basesiteProperty,jdbcType=INTEGER},
+      basesite_share = #{basesiteShare,jdbcType=INTEGER},
+      basesite_longitude = #{basesiteLongitude,jdbcType=DECIMAL},
+      basesite_latitude = #{basesiteLatitude,jdbcType=DECIMAL},
+      auditing_state = #{auditingState,jdbcType=INTEGER},
+      auditing_user_id = #{auditingUserId,jdbcType=VARCHAR},
+      auditing_date = #{auditingDate,jdbcType=TIMESTAMP},
+      data_from = #{dataFrom,jdbcType=INTEGER}
+    where basesite_id = #{basesiteId,jdbcType=VARCHAR}
+  </update>
+  
+    <insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">  
+<!--     <selectKey resultType="long" keyProperty="id" order="AFTER">  
+        SELECT  
+        LAST_INSERT_ID()  
+    </selectKey> -->  
+       insert into dat_basesite (basesite_id, prv_id, prv_sname, 
+      preg_id, preg_name, reg_id, 
+      reg_name, basesite_cuid, basesite_code, 
+      basesite_name, basesite_address, basesite_type, 
+      basesite_state, basesite_maintenance, tower_site_code, 
+      basesite_opendate, basesite_stopdate, 
+      basesite_belong, basesite_property, basesite_share, 
+      basesite_longitude, basesite_latitude,auditing_state,
+      auditing_user_id, auditing_date,data_from, create_time, create_user, create_ip
+      )
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.basesiteId,jdbcType=VARCHAR}, #{item.prvId,jdbcType=VARCHAR}, #{item.prvSname,jdbcType=VARCHAR}, 
+      #{item.pregId,jdbcType=VARCHAR}, #{item.pregName,jdbcType=VARCHAR}, #{item.regId,jdbcType=VARCHAR}, 
+      #{item.regName,jdbcType=VARCHAR}, #{item.basesiteCuid,jdbcType=VARCHAR}, #{item.basesiteCode,jdbcType=VARCHAR}, 
+      #{item.basesiteName,jdbcType=VARCHAR}, #{item.basesiteAddress,jdbcType=VARCHAR}, #{item.basesiteType,jdbcType=INTEGER}, 
+      #{item.basesiteState,jdbcType=INTEGER}, #{item.basesiteMaintenance,jdbcType=INTEGER}, #{item.towerSiteCode,jdbcType=VARCHAR}, 
+      #{item.basesiteOpendate,jdbcType=TIMESTAMP}, #{item.basesiteStopdate,jdbcType=TIMESTAMP}, 
+      #{item.basesiteBelong,jdbcType=INTEGER}, #{item.basesiteProperty,jdbcType=INTEGER}, #{item.basesiteShare,jdbcType=INTEGER}, 
+      #{item.basesiteLongitude,jdbcType=DECIMAL}, #{item.basesiteLatitude,jdbcType=DECIMAL},#{item.auditingState,jdbcType=INTEGER},
+      #{item.auditingUserId,jdbcType=VARCHAR}, #{item.auditingDate,jdbcType=TIMESTAMP}, #{item.dataFrom,jdbcType=INTEGER},
+      #{item.create_time,jdbcType=TIMESTAMP}, #{item.create_user,jdbcType=VARCHAR}, #{item.create_ip,jdbcType=VARCHAR})
+    </foreach>  
+</insert>  
+
+<update id="batchUpdate"  parameterType="java.util.List">
+	 
+     <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		update dat_basesite 
+		<set>
+		    update_time = #{item.update_time,jdbcType=TIMESTAMP},
+	  update_user = #{item.update_user,jdbcType=VARCHAR},
+	  update_ip = #{item.update_ip,jdbcType=VARCHAR},
+      <if test="item.regId != null and item.regId != ''">
+      	reg_id = #{item.regId,jdbcType=VARCHAR},
+      </if>
+      basesite_code = #{item.basesiteCode,jdbcType=VARCHAR},
+      basesite_name = #{item.basesiteName,jdbcType=VARCHAR},
+      basesite_address = #{item.basesiteAddress,jdbcType=VARCHAR},
+      basesite_type = #{item.basesiteType,jdbcType=INTEGER},
+      basesite_state = #{item.basesiteState,jdbcType=INTEGER},
+      basesite_maintenance = #{item.basesiteMaintenance,jdbcType=INTEGER},
+      tower_site_code = #{item.towerSiteCode,jdbcType=VARCHAR},
+      basesite_opendate = #{item.basesiteOpendate,jdbcType=TIMESTAMP},
+      basesite_stopdate = #{item.basesiteStopdate,jdbcType=TIMESTAMP},
+      basesite_belong = #{item.basesiteBelong,jdbcType=INTEGER},
+      basesite_property = #{item.basesiteProperty,jdbcType=INTEGER},
+      basesite_share = #{item.basesiteShare,jdbcType=INTEGER},
+      basesite_longitude = #{item.basesiteLongitude,jdbcType=DECIMAL},
+      basesite_latitude = #{item.basesiteLatitude,jdbcType=DECIMAL},
+      auditing_state = #{item.auditingState,jdbcType=INTEGER},
+      auditing_user_id = #{item.auditingUserId,jdbcType=VARCHAR},
+      auditing_date = #{item.auditingDate,jdbcType=TIMESTAMP},
+      data_from = #{item.dataFrom,jdbcType=INTEGER}
+				</set>
+				where basesite_cuid = #{item.basesiteCuid} AND prv_id = #{item.prvId}
+		 </foreach>
+		 
+    </update>
+    <!--删除-->
+    <delete id="delByCuidsAndPrvid" parameterType="java.util.Map">
+        DELETE from dat_basesite
+        WHERE prv_id=#{prvId} AND basesite_cuid IN
+        <foreach collection="list" item="item"  index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

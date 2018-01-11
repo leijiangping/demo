@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.HighUpVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizbasedata.HighUpVO" >
+	    <id column="highup_id" property="highupId" jdbcType="VARCHAR" />
+	    <result column="producttype_id" property="producttypeId" jdbcType="VARCHAR" />
+	    <result column="producttype_name" property="producttypeName" jdbcType="VARCHAR" />
+	    <result column="highup_name" property="highupName" jdbcType="VARCHAR" />
+	    <result column="highup_upper" property="highupUpper" jdbcType="DECIMAL" />
+	    <result column="highup_lower" property="highupLower" jdbcType="DECIMAL" />
+	    <result column="highup_state" property="highupState" jdbcType="INTEGER" />
+	    <result column="highup_note" property="highupNote" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <!-- 查询挂高对象-->
+	<select id="queryAllHighUp" resultMap="BaseResultMap" parameterType="Map">
+		select
+			  th.highup_id,
+			  th.producttype_id,
+			  pro.producttype_name,
+			  th.highup_name,
+			  th.highup_upper,
+			  th.highup_lower,
+			  th.highup_state,
+			  th.highup_note
+		from
+		twr_highup th inner join twr_producttype pro on th.producttype_id = pro.producttype_id
+		where  th.highup_state != -1
+	</select>
+	
+	 <!-- 删除挂高对象-->
+	<delete id="deleteByHighUpId" parameterType="Map">
+		update twr_highup
+		set highup_state = -1
+		where highup_id in 
+		<foreach collection="highUpIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	 <!-- 修改挂高对象-->
+	<update id="updateHighVOById" parameterType="com.xunge.model.towerrent.bizbasedata.HighUpVO">
+		update twr_highup
+		set
+			highup_name = #{highupName,jdbcType=VARCHAR},
+			highup_upper = #{highupUpper,jdbcType=DECIMAL},
+			highup_lower = #{highupLower,jdbcType=DECIMAL},
+			highup_note = #{highupNote,jdbcType=VARCHAR},
+			producttype_id = #{producttypeId,jdbcType=VARCHAR}
+		where highup_id = #{highupId,jdbcType=VARCHAR}
+	</update>
+	
+	 <!-- 更新挂高对象状态-->
+	<update id="updateHighUpState" parameterType="Map">
+		update twr_highup th set th.highup_state = #{highupState,jdbcType=INTEGER} 
+		where th.highup_id in 
+		<foreach collection="highUpIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	 <!-- 新增挂高对象-->
+	<insert id="addHighUpObj" parameterType="com.xunge.model.towerrent.bizbasedata.HighUpVO">
+		insert into twr_highup
+		    (highup_id,
+			producttype_id,
+			highup_name,
+		    highup_upper,
+		    highup_lower,
+		    highup_state,
+			highup_note)
+		values(
+		#{highupId,jdbcType=VARCHAR},
+		#{producttypeId,jdbcType=VARCHAR},
+		#{highupName,jdbcType=VARCHAR},
+		#{highupUpper,jdbcType=DECIMAL},
+		#{highupLower,jdbcType=DECIMAL},
+		0,
+		#{highupNote,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	 <!-- 按条件过滤对象-->
+	<select id="queryHighUpVOByStateAndName" resultMap="BaseResultMap" parameterType="Map">
+        select
+			  th.highup_id,
+			  th.producttype_id,
+			  pro.producttype_name,
+			  th.highup_name,
+			  th.highup_upper,
+			  th.highup_lower,
+			  th.highup_state,
+			  th.highup_note
+		from
+		twr_highup th inner join twr_producttype pro on th.producttype_id = pro.producttype_id
+		where highup_id != '' and th.highup_state != -1
+       	<if test="highupState != null and highupState != ''">
+	    	and th.highup_state = #{highupState,jdbcType=INTEGER}
+		</if>
+		<if test="producttypeId != null and producttypeId != ''">
+	    	and th.producttype_id = #{producttypeId,jdbcType=VARCHAR}
+		</if>
+		<if test="highupName != null and highupName != ''">
+		    and th.highup_name like 
+		    CONCAT('%',#{highupName,jdbcType=VARCHAR},'%')
+		 </if>
+	</select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- 铁塔、移动侧账单 -->
+ 	<bean id="towerBillbalanceDao" class="com.xunge.dao.twrrent.settlement.impl.TowerBillbalanceDaoImpl"> 
+ 	</bean> 
+ 	<!-- 地市扣罚表 -->
+	<bean id="twrRegPunishDao" class="com.xunge.dao.twrrent.punish.impl.TwrRegPunishDaoImpl"> 
+ 	</bean>
+ 	<!-- 集团扣罚表 -->
+	<bean id="twrGroupPunishDao" class="com.xunge.dao.twrrent.punish.impl.TwrGroupPunishDaoImpl"> 
+ 	</bean> 
+ 	<!-- 集团扣罚汇总表 -->
+	<bean id="twrGroupRegPunishDao" class="com.xunge.dao.twrrent.punish.impl.TwrGroupRegPunishDaoImpl"> 
+ 	</bean> 
+ 	<!-- 扣罚汇总表 -->
+ 	<bean id="twrSummaryPunishDao" class="com.xunge.dao.twrrent.punish.impl.TwrSummaryPunishDaoImpl"> 
+ 	</bean> 
+</beans>

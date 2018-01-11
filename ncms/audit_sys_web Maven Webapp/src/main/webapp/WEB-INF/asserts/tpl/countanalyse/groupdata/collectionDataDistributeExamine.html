@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../../../css/ncms_page.css" rel="stylesheet">
+    <title>数据收集（已派发）查看</title>
+</head>
+<body>
+	<!--<form id="batchDownloadsForm" method="post" action="uploadZip">		
+   		<input type="hidden" id="datacollectIds">
+   		<input type="hidden" id="distributePrvs">
+		<div class="btn-toolbar">
+	        <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>	        
+    		<button type="sumbit" class="btn btn-primary">所有省份批量下载</button>
+	        <button type="button" class="btn btn-danger" onclick="closeWorkOrder()">完结工单</button>
+   		</div>
+	</form>-->
+
+    <form class="form-inline" id="dataForm" method="post" action="">
+    	<div class="btn-toolbar">
+	        <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>	        
+    		<button type="button" class="btn btn-primary" onclick="batchDownload()">所有省份批量下载</button>
+	        <button type="button" class="btn btn-danger" onclick="closeWorkOrder()">完结工单</button>
+	        <input type="hidden" id="distributePrvs">
+   		</div>
+        <ul class="list-group report-list">
+        	<input type="hidden" id="datacollectId">
+        	<li class="list-group-item row">
+                <div class="col-md-2 report-item">标题：</div>
+                <div class="col-md-10 report-mm" id="datacollectTitle"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-2 report-item">处理时限：</div>
+                <div class="col-md-10 report-mm" id="datacollectDeadline"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-2 report-item">派发时间：</div>
+                <div class="col-md-10 report-mm" id="datacollectDate"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-2 report-item">正文：</div>
+                <div class="col-md-10 report-mm" id="datacollectNote"></div>
+            </li>
+            <li class="list-group-item row">
+                <div class="col-md-2 report-item">上报省份及状态：</div>
+                <div class="col-md-10" id="distribute">
+                </div>
+            </li>
+            <li class="list-group-item row" id="examineTbData">      
+       			<table id="datacollectExamineTb">
+       				<thead>
+       					<tr>
+	       					<th>数据类型</th>
+	       					<th>上报文件</th>
+       					</tr>
+       				</thead>
+       				<tbody>
+       				</tbody>
+       			</table> 
+            </li>            
+            <li class="list-group-item row" id="prvData">
+                <div class="col-md-2 report-item">备注：</div>
+                <div class="col-md-10 report-mm" id="notePrvData"></div>
+            </li>
+            <li class="list-group-item row" id="OtherData">
+                <div class="col-md-2 report-item">其他文件：</div>
+                <div class="col-md-10">
+                	<table id="datacollectOtherTb">
+	       				<thead>
+		       				<tr>
+		       					<th>文件名称</th>
+		       					<th>下载</th>
+		       				</tr>	
+	       				</thead>
+	       				<tbody>
+	       				</tbody>
+	       			</table>
+                </div>
+            </li>         
+            <li class="list-group-item row" id="opinionData">
+            </li>
+            <li class="list-group-item row" id="operationData">
+            	<div class="col-md-2 report-item">操作日志：</div>
+                <div class="col-md-10">
+	            	<table id="operationDataTb">
+	       				<thead>
+		       				<tr>
+		       					<th>序号</th>
+		       					<th>操作记录</th>
+		       					<th>操作时间</th>
+		       				</tr>	
+	       				</thead>
+	       				<tbody>
+	       				</tbody>
+	       			</table>
+	       		</div>	
+            </li>
+       	</ul>
+       	<div id="loading" style="position: absolute;top: 50%;left: 50%;"></div>   
+    </form>
+	<script src="../../../../asserts/lib/jquery.2.0.3.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../js/common.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../../js/page/countanalyse/groupdata/collectionDataDistributeExamine.js"></script>
+	
+</body>
+</html>
+
+

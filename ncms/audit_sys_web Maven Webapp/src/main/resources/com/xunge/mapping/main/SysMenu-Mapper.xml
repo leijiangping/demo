@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunge.dao.SysMenuDao">
+  <resultMap id="BaseResultMap" type="com.xunge.model.SysMenuVO">
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_note" jdbcType="VARCHAR" property="menuNote" />
+    <result column="pmenu_id" jdbcType="VARCHAR" property="pmenuId" />
+    <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
+    <result column="menu_state" jdbcType="INTEGER" property="menuState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_code, menu_name, menu_url, menu_note, pmenu_id, menu_order, menu_state
+  </sql>
+  <resultMap id="BaseResultMap_AutoMenu" type="com.xunge.model.SysAutoMenuVO">
+    <id column="menu_id" jdbcType="VARCHAR" property="id" />
+    <result column="menu_code" jdbcType="VARCHAR" property="code" />
+    <result column="menu_name" jdbcType="VARCHAR" property="name" />
+    <result column="menu_url" jdbcType="VARCHAR" property="url" />
+    <result column="pmenu_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="menu_order" jdbcType="INTEGER" property="order" />
+    <result column="menu_icon" jdbcType="INTEGER" property="icon" />
+  </resultMap>
+  <sql id="Base_Column_List_AutoMenu">
+    m.menu_id, m.menu_code, m.menu_name, m.menu_url, m.pmenu_id, m.menu_order,IFNULL(m.menu_icon, '') as menu_icon
+  </sql>
+  <resultMap id="BaseResultMap_TreeNode" type="com.xunge.model.system.mannage.MenuTreeNodeVO">
+    <id column="menu_id" jdbcType="VARCHAR" property="id" />
+    <result column="pmenu_id" jdbcType="VARCHAR" property="pid" />
+    <result column="menu_name" jdbcType="VARCHAR" property="name" />
+    <result column="menu_code" jdbcType="VARCHAR" property="code" />
+    <result column="menu_url" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="menu_order" jdbcType="VARCHAR" property="order" />
+    <result column="menu_state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List_TreeNode">
+    menu_id, menu_code, menu_name, pmenu_id, menu_url, menu_order,menu_state
+  </sql>
+  
+  <!-- 模糊查询 -->
+  <select id="queryMenuByConditions" parameterType="Map" resultMap="BaseResultMap_TreeNode"> 
+     select 
+	    <include refid="Base_Column_List_TreeNode" />
+     from sys_menu  
+     <where> 
+    	<if test="menuCode != '' and menuCode != null">
+     		and menu_code like CONCAT('%',#{menuCode,jdbcType=VARCHAR},'%')
+     	</if>
+     	<if test="menuName != '' and menuName != null">
+     		and menu_name like CONCAT('%',#{menuName,jdbcType=VARCHAR},'%') 
+     	</if>
+     </where>
+   </select> 
+   
+  	<!-- 根据pmenuId查询所有子菜单list -->
+  	<select id="querySystemMenuTree" parameterType="Map" resultMap="BaseResultMap_TreeNode">
+	  	select 
+			DISTINCT
+			mout.* 
+		from(
+			select 
+		    	<include refid="Base_Column_List_TreeNode" />
+			FROM
+				sys_menu m
+			WHERE
+				m.menu_id = #{menuId,jdbcType=VARCHAR}
+			union all 
+			select 
+				<include refid="Base_Column_List_TreeNode" />
+			FROM
+				sys_menu m
+			WHERE
+				m.menu_code like CONCAT(#{menuId,jdbcType=VARCHAR},'%')
+		) mout
+  	</select>
+  	
+  <!-- 查询顶级菜单 -->
+  <select id="queryMenuIndexByRole" parameterType="Map" resultMap="BaseResultMap_AutoMenu">
+    select DISTINCT
+  		<include refid="Base_Column_List_AutoMenu" />
+	FROM 
+		sys_menu m 
+	INNER JOIN 
+		sys_rolemenu r
+	ON 
+		m.menu_id = r.menu_id
+	WHERE 
+		r.role_id in
+	   	<foreach collection="role_ids" item="item" index="index" open="(" separator="," close=")">  
+	    	#{item}  
+	    </foreach>
+	AND m.menu_state = #{menu_state,jdbcType=VARCHAR} 
+	ORDER BY
+		m.menu_order
+  </select>
+  
+  <!-- 查询父id下一层子菜单 -->
+  <select id="querySecondMenuIndexByRole" parameterType="Map" resultMap="BaseResultMap_AutoMenu">
+    select DISTINCT
+    <include refid="Base_Column_List_AutoMenu" />
+	FROM
+		sys_menu m
+	INNER JOIN 
+		sys_rolemenu r
+	ON 
+		m.menu_id = r.menu_id
+	WHERE
+		r.role_id in
+	   	<foreach collection="role_ids" item="item" index="index" open="(" separator="," close=")">  
+	    	#{item}  
+	    </foreach>
+	AND
+		m.menu_state = #{menu_state,jdbcType=VARCHAR}
+	AND m.menu_code like CONCAT(#{pmenu_code,jdbcType=VARCHAR},'%')
+	AND m.menu_code != #{pmenu_code,jdbcType=VARCHAR}
+	ORDER BY
+		m.pmenu_id, m.menu_order
+  </select>
+  
+  	<!-- 查询父id下一层子菜单-返回结点 -->
+  	<select id="getMenuTreeNodeByMenuId" parameterType="Map" resultMap="BaseResultMap_TreeNode">
+	    select DISTINCT
+	    <include refid="Base_Column_List_TreeNode" />
+		FROM
+			sys_menu m
+		WHERE
+			m.pmenu_id = #{pmenuId,jdbcType=VARCHAR}
+  	</select>
+  	
+  	<!-- 根据code查询单条菜单 -->
+  <select id="queryMenuitemByCode" parameterType="Map" resultMap="BaseResultMap_TreeNode">
+    select 
+	    <include refid="Base_Column_List_TreeNode" />
+	FROM 
+		sys_menu m 
+	WHERE 
+		m.menu_code = #{menu_code,jdbcType=VARCHAR} 
+  </select>
+  
+	<!-- 批量修改状态 -->
+  	<update id="updateMenuStateBatch" parameterType="Map">
+		update sys_menu m set m.menu_state=#{state}
+	    where 1=1
+		<if test="idsList != null and idsList.size()>0">  
+	        and m.menu_id in  
+	        <foreach collection="idsList" item="item" index="index" open="(" separator="," close=")">  
+                #{item}  
+            </foreach>  
+    	</if>
+	</update>
+  
+	<!-- 新增菜单结点 -->
+  	<insert id="insertMenuNode" parameterType="com.xunge.model.SysMenuVO">
+		insert into sys_menu values(
+			#{menuId,jdbcType=VARCHAR},
+			#{menuCode,jdbcType=VARCHAR},
+			#{menuName,jdbcType=VARCHAR},
+			#{menuUrl,jdbcType=VARCHAR},
+			#{menuIcon,jdbcType=VARCHAR},
+			#{menuNote,jdbcType=VARCHAR},
+			#{pmenuId,jdbcType=VARCHAR},
+			#{menuOrder,jdbcType=INTEGER},
+			#{menuState,jdbcType=INTEGER}
+		)  
+	</insert> 
+  
+	<!-- 修改菜单结点信息 -->
+  	<update id="updateMenuNode" parameterType="com.xunge.model.SysMenuVO">
+		update sys_menu m set 
+			m.menu_code=#{menuCode,jdbcType=VARCHAR},
+			m.menu_name=#{menuName,jdbcType=VARCHAR},
+			m.menu_url=#{menuUrl,jdbcType=VARCHAR},
+			m.menu_note=#{menuNote,jdbcType=VARCHAR},
+			m.menu_order=#{menuOrder,jdbcType=INTEGER},
+			m.menu_state=#{menuState,jdbcType=INTEGER}
+	    where m.menu_id=#{menuId,jdbcType=VARCHAR}
+	</update>
+  
+  <!-- 查询角色访问权限 -->
+	<select id="queryUrlAuthor" parameterType="Map" resultType="java.lang.Integer">
+	select 
+		count(menu_code) 
+	from 
+		sys_menu sm 
+	LEFT JOIN sys_rolemenu srm on srm.menu_id=sm.menu_id
+	LEFT JOIN sys_role sr on srm.role_id = sr.role_id
+	where sr.role_state=0
+		<if test="roleIds != null and roleIds.size()>0">  
+	        and sr.role_id in  
+	        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">  
+                #{item}  
+            </foreach>  
+    	</if>
+	and sm.menu_url=#{url,jdbcType=VARCHAR}
+  	</select>
+</mapper>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.TwrGroupRegPunishVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.punish.TwrGroupRegPunishVO" >
+    <id column="twr_group_reg_punish_id" property="twrGroupRegPunishId" jdbcType="VARCHAR" />
+    <result column="accountsummary_id" property="accountsummaryId" jdbcType="VARCHAR" />
+    <result column="punish_year_month" property="punishYearMonth" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="punishAmount" property="punishamount" jdbcType="DECIMAL" />
+    <result column="towerBaseStationCount" property="towerbasestationcount" jdbcType="INTEGER" />
+    <result column="avgPunishAmount" property="avgpunishamount" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    twr_group_reg_punish_id, accountsummary_id, punish_year_month, reg_id, punishAmount, 
+    towerBaseStationCount, avgPunishAmount, state, create_user_id, create_time, update_user_id, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from twr_group_reg_punish
+    where twr_group_reg_punish_id = #{twrGroupRegPunishId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from twr_group_reg_punish
+    where twr_group_reg_punish_id = #{twrGroupRegPunishId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.towerrent.punish.TwrGroupRegPunishVO" >
+    insert into twr_group_reg_punish (twr_group_reg_punish_id, accountsummary_id, 
+      punish_year_month, reg_id, punishAmount, 
+      towerBaseStationCount, avgPunishAmount, 
+      state, create_user_id, create_time, 
+      update_user_id, update_time)
+    values (#{twrGroupRegPunishId,jdbcType=VARCHAR}, #{accountsummaryId,jdbcType=VARCHAR}, 
+      #{punishYearMonth,jdbcType=VARCHAR}, #{regId,jdbcType=VARCHAR}, #{punishamount,jdbcType=DECIMAL}, 
+      #{towerbasestationcount,jdbcType=INTEGER}, #{avgpunishamount,jdbcType=DECIMAL}, 
+      #{state,jdbcType=INTEGER}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <!-- 新增集团扣罚信息汇总 -->
+  <insert id="insertSelective" parameterType="com.xunge.model.towerrent.punish.TwrGroupRegPunishVO" >
+    insert into twr_group_reg_punish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="twrGroupRegPunishId != null" >
+        twr_group_reg_punish_id,
+      </if>
+      <if test="accountsummaryId != null" >
+        accountsummary_id,
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="punishamount != null" >
+        punishAmount,
+      </if>
+      <if test="towerbasestationcount != null" >
+        towerBaseStationCount,
+      </if>
+      <if test="avgpunishamount != null" >
+        avgPunishAmount,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="twrGroupRegPunishId != null" >
+        #{twrGroupRegPunishId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountsummaryId != null" >
+        #{accountsummaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishYearMonth != null" >
+        #{punishYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishamount != null" >
+        #{punishamount,jdbcType=DECIMAL},
+      </if>
+      <if test="towerbasestationcount != null" >
+        #{towerbasestationcount,jdbcType=INTEGER},
+      </if>
+      <if test="avgpunishamount != null" >
+        #{avgpunishamount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <!-- 修改集团扣罚信息汇总表 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.towerrent.punish.TwrGroupRegPunishVO" >
+    update twr_group_reg_punish
+    <set >
+      <if test="accountsummaryId != null" >
+        accountsummary_id = #{accountsummaryId},
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month = #{punishYearMonth},
+      </if>
+      <if test="regId != null" >
+        reg_id = #{regId},
+      </if>
+      <if test="punishamount != null" >
+        punishAmount = #{punishamount},
+      </if>
+      <if test="towerbasestationcount != null" >
+        towerBaseStationCount = #{towerbasestationcount},
+      </if>
+      <if test="avgpunishamount != null" >
+        avgPunishAmount = #{avgpunishamount},
+      </if>
+      <if test="state != null" >
+        state = #{state},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where twr_group_reg_punish_id = #{twrGroupRegPunishId}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.towerrent.punish.TwrGroupRegPunishVO" >
+    update twr_group_reg_punish
+    set accountsummary_id = #{accountsummaryId,jdbcType=VARCHAR},
+      punish_year_month = #{punishYearMonth,jdbcType=VARCHAR},
+      reg_id = #{regId,jdbcType=VARCHAR},
+      punishAmount = #{punishamount,jdbcType=DECIMAL},
+      towerBaseStationCount = #{towerbasestationcount,jdbcType=INTEGER},
+      avgPunishAmount = #{avgpunishamount,jdbcType=DECIMAL},
+      state = #{state,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where twr_group_reg_punish_id = #{twrGroupRegPunishId,jdbcType=VARCHAR}
+  </update>
+  <!-- 根据年月和地市id查找集团扣罚汇总信息 -->
+  <select id="queryGroupRegPunish" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from twr_group_reg_punish
+  	where punish_year_month = #{punishYearMonth}
+  	and reg_id = #{regId}
+  	and state = #{state}
+  </select>
+  <!-- 根据省份id查询省份信息 -->
+  <select id="queryPrvCodeById" parameterType="Map" resultType="java.lang.String">
+  	select prv_code 
+  	from sys_province
+  	where prv_id = #{regId}
+  </select>
+  <!-- 根据地市id和年月查询罚金合计 -->
+  <select id="queryGroupAmount" parameterType="Map" resultType="BigDecimal">
+  	select sum(punishAmount)
+  	from twr_group_reg_punish
+  	where punish_year_month = #{punishYearMonth}
+  	and reg_id = #{regId}
+  </select>
+</mapper>

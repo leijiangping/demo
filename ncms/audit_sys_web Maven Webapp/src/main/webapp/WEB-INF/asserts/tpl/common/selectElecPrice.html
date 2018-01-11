@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<style>
+#ElecPriceForm1 .modal-error{
+display:none;}
+</style>
+</head>
+<body>
+	<div class="modal fade" id="ElecPricePanel1" tabindex="-1" role="dialog" aria-labelledby="ElecPricePanel1">
+  		<div class="modal-dialog" role="document" style="width:600px;">
+    	<div class="modal-content">
+			<div class="modal-body">
+				<form id="ElecPriceForm1" class="form-inline" role="form">
+					<table class="table table-bordered table-striped table-hover" id="ElecPriceTb1">
+						<thead style="text-align: center;">
+							<tr>
+								<th>类型</th>
+								<th>值</th>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle;">平单价</td>
+								<td><input class="form-control" id="flatPriceSet" onblur="blurF(this)" style="float:left;" name="flatPriceSet" type="text"/>
+									<span style="float:left;margin-left:8px;padding-top:10px">元</span>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle;">峰单价</td>
+								<td><input class="form-control" id="peakPriceSet" onblur="blurF(this)" style="float:left;" name="peakPriceSet" type="text"/>
+									<span style="float:left;margin-left:8px;padding-top:10px">元</span>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle;">谷单价</td>
+								<td><input class="form-control" id="valleyPriceSet" onblur="blurF(this)" style="float:left;" name="valleyPriceSet" type="text"/><span style="float:left;margin-left:8px;padding-top:10px">元</span>
+								<span id="err1" class="modal-error"><span style="width: 40%; position: absolute;  bottom: 22%; right: 20%;color: red;"><img src="../../../image/error.png">请至少输入一项电费单价</span></span>
+ 								<span id="err2" class="modal-error"><span style="width: 40%;position: absolute;  bottom: 22%; right: 20%;color: green;"><img src="../../../image/right_1.png">验证成功</span></span>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle;">尖单价</td>
+								<td><input class="form-control" id="TopPrice" onblur="blurF(this)" style="float:left;" name="TopPrice" type="text"/>
+									<span style="float:left;margin-left:8px;padding-top:10px">元</span>
+								</td>
+							</tr>
+						</thead>
+					</table>
+	           	</form>
+	           	
+				<div class="modal-footer">
+					<a class="btn" onClick="closeM()">关闭</a> 
+					<a class="btn btn-success" onclick="submit1();">确认</a>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<!-- 站点弹出页面 -->
+	<div class="modal fade" id="ElecPricePanel" tabindex="-1" role="dialog" aria-labelledby="ElecPricePanel">
+  		<div class="modal-dialog" role="document" style="width:600px;">
+    	<div class="modal-content">
+			<div class="modal-body">
+				<form id="ElecPriceForm" class="form-inline" role="form">
+					<table class="table table-bordered table-striped table-hover" id="ElecPriceTb" style="text-align: center;">
+						<tr>
+							<th style="text-align: center;vertical-align: middle;">类型</th>
+							<th style="text-align: center;vertical-align: middle;">值</th>
+							<th style="text-align: center;vertical-align: middle;">操作<button type="button" class="btn btn-primary" onclick="add();">+</button></th>
+						</tr>
+						<tr>
+							<td>电费单价</td>
+							<td>
+								<input class="form-control" id="price1" style="float:left;" name="price1" type="text"/>
+								<span id="err" class="modal-error"  style="position: absolute;top: 0px;left: 205px;"></span>
+								<span style="float:left;margin-left:8px;padding-top:10px">元</span>
+							</td>
+							<td><a href='#' class='btn' onclick='remove(this)'>删除</a></td>
+						</tr>
+					</table>
+	           	</form>
+				<div class="modal-footer">
+					<a class="btn" onclick="closeM();">关闭</a> 
+					<a class="btn btn-success" onclick="submit();">确认</a>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

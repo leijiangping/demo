@@ -1,0 +1,1340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.ring.PowerPerfVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.basedata.ring.PowerPerfVO" >
+    <id column="power_id" property="powerId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="prv_sname" property="prvSname" jdbcType="VARCHAR" />
+    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+    <result column="preg_name" property="pregName" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+    <result column="resource_type" property="resourceType" jdbcType="INTEGER" />
+    <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="code_type" property="codeType" jdbcType="INTEGER" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="stop_time" property="stopTime" jdbcType="TIMESTAMP" />
+    <result column="smps_loss" property="smpsLoss" jdbcType="REAL" />
+    <result column="v1" property="v1" jdbcType="REAL" />
+    <result column="a1" property="a1" jdbcType="REAL" />
+    <result column="v2" property="v2" jdbcType="REAL" />
+    <result column="a2" property="a2" jdbcType="REAL" />
+    <result column="v3" property="v3" jdbcType="REAL" />
+    <result column="a3" property="a3" jdbcType="REAL" />
+    <result column="v4" property="v4" jdbcType="REAL" />
+    <result column="a4" property="a4" jdbcType="REAL" />
+    <result column="v5" property="v5" jdbcType="REAL" />
+    <result column="a5" property="a5" jdbcType="REAL" />
+    <result column="v6" property="v6" jdbcType="REAL" />
+    <result column="a6" property="a6" jdbcType="REAL" />
+    <result column="v7" property="v7" jdbcType="REAL" />
+    <result column="a7" property="a7" jdbcType="REAL" />
+    <result column="v8" property="v8" jdbcType="REAL" />
+    <result column="a8" property="a8" jdbcType="REAL" />
+    <result column="v9" property="v9" jdbcType="REAL" />
+    <result column="a9" property="a9" jdbcType="REAL" />
+    <result column="v10" property="v10" jdbcType="REAL" />
+    <result column="a10" property="a10" jdbcType="REAL" />
+    <result column="v11" property="v11" jdbcType="REAL" />
+    <result column="a11" property="a11" jdbcType="REAL" />
+    <result column="v12" property="v12" jdbcType="REAL" />
+    <result column="a12" property="a12" jdbcType="REAL" />
+    <result column="v13" property="v13" jdbcType="REAL" />
+    <result column="a13" property="a13" jdbcType="REAL" />
+    <result column="v14" property="v14" jdbcType="REAL" />
+    <result column="a14" property="a14" jdbcType="REAL" />
+    <result column="v15" property="v15" jdbcType="REAL" />
+    <result column="a15" property="a15" jdbcType="REAL" />
+    <result column="v16" property="v16" jdbcType="REAL" />
+    <result column="a16" property="a16" jdbcType="REAL" />
+    <result column="v17" property="v17" jdbcType="REAL" />
+    <result column="a17" property="a17" jdbcType="REAL" />
+    <result column="v18" property="v18" jdbcType="REAL" />
+    <result column="a18" property="a18" jdbcType="REAL" />
+    <result column="v19" property="v19" jdbcType="REAL" />
+    <result column="a19" property="a19" jdbcType="REAL" />
+    <result column="v20" property="v20" jdbcType="REAL" />
+    <result column="a20" property="a20" jdbcType="REAL" />
+    <result column="v21" property="v21" jdbcType="REAL" />
+    <result column="a21" property="a21" jdbcType="REAL" />
+    <result column="v22" property="v22" jdbcType="REAL" />
+    <result column="a22" property="a22" jdbcType="REAL" />
+    <result column="v23" property="v23" jdbcType="REAL" />
+    <result column="a23" property="a23" jdbcType="REAL" />
+    <result column="v24" property="v24" jdbcType="REAL" />
+    <result column="a24" property="a24" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    power_id, prv_id, prv_sname, preg_id, preg_name, reg_id, reg_name, resource_type, 
+    resource_code, code_type, resource_name, start_time, stop_time, smps_loss, v1, a1, 
+    v2, a2, v3, a3, v4, a4, v5, a5, v6, a6, v7, a7, v8, a8, v9, a9, v10, a10, v11, a11, 
+    v12, a12, v13, a13, v14, a14, v15, a15, v16, a16, v17, a17, v18, a18, v19, a19, v20, 
+    a20, v21, a21, v22, a22, v23, a23, v24, a24
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunge.model.basedata.ring.PowerPerfVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from performance_power
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from performance_power
+    where power_id = #{powerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from performance_power
+    where power_id = #{powerId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunge.model.basedata.ring.PowerPerfVOExample" >
+    delete from performance_power
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.basedata.ring.PowerPerfVO" >
+    insert into performance_power (power_id, prv_id, prv_sname, 
+      preg_id, preg_name, reg_id, 
+      reg_name, resource_type, resource_code, 
+      code_type, resource_name, start_time, 
+      stop_time, smps_loss, v1, 
+      a1, v2, a2, v3, 
+      a3, v4, a4, v5, 
+      a5, v6, a6, v7, 
+      a7, v8, a8, v9, 
+      a9, v10, a10, v11, 
+      a11, v12, a12, v13, 
+      a13, v14, a14, v15, 
+      a15, v16, a16, v17, 
+      a17, v18, a18, v19, 
+      a19, v20, a20, v21, 
+      a21, v22, a22, v23, 
+      a23, v24, a24)
+    values (#{powerId,jdbcType=VARCHAR}, #{prvId,jdbcType=VARCHAR}, #{prvSname,jdbcType=VARCHAR}, 
+      #{pregId,jdbcType=VARCHAR}, #{pregName,jdbcType=VARCHAR}, #{regId,jdbcType=VARCHAR}, 
+      #{regName,jdbcType=VARCHAR}, #{resourceType,jdbcType=INTEGER}, #{resourceCode,jdbcType=VARCHAR}, 
+      #{codeType,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{stopTime,jdbcType=TIMESTAMP}, #{smpsLoss,jdbcType=REAL}, #{v1,jdbcType=REAL}, 
+      #{a1,jdbcType=REAL}, #{v2,jdbcType=REAL}, #{a2,jdbcType=REAL}, #{v3,jdbcType=REAL}, 
+      #{a3,jdbcType=REAL}, #{v4,jdbcType=REAL}, #{a4,jdbcType=REAL}, #{v5,jdbcType=REAL}, 
+      #{a5,jdbcType=REAL}, #{v6,jdbcType=REAL}, #{a6,jdbcType=REAL}, #{v7,jdbcType=REAL}, 
+      #{a7,jdbcType=REAL}, #{v8,jdbcType=REAL}, #{a8,jdbcType=REAL}, #{v9,jdbcType=REAL}, 
+      #{a9,jdbcType=REAL}, #{v10,jdbcType=REAL}, #{a10,jdbcType=REAL}, #{v11,jdbcType=REAL}, 
+      #{a11,jdbcType=REAL}, #{v12,jdbcType=REAL}, #{a12,jdbcType=REAL}, #{v13,jdbcType=REAL}, 
+      #{a13,jdbcType=REAL}, #{v14,jdbcType=REAL}, #{a14,jdbcType=REAL}, #{v15,jdbcType=REAL}, 
+      #{a15,jdbcType=REAL}, #{v16,jdbcType=REAL}, #{a16,jdbcType=REAL}, #{v17,jdbcType=REAL}, 
+      #{a17,jdbcType=REAL}, #{v18,jdbcType=REAL}, #{a18,jdbcType=REAL}, #{v19,jdbcType=REAL}, 
+      #{a19,jdbcType=REAL}, #{v20,jdbcType=REAL}, #{a20,jdbcType=REAL}, #{v21,jdbcType=REAL}, 
+      #{a21,jdbcType=REAL}, #{v22,jdbcType=REAL}, #{a22,jdbcType=REAL}, #{v23,jdbcType=REAL}, 
+      #{a23,jdbcType=REAL}, #{v24,jdbcType=REAL}, #{a24,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.basedata.ring.PowerPerfVO" >
+    insert into performance_power
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="powerId != null" >
+        power_id,
+      </if>
+      <if test="prvId != null" >
+        prv_id,
+      </if>
+      <if test="prvSname != null" >
+        prv_sname,
+      </if>
+      <if test="pregId != null" >
+        preg_id,
+      </if>
+      <if test="pregName != null" >
+        preg_name,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="regName != null" >
+        reg_name,
+      </if>
+      <if test="resourceType != null" >
+        resource_type,
+      </if>
+      <if test="resourceCode != null" >
+        resource_code,
+      </if>
+      <if test="codeType != null" >
+        code_type,
+      </if>
+      <if test="resourceName != null" >
+        resource_name,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="stopTime != null" >
+        stop_time,
+      </if>
+      <if test="smpsLoss != null" >
+        smps_loss,
+      </if>
+      <if test="v1 != null" >
+        v1,
+      </if>
+      <if test="a1 != null" >
+        a1,
+      </if>
+      <if test="v2 != null" >
+        v2,
+      </if>
+      <if test="a2 != null" >
+        a2,
+      </if>
+      <if test="v3 != null" >
+        v3,
+      </if>
+      <if test="a3 != null" >
+        a3,
+      </if>
+      <if test="v4 != null" >
+        v4,
+      </if>
+      <if test="a4 != null" >
+        a4,
+      </if>
+      <if test="v5 != null" >
+        v5,
+      </if>
+      <if test="a5 != null" >
+        a5,
+      </if>
+      <if test="v6 != null" >
+        v6,
+      </if>
+      <if test="a6 != null" >
+        a6,
+      </if>
+      <if test="v7 != null" >
+        v7,
+      </if>
+      <if test="a7 != null" >
+        a7,
+      </if>
+      <if test="v8 != null" >
+        v8,
+      </if>
+      <if test="a8 != null" >
+        a8,
+      </if>
+      <if test="v9 != null" >
+        v9,
+      </if>
+      <if test="a9 != null" >
+        a9,
+      </if>
+      <if test="v10 != null" >
+        v10,
+      </if>
+      <if test="a10 != null" >
+        a10,
+      </if>
+      <if test="v11 != null" >
+        v11,
+      </if>
+      <if test="a11 != null" >
+        a11,
+      </if>
+      <if test="v12 != null" >
+        v12,
+      </if>
+      <if test="a12 != null" >
+        a12,
+      </if>
+      <if test="v13 != null" >
+        v13,
+      </if>
+      <if test="a13 != null" >
+        a13,
+      </if>
+      <if test="v14 != null" >
+        v14,
+      </if>
+      <if test="a14 != null" >
+        a14,
+      </if>
+      <if test="v15 != null" >
+        v15,
+      </if>
+      <if test="a15 != null" >
+        a15,
+      </if>
+      <if test="v16 != null" >
+        v16,
+      </if>
+      <if test="a16 != null" >
+        a16,
+      </if>
+      <if test="v17 != null" >
+        v17,
+      </if>
+      <if test="a17 != null" >
+        a17,
+      </if>
+      <if test="v18 != null" >
+        v18,
+      </if>
+      <if test="a18 != null" >
+        a18,
+      </if>
+      <if test="v19 != null" >
+        v19,
+      </if>
+      <if test="a19 != null" >
+        a19,
+      </if>
+      <if test="v20 != null" >
+        v20,
+      </if>
+      <if test="a20 != null" >
+        a20,
+      </if>
+      <if test="v21 != null" >
+        v21,
+      </if>
+      <if test="a21 != null" >
+        a21,
+      </if>
+      <if test="v22 != null" >
+        v22,
+      </if>
+      <if test="a22 != null" >
+        a22,
+      </if>
+      <if test="v23 != null" >
+        v23,
+      </if>
+      <if test="a23 != null" >
+        a23,
+      </if>
+      <if test="v24 != null" >
+        v24,
+      </if>
+      <if test="a24 != null" >
+        a24,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="powerId != null" >
+        #{powerId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvId != null" >
+        #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvSname != null" >
+        #{prvSname,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null" >
+        #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="pregName != null" >
+        #{pregName,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null" >
+        #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceCode != null" >
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeType != null" >
+        #{codeType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null" >
+        #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="smpsLoss != null" >
+        #{smpsLoss,jdbcType=REAL},
+      </if>
+      <if test="v1 != null" >
+        #{v1,jdbcType=REAL},
+      </if>
+      <if test="a1 != null" >
+        #{a1,jdbcType=REAL},
+      </if>
+      <if test="v2 != null" >
+        #{v2,jdbcType=REAL},
+      </if>
+      <if test="a2 != null" >
+        #{a2,jdbcType=REAL},
+      </if>
+      <if test="v3 != null" >
+        #{v3,jdbcType=REAL},
+      </if>
+      <if test="a3 != null" >
+        #{a3,jdbcType=REAL},
+      </if>
+      <if test="v4 != null" >
+        #{v4,jdbcType=REAL},
+      </if>
+      <if test="a4 != null" >
+        #{a4,jdbcType=REAL},
+      </if>
+      <if test="v5 != null" >
+        #{v5,jdbcType=REAL},
+      </if>
+      <if test="a5 != null" >
+        #{a5,jdbcType=REAL},
+      </if>
+      <if test="v6 != null" >
+        #{v6,jdbcType=REAL},
+      </if>
+      <if test="a6 != null" >
+        #{a6,jdbcType=REAL},
+      </if>
+      <if test="v7 != null" >
+        #{v7,jdbcType=REAL},
+      </if>
+      <if test="a7 != null" >
+        #{a7,jdbcType=REAL},
+      </if>
+      <if test="v8 != null" >
+        #{v8,jdbcType=REAL},
+      </if>
+      <if test="a8 != null" >
+        #{a8,jdbcType=REAL},
+      </if>
+      <if test="v9 != null" >
+        #{v9,jdbcType=REAL},
+      </if>
+      <if test="a9 != null" >
+        #{a9,jdbcType=REAL},
+      </if>
+      <if test="v10 != null" >
+        #{v10,jdbcType=REAL},
+      </if>
+      <if test="a10 != null" >
+        #{a10,jdbcType=REAL},
+      </if>
+      <if test="v11 != null" >
+        #{v11,jdbcType=REAL},
+      </if>
+      <if test="a11 != null" >
+        #{a11,jdbcType=REAL},
+      </if>
+      <if test="v12 != null" >
+        #{v12,jdbcType=REAL},
+      </if>
+      <if test="a12 != null" >
+        #{a12,jdbcType=REAL},
+      </if>
+      <if test="v13 != null" >
+        #{v13,jdbcType=REAL},
+      </if>
+      <if test="a13 != null" >
+        #{a13,jdbcType=REAL},
+      </if>
+      <if test="v14 != null" >
+        #{v14,jdbcType=REAL},
+      </if>
+      <if test="a14 != null" >
+        #{a14,jdbcType=REAL},
+      </if>
+      <if test="v15 != null" >
+        #{v15,jdbcType=REAL},
+      </if>
+      <if test="a15 != null" >
+        #{a15,jdbcType=REAL},
+      </if>
+      <if test="v16 != null" >
+        #{v16,jdbcType=REAL},
+      </if>
+      <if test="a16 != null" >
+        #{a16,jdbcType=REAL},
+      </if>
+      <if test="v17 != null" >
+        #{v17,jdbcType=REAL},
+      </if>
+      <if test="a17 != null" >
+        #{a17,jdbcType=REAL},
+      </if>
+      <if test="v18 != null" >
+        #{v18,jdbcType=REAL},
+      </if>
+      <if test="a18 != null" >
+        #{a18,jdbcType=REAL},
+      </if>
+      <if test="v19 != null" >
+        #{v19,jdbcType=REAL},
+      </if>
+      <if test="a19 != null" >
+        #{a19,jdbcType=REAL},
+      </if>
+      <if test="v20 != null" >
+        #{v20,jdbcType=REAL},
+      </if>
+      <if test="a20 != null" >
+        #{a20,jdbcType=REAL},
+      </if>
+      <if test="v21 != null" >
+        #{v21,jdbcType=REAL},
+      </if>
+      <if test="a21 != null" >
+        #{a21,jdbcType=REAL},
+      </if>
+      <if test="v22 != null" >
+        #{v22,jdbcType=REAL},
+      </if>
+      <if test="a22 != null" >
+        #{a22,jdbcType=REAL},
+      </if>
+      <if test="v23 != null" >
+        #{v23,jdbcType=REAL},
+      </if>
+      <if test="a23 != null" >
+        #{a23,jdbcType=REAL},
+      </if>
+      <if test="v24 != null" >
+        #{v24,jdbcType=REAL},
+      </if>
+      <if test="a24 != null" >
+        #{a24,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunge.model.basedata.ring.PowerPerfVOExample" resultType="java.lang.Integer" >
+    select count(*) from performance_power
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update performance_power
+    <set >
+      <if test="record.powerId != null" >
+        power_id = #{record.powerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prvId != null" >
+        prv_id = #{record.prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prvSname != null" >
+        prv_sname = #{record.prvSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pregId != null" >
+        preg_id = #{record.pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pregName != null" >
+        preg_name = #{record.pregName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regId != null" >
+        reg_id = #{record.regId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regName != null" >
+        reg_name = #{record.regName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceType != null" >
+        resource_type = #{record.resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceCode != null" >
+        resource_code = #{record.resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codeType != null" >
+        code_type = #{record.codeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceName != null" >
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stopTime != null" >
+        stop_time = #{record.stopTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.smpsLoss != null" >
+        smps_loss = #{record.smpsLoss,jdbcType=REAL},
+      </if>
+      <if test="record.v1 != null" >
+        v1 = #{record.v1,jdbcType=REAL},
+      </if>
+      <if test="record.a1 != null" >
+        a1 = #{record.a1,jdbcType=REAL},
+      </if>
+      <if test="record.v2 != null" >
+        v2 = #{record.v2,jdbcType=REAL},
+      </if>
+      <if test="record.a2 != null" >
+        a2 = #{record.a2,jdbcType=REAL},
+      </if>
+      <if test="record.v3 != null" >
+        v3 = #{record.v3,jdbcType=REAL},
+      </if>
+      <if test="record.a3 != null" >
+        a3 = #{record.a3,jdbcType=REAL},
+      </if>
+      <if test="record.v4 != null" >
+        v4 = #{record.v4,jdbcType=REAL},
+      </if>
+      <if test="record.a4 != null" >
+        a4 = #{record.a4,jdbcType=REAL},
+      </if>
+      <if test="record.v5 != null" >
+        v5 = #{record.v5,jdbcType=REAL},
+      </if>
+      <if test="record.a5 != null" >
+        a5 = #{record.a5,jdbcType=REAL},
+      </if>
+      <if test="record.v6 != null" >
+        v6 = #{record.v6,jdbcType=REAL},
+      </if>
+      <if test="record.a6 != null" >
+        a6 = #{record.a6,jdbcType=REAL},
+      </if>
+      <if test="record.v7 != null" >
+        v7 = #{record.v7,jdbcType=REAL},
+      </if>
+      <if test="record.a7 != null" >
+        a7 = #{record.a7,jdbcType=REAL},
+      </if>
+      <if test="record.v8 != null" >
+        v8 = #{record.v8,jdbcType=REAL},
+      </if>
+      <if test="record.a8 != null" >
+        a8 = #{record.a8,jdbcType=REAL},
+      </if>
+      <if test="record.v9 != null" >
+        v9 = #{record.v9,jdbcType=REAL},
+      </if>
+      <if test="record.a9 != null" >
+        a9 = #{record.a9,jdbcType=REAL},
+      </if>
+      <if test="record.v10 != null" >
+        v10 = #{record.v10,jdbcType=REAL},
+      </if>
+      <if test="record.a10 != null" >
+        a10 = #{record.a10,jdbcType=REAL},
+      </if>
+      <if test="record.v11 != null" >
+        v11 = #{record.v11,jdbcType=REAL},
+      </if>
+      <if test="record.a11 != null" >
+        a11 = #{record.a11,jdbcType=REAL},
+      </if>
+      <if test="record.v12 != null" >
+        v12 = #{record.v12,jdbcType=REAL},
+      </if>
+      <if test="record.a12 != null" >
+        a12 = #{record.a12,jdbcType=REAL},
+      </if>
+      <if test="record.v13 != null" >
+        v13 = #{record.v13,jdbcType=REAL},
+      </if>
+      <if test="record.a13 != null" >
+        a13 = #{record.a13,jdbcType=REAL},
+      </if>
+      <if test="record.v14 != null" >
+        v14 = #{record.v14,jdbcType=REAL},
+      </if>
+      <if test="record.a14 != null" >
+        a14 = #{record.a14,jdbcType=REAL},
+      </if>
+      <if test="record.v15 != null" >
+        v15 = #{record.v15,jdbcType=REAL},
+      </if>
+      <if test="record.a15 != null" >
+        a15 = #{record.a15,jdbcType=REAL},
+      </if>
+      <if test="record.v16 != null" >
+        v16 = #{record.v16,jdbcType=REAL},
+      </if>
+      <if test="record.a16 != null" >
+        a16 = #{record.a16,jdbcType=REAL},
+      </if>
+      <if test="record.v17 != null" >
+        v17 = #{record.v17,jdbcType=REAL},
+      </if>
+      <if test="record.a17 != null" >
+        a17 = #{record.a17,jdbcType=REAL},
+      </if>
+      <if test="record.v18 != null" >
+        v18 = #{record.v18,jdbcType=REAL},
+      </if>
+      <if test="record.a18 != null" >
+        a18 = #{record.a18,jdbcType=REAL},
+      </if>
+      <if test="record.v19 != null" >
+        v19 = #{record.v19,jdbcType=REAL},
+      </if>
+      <if test="record.a19 != null" >
+        a19 = #{record.a19,jdbcType=REAL},
+      </if>
+      <if test="record.v20 != null" >
+        v20 = #{record.v20,jdbcType=REAL},
+      </if>
+      <if test="record.a20 != null" >
+        a20 = #{record.a20,jdbcType=REAL},
+      </if>
+      <if test="record.v21 != null" >
+        v21 = #{record.v21,jdbcType=REAL},
+      </if>
+      <if test="record.a21 != null" >
+        a21 = #{record.a21,jdbcType=REAL},
+      </if>
+      <if test="record.v22 != null" >
+        v22 = #{record.v22,jdbcType=REAL},
+      </if>
+      <if test="record.a22 != null" >
+        a22 = #{record.a22,jdbcType=REAL},
+      </if>
+      <if test="record.v23 != null" >
+        v23 = #{record.v23,jdbcType=REAL},
+      </if>
+      <if test="record.a23 != null" >
+        a23 = #{record.a23,jdbcType=REAL},
+      </if>
+      <if test="record.v24 != null" >
+        v24 = #{record.v24,jdbcType=REAL},
+      </if>
+      <if test="record.a24 != null" >
+        a24 = #{record.a24,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update performance_power
+    set power_id = #{record.powerId,jdbcType=VARCHAR},
+      prv_id = #{record.prvId,jdbcType=VARCHAR},
+      prv_sname = #{record.prvSname,jdbcType=VARCHAR},
+      preg_id = #{record.pregId,jdbcType=VARCHAR},
+      preg_name = #{record.pregName,jdbcType=VARCHAR},
+      reg_id = #{record.regId,jdbcType=VARCHAR},
+      reg_name = #{record.regName,jdbcType=VARCHAR},
+      resource_type = #{record.resourceType,jdbcType=INTEGER},
+      resource_code = #{record.resourceCode,jdbcType=VARCHAR},
+      code_type = #{record.codeType,jdbcType=INTEGER},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      stop_time = #{record.stopTime,jdbcType=TIMESTAMP},
+      smps_loss = #{record.smpsLoss,jdbcType=REAL},
+      v1 = #{record.v1,jdbcType=REAL},
+      a1 = #{record.a1,jdbcType=REAL},
+      v2 = #{record.v2,jdbcType=REAL},
+      a2 = #{record.a2,jdbcType=REAL},
+      v3 = #{record.v3,jdbcType=REAL},
+      a3 = #{record.a3,jdbcType=REAL},
+      v4 = #{record.v4,jdbcType=REAL},
+      a4 = #{record.a4,jdbcType=REAL},
+      v5 = #{record.v5,jdbcType=REAL},
+      a5 = #{record.a5,jdbcType=REAL},
+      v6 = #{record.v6,jdbcType=REAL},
+      a6 = #{record.a6,jdbcType=REAL},
+      v7 = #{record.v7,jdbcType=REAL},
+      a7 = #{record.a7,jdbcType=REAL},
+      v8 = #{record.v8,jdbcType=REAL},
+      a8 = #{record.a8,jdbcType=REAL},
+      v9 = #{record.v9,jdbcType=REAL},
+      a9 = #{record.a9,jdbcType=REAL},
+      v10 = #{record.v10,jdbcType=REAL},
+      a10 = #{record.a10,jdbcType=REAL},
+      v11 = #{record.v11,jdbcType=REAL},
+      a11 = #{record.a11,jdbcType=REAL},
+      v12 = #{record.v12,jdbcType=REAL},
+      a12 = #{record.a12,jdbcType=REAL},
+      v13 = #{record.v13,jdbcType=REAL},
+      a13 = #{record.a13,jdbcType=REAL},
+      v14 = #{record.v14,jdbcType=REAL},
+      a14 = #{record.a14,jdbcType=REAL},
+      v15 = #{record.v15,jdbcType=REAL},
+      a15 = #{record.a15,jdbcType=REAL},
+      v16 = #{record.v16,jdbcType=REAL},
+      a16 = #{record.a16,jdbcType=REAL},
+      v17 = #{record.v17,jdbcType=REAL},
+      a17 = #{record.a17,jdbcType=REAL},
+      v18 = #{record.v18,jdbcType=REAL},
+      a18 = #{record.a18,jdbcType=REAL},
+      v19 = #{record.v19,jdbcType=REAL},
+      a19 = #{record.a19,jdbcType=REAL},
+      v20 = #{record.v20,jdbcType=REAL},
+      a20 = #{record.a20,jdbcType=REAL},
+      v21 = #{record.v21,jdbcType=REAL},
+      a21 = #{record.a21,jdbcType=REAL},
+      v22 = #{record.v22,jdbcType=REAL},
+      a22 = #{record.a22,jdbcType=REAL},
+      v23 = #{record.v23,jdbcType=REAL},
+      a23 = #{record.a23,jdbcType=REAL},
+      v24 = #{record.v24,jdbcType=REAL},
+      a24 = #{record.a24,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.ring.PowerPerfVO" >
+    update performance_power
+    <set >
+      <if test="prvId != null" >
+        prv_id = #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvSname != null" >
+        prv_sname = #{prvSname,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null" >
+        preg_id = #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="pregName != null" >
+        preg_name = #{pregName,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null" >
+        reg_name = #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        resource_type = #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceCode != null" >
+        resource_code = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeType != null" >
+        code_type = #{codeType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null" >
+        stop_time = #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="smpsLoss != null" >
+        smps_loss = #{smpsLoss,jdbcType=REAL},
+      </if>
+      <if test="v1 != null" >
+        v1 = #{v1,jdbcType=REAL},
+      </if>
+      <if test="a1 != null" >
+        a1 = #{a1,jdbcType=REAL},
+      </if>
+      <if test="v2 != null" >
+        v2 = #{v2,jdbcType=REAL},
+      </if>
+      <if test="a2 != null" >
+        a2 = #{a2,jdbcType=REAL},
+      </if>
+      <if test="v3 != null" >
+        v3 = #{v3,jdbcType=REAL},
+      </if>
+      <if test="a3 != null" >
+        a3 = #{a3,jdbcType=REAL},
+      </if>
+      <if test="v4 != null" >
+        v4 = #{v4,jdbcType=REAL},
+      </if>
+      <if test="a4 != null" >
+        a4 = #{a4,jdbcType=REAL},
+      </if>
+      <if test="v5 != null" >
+        v5 = #{v5,jdbcType=REAL},
+      </if>
+      <if test="a5 != null" >
+        a5 = #{a5,jdbcType=REAL},
+      </if>
+      <if test="v6 != null" >
+        v6 = #{v6,jdbcType=REAL},
+      </if>
+      <if test="a6 != null" >
+        a6 = #{a6,jdbcType=REAL},
+      </if>
+      <if test="v7 != null" >
+        v7 = #{v7,jdbcType=REAL},
+      </if>
+      <if test="a7 != null" >
+        a7 = #{a7,jdbcType=REAL},
+      </if>
+      <if test="v8 != null" >
+        v8 = #{v8,jdbcType=REAL},
+      </if>
+      <if test="a8 != null" >
+        a8 = #{a8,jdbcType=REAL},
+      </if>
+      <if test="v9 != null" >
+        v9 = #{v9,jdbcType=REAL},
+      </if>
+      <if test="a9 != null" >
+        a9 = #{a9,jdbcType=REAL},
+      </if>
+      <if test="v10 != null" >
+        v10 = #{v10,jdbcType=REAL},
+      </if>
+      <if test="a10 != null" >
+        a10 = #{a10,jdbcType=REAL},
+      </if>
+      <if test="v11 != null" >
+        v11 = #{v11,jdbcType=REAL},
+      </if>
+      <if test="a11 != null" >
+        a11 = #{a11,jdbcType=REAL},
+      </if>
+      <if test="v12 != null" >
+        v12 = #{v12,jdbcType=REAL},
+      </if>
+      <if test="a12 != null" >
+        a12 = #{a12,jdbcType=REAL},
+      </if>
+      <if test="v13 != null" >
+        v13 = #{v13,jdbcType=REAL},
+      </if>
+      <if test="a13 != null" >
+        a13 = #{a13,jdbcType=REAL},
+      </if>
+      <if test="v14 != null" >
+        v14 = #{v14,jdbcType=REAL},
+      </if>
+      <if test="a14 != null" >
+        a14 = #{a14,jdbcType=REAL},
+      </if>
+      <if test="v15 != null" >
+        v15 = #{v15,jdbcType=REAL},
+      </if>
+      <if test="a15 != null" >
+        a15 = #{a15,jdbcType=REAL},
+      </if>
+      <if test="v16 != null" >
+        v16 = #{v16,jdbcType=REAL},
+      </if>
+      <if test="a16 != null" >
+        a16 = #{a16,jdbcType=REAL},
+      </if>
+      <if test="v17 != null" >
+        v17 = #{v17,jdbcType=REAL},
+      </if>
+      <if test="a17 != null" >
+        a17 = #{a17,jdbcType=REAL},
+      </if>
+      <if test="v18 != null" >
+        v18 = #{v18,jdbcType=REAL},
+      </if>
+      <if test="a18 != null" >
+        a18 = #{a18,jdbcType=REAL},
+      </if>
+      <if test="v19 != null" >
+        v19 = #{v19,jdbcType=REAL},
+      </if>
+      <if test="a19 != null" >
+        a19 = #{a19,jdbcType=REAL},
+      </if>
+      <if test="v20 != null" >
+        v20 = #{v20,jdbcType=REAL},
+      </if>
+      <if test="a20 != null" >
+        a20 = #{a20,jdbcType=REAL},
+      </if>
+      <if test="v21 != null" >
+        v21 = #{v21,jdbcType=REAL},
+      </if>
+      <if test="a21 != null" >
+        a21 = #{a21,jdbcType=REAL},
+      </if>
+      <if test="v22 != null" >
+        v22 = #{v22,jdbcType=REAL},
+      </if>
+      <if test="a22 != null" >
+        a22 = #{a22,jdbcType=REAL},
+      </if>
+      <if test="v23 != null" >
+        v23 = #{v23,jdbcType=REAL},
+      </if>
+      <if test="a23 != null" >
+        a23 = #{a23,jdbcType=REAL},
+      </if>
+      <if test="v24 != null" >
+        v24 = #{v24,jdbcType=REAL},
+      </if>
+      <if test="a24 != null" >
+        a24 = #{a24,jdbcType=REAL},
+      </if>
+    </set>
+    where power_id = #{powerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.ring.PowerPerfVO" >
+    update performance_power
+    set prv_id = #{prvId,jdbcType=VARCHAR},
+      prv_sname = #{prvSname,jdbcType=VARCHAR},
+      preg_id = #{pregId,jdbcType=VARCHAR},
+      preg_name = #{pregName,jdbcType=VARCHAR},
+      reg_id = #{regId,jdbcType=VARCHAR},
+      reg_name = #{regName,jdbcType=VARCHAR},
+      resource_type = #{resourceType,jdbcType=INTEGER},
+      resource_code = #{resourceCode,jdbcType=VARCHAR},
+      code_type = #{codeType,jdbcType=INTEGER},
+      resource_name = #{resourceName,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      stop_time = #{stopTime,jdbcType=TIMESTAMP},
+      smps_loss = #{smpsLoss,jdbcType=REAL},
+      v1 = #{v1,jdbcType=REAL},
+      a1 = #{a1,jdbcType=REAL},
+      v2 = #{v2,jdbcType=REAL},
+      a2 = #{a2,jdbcType=REAL},
+      v3 = #{v3,jdbcType=REAL},
+      a3 = #{a3,jdbcType=REAL},
+      v4 = #{v4,jdbcType=REAL},
+      a4 = #{a4,jdbcType=REAL},
+      v5 = #{v5,jdbcType=REAL},
+      a5 = #{a5,jdbcType=REAL},
+      v6 = #{v6,jdbcType=REAL},
+      a6 = #{a6,jdbcType=REAL},
+      v7 = #{v7,jdbcType=REAL},
+      a7 = #{a7,jdbcType=REAL},
+      v8 = #{v8,jdbcType=REAL},
+      a8 = #{a8,jdbcType=REAL},
+      v9 = #{v9,jdbcType=REAL},
+      a9 = #{a9,jdbcType=REAL},
+      v10 = #{v10,jdbcType=REAL},
+      a10 = #{a10,jdbcType=REAL},
+      v11 = #{v11,jdbcType=REAL},
+      a11 = #{a11,jdbcType=REAL},
+      v12 = #{v12,jdbcType=REAL},
+      a12 = #{a12,jdbcType=REAL},
+      v13 = #{v13,jdbcType=REAL},
+      a13 = #{a13,jdbcType=REAL},
+      v14 = #{v14,jdbcType=REAL},
+      a14 = #{a14,jdbcType=REAL},
+      v15 = #{v15,jdbcType=REAL},
+      a15 = #{a15,jdbcType=REAL},
+      v16 = #{v16,jdbcType=REAL},
+      a16 = #{a16,jdbcType=REAL},
+      v17 = #{v17,jdbcType=REAL},
+      a17 = #{a17,jdbcType=REAL},
+      v18 = #{v18,jdbcType=REAL},
+      a18 = #{a18,jdbcType=REAL},
+      v19 = #{v19,jdbcType=REAL},
+      a19 = #{a19,jdbcType=REAL},
+      v20 = #{v20,jdbcType=REAL},
+      a20 = #{a20,jdbcType=REAL},
+      v21 = #{v21,jdbcType=REAL},
+      a21 = #{a21,jdbcType=REAL},
+      v22 = #{v22,jdbcType=REAL},
+      a22 = #{a22,jdbcType=REAL},
+      v23 = #{v23,jdbcType=REAL},
+      a23 = #{a23,jdbcType=REAL},
+      v24 = #{v24,jdbcType=REAL},
+      a24 = #{a24,jdbcType=REAL}
+    where power_id = #{powerId,jdbcType=VARCHAR}
+  </update>
+  
+           <insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">  
+<!--     <selectKey resultType="long" keyProperty="id" order="AFTER">  
+        SELECT  
+        LAST_INSERT_ID()  
+    </selectKey> -->  
+       insert into performance_power (power_id, prv_id, prv_sname, 
+      resource_type, resource_code, code_type, 
+      resource_name, preg_id, preg_name, 
+      reg_id, reg_name, start_time, 
+      stop_time, smps_loss, v1, 
+      a1, v2, a2, v3, 
+      a3, v4, a4, v5, 
+      a5, v6, a6, v7, 
+      a7, v8, a8, v9, 
+      a9, v10, a10, v11, 
+      a11, v12, a12, v13, 
+      a13, v14, a14, v15, 
+      a15, v16, a16, v17, 
+      a17, v18, a18, v19, 
+      a19, v20, a20, v21, 
+      a21, v22, a22, v23, 
+      a23, v24, a24, create_time, create_user, create_ip)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+      (#{item.powerId,jdbcType=VARCHAR}, #{item.prvId,jdbcType=VARCHAR},#{item.prvSname,jdbcType=VARCHAR}, #{item.resourceType,jdbcType=INTEGER}, 
+      #{item.resourceCode,jdbcType=VARCHAR}, #{item.codeType,jdbcType=INTEGER}, #{item.resourceName,jdbcType=VARCHAR}, 
+      #{item.pregId,jdbcType=VARCHAR}, #{item.pregName,jdbcType=VARCHAR}, #{item.regId,jdbcType=VARCHAR}, 
+      #{item.regName,jdbcType=VARCHAR}, #{item.startTime,jdbcType=TIMESTAMP}, #{item.stopTime,jdbcType=TIMESTAMP}, 
+      #{item.smpsLoss,jdbcType=REAL}, #{item.v1,jdbcType=REAL}, #{item.a1,jdbcType=REAL}, #{item.v2,jdbcType=REAL}, 
+      #{item.a2,jdbcType=REAL}, #{item.v3,jdbcType=REAL}, #{item.a3,jdbcType=REAL}, #{item.v4,jdbcType=REAL}, 
+      #{item.a4,jdbcType=REAL}, #{item.v5,jdbcType=REAL}, #{item.a5,jdbcType=REAL}, #{item.v6,jdbcType=REAL}, 
+      #{item.a6,jdbcType=REAL}, #{item.v7,jdbcType=REAL}, #{item.a7,jdbcType=REAL}, #{item.v8,jdbcType=REAL}, 
+      #{item.a8,jdbcType=REAL}, #{item.v9,jdbcType=REAL}, #{item.a9,jdbcType=REAL}, #{item.v10,jdbcType=REAL}, 
+      #{item.a10,jdbcType=REAL}, #{item.v11,jdbcType=REAL}, #{item.a11,jdbcType=REAL}, #{item.v12,jdbcType=REAL}, 
+      #{item.a12,jdbcType=REAL}, #{item.v13,jdbcType=REAL}, #{item.a13,jdbcType=REAL}, #{item.v14,jdbcType=REAL}, 
+      #{item.a14,jdbcType=REAL}, #{item.v15,jdbcType=REAL}, #{item.a15,jdbcType=REAL}, #{item.v16,jdbcType=REAL}, 
+      #{item.a16,jdbcType=REAL}, #{item.v17,jdbcType=REAL}, #{item.a17,jdbcType=REAL}, #{item.v18,jdbcType=REAL}, 
+      #{item.a18,jdbcType=REAL}, #{item.v19,jdbcType=REAL}, #{item.a19,jdbcType=REAL}, #{item.v20,jdbcType=REAL}, 
+      #{item.a20,jdbcType=REAL}, #{item.v21,jdbcType=REAL}, #{item.a21,jdbcType=REAL}, #{item.v22,jdbcType=REAL}, 
+      #{item.a22,jdbcType=REAL}, #{item.v23,jdbcType=REAL}, #{item.a23,jdbcType=REAL}, #{item.v24,jdbcType=REAL}, 
+      #{item.a24,jdbcType=REAL},#{item.create_time,jdbcType=TIMESTAMP}, #{item.create_user,jdbcType=VARCHAR}, #{item.create_ip,jdbcType=VARCHAR})
+    </foreach>  
+</insert>  
+
+	<update id="batchUpdate"  parameterType="java.util.List">
+     <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		update performance_power 
+		<set>
+	      update_time = #{item.update_time,jdbcType=TIMESTAMP},
+	  	  update_user = #{item.update_user,jdbcType=VARCHAR},
+	  	  update_ip = #{item.update_ip,jdbcType=VARCHAR},
+		  prv_id = #{item.prvId,jdbcType=VARCHAR},
+		  prv_sname = #{item.prvSname,jdbcType=VARCHAR},
+	      resource_type = #{item.resourceType,jdbcType=INTEGER},
+	      resource_code = #{item.resourceCode,jdbcType=VARCHAR},
+	      code_type = #{item.codeType,jdbcType=INTEGER},
+	      resource_name = #{item.resourceName,jdbcType=VARCHAR},
+	      preg_id = #{item.pregId,jdbcType=VARCHAR},
+	      preg_name = #{item.pregName,jdbcType=VARCHAR},
+	      reg_id = #{item.regId,jdbcType=VARCHAR},
+	      reg_name = #{item.regName,jdbcType=VARCHAR},
+	      start_time = #{item.startTime,jdbcType=TIMESTAMP},
+	      stop_time = #{item.stopTime,jdbcType=TIMESTAMP},
+	      smps_loss = #{item.smpsLoss,jdbcType=REAL},
+	      v1 = #{item.v1,jdbcType=REAL},
+	      a1 = #{item.a1,jdbcType=REAL},
+	      v2 = #{item.v2,jdbcType=REAL},
+	      a2 = #{item.a2,jdbcType=REAL},
+	      v3 = #{item.v3,jdbcType=REAL},
+	      a3 = #{item.a3,jdbcType=REAL},
+	      v4 = #{item.v4,jdbcType=REAL},
+	      a4 = #{item.a4,jdbcType=REAL},
+	      v5 = #{item.v5,jdbcType=REAL},
+	      a5 = #{item.a5,jdbcType=REAL},
+	      v6 = #{item.v6,jdbcType=REAL},
+	      a6 = #{item.a6,jdbcType=REAL},
+	      v7 = #{item.v7,jdbcType=REAL},
+	      a7 = #{item.a7,jdbcType=REAL},
+	      v8 = #{item.v8,jdbcType=REAL},
+	      a8 = #{item.a8,jdbcType=REAL},
+	      v9 = #{item.v9,jdbcType=REAL},
+	      a9 = #{item.a9,jdbcType=REAL},
+	      v10 = #{item.v10,jdbcType=REAL},
+	      a10 = #{item.a10,jdbcType=REAL},
+	      v11 = #{item.v11,jdbcType=REAL},
+	      a11 = #{item.a11,jdbcType=REAL},
+	      v12 = #{item.v12,jdbcType=REAL},
+	      a12 = #{item.a12,jdbcType=REAL},
+	      v13 = #{item.v13,jdbcType=REAL},
+	      a13 = #{item.a13,jdbcType=REAL},
+	      v14 = #{item.v14,jdbcType=REAL},
+	      a14 = #{item.a14,jdbcType=REAL},
+	      v15 = #{item.v15,jdbcType=REAL},
+	      a15 = #{item.a15,jdbcType=REAL},
+	      v16 = #{item.v16,jdbcType=REAL},
+	      a16 = #{item.a16,jdbcType=REAL},
+	      v17 = #{item.v17,jdbcType=REAL},
+	      a17 = #{item.a17,jdbcType=REAL},
+	      v18 = #{item.v18,jdbcType=REAL},
+	      a18 = #{item.a18,jdbcType=REAL},
+	      v19 = #{item.v19,jdbcType=REAL},
+	      a19 = #{item.a19,jdbcType=REAL},
+	      v20 = #{item.v20,jdbcType=REAL},
+	      a20 = #{item.a20,jdbcType=REAL},
+	      v21 = #{item.v21,jdbcType=REAL},
+	      a21 = #{item.a21,jdbcType=REAL},
+	      v22 = #{item.v22,jdbcType=REAL},
+	      a22 = #{item.a22,jdbcType=REAL},
+	      v23 = #{item.v23,jdbcType=REAL},
+	      a23 = #{item.a23,jdbcType=REAL},
+	      v24 = #{item.v24,jdbcType=REAL},
+	      a24 = #{item.a24,jdbcType=REAL}
+		</set>				
+		where resource_code = #{item.resourceCode} AND prv_id = #{item.prvId}
+	 </foreach>
+    </update>
+    <!--删除-->
+    <delete id="delByCuidsAndPrvid" parameterType="java.util.Map">
+        DELETE from performance_power
+        WHERE prv_id=#{prvId} AND resource_code IN
+        <foreach collection="list" item="item"  index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    
+   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.xunge.model.basedata.ring.PowerPerfVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from performance_power aa
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+        	
+        	<if test="prvId != '' and prvId != null">
+                AND aa.prv_id = #{prvId}
+            </if>
+             <if test="pregId != '' and pregId != null">
+                AND aa.preg_id = #{pregId}
+            </if>
+            <if test="regId != '' and regId != null">
+                AND aa.reg_id = #{regId}
+            </if>
+            <if test="regId == '' or regId == null">
+				AND aa.reg_id  in (
+				select bb.reg_id from sys_userregion bb
+				where bb.relation_state=0
+					and bb.user_id = #{userId,jdbcType=VARCHAR}
+				)
+			</if>
+            <if test="resourceType != '' and resourceType != null">
+                AND aa.resource_type = #{resourceType}
+            </if>
+            <if test="resourceName != '' and resourceName != null">
+                AND (aa.resource_name like #{resourceName} or aa.resource_code like #{resourceName})
+            </if>
+            <if test="queryDate != null ">
+                AND  (aa.start_time like #{queryDate} or aa.stop_time like #{queryDate})
+            </if>
+        </trim>     
+  </select>
+  
+  <resultMap id="RedisMap" type="com.xunge.model.basedata.ring.PowerPerfVO" >
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="prv_sname" property="prvSname" jdbcType="VARCHAR" />
+    <result column="resource_type" property="resourceType" jdbcType="INTEGER" />
+    <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="code_type" property="codeType" jdbcType="INTEGER" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="stop_time" property="stopTime" jdbcType="TIMESTAMP" />
+    <result column="smps_loss" property="smpsLoss" jdbcType="REAL" />
+    <result column="v1" property="v1" jdbcType="REAL" />
+    <result column="a1" property="a1" jdbcType="REAL" />
+    <result column="v2" property="v2" jdbcType="REAL" />
+    <result column="a2" property="a2" jdbcType="REAL" />
+    <result column="v3" property="v3" jdbcType="REAL" />
+    <result column="a3" property="a3" jdbcType="REAL" />
+    <result column="v4" property="v4" jdbcType="REAL" />
+    <result column="a4" property="a4" jdbcType="REAL" />
+    <result column="v5" property="v5" jdbcType="REAL" />
+    <result column="a5" property="a5" jdbcType="REAL" />
+    <result column="v6" property="v6" jdbcType="REAL" />
+    <result column="a6" property="a6" jdbcType="REAL" />
+    <result column="v7" property="v7" jdbcType="REAL" />
+    <result column="a7" property="a7" jdbcType="REAL" />
+    <result column="v8" property="v8" jdbcType="REAL" />
+    <result column="a8" property="a8" jdbcType="REAL" />
+    <result column="v9" property="v9" jdbcType="REAL" />
+    <result column="a9" property="a9" jdbcType="REAL" />
+    <result column="v10" property="v10" jdbcType="REAL" />
+    <result column="a10" property="a10" jdbcType="REAL" />
+    <result column="v11" property="v11" jdbcType="REAL" />
+    <result column="a11" property="a11" jdbcType="REAL" />
+    <result column="v12" property="v12" jdbcType="REAL" />
+    <result column="a12" property="a12" jdbcType="REAL" />
+    <result column="v13" property="v13" jdbcType="REAL" />
+    <result column="a13" property="a13" jdbcType="REAL" />
+    <result column="v14" property="v14" jdbcType="REAL" />
+    <result column="a14" property="a14" jdbcType="REAL" />
+    <result column="v15" property="v15" jdbcType="REAL" />
+    <result column="a15" property="a15" jdbcType="REAL" />
+    <result column="v16" property="v16" jdbcType="REAL" />
+    <result column="a16" property="a16" jdbcType="REAL" />
+    <result column="v17" property="v17" jdbcType="REAL" />
+    <result column="a17" property="a17" jdbcType="REAL" />
+    <result column="v18" property="v18" jdbcType="REAL" />
+    <result column="a18" property="a18" jdbcType="REAL" />
+    <result column="v19" property="v19" jdbcType="REAL" />
+    <result column="a19" property="a19" jdbcType="REAL" />
+    <result column="v20" property="v20" jdbcType="REAL" />
+    <result column="a20" property="a20" jdbcType="REAL" />
+    <result column="v21" property="v21" jdbcType="REAL" />
+    <result column="a21" property="a21" jdbcType="REAL" />
+    <result column="v22" property="v22" jdbcType="REAL" />
+    <result column="a22" property="a22" jdbcType="REAL" />
+    <result column="v23" property="v23" jdbcType="REAL" />
+    <result column="a23" property="a23" jdbcType="REAL" />
+    <result column="v24" property="v24" jdbcType="REAL" />
+    <result column="a24" property="a24" jdbcType="REAL" />
+  </resultMap>	
+ 
+ 	 
+  <select id="selectForRedis" resultMap="RedisMap">
+  	select 
+  	prv_id,prv_sname,resource_type,resource_code,code_type,resource_name,start_time,stop_time,
+      smps_loss,v1, 
+      a1, v2, a2, v3, 
+      a3, v4, a4, v5, 
+      a5, v6, a6, v7, 
+      a7, v8, a8, v9, 
+      a9, v10, a10, v11, 
+      a11, v12, a12, v13, 
+      a13, v14, a14, v15, 
+      a15, v16, a16, v17, 
+      a17, v18, a18, v19, 
+      a19, v20, a20, v21, 
+      a21, v22, a22, v23, 
+      a23, v24, a24
+    from performance_power
+  	where prv_id = #{prvId,jdbcType=VARCHAR}
+  </select>
+</mapper>

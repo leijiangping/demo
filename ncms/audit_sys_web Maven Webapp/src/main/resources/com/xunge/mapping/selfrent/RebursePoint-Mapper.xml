@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.RebursePointVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.selfrent.rebursepoint.RentBillaccountVO" >
+    <id column="billaccount_id" property="billAccountId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="billaccount_name" property="billAccountName" jdbcType="VARCHAR" />
+    <result column="billaccount_state" property="billAccountState" jdbcType="INTEGER" />
+    <result column="billaccount_note" property="billAccountNote" jdbcType="VARCHAR" />
+    <result column="billaccount_code" property="billAccountCode" jdbcType="VARCHAR" />
+    <result column="audit_state" property="auditState" jdbcType="INTEGER" />
+    <association property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+		    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+		    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+		    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+		    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+		    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+     </association>
+     <association property="rentPaymentVO" javaType="com.xunge.model.selfrent.billAccount.RentPaymentVO">
+		    <id column="payment_id" property="paymentId" jdbcType="VARCHAR" />
+		    <result column="payment_method" property="paymentMethod" jdbcType="INTEGER" />
+     </association>
+  </resultMap>
+  <!-- 查询所有报账点信息 -->
+	<select id="queryRembursePointInfo" resultMap="BaseResultMap" parameterType="java.util.List">
+		SELECT
+		rb.billaccount_id,
+		rb.billaccount_code,
+		rb.billaccount_name,
+		rb.billaccount_state,
+		rb.audit_state,
+		vsr.reg_id,
+		vsr.reg_name,
+		vsr.preg_id,
+		vsr.preg_name
+		FROM
+		rent_billaccount rb INNER JOIN v_sys_region vsr ON vsr.reg_id = rb.reg_id 
+		<where> 
+			1=1 
+			<if test="billAccountCodeOrName != '' and billAccountCodeOrName != null">
+				and (rb.billaccount_name like
+				CONCAT('%',#{billAccountCodeOrName,jdbcType=VARCHAR},'%')
+				or rb.billaccount_code like
+				CONCAT('%',#{billAccountCodeOrName,jdbcType=VARCHAR},'%'))
+			</if>
+			<if test="billaccountAuditState != '' and billaccountAuditState != null">
+				and rb.audit_state = #{billaccountAuditState,jdbcType=INTEGER}
+			</if>
+			<if test="billAccountState != '' and billAccountState != null">
+				and rb.billaccount_state = #{billAccountState,jdbcType=INTEGER}
+			</if>
+			<if test="regId != '' and regId != null">
+				and rb.reg_id = #{regId,jdbcType=VARCHAR}
+			</if>
+			<if test="prvId != '' and prvId != null">
+				and vsr.prv_id = #{prvId,jdbcType=VARCHAR}
+			</if>
+			<if test="regIds !=null and regIds.size()>0">
+			and vsr.reg_id in 
+				<foreach collection="regIds" item="item" index="index" open="(" separator="," close=")">  
+	                #{item}
+	           	</foreach> 
+	        </if>
+		</where>
+	</select>
+  <!-- 查询待审核报账点信息 -->
+	<select id="queryRembursePointVO" resultMap="BaseResultMap" parameterType="Map">
+		SELECT
+		rb.billaccount_id,
+		rb.billaccount_code,
+		rb.billaccount_name,
+		rb.billaccount_state,
+		rb.audit_state,
+		rb.reg_id,
+		vsr.preg_id,
+		vsr.reg_name,
+		vsr.reg_state,
+		vsr.preg_name
+		FROM
+		rent_billaccount rb INNER JOIN v_sys_region vsr ON vsr.reg_id = rb.reg_id 
+		<where> 
+			1=1 
+			<if test="billAccountCodeOrName != '' and billAccountCodeOrName != null">
+				and (rb.billaccount_name like
+				CONCAT('%',#{billAccountCodeOrName,jdbcType=VARCHAR},'%')
+				or rb.billaccount_code like
+				CONCAT('%',#{billAccountCodeOrName,jdbcType=VARCHAR},'%'))
+			</if>
+			<if test="billaccountAuditState != '' and billaccountAuditState != null">
+			and rb.audit_state=#{billaccountAuditState} 
+			</if>
+			<if test="billAccountState != '' and billAccountState != null">
+				and rb.billaccount_state = #{billAccountState,jdbcType=INTEGER}
+			</if>
+			<if test="regId != '' and regId != null">
+				and rb.reg_id = #{regId,jdbcType=VARCHAR}
+			</if>
+			 <!-- 根据权限过滤 -->
+			<if test="regIds !=null and regIds.size()>0">
+	   			and vsr.reg_id in 
+	   			<foreach collection="regIds" item="item" index="index" open="(" separator="," close=")">  
+	                #{item}
+	           	</foreach> 
+			</if>
+			<!-- 流程实例id集合 -->
+			<if test="idsList != null and idsList.size()>0">  
+	        	and rb.billaccount_id in  
+		        <foreach collection="idsList" item="item" index="index" open="(" separator="," close=")">  
+	                #{item.businessId}
+	            </foreach>  
+    		</if>
+		</where>
+	</select>
+<!-- 	添加报账点数据 -->
+<!-- 	<insert id="insertBillAcount"  parameterType="com.xunge.model.selfrent.rebursepoint.RentBillaccountVO">
+		insert into rent_billaccount (
+			billaccount_id,
+			reg_id,
+			billaccount_code,
+			billaccount_name,
+			billaccount_state,
+			billaccount_note,
+			audit_state
+		)
+		VALUES
+		(
+			#{billAccountId},
+			#{regId},
+			#{billAccountCode},
+			#{billAccountName},
+			#{billAccountState},
+			#{billAccountNote},
+			#{billaccountAuditState}
+		 );
+	</insert> -->
+	<!-- 动态添加  xup -->
+	<insert id="insertBillAcount"  parameterType="com.xunge.model.selfrent.rebursepoint.RentBillaccountVO">
+		insert into rent_billaccount 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billAccountId != null" >
+        billaccount_id,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="billAccountCode != null" >
+        billaccount_code,
+      </if>
+      <if test="billAccountName != null" >
+        billaccount_name,
+      </if>
+      <if test="billAccountState != null" >
+        billaccount_state,
+      </if>
+      <if test="billAccountNote != null" >
+        billaccount_note,
+      </if>
+      <if test="auditState != null" >
+        audit_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billAccountId != null" >
+        #{billAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="billAccountCode != null" >
+        #{billAccountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billAccountName != null" >
+        #{billAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="billAccountState != null" >
+        #{billAccountState,jdbcType=INTEGER},
+      </if>
+      <if test="billAccountNote != null" >
+        #{billAccountNote,jdbcType=VARCHAR},
+      </if>
+      <if test="auditState != null" >
+        #{auditState,jdbcType=INTEGER},
+      </if>
+    
+    </trim>
+	</insert>
+	
+<!-- 	更新报账点数据 -->
+	<update id="updateBillAcount"  parameterType="com.xunge.model.selfrent.rebursepoint.RentBillaccountVO">
+		UPDATE rent_billaccount
+		<set>
+			<if test="regId != null and regId != ''">
+			 reg_id = #{regId},
+			</if> 
+			<if test="billAccountCode != null and billAccountCode != ''">
+			 billaccount_code = #{billAccountCode},
+			</if> 
+			<if test="billAccountName != null and billAccountName != ''">
+			billaccount_name = #{billAccountName},
+			</if> 
+			<if test="billAccountState != null and billAccountState != ''">
+			 billaccount_state = #{billAccountState},
+			</if> 
+			<if test="billAccountNote != null and billAccountNote != ''">
+			 billaccount_note = #{billAccountNote},
+			</if> 
+		</set>
+		WHERE
+			billaccount_id = #{billAccountId}
+	</update>
+	<!-- 	删除报账点数据 -->
+	<delete id="deleteBillAcount"  parameterType="java.lang.String">
+		delete from rent_billaccount where billaccount_id=#{billAccountId}
+	</delete>
+	<select id="queryBillAccountById" resultMap="BaseResultMap" parameterType="Map">
+		SELECT
+		rb.billaccount_id,
+		rb.billaccount_name,
+		rb.billaccount_state,
+		rb.billaccount_code,
+		rb.reg_id,
+		rb.audit_state,
+		rb.billaccount_note,
+		vsr.preg_id,
+		vsr.reg_name,
+		vsr.reg_state,
+		vsr.preg_name
+		FROM
+		rent_billaccount rb INNER JOIN v_sys_region vsr ON vsr.reg_id = rb.reg_id 
+		where rb.billaccount_id=#{billAccountId}
+	</select>                     
+	<update id="billAccountSubmitAudit" parameterType="Map">
+		update rent_billaccount
+  		set 
+  			audit_state = #{state,jdbcType=INTEGER}
+  		where 
+  			billaccount_id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="queryPaymentMethod" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT
+			rent_billaccount.billaccount_id,
+			rent_payment.payment_method
+			FROM
+			rent_billaccount
+		INNER JOIN rent_payment ON rent_payment.billaccount_id = rent_billaccount.billaccount_id
+		where rent_billaccount.billaccount_id=#{billAccountId}
+	</select>
+	
+	  <!-- 批量保存 -->
+  <insert id="insertBatchSelective" parameterType="com.xunge.model.selfrent.rebursepoint.RentBillaccountVO">
+  	insert into rent_billaccount (billaccount_id, reg_id, 
+      billaccount_code, audit_state)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+    (#{item.billaccountId,jdbcType=VARCHAR}, #{item.regId,jdbcType=VARCHAR}, 
+      #{item.billaccountCode,jdbcType=VARCHAR}, #{item.auditState,jdbcType=CHAR})
+      </foreach>
+  </insert>
+</mapper>

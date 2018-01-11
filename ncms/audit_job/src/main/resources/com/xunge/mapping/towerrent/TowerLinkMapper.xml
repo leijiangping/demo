@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.towerrent.TowerLinkMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.TowerLinkVO" >
+    <id column="tower_station_code" property="towerStationCode" jdbcType="VARCHAR" />
+    <result column="operator_phy_station_code" property="operatorPhyStationCode" jdbcType="VARCHAR" />
+    <result column="operator_phyStation_name" property="operatorPhystationName" jdbcType="VARCHAR" />
+    <result column="relation_state" property="relationState" jdbcType="INTEGER" />
+    <result column="relation_startdate" property="relationStartdate" jdbcType="TIMESTAMP" />
+    <result column="relation_enddate" property="relationEnddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tower_station_code, operator_phy_station_code, operator_phyStation_name, relation_state, 
+    relation_startdate, relation_enddate
+  </sql>
+  <select id="queryAllTowerLink" resultType="String">
+    select 
+    tower_station_code
+    from twr_towerlink
+	where relation_state = 0
+  </select>
+</mapper>

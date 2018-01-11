@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+           
+           
+   <bean id="twrProductTypeService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrProductTypeServiceImpl">
+        <property name="twrProductTypeDao" ref="twrProductTypeDao" /> 
+    </bean>
+   <bean id="twrWindPressureService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrWindPressureServiceImpl">
+        <property name="twrWindPressureDao" ref="twrWindPressureDao" /> 
+    </bean>
+   <bean id="highUpService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrHighUpServiceImpl">
+        <property name="twrHighUpDao" ref="twrHighUpDao" /> 
+    </bean>
+   <bean id="calParamService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrCalParamServiceImpl">
+        <property name="calParamDao" ref="calParamDao" /> 
+    </bean>
+   <bean id="proCostService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrProductCostServiceImpl">
+        <property name="proCostDao" ref="proCostDao" /> 
+    </bean>
+   <bean id="costDiffService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrCostDiffServiceImpl">
+        <property name="chargeDao" ref="chargeDao" /> 
+    </bean>
+   <bean id="proConfService" class="com.xunge.service.twrrent.bizbasedata.impl.TwrProductConfServiceImpl">
+        <property name="proConfDao" ref="proConfDao" /> 
+    </bean>
+    
+    <!-- 移动起租表service -->
+    <bean id="twrRentInformationService" class="com.xunge.service.towerrent.mobile.impl.TwrRentInformationServiceImpl">
+        <property name="twrRentInformationDao" ref="twrRentInformationDao" /> 
+    </bean>
+    
+    <bean id="twrPrvCheckIndexFineService" class="com.xunge.service.towerrent.checkmanage.impl.TwrPrvCheckIndexFineServiceImpl">
+        <property name="twrPrvCheckIndexFineDao" ref="twrPrvCheckIndexFineDao" /> 
+    </bean>
+</beans>

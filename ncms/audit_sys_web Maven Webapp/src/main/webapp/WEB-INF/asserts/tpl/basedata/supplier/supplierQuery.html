@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<link href="../../../../asserts/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	media="screen">
+<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="../../../css/ncms_page.css" rel="stylesheet" media="screen">
+<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+<script src="../../../../asserts/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/common/common.js"></script>	
+<script type="text/javascript" src="../../../js/page/basedata/supplier/supplierQuery.js?v=1"></script>
+</head>
+<body>
+	<form id="form" class="form-inline" >
+		<div class="form-group">
+			<input type="text" placeholder="供应商编码或名称" id="supplierReg">
+		</div>
+		<div class="form-group">
+			<select id="city" name="city">
+				<option>-选择地市-</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select id="region" name="region">
+				<option>-选择区县-</option>
+			</select>			
+		</div>
+		<button type="button" class="btn btn-success" onclick="findSupplier(1)">查询</button>
+	</form>
+	<div class="btn-toolbar">
+		<button class="btn btn-primary" type="button" onclick="exportData()">导出</button>
+	</div>
+	<table id="tb"></table>
+	<!-- 查看页面 -->
+<div class="modal fade" id="ViewPanel" tabindex="-1" role="dialog" aria-labelledby="ViewPanel">
+ 	<div class="modal-dialog" role="document" >
+	   	<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" type="button" data-dismiss="modal">×</button>
+				<h4 id="myModalLabel">查看运营商信息</h4>
+			</div>
+			<div class="modal-body">
+			        <form class="form-horizontal" id="dataForm" role="form">
+			        	<div class="pull-left">
+			        		<label for="ds_code">供应商编号</label>
+			        		<input type="text" name="supplierCode1" class="form-control">
+			        	</div>
+			        	<div class="pull-right">
+			        		<label for="ds_name">供应商名称</label>
+			        		<input type="text" name="supplierName1" class="form-control"style="width:170px;height:34px;">
+			        	</div>
+			        	<div class="pull-left">
+			        		<label for="ds_space">地点</label>
+			        		<input type="text" name="supplierSite1" class="form-control">
+			        	</div>
+			        	<div class="pull-right">
+			        		<label for="ds_addr">供应商地址</label>
+			        		<input type="text" name="supplierAddress1" class="form-control"style="width:170px;height:34px;">
+			        	</div>
+			        	<div class="pull-left">
+			        		<label for="ds_contact">联系人</label>
+			        		<input type="text" name="supplierContact1" class="form-control">
+			        	</div>
+			        	<div class="pull-right">
+			        		<label for="ds_telephone">联系电话</label>
+			        		<input type="text" name="supplierTelephone1" class="form-control"style="width:170px;height:34px;">
+			        	</div>
+			        	<div class="pull-left">
+			        		<label for="district">地市</label>
+							<input id="pregId1" name="pregId1" class="form-control pregId">
+			        	</div>
+			        	<div class="pull-right">
+			        		<label for="ds_telephone">区县</label>
+			        		<input id="regId1" name="regId1" class="form-control regId"style="width:170px;height:34px;">
+			        	</div>
+			        	<div class="pull-left">
+			        		<label for="ds_share">是否向下共享</label>
+			        		<select id="isDownshare1" name="isDownshare1" class="form-control">
+								<option value="1">是</option>
+								<option value="0" selected="selected">否</option>
+							</select>
+			        	</div>
+			        	<div class="pull-right">
+			        		<label for="ds_code">账户类型</label>
+			        		<select id="accountType1" name="accountType1" class="form-control"style="width:170px;height:34px;">
+								<option value="">-请选择-</option>
+								<option value="0">公户</option>
+								<option value="1">私户</option>
+							</select>
+			        	</div>
+			        	<div class="pull-left">
+			        		<label for="ds_name">开户银行</label>
+			        		<input type="text" name="depositBank1" class="form-control">
+			        	</div>
+						<div class="pull-right">
+							<label for="ds_code">供应商类别</label>
+							<select id="supplierType1" name="supplierType1" class="form-control"style="width:170px;height:34px;">
+								<option value="">-请选择-</option>
+								<option value="1">业主</option>
+								<option value="2">供电局</option>
+								<option value="3">经营性第三方公司</option>
+								<option value="4">代收性第三方公司</option>
+							</select>
+						</div>
+						<div>
+							<label class="control-label"style="display: inline-block;float:left;width:100px;margin-right: 3px;">备注</label> 
+							<textarea  name="supplierNote1" id="supplierNote1" rows="2" style="width: 454px;" class="form-control"></textarea>
+			        	</div>
+						<div style="clear:both;"></div>
+		           </form>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

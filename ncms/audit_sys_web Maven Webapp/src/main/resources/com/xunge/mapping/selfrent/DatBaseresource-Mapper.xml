@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.DatBaseresourceVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.selfrent.billAccount.DatBaseresourceVO" >
+    <id column="baseresource_id" property="baseresourceId" jdbcType="VARCHAR" />
+    <result column="basesite_id" property="basesiteId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="baseresource_type" property="baseresourceType" jdbcType="INTEGER" />
+    <result column="baseresource_category" property="baseresourceCategory" jdbcType="INTEGER" />
+    <result column="baseresource_cuid" property="baseresourceCuid" jdbcType="VARCHAR" />
+    <result column="baseresource_code" property="baseresourceCode" jdbcType="VARCHAR" />
+    <result column="baseresource_name" property="baseresourceName" jdbcType="VARCHAR" />
+    <result column="baseresource_address" property="baseresourceAddress" jdbcType="VARCHAR" />
+    <result column="baseresource_area" property="baseresourceArea" jdbcType="DECIMAL" />
+    <result column="baseresource_opendate" property="baseresourceOpendate" jdbcType="TIMESTAMP" />
+    <result column="baseresource_stopdate" property="baseresourceStopdate" jdbcType="TIMESTAMP" />
+    <result column="room_owner" property="roomOwner" jdbcType="INTEGER" />
+    <result column="room_property" property="roomProperty" jdbcType="INTEGER" />
+    <result column="room_share" property="roomShare" jdbcType="INTEGER" />
+    <result column="baseresource_longitude" property="baseresourceLongitude" jdbcType="DECIMAL" />
+    <result column="baseresource_latitude" property="baseresourceLatitude" jdbcType="DECIMAL" />
+    <result column="airconditioner_power" property="airconditionerPower" jdbcType="DECIMAL" />
+    <result column="baseresource_state" property="baseresourceState" jdbcType="INTEGER" />
+    <result column="baseresource_note" property="baseresourceNote" jdbcType="VARCHAR" />
+    <result column="data_from" property="dataFrom" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    db.baseresource_id, db.basesite_id, db.reg_id, db.baseresource_type, db.baseresource_category, db.baseresource_cuid, 
+    db.baseresource_code, db.baseresource_name, db.baseresource_address, db.baseresource_area, db.baseresource_opendate, 
+    db.baseresource_stopdate, db.room_owner, db.room_property, db.room_share, db.baseresource_longitude, 
+    db.baseresource_latitude, db.airconditioner_power, db.baseresource_state, db.baseresource_note, 
+    db.data_from
+  </sql>
+  <!-- 根据报账点id查询资源点信息 -->
+  <select id="queryDatBaseresourceByBillAccountId" parameterType="java.lang.String"
+  			resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"></include>
+  	from
+  		dat_baseresource db
+  	where
+  		 db.baseresource_id in (
+  		 	select 
+  		 		rb.baseresource_id 
+  		 	from 
+  		 		rent_billaccountresource rb
+  		 	where
+  		 		rb.billaccount_id = #{billAccountId}
+  		 )
+  </select>
+</mapper>

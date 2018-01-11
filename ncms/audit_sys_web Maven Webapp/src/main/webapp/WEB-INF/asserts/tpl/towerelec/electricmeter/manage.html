@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"/>
+
+</head>
+<body>
+    <form id="form" class="form-inline" >
+		<input type="text" class="form-control" placeholder="电表编码" id="meterCode1" name="meterCode1" style="width: 150px;">
+		<select id="city" class="form-control" name="city" style="width: 130px;">
+			<option>-选择地市-</option>
+		</select>
+		<select id="region" class="form-control" name="region" style="width: 130px;">
+			<option>-选择区县-</option>
+		</select>
+		<select id="meterState1" class="form-control" name="meterState1" style="width: 130px;">
+			<option>-电表状态-</option>
+			<option value="0">正常</option>
+			<option value="9">停用</option>
+		</select>
+		<select id="meterType1" class="form-control" name="meterType1" style="width: 130px;">
+			<option>-电表类型-</option>
+			<option value="1">普通表</option>
+			<option value="2">平峰谷表</option>
+		</select>
+		<select id="relateResState" class="form-control" name="relateResState" style="width: 150px;">
+			<option>-电表关联资源状态-</option>
+			<option value="0">未关联</option>
+			<option value="1">已关联</option>
+		</select>
+		<button type="button" class="btn btn-success" onclick="findElectricMeter()">查询</button>
+	</form>
+	<div class="btn-toolbar" style="margin-top:10px">
+	    <button class="btn btn-primary" type="button" onclick="add()">新增</button>
+		<button class="btn btn-primary" type="button" onclick="modify()">修改</button>
+		<button class="btn btn-danger" type="button" onclick="del()">删除</button>
+		<button class="btn btn-primary" type="button" onclick="importExcel()">导入</button>
+		<button class="btn btn-primary" type="button" onclick="exportExcel()">导出</button>
+	</div>
+	<table id="tb"></table>
+
+	<!-- 新增、修改弹出页面 -->
+	<div class="modal fade" id="EditPanel" tabindex="-1" role="dialog"
+		aria-labelledby="EditPanel">
+		<div class="modal-dialog" role="document" style="width: 800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+						<h5 id="myModalLabel">电表信息</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="dataForm" role="form">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电表编码:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="meterCode"
+									name="meterCode">
+									<span id="err" class="modal-error"></span>
+							</div>
+							<label class="col-sm-2 control-label">电表类型:</label>
+							<div class="col-sm-4">
+								<select id="meterType" name="meterType"
+									onchange="setMeterValue(this.value);" class="form-control">
+									<option value="1">普通表</option>
+									<option value="2">平峰谷表</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电表状态:</label>
+							<div class="col-sm-4">
+								<select id="meterState" name="meterState" class="form-control">
+									<option value="0">正常</option>
+									<option value="9">停用</option>
+								</select>
+							</div>
+							<label class="col-sm-2 control-label">电表倍率:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control"
+									id="electricmeterMultiply" name="electricmeterMultiply">
+									<span id="err" class="modal-error"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">所属地市:</label>
+							<div class="col-sm-4">
+								<select id="pregId" name="pregId" class="form-control">
+									<option>-选择地市-</option>
+								</select>
+							</div>
+							<label class="col-sm-2 control-label">所属县区:</label>
+							<div class="col-sm-4">
+								<select id="regId" name="regId" class="form-control">
+									<option>-选择区县-</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电表初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="initialValue" name="initialValue" " maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+								<label class="col-sm-2 control-label">电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="upperValue" name="upperValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">平初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="flatValue" name="flatValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+								<label class="col-sm-2 control-label">平电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="flatUpperValue" name="flatUpperValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">峰初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="peakValue" name="peakValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+								<label class="col-sm-2 control-label">峰电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="peakUpperValue" name="peakUpperValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">谷初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="valleyValue" name="valleyValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+								<label class="col-sm-2 control-label">谷电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="valleyUpperValue" name="valleyUpperValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">尖初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="topValue" name="topValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+							<label class="col-sm-2 control-label">尖电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="topUpperValue" name="topUpperValue" maxlength="13">
+								<span id="err" class="modal-error"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">多机房公用:</label>
+							<div class="col-sm-4">
+								<select id="isShare" name="isShare" class="form-control">
+									<option value="0">否</option>
+									<option value="1">是</option>
+								</select>
+							</div>
+							<label class="col-sm-2 control-label">电表户号:</label>
+							<div class="col-sm-4">
+							   <input type="text" class="form-control" id="accountNumber" name="accountNumber">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">安装日期:</label>
+							<div class="col-sm-4">
+								<!-- <div class='input-group date' id='datetimepicker1'> -->
+									<input type='text' class="form-control"
+										id="dateStr" name="dateStr"/> 
+										<!-- <span class="input-group-addon"> -->
+										<!-- <span class="glyphicon glyphicon-calendar"></span>
+									</span> -->
+								<!-- </div> -->
+								<span id="err" class="modal-error"></span>
+							</div>
+							<label class="col-sm-2 control-label">备注信息:</label>
+							<div class="col-sm-4">
+							   <input type="text" class="form-control" id="meterNote" name="meterNote">
+							</div>
+						</div>
+						<input type="hidden" id="meterId" name="meterId" /> 
+						<input type="hidden" id="pregName" name="pregName" /> 
+						<input type="hidden" id="regName" name="regName" />
+						<input type="hidden" id="dataFrom" name="dataFrom" />
+						<input type="hidden" id="prvId" name="prvId" />
+						<input type="hidden" id="prvSname" name="prvSname" />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> <a href="#"
+						class="btn btn-primary" onclick="saveMeter();">保存</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="filePanel" tabindex="-1" role="dialog"
+		aria-labelledby="filePanel">
+		<div class="modal-dialog" role="document" style="width: 400px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+						<h5 id="myModalLabel">选择文件</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="fileForm" role="form">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">上传文件:</label>
+							<div class="col-sm-8">
+								<input type="file" class="form-control" id="file_url" name="files" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" /> 
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> <a href="#"
+						class="btn btn-primary" onclick="uploadExcel();">上传</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 查看页面  add by jiacy-->
+	<div class="modal fade" id="ViewPanel" tabindex="-1" role="dialog" aria-labelledby="ViewPanel">
+		 	<div class="modal-dialog" role="document" style="width: 800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+						<h5 id="myModalLabel">查看电表信息</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="dataFormView" role="form">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电表编码:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="meterCode"
+									name="meterCode">
+							</div>
+							<label class="col-sm-2 control-label">电表类型:</label>
+							<div class="col-sm-4">
+								<input type="text" id="meterType" name="meterType" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电表状态:</label>
+							<div class="col-sm-4">
+								<input type="text" id="meterState" name="meterState" class="form-control"/>
+							</div>
+							<label class="col-sm-2 control-label">电表倍率:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control"
+									id="electricmeterMultiply" name="electricmeterMultiply">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">所属地市:</label>
+							<div class="col-sm-4">
+								<input type="text" id="pregName" name="pregName" class="form-control"/>
+							</div>
+							<label class="col-sm-2 control-label">所属县区:</label>
+							<div class="col-sm-4">
+								<input type="text" id="regName" name="regName" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电表初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="initialValue" name="initialValue" ">
+							</div>
+								<label class="col-sm-2 control-label">电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="upperValue" name="upperValue">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">平初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="flatValue" name="flatValue">
+							</div>
+								<label class="col-sm-2 control-label">平电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="flatUpperValue" name="flatUpperValue">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">峰初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="peakValue" name="peakValue" >
+							</div>
+								<label class="col-sm-2 control-label">峰电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="peakUpperValue" name="peakUpperValue">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">谷初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="valleyValue" name="valleyValue" >
+							</div>
+								<label class="col-sm-2 control-label">谷电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="valleyUpperValue" name="valleyUpperValue">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">尖初始值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="topValue" name="topValue" >
+							</div>
+							<label class="col-sm-2 control-label">尖电表上限值:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="topUpperValue" name="topUpperValue">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">多机房公用:</label>
+							<div class="col-sm-4">
+								<input type="text" id="isShare" name="isShare" class="form-control"/>
+							</div>
+							<label class="col-sm-2 control-label">电表户号:</label>
+							<div class="col-sm-4">
+							   <input type="text" class="form-control" id="accountNumber" name="accountNumber">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">安装日期:</label>
+							<div class="col-sm-4">
+							   <input type="text" class="form-control" id="installDate" name="installDate">
+							</div>
+							<label class="col-sm-2 control-label">备注信息:</label>
+							<div class="col-sm-4">
+							   <input type="text" class="form-control" id="meterNote" name="meterNote">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">关闭</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../../../asserts/lib/jquery.2.0.3.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+    <script type="text/javascript" src="../../../js/common.js?v=3"></script>
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+    <script  src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+	<script src="../../../js/page/towerelec/electricmeter/manage.js" type="text/javascript"></script>	
+	<script>
+	$(function(){
+		$("#dateStr").datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn')
+        });
+	})
+	</script>
+</body>
+</html>

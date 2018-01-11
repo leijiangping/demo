@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title>合同新增修改页面</title>
+<link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="../../../bootstrap/css/jquery.datetimepicker.css" />
+<link rel="stylesheet" href="../../../css/ncms_page.css" />
+<link href="../../../bootstrap/css/bootstrap-table.min.css"
+	rel="stylesheet">
+</head>
+<body>
+	<form action="" id="dataForm">
+		<div class="btn-toolbar">
+			<button id="saveSet" type="button" class="btn btn-primary" onclick="formSubmitAddContract()">保存</button>
+			<button type="button" class="btn btn-default" onclick="back();">取消</button>
+		</div>
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#basic_info" data-toggle="tab">基本信息</a></li>
+			<li><a href="#rent_info" data-toggle="tab">租费信息</a></li>
+			<li><a href="#sup_pay" data-toggle="tab">付款供应商</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content contract-information">
+			<!--基本信息-->
+			<div class="tab-pane fade in active" id="basic_info">
+				<ul class="list-group">
+					<li class="list-group-item row">
+						<div class="col-md-2">合同代码：</div>
+						<div class="col-md-4 contract">
+							<input type="text" id="contractCode"
+								name="datContractVO.contractCode" class="form-control"
+								onblur="checkContractCode()">
+								<span id="err" class="modal-error"></span>
+								<!--<span id="codeMsg"></span>  -->
+						</div>
+						<div class="col-md-2">合同名称：</div>
+						<div class="col-md-4">
+							<input type="text" id="contractName"
+								name="datContractVO.contractName" class="form-control">
+							<span id="err" class="modal-error"></span>
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">合同期始：</div>
+						<div class="col-md-4">
+							<input type='text' id="contractStartdate"
+								name="datContractVO.contractStartdate"
+								style="float:left;height:34px;border-radius: 4px;margin-top: 3px;width:60%;padding: 0px 12px;border:1px solid #ccc;"/>
+								<span id="err" class="modal-error"></span>
+						</div>
+						<div class="col-md-2">合同期终：</div>
+						<div class="col-md-4">
+							<!--指定 date标记-->
+								<input
+								type='text' id="contractEnddate"
+								onblur="checkContractEndDate()"
+								name="datContractVO.contractEnddate" onkeydown="return false;"
+								style="float:left;height:34px;border-radius: 4px;margin-top: 3px;width:60%;padding: 0px 12px;border:1px solid #ccc;"/>
+								<span id="err" class="modal-error"></span>
+								<span id="contractEnddateMsg"></span>
+						</div> <input type="hidden" name="enddate" id="enddate" />
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">签约日期：</div>
+						<div class="col-md-4">
+							<input type='text' id="contractSigndate"
+								name="datContractVO.contractSigndate"
+								style="float:left;height:34px;border-radius: 4px;margin-top: 3px;width:60%;padding: 0px 12px;border:1px solid #ccc;" />
+							<span id="err" class="modal-error"></span>
+						</div>
+						<div class="col-md-2">合同年限：</div>
+						<div class="col-md-4">
+							<input type="text" id="contractYearquantity" readonly="readonly"
+								name="datContractVO.contractYearquantity" class="form-control">
+							<span id="err" class="modal-error"></span>
+							<span id="contractYearquantityMsg"></span>	
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">地市</div>
+						<div class="col-md-4">
+							<select id="City" name="datContractVO.pregId"
+								class="form-control">
+							</select>
+							<span id="err" class="modal-error"></span>
+						</div>
+						<div class="col-md-2">区县</div>
+						<div class="col-md-4">
+							<select id="Village" name="datContractVO.regId"
+							onchange="checkIsDownShare()"
+								class="form-control">
+							</select>
+							<span id="err" class="modal-error"></span>
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">合同总金额</div>
+						<div class="col-md-4">
+							<input type="text" id="totalAmount" name="totalAmount"
+							onblur="yearAmountVal()"
+								class="form-control">
+								<span id="err" class="modal-error"></span>
+						</div>
+						<div class="col-md-2">是否向下共享：</div>
+						<div class="col-md-4">
+							<select id="isDownShare" name="datContractVO.isDownShare"
+								class="form-control">
+								<option value="1">是</option>
+								<option value="0" selected="selected">否</option>
+							</select>
+							<span id="err" class="modal-error"></span>		
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">对方签约名称：</div>
+						<div class="col-md-4">
+							<input type="text" id="contractCheckname2"
+								name="datContractVO.contractCheckname2" class="form-control">
+						</div>
+						<div class="col-md-2">我方签约名称：</div>
+						<div class="col-md-4">
+							<input type="text" id="contractCheckname1"
+								name="datContractVO.contractCheckname1" class="form-control">
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">管理负责人：</div>
+						<div class="col-md-4">
+							<input type="text" id="managerUser"
+								name="datContractVO.managerUser" class="form-control">
+						</div>
+						<div class="col-md-2">管理部门:</div>
+						<div class="col-md-4">
+							<input type="text" id="managerDepartment"
+								name="datContractVO.managerDepartment" class="form-control">
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- 租费信息-->
+			<div class="tab-pane fade" id="rent_info">
+				<ul class="list-group">
+					<li class="list-group-item row">
+						<div class="col-md-2">年租费：</div>
+						<div class="col-md-4">
+							<input type="text" id="yearAmount" name="yearAmount"
+								class="form-control" >
+								<span id="err" class="modal-error"></span>
+						</div>
+						<div class="col-md-2">房屋类型：</div>
+						<div class="col-md-4">
+							<select id="houseType" name="houseType" class="form-control"></select>
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">缴费周期：</div>
+						<div class="col-md-4">
+							<select id="paymentperiodId" name="paymentperiodId"
+								class="form-control"></select>
+								<span id="err" class="modal-error"></span>
+						</div>
+						<div class="col-md-2">物业地址：</div>
+						<div class="col-md-4">
+							<input type="text" id="propertyAddress" name="propertyAddress"
+								class="form-control">
+						</div>
+					</li>
+					<li class="list-group-item row comment">
+						<div class="col-md-2">备注:</div>
+						<div class="col-md-10">
+							<textarea class="form-control" id="rentcontractNote"
+								name="rentcontractNote" rows="2"></textarea>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- 付款供应商-->
+			<div class="tab-pane fade" id="sup_pay">
+				<ul class="list-group">
+					<li class="list-group-item row">
+						<div class="col-md-2">供应商代码</div>
+						<div class="col-md-4" >
+								<span id="supplierCode"></span>
+								<input type="button"
+								class="btn btn-primary" value="选择供应商" onclick="findSupplier()"
+								style="position: absolute;top:8%;left:70%;" />
+						</div>
+
+						<div class="col-md-2">供应商名称</div>
+						<div class="col-md-4" id="supplierName">
+						</div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">地市/区县：</div>
+						<div class="col-md-2"  id="sPregName">
+						</div> 
+						<div class="col-md-2"  id="sRegName">
+						</div>
+						<div class="col-md-2">是否向下共享：</div>
+						<div class="col-md-4"  id="sIsDownshare">
+						</div>
+						<input type="hidden" id="sPregId">
+          				<input type="hidden" id="sRegId">
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">联系人</div>
+						<div class="col-md-4" id="supplierContact"> </div>
+						<div class="col-md-2">联系电话</div>
+						<div class="col-md-4" id="supplierTelephone"> </div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">账户类型</div>
+						<div class="col-md-4" id="accountType"> </div>
+						<div class="col-md-2">银行账户</div>
+						<div class="col-md-4" id="bankAccount"> </div>
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">开户银行</div>
+						<div class="col-md-4" id="depositBank">
+						</div>
+						<div class="col-md-2">银行账号</div>
+						<div class="col-md-4" id="bankUser"> </div> 
+						
+						<input type="hidden" id="contractId" name="contractId" /> 
+						<input type="hidden" id="supplierId" name="supplierId"/>
+						<input type="hidden" id="rentcontractId" name="rentcontractId" />
+					</li>
+					<li class="list-group-item row">
+						<div class="col-md-2">供应商地址</div>
+						<div class="col-md-4" id="supplierAddress"> </div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+
+	<!-- 选择供应商弹窗 -->
+	<div class="modal hide fade special" id="EditPanel" tabindex="-1">
+		<div class="modal-dialog" role="document" style="width: 900px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4 id="myModalLabel">选择供应商</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<input type="hidden" id="state" />
+						<div class="form-group">
+							<input type="text" id="supplierNameFind" placeholder="供应商代码或名称">
+						</div>
+						<div class="form-group">
+							<select id="City1">
+								<option value="">-选择地市-</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select id="Village1">
+								<option value="">-选择区县-</option>
+							</select>
+						</div>
+
+						<button type="button" class="btn btn-success"onclick="loadTableData()">查询</button>
+					</form>
+					<table id="tb"></table>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">取消</a> 
+					<a href="#" class="btn btn-primary" onclick="formSubmit();">确定</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>	
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+	<script src="../../../bootstrap/js/messages_zh.js"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<!--[if lte IE 9]>
+		<script src="../../../bootstrap/js/html5shiv.js"></script>
+		<script src="../../../bootstrap/js/respond.min.js"></script>
+		<script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.datetimepicker.full.min.js"></script>
+	<script type="text/javascript" src="../../../js/common.js?v=2"></script>
+	<script type="text/javascript"
+		src="../../../js/page/selfrent/rentcontract_m/contract_addnew.js?v=1"></script>
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script>
+		$(function() {
+			$('#myTab a:first').tab('show');
+			$('input[class="lefile"]').change(
+					function() {
+						$(this).next('.input-append').children(
+								'input[type="text"]').val($(this).val());
+					});
+			
+			$('#contractStartdate').datetimepicker({
+				format:'Y-m-d',
+				onShow:function( ct ){
+					this.setOptions({
+					 	maxDate:$('#contractEnddate').val()?$('#contractEnddate').val():false
+					})
+				},
+				timepicker:false
+			});
+			$('#contractEnddate').datetimepicker({
+				format:'Y-m-d',
+				onShow:function( ct ){
+					this.setOptions({
+					    minDate:$('#contractStartdate').val()?$('#contractStartdate').val():false
+					})
+				},
+				timepicker:false
+			});
+			$('#contractSigndate').datetimepicker({
+				 format:'Y-m-d',
+				 timepicker:false
+			});
+			$.datetimepicker.setLocale('zh');
+		})
+	</script>
+</body>
+</html>

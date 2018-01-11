@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.SysRegionVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.basedata.SysRegionVO" >
+    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    reg_id, prv_id, reg_code, reg_name, preg_id, reg_order, level, is_valid, reg_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunge.model.basedata.SysRegionVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_region
+    where reg_id = #{regId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_region
+    where reg_id = #{regId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunge.model.basedata.SysRegionVOExample" >
+    delete from sys_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.basedata.SysRegionVO" >
+    insert into sys_region (reg_id, prv_id, reg_code, 
+      reg_name, preg_id, reg_order, 
+      level, is_valid, reg_state
+      )
+    values (#{regId,jdbcType=VARCHAR}, #{prvId,jdbcType=VARCHAR}, #{regCode,jdbcType=VARCHAR}, 
+      #{regName,jdbcType=VARCHAR}, #{pregId,jdbcType=VARCHAR}, #{regOrder,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{regState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.basedata.SysRegionVO" >
+    insert into sys_region
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="prvId != null" >
+        prv_id,
+      </if>
+      <if test="regCode != null" >
+        reg_code,
+      </if>
+      <if test="regName != null" >
+        reg_name,
+      </if>
+      <if test="pregId != null" >
+        preg_id,
+      </if>
+      <if test="regOrder != null" >
+        reg_order,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="regState != null" >
+        reg_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="prvId != null" >
+        #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="regCode != null" >
+        #{regCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null" >
+        #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null" >
+        #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrder != null" >
+        #{regOrder,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="regState != null" >
+        #{regState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunge.model.basedata.SysRegionVOExample" resultType="java.lang.Integer" >
+    select count(*) from sys_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_region
+    <set >
+      <if test="record.regId != null" >
+        reg_id = #{record.regId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prvId != null" >
+        prv_id = #{record.prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regCode != null" >
+        reg_code = #{record.regCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regName != null" >
+        reg_name = #{record.regName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pregId != null" >
+        preg_id = #{record.pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regOrder != null" >
+        reg_order = #{record.regOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.isValid != null" >
+        is_valid = #{record.isValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.regState != null" >
+        reg_state = #{record.regState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_region
+    set reg_id = #{record.regId,jdbcType=VARCHAR},
+      prv_id = #{record.prvId,jdbcType=VARCHAR},
+      reg_code = #{record.regCode,jdbcType=VARCHAR},
+      reg_name = #{record.regName,jdbcType=VARCHAR},
+      preg_id = #{record.pregId,jdbcType=VARCHAR},
+      reg_order = #{record.regOrder,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      is_valid = #{record.isValid,jdbcType=INTEGER},
+      reg_state = #{record.regState,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.SysRegionVO" >
+    update sys_region
+    <set >
+      <if test="prvId != null" >
+        prv_id = #{prvId,jdbcType=VARCHAR},
+      </if>
+      <if test="regCode != null" >
+        reg_code = #{regCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regName != null" >
+        reg_name = #{regName,jdbcType=VARCHAR},
+      </if>
+      <if test="pregId != null" >
+        preg_id = #{pregId,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrder != null" >
+        reg_order = #{regOrder,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="regState != null" >
+        reg_state = #{regState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reg_id = #{regId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.SysRegionVO" >
+    update sys_region
+    set prv_id = #{prvId,jdbcType=VARCHAR},
+      reg_code = #{regCode,jdbcType=VARCHAR},
+      reg_name = #{regName,jdbcType=VARCHAR},
+      preg_id = #{pregId,jdbcType=VARCHAR},
+      reg_order = #{regOrder,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=INTEGER},
+      reg_state = #{regState,jdbcType=INTEGER}
+    where reg_id = #{regId,jdbcType=VARCHAR}
+  </update>
+  
+        <insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">  
+<!--     <selectKey resultType="long" keyProperty="id" order="AFTER">  
+        SELECT  
+        LAST_INSERT_ID()  
+    </selectKey> -->  
+       insert into sys_region (reg_id, prv_id, reg_code, 
+      reg_name, preg_id, reg_order, 
+      level, is_valid, reg_state
+      )
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+     (#{item.regId}, #{item.prvId}, #{item.regCode}, 
+      #{item.regName}, #{item.pregId}, #{item.regOrder}, 
+      #{item.level}, #{item.isValid}, #{item.regState})
+    </foreach>  
+</insert>  
+
+<update id="batchUpdate"  parameterType="java.util.List">
+	 
+	      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+				update sys_region 
+				<set>
+			    prv_id = #{item.prvId},
+                reg_code = #{item.regCode},
+                reg_name = #{item.regName},
+                preg_id = #{item.pregId},
+                reg_order = #{item.regOrder},
+                level = #{item.level},
+                is_valid = #{item.isValid},
+                reg_state = #{item.regState}
+				</set>
+				where reg_id = ${item.regId}
+		 </foreach>
+		 
+    </update>
+    <!--删除-->
+    <delete id="deByCuids">
+        DELETE from sys_region
+        WHERE reg_id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    	<!-- 查询所有区域信息 -->
+	<select id="getAddress" resultMap="BaseResultMap" parameterType="com.xunge.model.basedata.SysRegionVO">
+		 select 
+    <include refid="Base_Column_List" />
+		from sys_region where reg_state = #{regState,jdbcType=INTEGER}
+		<if test="prvId != '' and prvId != null">
+			and prv_id = #{prvId,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

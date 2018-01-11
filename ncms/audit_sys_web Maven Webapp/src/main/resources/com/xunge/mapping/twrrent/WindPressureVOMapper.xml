@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.WindPressureVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizbasedata.WindPressureVO" >
+	    <id column="windpressure_id" property="windpressureId" jdbcType="VARCHAR" />
+	    <result column="windpressure_name" property="windpressureName" jdbcType="VARCHAR" />
+	    <result column="windpressure_upper" property="windpressureUpper" jdbcType="FLOAT" />
+	    <result column="windpressure_lower" property="windpressureLower" jdbcType="FLOAT" />
+	    <result column="windpressure_state" property="windpressureState" jdbcType="INTEGER" />
+	    <result column="windpressure_note" property="windpressureNote" jdbcType="VARCHAR" />
+  </resultMap>
+  
+	<!-- 查询所有铁塔种类信息 -->
+	<select id="queryAllWindPressureObj" resultMap="BaseResultMap" parameterType="Map">
+		select
+			wp.windpressure_id,
+			wp.windpressure_name,
+			wp.windpressure_upper,
+			wp.windpressure_lower,
+			wp.windpressure_state,
+			wp.windpressure_note
+		from
+		twr_windpressure wp
+		where wp.windpressure_state != -1
+	</select>
+	
+	<!-- 根据Id删除批量所选风压力对象-->
+	<delete id="deleteByTypeId" parameterType="Map">
+	    update twr_windpressure
+		set windpressure_state = -1
+		where windpressure_id in 
+		<foreach collection="windPressIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改风压信息 -->	
+	<update id="updateWindPressureVOById" parameterType="Map">
+	   	update twr_windpressure
+		set
+			windpressure_name = #{windpressureName,jdbcType=VARCHAR},
+			windpressure_upper = #{windpressureUpper,jdbcType=FLOAT},
+			windpressure_lower = #{windpressureLower,jdbcType=FLOAT},
+			windpressure_note = #{windpressureNote,jdbcType=VARCHAR}
+		where windpressure_id = #{windpressureId,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 批量启用或停用风压状态 -->
+	<update id="updateWindPressureState" parameterType="Map">
+		update twr_windpressure wp 
+		set 
+		wp.windpressure_state = #{windpressureState,jdbcType=INTEGER} 
+		where 
+		wp.windpressure_id in 
+		<foreach collection="windPressIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 新增风压对象 -->
+	<insert id="addWindPressureVO" parameterType="com.xunge.model.towerrent.bizbasedata.WindPressureVO">
+		insert into 
+		twr_windpressure(windpressure_id,windpressure_name,windpressure_upper,windpressure_lower,windpressure_note,windpressure_state)
+		values(#{windpressureId,jdbcType=VARCHAR},#{windpressureName,jdbcType=VARCHAR},
+		#{windpressureUpper,jdbcType=FLOAT},#{windpressureLower,jdbcType=FLOAT},#{windpressureNote,jdbcType=VARCHAR},0)
+	</insert>
+	
+	<!-- 根据查询条件进行查询 -->
+	<select id="queryWindPressureVOByStateAndName" resultMap="BaseResultMap" parameterType="Map">
+	    select 
+            windpressure_id,
+		    windpressure_name,
+			windpressure_upper,
+		    windpressure_lower,
+			windpressure_state,
+			windpressure_note
+        from twr_windpressure where windpressure_id != '' and windpressure_state != -1
+        	<if test="windpressureState != null and windpressureState != ''">
+		    	and windpressure_state = #{windpressureState,jdbcType=INTEGER}
+			</if>
+		 	<if test="windpressureName != null and windpressureName != ''">
+		    	and windpressure_name like 
+		    	CONCAT('%',#{windpressureName,jdbcType=VARCHAR},'%')
+		 	 </if>
+	</select>
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.BillAccountVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.selfrent.billAccount.BillAccountVO" >
+    <id column="billAccount_id" property="billAccountId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="billAccount_code" property="billAccountCode" jdbcType="VARCHAR" />
+    <result column="billAccount_name" property="billAccountName" jdbcType="VARCHAR" />
+    <result column="billAccount_state" property="billAccountState" jdbcType="INTEGER" />
+    <result column="billAccount_note" property="billAccountNote" jdbcType="VARCHAR" />
+    <result column="audit_state" property="auditState" jdbcType="INTEGER" />
+   	<association property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+	    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+	    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+	    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+	    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+     </association>
+  </resultMap>
+  <!-- 查询所有报账点信息 -->
+  <select id="queryBillAccountVO" parameterType="map" resultMap="BaseResultMap">
+  	select 
+  		rent_billaccount.billAccount_id,
+  		rent_billaccount.reg_id,
+  		rent_billaccount.billAccount_code,
+  		rent_billaccount.billAccount_name,
+  		rent_billaccount.billAccount_state,
+  		rent_billaccount.billAccount_note,
+  		v_sys_region.preg_name,
+  		v_sys_region.reg_name
+  	from
+  		rent_billaccount
+  		INNER JOIN v_sys_region ON v_sys_region.reg_id = rent_billaccount.reg_id
+  	<where>
+  		rent_billaccount.audit_state = #{auditState}
+  		<if test="billaccountName != null and billaccountName != ''">
+  			and rent_billaccount.billAccount_name like CONCAT('%',#{billaccountName},'%')
+  			or rent_billaccount.billAccount_code like CONCAT('%',#{billaccountName},'%')
+  		</if>
+  		<if test="regId != null and regId != ''">
+  			and rent_billaccount.reg_id = #{regId}
+  		</if>
+  		<if test="regId == '' or regId == null">
+			and v_sys_region.reg_id in (
+			select reg_id from sys_userregion 
+			where relation_state=#{state}
+				and user_id = #{userId}
+			)
+		</if>
+		<if test="pRegId != '' and pRegId != null">
+				and v_sys_region.preg_id = #{pRegId,jdbcType=VARCHAR}
+		</if>
+  		<if test="billaccountState!=null and billaccountState!=''">
+  			and rent_billaccount.billAccount_state = #{billaccountState,jdbcType=INTEGER}
+  		</if>
+  	</where>
+  </select>  
+  <!-- 根据报账点id查询所有报账点信息 -->
+  <select id="queryBillAccountById" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  		billAccount_id,reg_id,billAccount_code,billAccount_name,billAccount_state,billAccount_note
+  	from
+  		rent_billaccount
+  	where
+  		billAccount_id = #{billAccountId}
+  </select>  
+  <!-- 查询报账点关联关系 -->
+  <select id="queryBillaccountRelations" parameterType="java.lang.String" resultType="map">
+  	SELECT
+		'rent_contract' AS resType,
+		rc.rentcontract_id AS id,
+		dc.contract_code AS CODE,
+		dc.contract_name AS NAME,
+		NULL pResType,
+		NULL AS pId 
+	FROM
+		dat_contract dc INNER JOIN rent_contract rc ON dc.contract_id = rc.contract_id
+		INNER JOIN rent_billaccountcontract rbc ON rc.rentcontract_id = rbc.rentcontract_id
+		INNER JOIN rent_billaccount rb ON rb.billaccount_id = rbc.billaccount_id
+	WHERE rb.billaccount_id = #{billaccountId}
+	UNION
+	SELECT
+		'rent_billaccount' AS resType,
+		rb.billaccount_id AS id,
+		rb.billaccount_code AS CODE,
+		rb.billaccount_name AS NAME,
+		'rent_contract' pResType,
+		rc.rentcontract_id AS pId 
+	FROM
+		rent_billaccount rb INNER JOIN rent_billaccountcontract rbc ON rb.billaccount_id = rbc.billaccount_id
+		INNER JOIN rent_contract rc on rc.rentcontract_id = rbc.rentcontract_id
+	WHERE rb.billaccount_id = #{billaccountId}
+	UNION
+	SELECT
+		'dat_baseresource' AS resType,
+		dbs.baseresource_id AS id,
+		dbs.baseresource_code AS CODE,
+		dbs.baseresource_name AS NAME,
+		'rent_billaccount' pResType,
+		rb.billaccount_id AS pId 
+	FROM
+		dat_baseresource dbs INNER JOIN rent_billaccountresource rbs ON dbs.baseresource_id = rbs.baseresource_id
+		INNER JOIN rent_billaccount rb on rb.billaccount_id = rbs.billaccount_id
+	WHERE rb.billaccount_id = #{billaccountId}
+  </select>
+</mapper>

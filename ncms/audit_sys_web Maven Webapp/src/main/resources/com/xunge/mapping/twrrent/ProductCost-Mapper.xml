@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.ProductCostVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.bizbasedata.ProductCostVO" >
+	    <id column="productcost_id" property="productcostId" jdbcType="VARCHAR" />
+	    <result column="producttype_id" property="producttypeId" jdbcType="VARCHAR" />
+	    <result column="producttype_name" property="producttypeName" jdbcType="VARCHAR" />
+	    <result column="highup_id" property="highupId" jdbcType="VARCHAR" />
+	    <result column="highup_name" property="highupName" jdbcType="VARCHAR" />
+	    <result column="windpressure_id" property="windpressureId" jdbcType="VARCHAR" />
+	    <result column="windpressure_name" property="windpressureName" jdbcType="VARCHAR" />
+	    <result column="roomtype_id" property="roomtypeId" jdbcType="VARCHAR" />
+	    <result column="roomtype_name" property="roomtypeName" jdbcType="VARCHAR" />
+	    <result column="supttype_id" property="supttypeId" jdbcType="VARCHAR" />
+	    <result column="supttype_name" property="supttypeName" jdbcType="VARCHAR" />
+	    <result column="productcost_price" property="productcostPrice" jdbcType="DECIMAL" />
+	    <result column="productcost_state" property="productcostState" jdbcType="INTEGER" />
+	    <result column="productcost_note" property="productcostNote" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <!-- 查询建造成本库对象 -->
+	<select id="queryAllProCost" resultMap="BaseResultMap" parameterType="Map">
+		    select
+			    co.productcost_id productcost_id,
+				co.productcost_price productcost_price,
+				co.productcost_state productcost_state,
+				tt.producttype_id producttype_id,
+				tt.producttype_name producttype_name,
+				wp.windpressure_id windpressure_id,
+				wp.windpressure_name windpressure_name,
+				hh.highup_id highup_id,
+				hh.highup_name highup_name,
+				co.roomtype_id roomtype_id,
+	      		(select comm.commtype_name from twr_commtype comm where comm.commtype_id = co.roomtype_id) roomtype_name,
+				co.supttype_id supttype_id,
+			  	(select comm.commtype_name from twr_commtype comm where comm.commtype_id = co.supttype_id) supttype_name,
+				co.productcost_note productcost_note
+			from
+			twr_productcost co 
+			inner join
+			twr_producttype tt on co.producttype_id = tt.producttype_id 
+			inner join
+			twr_windpressure wp on co.windpressure_id = wp.windpressure_id 
+			inner join 
+			twr_highup hh on co.highup_id = hh.highup_id
+			where productcost_state != -1
+	</select>
+	
+	<!-- 删除建造成本库对象-->
+	<delete id="deleteByProCostId" parameterType="Map">
+		update twr_productcost
+		set productcost_state = -1
+		where productcost_id in 
+		<foreach collection="productCostIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改建造成本库对象-->
+	<update id="updateProCostVOById" parameterType="com.xunge.model.towerrent.bizbasedata.ProductCostVO">
+		update twr_productcost
+		set
+			producttype_id = #{producttypeId,jdbcType=VARCHAR},
+			highup_id = #{highupId,jdbcType=VARCHAR},
+			windpressure_id = #{windpressureId,jdbcType=VARCHAR},
+			roomtype_id = #{roomtypeId,jdbcType=VARCHAR},
+			supttype_id = #{supttypeId,jdbcType=VARCHAR},
+			productcost_price = #{productcostPrice,jdbcType=DECIMAL},
+			productcost_note = #{productcostNote,jdbcType=VARCHAR}
+		where productcost_id = #{productcostId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 修改建造成本库对象状态-->
+	<update id="updateProCostState" parameterType="Map">
+		update twr_productcost tp set tp.productcost_state = #{productcostState,jdbcType=INTEGER} 
+		where tp.productcost_id in 
+		<foreach collection="proCostIdList" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 新增建造成本库对象-->
+	<insert id="addProCostObj" parameterType="com.xunge.model.towerrent.bizbasedata.ProductCostVO">
+		insert into twr_productcost
+		    (productcost_id,
+		    <if test="producttypeId != null and producttypeId != ''">
+		    producttype_id,
+		   </if>
+		   <if test="highupId != null and highupId != ''">
+			highup_id,     
+			</if>
+			 <if test="windpressureId != null and windpressureId != ''">
+			windpressure_id,
+			</if>
+			 <if test="roomtypeId != null and roomtypeId != ''">
+			roomtype_id,
+			</if>
+			 <if test="supttypeId != null and supttypeId != ''">
+			supttype_id,
+			</if>
+			productcost_price,
+			productcost_note,
+			productcost_state)
+		values(
+			  #{productcostId,jdbcType=VARCHAR},
+			  <if test="producttypeId != null and producttypeId != ''">
+			  #{producttypeId,jdbcType=VARCHAR},
+			  </if>
+			   <if test="highupId != null and highupId != ''">
+			  #{highupId,jdbcType=VARCHAR},
+			  </if>
+			  <if test="windpressureId != null and windpressureId != ''">
+			  #{windpressureId,jdbcType=VARCHAR},
+			  </if>
+			  <if test="roomtypeId != null and roomtypeId != ''">
+			  #{roomtypeId,jdbcType=VARCHAR},
+			  </if>
+			   <if test="supttypeId != null and supttypeId != ''">
+			  #{supttypeId,jdbcType=VARCHAR},
+			  </if>
+			  #{productcostPrice,jdbcType=DECIMAL},
+			  #{productcostNote,jdbcType=VARCHAR},
+			  0)
+	</insert>
+	
+	<!-- 根据group查询公共字典中的数据集 -->
+	<select id="queryAllGroupType" resultType="com.xunge.model.towerrent.bizbasedata.CommTypeVO" parameterType="Map">
+		    select 
+		    distinct(commtype_name) commtype_name,
+		    commtype_id
+		    from twr_commtype
+		    where commtype_group = #{commType,jdbcType=VARCHAR} and commtype_state != -1
+	</select>
+	
+	<!-- 查询挂高数据集 -->
+	<select id="queryHigUp" resultType="com.xunge.model.towerrent.bizbasedata.HighUpVO" parameterType="Map">
+		    select 
+		    distinct(highup_name) highupName,
+            highup_id highupId
+        	from twr_highup where highup_state != -1
+		</select>
+		
+	<!-- 查询风压数据集 -->
+		<select id="queryWindPress" resultType="com.xunge.model.towerrent.bizbasedata.WindPressureVO">
+		    select 
+		    distinct(windpressure_name) windpressureName,
+            windpressure_id windpressureId
+        	from twr_windpressure where windpressure_state != -1
+	</select>
+	
+		<!-- 查询三级铁塔类型数据集 -->
+		<select id="queryTwrType" resultType="com.xunge.model.towerrent.bizbasedata.ProductCostVO" >
+		    select 
+		    distinct(producttype_name) producttypeName,
+            producttype_id producttypeId
+	        from twr_producttype where producttype_pid not in
+			(select twr1.producttype_id from twr_producttype twr1 where twr1.producttype_pid = '') and producttype_pid != '' and producttype_state != -1
+	</select>
+	
+	<!-- 查询表中机房列表 -->
+		<select id="queryRoomList" resultType="String">
+		    select 
+		    distinct(comm.commtype_name) commTypeName,
+		    roomtype_id roomTypeId
+		    from twr_productcost cost 
+		    INNER JOIN twr_commtype comm 
+		    ON cost.roomtype_id = comm.commtype_id
+		    where commtype_state != -1
+	</select>
+	
+	<!-- 查询表中配套列表 -->
+		<select id="querySuptList" resultType="String">
+		    select 
+		    distinct(comm.commtype_name) commTypeName,
+		    cost.supttype_id suptTypeId
+		    from twr_productcost cost 
+		    INNER JOIN twr_commtype comm 
+		    ON cost.supttype_id = comm.commtype_id
+		    where commtype_state != -1
+	</select>
+	
+	<!-- 查询表中铁塔类型列表 -->
+		<select id="queryTwrTypeList" resultType="String">
+		    select 
+		    distinct(pro.producttype_name) proTypeName, 
+		    cost.producttype_id proTypeId
+		    from twr_productcost cost 
+		    inner join twr_producttype pro 
+		    on pro.producttype_id = cost.producttype_id
+		    where producttype_state != -1
+	</select>
+	
+	<!-- 按条件建造成本库对象-->
+	<select id="queryProCostVOByStateAndName" resultMap="BaseResultMap" parameterType="Map">
+      select
+			tt.producttype_id,
+			tt.producttype_name,
+			wp.windpressure_id,
+			wp.windpressure_name,
+			hh.highup_id,
+			hh.highup_name,
+			co.productcost_id,
+			co.productcost_price,
+			co.productcost_state,
+			co.roomtype_id,
+      		(select comm.commtype_name from twr_commtype comm where comm.commtype_id = co.roomtype_id) roomtype_name,
+			co.supttype_id,
+		  	(select comm.commtype_name from twr_commtype comm where comm.commtype_id = co.supttype_id) supttype_name,
+			co.productcost_note
+			from
+			twr_productcost co 
+			inner join
+			twr_producttype tt on co.producttype_id = tt.producttype_id 
+			inner join
+			twr_windpressure wp on co.windpressure_id = wp.windpressure_id 
+			inner join
+			twr_highup hh on co.highup_id = hh.highup_id
+         where co.productcost_id != '' and co.productcost_state != -1
+         <if test="productcostState != null and productcostState != ''">
+	    	and co.productcost_state = #{productcostState,jdbcType=INTEGER}
+		 </if>
+		 <if test="roomtypeId != null and roomtypeId != ''">
+	    	and co.roomtype_id = #{roomtypeId,jdbcType=VARCHAR}
+		 </if>
+		 <if test="supttypeId != null and supttypeId != ''">
+	    	and co.supttype_id = #{supttypeId,jdbcType=VARCHAR}
+		 </if>
+		 <if test="producttypeId != null and producttypeId != ''">
+			and tt.producttype_id = #{producttypeId,jdbcType=VARCHAR}
+		  </if>
+	</select>
+</mapper>

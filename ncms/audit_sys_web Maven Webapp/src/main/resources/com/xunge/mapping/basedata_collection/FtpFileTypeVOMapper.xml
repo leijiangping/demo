@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.basedata.collection.FtpFileTypeVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.basedata.colletion.FtpFileTypeVO" >
+    <id column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_code" property="typeCode" jdbcType="VARCHAR" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="type_group_id" property="typeGroupId" jdbcType="INTEGER" />
+    <result column="type_group_name" property="typeGroupName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    type_id, type_code, type_name, type_group_id, type_group_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ftp_file_type
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ftp_file_type
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.basedata.colletion.FtpFileTypeVO" >
+    insert into ftp_file_type (type_id, type_code, type_name, 
+      type_group_id, type_group_name)
+    values (#{typeId,jdbcType=INTEGER}, #{typeCode,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, 
+      #{typeGroupId,jdbcType=INTEGER}, #{typeGroupName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.basedata.colletion.FtpFileTypeVO" >
+    insert into ftp_file_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="typeCode != null" >
+        type_code,
+      </if>
+      <if test="typeName != null" >
+        type_name,
+      </if>
+      <if test="typeGroupId != null" >
+        type_group_id,
+      </if>
+      <if test="typeGroupName != null" >
+        type_group_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeCode != null" >
+        #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeGroupId != null" >
+        #{typeGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="typeGroupName != null" >
+        #{typeGroupName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.basedata.colletion.FtpFileTypeVO" >
+    update ftp_file_type
+    <set >
+      <if test="typeCode != null" >
+        type_code = #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null" >
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeGroupId != null" >
+        type_group_id = #{typeGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="typeGroupName != null" >
+        type_group_name = #{typeGroupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.basedata.colletion.FtpFileTypeVO" >
+    update ftp_file_type
+    set type_code = #{typeCode,jdbcType=VARCHAR},
+      type_name = #{typeName,jdbcType=VARCHAR},
+      type_group_id = #{typeGroupId,jdbcType=INTEGER},
+      type_group_name = #{typeGroupName,jdbcType=VARCHAR}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  
+     <!--根据collectiontype获取-->
+    <select id="getFtpFileTypebyGroupId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from ftp_file_type    
+        where type_group_id = #{typeGroupId}
+    </select>
+</mapper>

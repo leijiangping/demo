@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-table.min.css" >
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+    <title>费用审核</title>
+</head>
+<body>
+    <form class="form-inline">
+        <div class="form-group">
+            <select id="City">
+            	<option value="">运营商地市</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="year">
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="month">
+            	<option value="01">1月</option>
+            	<option value="02">2月</option>
+            	<option value="03">3月</option>
+            	<option value="04">4月</option>
+            	<option value="05">5月</option>
+            	<option value="06">6月</option>
+            	<option value="07">7月</option>
+            	<option value="08">8月</option>
+            	<option value="09">9月</option>
+            	<option value="10">10月</option>
+            	<option value="11">11月</option>
+            	<option value="12">12月</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="state">
+            	<option value="">选择状态</option>
+            	<option value="9">未审核</option>
+            	<option value="0">已审核</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-success" onclick="loadTableData();">查询</button>
+    </form>
+    <div class="btn-toolbar">
+        <button class="btn btn-primary" type="button" onclick="auditExamination();">审核</button>
+		<button class="btn btn-primary" type="button" onclick="submitAudit();">批量审核</button>
+    </div>
+    <table id="tb"></table>
+    <!-- 审核弹出页面 -->
+	<div class="modal hide fade" id="EditPanel" tabindex="-1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h4 id="myModalLabel">审核</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="list-group">
+				        <li class="list-group-item row">
+				             <div class="col-md-3">审核状态</div>
+				             <div class="col-md-3">
+				                 <select class="form-control" id='checkState'>
+				                     <option value='0'>通过</option>
+				                     <option value='8'>不通过</option>
+				                 </select>
+				             </div>
+				             <div class="col-md-3">审核时间</div>
+				             <div class="col-md-3">
+			                     <input type='text' id="auditTime" name="" 
+			                     	style="float: left;height: 34px;border-radius: 4px;margin-top: 3px; width: 100%;padding: 0px 12px;border: 1px solid #ccc;"/>
+				             </div>
+				         </li>    
+				         <li class="list-group-item row">
+				             <div class="col-md-3">审核人</div>
+				             <div class="col-md-3" id="curUser"></div>
+				             <div class="col-md-3">下级审核人</div>
+				             <div class="col-md-3" id="firstUsers">
+				             <select id="nextUsers" class="selectpicker" data-hide-disabled="true" data-size="4"></select>
+				             </div> 
+				          </li>
+				          <li class="list-group-item row">
+				            <div class="col-md-3">审核备注</div>
+				            <div class="col-md-9">
+				                <input type="text" class="form-control" id='comment'>
+				            </div>
+				        </li>
+        			</ul>
+				</div>
+				<div class="modal-footer">
+					<a href="#"  class="btn" data-dismiss="modal">关闭</a> 
+					<a href="#" class="btn btn-primary" onclick="formSubmit();">保存</a>
+				</div>
+				<input id="accountIds" value="" type="hidden"/>
+			</div>
+		</div>
+	</div>
+    <script src="../../../../asserts/lib/jquery.js"></script>
+    <script src="../../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../bootstrap/js/ui.loading.js"></script>
+    <!--[if lte IE 9]>
+	 <script src="../../../bootstrap/js/html5shiv.js"></script>
+	 <script src="../../../bootstrap/js/respond.min.js"></script>
+	 <script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+    <script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+	<script  src="../../../bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../../js/common.js"></script>
+    <script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js?v=3"></script>
+    <script src="../../../js/page/twrrent/accountmanage/costCheck.js"></script>
+    <script>
+    $(function () {
+        $('#auditTime').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+    })
+</script>
+</body>
+</html>

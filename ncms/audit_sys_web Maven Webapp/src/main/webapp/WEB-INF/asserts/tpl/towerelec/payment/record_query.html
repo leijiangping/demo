@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <title>报账点信息管理-新增页面</title>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+</head>
+<body>
+<form action="">
+    <div class="btn-toolbar">
+        <button type="button" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-primary">保存并提交审核</button>
+        <button type="button" class="btn btn-default" onclick="back();">取消</button>
+    </div>
+    <div class="B_box">
+    	<!-- 报账点与合同信息 -->
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">报账点与合同信息</div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">报账点编码</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">报账点名称</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">合同编码</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">合同名称</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    
+                    <div class="col-md-2">是否包干合同</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                    </div>
+                    
+                    <div class="col-md-2">电费费率</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">供电类型</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    
+                    <div class="col-md-2">是否有电损</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">电损计算方式</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">按度数</option>
+              				<option value="1">按金额</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">合同总金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                 <li class="list-group-item row">
+                    <div class="col-md-2">是否独立挂表</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">移动分摊比例</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">电费单价是否含税</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    
+                    <div class="col-md-2">供应商编码</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">供应商名称</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">供应商地点</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 报账点缴费信息-->
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">报账点缴费信息</div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">缴费期始</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">缴费期终</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">缴费申请日期</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                	<div class="col-md-2">购电方式</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">IC卡</option>
+                            <option value="1" selected>后付费</option>
+                            <option value="2" selected>预付费</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">支付方式</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">转账</option>
+                            <option value="1">托收</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">报账类型</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">借款</option>
+                            <option value="1" selected>报账</option>
+                            <option value="2">核销</option>
+                            <option value="3">计提</option>
+                            <option value="4">冲销</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">票据类型</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">发票</option>
+                            <option value="1">收据</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">税金承担方式</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="" selected>请选择</option>
+                            <option value="0">移动开票认税</option>
+                            <option value="1">对方开票认税</option>
+                            <option value="2">移动开票对方认税</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">增值税是否可抵扣</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">可抵扣</option>
+                            <option value="1">不可抵扣</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">业务类型</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">扩展字段</option>
+                            <option value="1">网络类型租赁</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">费用类型</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">机房租赁</option>
+                            <option value="1">基站租赁</option>
+                            <option value="1">其它网元租赁</option>
+                            <option value="1">扩展字段</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">费用类别</div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="0">租金</option>
+                            <option value="1">扩展字段</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">系统计算不含税金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">实际不含税金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">系统计算电损金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                 <li class="list-group-item row">
+                    <div class="col-md-2">系统计算税金</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">实际税金</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">实际电损金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">其他费用</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">计算报账金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">实际报账金额</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">电表总电量</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">报账点计量倍数</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">实际总耗电量</div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-2">备注</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 缴费标杆信息-->
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">缴费标杆信息</div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-md-12">
+                    	<table id="tb"></table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 电表缴费明细信息-->
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-md-12   title">电表缴费明细信息</div>
+                </li>
+                <li class="list-group-item row">
+                    <ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="#1_info" data-toggle="tab">DB-001</a></li>
+						<li><a href="#2_info" data-toggle="tab">DB-002</a></li>
+						<li><a href="#3_info" data-toggle="tab">DB-003</a></li>
+						<li><a href="#6_info" data-toggle="tab">DB-006</a></li>
+						<li><a href="#7_info" data-toggle="tab">DB-007</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<!--DB-001-->
+				        <div class="tab-pane fade in active" id="1_info">
+				            <ul class="list-group">
+				             	<li class="list-group-item row">
+				                    <div class="col-md-2">电表编码</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电表类型</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电表户号</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">上期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">本期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电表倍率</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">本期度数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">移动分摊比例</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">分摊后度数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                
+				                <li class="list-group-item row">
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电费单价1</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">用电量1</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电费单价2</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">用电量2</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电费单价3</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">用电量3</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">不含税金额</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">税金</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                
+				                <li class="list-group-item row">
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电损度数1</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电损电量1</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电损度数2</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电损电量2</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电损度数3</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电损电量3</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电损金额</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				            </ul>
+				        </div>
+				        
+				        <!--DB-002-->
+				        <div class="tab-pane fade in" id="2_info">
+				            <ul class="list-group">
+				             	<li class="list-group-item row">
+				                    <div class="col-md-2">电表编码</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电表类型</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电表户号</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">上期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">本期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电表倍率</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">本期度数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">移动分摊比例</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">分摊后度数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                
+				                <li class="list-group-item row">
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">平单价</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">平上期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">平本期读数</div>
+				                    <div class="col-md-2">
+				                    	<input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">峰单价</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">峰上期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">峰本期读数</div>
+				                    <div class="col-md-2">
+				                    	<input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">谷单价</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">谷上期读数</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">谷本期读数</div>
+				                    <div class="col-md-2">
+				                    	<input type="text" class="form-control">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">不含税金额</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">税金</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                
+				                <li class="list-group-item row">
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">平单价</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电损电量1</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">峰单价</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电损电量2</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">谷单价</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2">电损电量3</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				                <li class="list-group-item row">
+				                    <div class="col-md-2">电损金额</div>
+				                    <div class="col-md-2">
+				                        <input type="text" class="form-control">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                    <div class="col-md-2"></div>
+				                    <div class="col-md-2">
+				                    </div>
+				                </li>
+				            </ul>
+				        </div>
+				        
+					</div>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</form>
+<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<!--[if lte IE 9]>
+	<script src="../../../bootstrap/js/html5shiv.js"></script>
+	<script src="../../../bootstrap/js/respond.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="../../../js/common.js?v=11"></script>
+</body>
+</html>

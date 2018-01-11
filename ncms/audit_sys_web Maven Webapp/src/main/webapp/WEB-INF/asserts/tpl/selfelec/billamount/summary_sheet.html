@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>汇总单详情</title>
+    
+    
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+	<link href="../../../bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+  
+</head>
+<body>
+<div id="sheetBox">
+    <div class="btn-toolbar">
+        <button type="button" class="btn btn-primary" onclick="printBillamountPDF()">打印</button>
+        <button type="button" class="btn btn-primary" onclick="exportBillamount()">PDF导出</button>
+        <button type="button" class="btn btn-primary" onclick="exportPaymentDatil()">导出缴费明细</button>
+        <button type="button" class="btn btn-primary" onclick="finishBillamount()">完成</button>
+        <button type="button" class="btn btn-primary" onclick="finishBillamount()">返回</button>
+    </div>
+    <span style="display: none;" id="imgurl"></span>
+    <div id="pdfcanvas">
+    	<div  class="search_title">电费报账汇总单</div>
+		    <ul class="list-group">
+		        <li class="list-group-item row">
+		            <div class="col-md-1">汇总单号</div>
+		            <div class="col-md-2" id="billamountCode"></div>
+		            <div class="col-md-1">地市</div>
+		            <div class="col-md-2" id="City"></div>
+		            <div class="col-md-1">区县</div>
+		            <div class="col-md-2" id="Village"></div>
+		            <div class="col-md-1">汇总日期</div>
+		            <div class="col-md-2" id="billamountDate"></div>
+		        </li>
+		        <li class="list-group-item row">
+		            <div class="col-md-1">应付金额</div>
+		            <div class="col-md-2" id="billamountWithtax"></div>
+		            <div class="col-md-1">缴费数量</div>
+		            <div class="col-md-2" id="billamountDetail"></div>
+		            <div class="col-md-1">报账类型</div>
+		            <div class="col-md-2" id="billType">缴费</div>
+		            <div class="col-md-1">报账人</div>
+		            <div class="col-md-2" id="userRealName"></div>
+		        </li>
+		        <li class="list-group-item row">
+		            <div class="col-md-1">供应商编码</div>
+		            <div class="col-md-2" id="supplierCode"></div>
+		            <div class="col-md-1">供应商名称</div>
+		            <div class="col-md-2" id="supplierName"></div>
+		            <div class="col-md-1">开户银行</div>
+		            <div class="col-md-2" id="depositBank"></div>
+		            <div class="col-md-1">银行账号</div>
+		            <div class="col-md-2" id="bankAccount"></div>
+		        </li>
+		    </ul>
+		    <div class="search_title">汇总单明细信息</div>
+		    <table class="table table-bordered table-striped table-hover" id="billamountDetailTable">
+		    </table>
+		</div>
+    </div>
+    
+    <!--用于传输生成pdf的字节码  -->
+    <form id="pdfform" action="exportPdf" method="post" style="visibility: hidden;">
+    	<input name="imgUrl" id="imgUrl" type="hidden">
+    	<input name="title" id="title" type="hidden">
+    </form>
+    
+  
+    <script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../../bootstrap/js/ui.loading.js"></script>
+	<!--[if lte IE 9]>
+	<script src="../../../bootstrap/js/html5shiv.js"></script>
+	<script src="../../../bootstrap/js/respond.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+	<script src="../../../bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../bootstrap/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+	
+	<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+	
+	<script type="text/javascript" src="../../../js/page/selfelec/billamount/html2canvas.js?v=3"></script>
+	<script type="text/javascript" src="../../../js/page/selfelec/billamount/billamount-viewinfo.js?v=3"></script> 
+</body>
+</html>

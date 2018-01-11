@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+    <title>信息审核</title>
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.css"/>    
+    <link rel="stylesheet" href="../../../css/ncms_page.css"/>
+</head>
+<body>
+<form action="" id="dataForm">
+    <div class="btn-toolbar">
+        <button id="saveSet"type="button" class="btn btn-primary" onclick="saveCheckInfo();">保存</button>
+        <button type="button" class="btn btn-default"  onclick="goBack();">取消</button>
+    </div>
+    <input type="hidden" name="rentId" id="rentId"/>
+    <input type="hidden" name="datId" id="datId"/>
+    
+    <div class="info_check">
+         <ul class="list-group">
+            <li class="list-group-item row">
+                <div class="col-md-3">审核状态</div>
+                <div class="col-md-3">
+                    <select class="form-control" id='checkState'>
+                        <option value='0'>通过</option>
+                        <option value='8'>不通过</option>
+                    </select>
+                </div>
+                  <div class="col-md-3">审核人</div>
+                <div class="col-md-3" id="curUser"></div>
+              <!--   <div class="col-md-3">审核时间</div>
+                <div class="col-md-3">
+                    <input type="date"/>
+                </div> -->
+            </li>
+            <li class="list-group-item row">
+              
+                <div class="col-md-3">下级审核人</div>
+                <div class="col-md-3">
+                    <!-- <select class="form-control" id='leader' multiple="multiple">
+                        
+                    </select> -->
+                    <select id="nextUsers" name="nextUsers" class="form-control selectpicker" data-hide-disabled="true" data-size="4" style="float:left" onchange="changeSave()"></select>
+                    <span id="err" class="modal-error"></span> 
+                </div>
+                <div class="col-md-3">审核备注</div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control commentMsg" id='comment' name="comment" onchange="changeSave()">
+                    <span id="err" class="modal-error"></span> 
+                </div>
+            </li>
+        </ul>
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#basic_info" data-toggle="tab">基本信息</a></li>
+            <li><a href="#rent_info" data-toggle="tab">租费信息</a></li>
+            <li><a href="#sup_pay" data-toggle="tab">付款供应商</a></li>
+        </ul>
+	<div id="myTabContent" class="tab-content">
+            <!--基本信息-->
+            <div class="tab-pane fade in active" id="basic_info">
+                <ul class="list-group">
+                    <li class="list-group-item row">
+                        <div class="col-md-2">合同分类：</div>
+                        <div class="col-md-4" id="contractType"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">合同编号：</div>
+                        <div class="col-md-4 contract" id="contractCode"></div>
+                        <div class="col-md-2">合同名称：</div>
+                        <div class="col-md-4" id="contractName"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">合同期始：</div>
+                        <div class="col-md-4" id="contractStartdate"></div>
+                        <div class="col-md-2" >合同期终：</div>
+                        <div class="col-md-4" id="contractEnddate"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2" >地市区县：</div>
+                        <div class="col-md-4" id="pRegName"></div>
+                        <div class="col-md-2" >合同总金额</div>
+                        <div class="col-md-4" id="totalAmount"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">对方签约名称：</div>
+                        <div class="col-md-4" id="contractCheckname1"></div>
+                         <div class="col-md-2">我方签约名称：</div>
+                        <div class="col-md-4" id="contractCheckname2"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">签约日期：</div>
+                        <div class="col-md-4" id="contractSigndate"></div>
+                        <div class="col-md-2">合同年限：</div>
+                        <div class="col-md-4" id="contractYearquantity"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">管理负责人：</div>
+                        <div class="col-md-4" id="managerUser"></div>
+                        <div class="col-md-2">管理部门:</div>
+                        <div class="col-md-4" id="managerDepartment"></div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 租费信息-->
+            <div class="tab-pane fade" id="rent_info">
+                <ul class="list-group">
+                    <li class="list-group-item row">
+                        <div class="col-md-2">年租费：</div>
+                        <div class="col-md-4"  id="yearAmount"></div>
+                        <div class="col-md-2">房屋类型：</div>
+                        <div class="col-md-4" id="houseType"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2" >合同分类：</div>
+                        <div class="col-md-4" id="contractType1"></div>
+                        <div class="col-md-2">缴费周期：</div>
+                        <div class="col-md-4" id="paymentperiod_id"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">费用类别：</div>
+                        <div class="col-md-4" id="charge_type"></div>
+                        <div class="col-md-2">物业地址：</div>
+                        <div class="col-md-4" id="property_address" ></div>
+                    </li>
+                    <li class="list-group-item row comment">
+                        <div class="col-md-2">备注:</div>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="2" id="rentcontract_note" readonly="readonly" style="resize: none;"></textarea>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 付款供应商-->
+            <div class="tab-pane fade" id="sup_pay">
+                <ul class="list-group">
+                    <li class="list-group-item row">
+                        <div class="col-md-2">供应商编号</div>
+                        <div class="col-md-4" id="supplier_code"></div>
+                        <div class="col-md-2">供应商名称</div>
+                        <div class="col-md-4" id="supplier_name"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">服务类别</div>
+                        <div class="col-md-4" id="supplier_type">电费</div>
+                        <div class="col-md-2">供应商地址</div>
+                        <div class="col-md-4" id="supplier_address"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">联系人</div>
+                        <div class="col-md-4" id="supplier_contact"></div>
+                        <div class="col-md-2">联系电话</div>
+                        <div class="col-md-4" id="supplier_telephone"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">地市</div>
+                        <div class="col-md-4" id="pRegName1"></div>
+                        <div class="col-md-2">区县</div>
+                        <div class="col-md-4" id="regName1"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">账户类型</div>
+                        <div class="col-md-4" id="account_type"></div>
+                        <div class="col-md-2">银行账户</div>
+                        <div class="col-md-4" id="bank_account"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">开户银行</div>
+                        <div class="col-md-4" id="deposit_bank"></div>
+                        <div class="col-md-2">银行账号</div>
+                        <div class="col-md-4" id="bank_user"></div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-2">供应商类别</div>
+                        <div class="col-md-4" id="suppliertype"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div id="histoicFlowList" class="info_check"></div>
+<script src="../../../../asserts/lib/jquery.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/ui.loading.js"></script>
+<script src="../../../bootstrap/js/jquery.validate.min.js"></script>
+<script src="../../../bootstrap/js/messages_zh.js"></script>
+
+<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lte IE 9]>
+	<script src="../../../bootstrap/js/html5shiv.js"></script>
+	<script src="../../../bootstrap/js/respond.min.js"></script>
+	<script src="../../../bootstrap/js/jquery.placeholder.min.js"></script>
+<![endif]-->
+<script src="../../../bootstrap/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/system/activity/act-common/act-common.js?v=3"></script>
+<script type="text/javascript" src="../../../js/page/selfrent/rentcontract_m/checkrentcontract.js?v=3"></script> 
+</body>
+</html>

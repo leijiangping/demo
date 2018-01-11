@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.towerrent.punish.TwrRegPunishVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    <id column="twr_reg_punish_id" property="twrRegPunishId" jdbcType="VARCHAR" />
+    <result column="accountsummary_id" property="accountsummaryId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="punish_year_month" property="punishYearMonth" jdbcType="VARCHAR" />
+    <result column="punishName" property="punishName" jdbcType="VARCHAR" />
+    <result column="punishCause" property="punishCause" jdbcType="VARCHAR" />
+    <result column="punishPerson" property="punishPerson" jdbcType="VARCHAR" />
+    <result column="punishAmount" property="punishAmount" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="audit_state" property="auditState" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updatetTime" jdbcType="TIMESTAMP" />
+    <association property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+		    <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+		    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+		    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+		    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+		    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+     </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    p.twr_reg_punish_id, p.accountsummary_id, p.reg_id, p.punish_year_month, p.punishName, p.punishCause, 
+    p.punishPerson, p.punishAmount, p.state, p.audit_state, p.create_user_id, p.create_time, p.update_user_id, 
+    p.updatet_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+    from twr_reg_punish p
+    INNER JOIN v_sys_region reg on reg.preg_id = p.reg_id
+    where twr_reg_punish_id = #{twrRegPunishId,jdbcType=VARCHAR}
+    group by <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+  </select>
+  <select id="selectByTwrRegPunish" resultMap="BaseResultMap" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    select 
+    <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+    from twr_reg_punish p
+    INNER JOIN v_sys_region reg on reg.preg_id = p.reg_id
+    <where>
+	    <if test="punishYearMonth != null and punishYearMonth != ''">
+			and p.punish_year_month = #{punishYearMonth}
+		</if>
+		<if test="regId != null and regId != ''">
+			and p.reg_id = #{regId}
+		</if>
+		and p.state =0
+		
+    </where>
+    group by <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+  </select>
+  
+  <!-- 地市扣罚查询 -->
+  <select id="selectTwrRegPunishPage" resultMap="BaseResultMap" parameterType="Map" >
+	    select 
+	    <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+	    from twr_reg_punish p
+	    INNER JOIN v_sys_region reg on reg.preg_id = p.reg_id
+	    <where>
+	    		
+	    		<if test="punishYearMonth != null and punishYearMonth != ''">
+					and p.punish_year_month = #{punishYearMonth}
+				</if>
+				<if test="state != null and state!=''">
+					and p.state = #{state}
+				</if>
+	    		
+				<if test="auditState != null and auditState != ''">
+					and p.audit_state = #{auditState}
+				</if>
+				<if test="accountsummaryId != null and accountsummaryId != ''">
+					and p.accountsummary_id = #{accountsummaryId}
+				</if>
+				<if test="regId != null and regId != ''">
+					and reg.preg_id = #{regId}
+				</if>
+				
+				<!-- 判断没有待审核的数据 -->
+				<if test="ids != null and ids.size()==0">
+					and 1!=1
+				</if>
+				<!-- 流程实例id集合 -->
+				<if test="ids != null and ids.size()>0">  
+		        	and  p.twr_reg_punish_id in  
+			        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">  
+		                #{item.businessId}
+		            </foreach>  
+		   		</if>
+		   		<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+	    </where>
+	    group by <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+		order by p.updatet_time
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  delete from twr_reg_punish
+    where twr_reg_punish_id = #{twrRegPunishId,jdbcType=VARCHAR}
+      <!-- update twr_reg_punish set state=1 where twr_reg_punish_id = #{twrRegPunishId,jdbcType=VARCHAR} -->
+  </delete>
+  <insert id="insertTwrRegPunishVO" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    insert into twr_reg_punish (twr_reg_punish_id, accountsummary_id, 
+      reg_id, punish_year_month, punishName, 
+      punishCause, punishPerson, punishAmount, 
+      state, audit_state, create_user_id, 
+      create_time, update_user_id, updatet_time
+      )
+    values (#{twrRegPunishId,jdbcType=VARCHAR}, #{accountsummaryId,jdbcType=VARCHAR}, 
+      #{regId,jdbcType=VARCHAR}, #{punishYearMonth,jdbcType=VARCHAR}, #{punishName,jdbcType=VARCHAR}, 
+      #{punishCause,jdbcType=VARCHAR}, #{punishPerson,jdbcType=VARCHAR}, #{punishAmount,jdbcType=DECIMAL}, 
+      #{state,jdbcType=INTEGER}, #{auditState,jdbcType=INTEGER}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{updatetTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+   <insert id="insertBatchTwrRegPunishVO" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    insert into twr_reg_punish (twr_reg_punish_id, accountsummary_id, 
+      reg_id, punish_year_month, punishName, 
+      punishCause, punishPerson, punishAmount, 
+      state, audit_state, create_user_id, 
+      create_time, update_user_id, updatet_time
+      )
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >
+	    (#{item.twrRegPunishId,jdbcType=VARCHAR}, #{item.accountsummaryId,jdbcType=VARCHAR}, 
+	      #{item.regId,jdbcType=VARCHAR}, #{item.punishYearMonth,jdbcType=VARCHAR}, #{item.punishName,jdbcType=VARCHAR}, 
+	      #{item.punishCause,jdbcType=VARCHAR}, #{item.punishPerson,jdbcType=VARCHAR}, #{item.punishAmount,jdbcType=DECIMAL}, 
+	      #{item.state,jdbcType=INTEGER}, #{item.auditState,jdbcType=INTEGER}, #{item.createUserId,jdbcType=VARCHAR}, 
+	      #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR}, #{item.updatetTime,jdbcType=TIMESTAMP}
+	      )
+     </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    insert into twr_reg_punish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="twrRegPunishId != null" >
+        twr_reg_punish_id,
+      </if>
+      <if test="accountsummaryId != null" >
+        accountsummary_id,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month,
+      </if>
+      <if test="punishName != null" >
+        punishName,
+      </if>
+      <if test="punishCause != null" >
+        punishCause,
+      </if>
+      <if test="punishPerson != null" >
+        punishPerson,
+      </if>
+      <if test="punishAmount != null" >
+        punishAmount,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="auditState != null" >
+        audit_state,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updatetTime != null" >
+        updatet_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="twrRegPunishId != null" >
+        #{twrRegPunishId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountsummaryId != null" >
+        #{accountsummaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishYearMonth != null" >
+        #{punishYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="punishName != null" >
+        #{punishName,jdbcType=VARCHAR},
+      </if>
+      <if test="punishCause != null" >
+        #{punishCause,jdbcType=VARCHAR},
+      </if>
+      <if test="punishPerson != null" >
+        #{punishPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="punishAmount != null" >
+        #{punishAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetTime != null" >
+        #{updatetTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateAccountsummaryIDByBatchID" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    update twr_reg_punish
+    <set >
+      <if test="accountsummaryId != null" >
+        accountsummary_id = #{accountsummaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month = #{punishYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="punishName != null" >
+        punishName = #{punishName,jdbcType=VARCHAR},
+      </if>
+      <if test="punishCause != null" >
+        punishCause = #{punishCause,jdbcType=VARCHAR},
+      </if>
+      <if test="punishPerson != null" >
+        punishPerson = #{punishPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="punishAmount != null" >
+        punishAmount = #{punishAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        audit_state = #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetTime != null" >
+        updatet_time = #{updatetTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+    	<if test="ids != null and ids != '' and ids.size()>0">
+			and reg.twr_reg_punish_id in
+			<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">    
+	            #{item}
+	        </foreach>
+		</if>
+    </where>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    update twr_reg_punish
+    <set >
+      <if test="accountsummaryId != null" >
+        accountsummary_id = #{accountsummaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishYearMonth != null" >
+        punish_year_month = #{punishYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="punishName != null" >
+        punishName = #{punishName,jdbcType=VARCHAR},
+      </if>
+      <if test="punishCause != null" >
+        punishCause = #{punishCause,jdbcType=VARCHAR},
+      </if>
+      <if test="punishPerson != null" >
+        punishPerson = #{punishPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="punishAmount != null" >
+        punishAmount = #{punishAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        audit_state = #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetTime != null" >
+        updatet_time = #{updatetTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where twr_reg_punish_id = #{twrRegPunishId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.towerrent.punish.TwrRegPunishVO" >
+    update twr_reg_punish
+    set accountsummary_id = #{accountsummaryId,jdbcType=VARCHAR},
+      reg_id = #{regId,jdbcType=VARCHAR},
+      punish_year_month = #{punishYearMonth,jdbcType=VARCHAR},
+      punishName = #{punishName,jdbcType=VARCHAR},
+      punishCause = #{punishCause,jdbcType=VARCHAR},
+      punishPerson = #{punishPerson,jdbcType=VARCHAR},
+      punishAmount = #{punishAmount,jdbcType=DECIMAL},
+      state = #{state,jdbcType=INTEGER},
+      audit_state = #{auditState,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      updatet_time = #{updatetTime,jdbcType=TIMESTAMP}
+    where twr_reg_punish_id = #{twrRegPunishId,jdbcType=VARCHAR}
+  </update>
+  <!-- 根据参数查询状态正常的地市扣罚Map集合 -->
+  <select id="queryTwrRegPunishMapListByCondition" resultType="java.util.Map" parameterType="java.util.Map" >
+	    select 
+	    <include refid="Base_Column_List" />,
+		reg.preg_id,
+		reg.preg_name
+	    from twr_reg_punish p
+	    INNER JOIN v_sys_region reg on reg.preg_id = p.reg_id
+	    <where>
+	    		<if test="punishYearMonth != null and punishYearMonth != ''">
+					and p.punish_year_month = #{punishYearMonth}
+				</if>
+				<if test="state != null">
+					and p.state = #{state}
+				</if>
+	    		
+				<if test="auditState != null">
+					and p.audit_state = #{auditState}
+				</if>
+				
+				<if test="regId != null and regId != ''">
+					and p.reg_id = #{regId}
+				</if>
+				<if test="regId == '' or regId == null">
+					and reg.reg_id in (
+					select reg_id from sys_userregion 
+					where relation_state=#{state}
+						and user_id = #{userId, jdbcType=VARCHAR}
+					)
+				</if>
+	    </where>
+  </select>
+   <!-- 根据地市id和年月查询罚金合计 -->
+  <select id="queryRegAmount" parameterType="Map" resultType="BigDecimal">
+  	select sum(punishAmount)
+  	from twr_reg_punish
+  	where punish_year_month = #{punishYearMonth}
+  	and reg_id = #{regId}
+  </select>
+</mapper>

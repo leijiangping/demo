@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.selfelec.EleBillaccountExpMapper" >
+  
+  <select id="selectByContract" parameterType="com.xunge.model.selfelec.VEleBillaccountcontract" resultMap="com.xunge.dao.selfelec.VEleContractMapper.BaseResultMap">
+	    SELECT 
+		  v.* 
+		FROM
+		  v_ele_contract v
+		WHERE  1=1
+		  AND (
+		    (
+		      v.prv_id = #{prvId}
+		      AND v.is_downshare = #{isDownshare}
+		      AND v.preg_id IS NULL
+		    ) 
+		    OR (
+		      v.preg_id = #{pregId}
+		      AND v.is_downshare = #{isDownshare}
+		      AND v.reg_id IS NULL
+		    ) 
+		    OR v.reg_id = #{regId}
+		  ) 
+	    <if test="contractName != '' and contractName != null">
+			and (contract_name like
+			CONCAT('%',#{contractName,jdbcType=VARCHAR},'%')
+			or
+			contract_code like
+			CONCAT('%',#{contractName,jdbcType=VARCHAR},'%'))
+		</if>
+		 <if test="isIncludeAll != null">
+		  	AND v.is_include_all = #{isIncludeAll}
+		 </if>
+		  <if test="priceType != null">
+		  	AND v.price_type = #{priceType}
+		  </if>
+		  <![CDATA[
+		  AND contract_enddate >= #{contractEnddate} 
+		  ]]> 
+		  AND v.contract_state = #{contractState}
+		  AND v.auditing_state = #{auditingState}
+		  AND NOT EXISTS 
+		  (SELECT 
+		    * 
+		  FROM
+		  v_ele_billaccountcontract r 
+		  WHERE r.`contract_id`=v.`contract_id`
+		  AND r.`relation_state`=#{relationState}
+		  <if test="billaccountId != null">
+		  	AND r.billaccount_id = #{billaccountId}
+		  </if>
+		   ) 
+  </select>
+  
+  <select id="selectResourceTree" parameterType="com.xunge.model.selfelec.VEleBillaccountbaseresource"  resultType="map">
+  	SELECT vbb.`billaccountbaseresource_id` AS id , vbb.`baseresource_type` , vbb.`baseresource_code`,vbb.`baseresource_name`,vbb.`baseresource_state`,vbb.`baseresource_id` AS nodeId , NULL AS parentId
+	FROM `v_ele_billaccountbaseresource` vbb 
+	WHERE vbb.`relation_state`=0 
+	<if test="regId != null">
+		 AND vbb.reg_id = #{regId}
+	</if>
+	<if test="billaccountId != null">
+		 AND vbb.billaccount_id = #{billaccountId}
+	</if>
+	<if test="baseresourceId != null">
+		 AND vbb.baseresource_id = #{baseresourceId}
+	</if>
+	UNION
+	SELECT vbe.`baseresourceelectricmeter_id` AS id , vbe.`meter_type` ,vbe.`is_share` , vbe.`meter_code`,vbe.`meter_state`,vbe.`meter_id` AS nodeId , vbe.`baseresource_id` AS parentId
+	FROM
+	`v_ele_baseresourceelectricmeter` vbe,`v_ele_billaccountbaseresource` vbb 
+	WHERE vbe.`relation_state`=0 AND vbb.`relation_state`=0 AND vbe.baseresource_id = vbb.`baseresource_id`
+	<if test="regId != null">
+		 AND vbb.reg_id = #{regId}
+	</if>
+	<if test="billaccountId != null">
+		 AND vbb.billaccount_id = #{billaccountId}
+	</if>
+  </select>
+  
+ <select id="selectByResource" parameterType="com.xunge.model.selfelec.VEleBillaccountbaseresource" resultMap="com.xunge.dao.selfelec.VDatBaseresourceMapper.BaseResultMap">
+	    SELECT 
+		  * 
+		FROM
+		  v_dat_baseresource b 
+		WHERE b.baseresource_state = 1 
+		<if test="regId != null">
+		 AND b.reg_id = #{regId}
+		 </if>
+		 <if test="baseresourceName != '' and baseresourceName != null">
+			and (baseresource_code like
+			CONCAT('%',#{baseresourceName,jdbcType=VARCHAR},'%')
+			or
+			baseresource_name like
+			CONCAT('%',#{baseresourceName,jdbcType=VARCHAR},'%'))
+		</if>
+		<if test="ResourceIdList != null and ResourceIdList.size()>0">
+        	and b.baseresource_id not in  
+	        <foreach collection="ResourceIdList" item="item" index="index" open="(" separator="," close=")">  
+                #{item}
+            </foreach> 
+	    </if>
+		  AND b.auditing_state = 0 
+		  AND b.baseresource_stopdate IS NULL 
+		  AND NOT EXISTS 
+		  (SELECT 
+		    * 
+		  FROM
+		    ele_billaccountbaseresource r 
+		  WHERE r.baseresource_id = b.baseresource_id 
+		  <if test="billaccountId != null">
+		 AND r.billaccount_id = #{billaccountId}
+		 </if>
+		  <if test="relationState != null">
+			 AND r.relation_state=#{relationState}
+		 </if>
+		    ) 
+  </select> 
+  <!--  <select id="selectByResource" parameterType="com.xunge.model.selfelec.VEleBillaccountbaseresource" resultMap="com.xunge.dao.selfelec.VDatBaseresourceMapper.newBaseResultMap">
+	SELECT
+	b.*,d.*
+	FROM
+	v_dat_baseresource b,dat_electricmeter d
+	WHERE
+	b.baseresource_state = 1
+	<if test="regId != null">
+		 AND b.reg_id = #{regId}
+		 </if>
+		 <if test="baseresourceName != '' and baseresourceName != null">
+			and (baseresource_code like
+			CONCAT('%',#{baseresourceName,jdbcType=VARCHAR},'%')
+			or
+			baseresource_name like
+			CONCAT('%',#{baseresourceName,jdbcType=VARCHAR},'%'))
+		</if>
+	AND d.meter_id IN(
+	SELECT
+	c.meter_id
+	FROM
+	ele_baseresourceelectricmeter c
+	INNER JOIN dat_baseresource db
+	WHERE
+	c.baseresource_id = db.baseresource_id
+	  <if test="billaccountId != null">
+		 AND c.billaccount_id = #{billaccountId}
+		 </if>
+	)
+	AND b.auditing_state = 0
+	AND b.baseresource_stopdate IS NULL
+	AND NOT EXISTS (
+	SELECT
+	*
+	FROM
+	ele_billaccountbaseresource r
+	WHERE
+	r.baseresource_id = b.baseresource_id
+	  <if test="billaccountId != null">
+		 AND r.billaccount_id = #{billaccountId}
+		 </if>
+	)
+
+  </select> -->
+  <select id="selectByElectricmeter" parameterType="com.xunge.model.selfelec.VEleBillaccountbaseresource" resultMap="com.xunge.dao.selfelec.VDatElectricmeterMapper.BaseResultMap">
+  	SELECT 
+	  b.*
+	FROM
+	  v_dat_electricmeter b 
+	WHERE b.meter_state = 0 
+	  <if test="regId != null">
+	  	  AND b.reg_id = #{regId}
+	  </if>
+	  <if test="meterType != null">
+	  	  AND b.meter_type = #{meterType}
+	  </if>
+	  <if test="meterCode != '' and meterCode != null">
+		  and (b.meter_code like
+		  CONCAT('%',#{meterCode,jdbcType=VARCHAR},'%'))
+	  </if>
+	  	<if test="meterIds != null and meterIds.size()>0">
+        	and b.meter_id not in  
+	        <foreach collection="meterIds" item="item" index="index" open="(" separator="," close=")">  
+                #{item}
+            </foreach> 
+	    </if>
+	  AND (
+	    (
+	      NOT EXISTS 
+	      (SELECT 
+	        * 
+	      FROM
+	        ele_baseresourceelectricmeter r 
+	      WHERE b.meter_id = r.meter_id 
+	        AND r.relation_state = 0)
+	    ) 
+	    OR (
+	      b.is_share = 1 
+	      AND NOT EXISTS 
+	      (SELECT 
+	        * 
+	      FROM
+	        ele_baseresourceelectricmeter r 
+	      WHERE b.meter_id = r.meter_id 
+	        AND r.relation_state = 0 
+	        <if test="baseresourceId != null">
+	        AND baseresource_id = #{baseresourceId}
+	        </if>
+	        ) 
+	      AND NOT EXISTS 
+	      (SELECT 
+	        * 
+	      FROM
+	        ele_baseresourceelectricmeter r 
+	      WHERE b.meter_id = r.meter_id 
+	        AND r.relation_state = 0 
+	        <if test="billaccountId != null">
+				<![CDATA[
+				      AND billaccount_id <> #{billaccountId}
+				  ]]> 
+			</if>
+	         
+	        )
+	    )
+	  ) 
+  </select>
+  
+  <select id="selectResourceRelations" parameterType="string" resultType="map">
+  		SELECT 
+		  'ele_billaccount' AS resType,
+		  billaccount_id AS id,
+		  billaccount_code AS CODE,
+		  billaccount_name AS NAME,
+		  NULL pResType,
+		  NULL AS pId 
+		FROM
+		  ele_billaccount 
+		WHERE billaccount_id = #{billaccountId} 
+		UNION
+		SELECT 
+		  'ele_contract' AS resType,
+		  elecontract_id AS id,
+		  contract_code AS CODE,
+		  contract_name AS NAME,
+		  'ele_billaccount' pResType,
+		  billaccount_id AS pId 
+		FROM
+		  v_ele_billaccountcontract v 
+		WHERE v.billaccount_id = #{billaccountId} 
+		  AND (
+		    v.relation_enddate > NOW() 
+		    OR v.relation_enddate IS NULL
+		  ) 
+		  AND v.relation_state = 0 
+		UNION
+		SELECT 
+		  'dat_baseresource' AS resType,
+		  baseresource_id AS id,
+		  baseresource_code AS CODE,
+		  baseresource_name AS NAME,
+		  'ele_billaccount' pResType,
+		  billaccount_id AS pId 
+		FROM
+		  v_ele_billaccountbaseresource v 
+		WHERE v.billaccount_id = #{billaccountId} 
+		  AND (
+		    v.relation_enddate > NOW() 
+		    OR v.relation_enddate IS NULL
+		  ) 
+		  AND v.relation_state = 0 
+		UNION
+		SELECT 
+		  'dat_electricmeter' AS resType,
+		  meter_id AS id,
+		  meter_code AS CODE,
+		  meter_code AS NAME,
+		  'dat_baseresource' pResType,
+		  v.baseresource_id AS pId 
+		FROM
+		  v_ele_billaccountbaseresource v,
+		  v_ele_baseresourceelectricmeter e 
+		WHERE v.baseresource_id = e.baseresource_id 
+		  AND v.billaccount_id = #{billaccountId} 
+		  AND (
+		    v.relation_enddate > NOW() 
+		    OR v.relation_enddate IS NULL
+		  ) 
+		  AND (
+		    e.relation_enddate > NOW() 
+		    OR e.relation_enddate IS NULL
+		  ) 
+		  AND .v.relation_state = 0 
+		  AND e.relation_state = 0 
+  </select>
+  
+  <!-- 修改自维电费缴费记录为已汇总 -->
+ <update id="updateBillamountIdByPaymentId" parameterType="Map" >
+ 
+  	update ele_payment set billamount_id=#{billamountId},billamount_detail_id=#{billamountDetailId}
+  	
+  	<where>
+	  	<if test="paymentIds != null and paymentIds.size()>0">
+        	and billaccountpaymentdetail_id in  
+	        <foreach collection="paymentIds" item="item" index="index" open="(" separator="," close=")">  
+                #{item}
+            </foreach> 
+	    </if>
+  	</where>
+  </update>
+  
+</mapper>

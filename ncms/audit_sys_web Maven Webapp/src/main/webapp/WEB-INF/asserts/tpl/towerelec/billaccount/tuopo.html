@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8" />
+<script src="../../../../asserts/lib/jquery.2.0.3.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../css/jtopo/jquery-snippet-min.css">
+
+<script type="text/javascript" src="../../../js/jtopo/jquery-snippet-min.js"></script>
+<script type="text/javascript" src="../../../js/jtopo/jtopo-0.4.8-min.js"></script>
+<script type="text/javascript" src="../../../js/jtopo/jtopo-toolbar.js"></script>
+<script type="text/javascript" src="../../../js/jtopo/base_top.js"></script>
+<script type="text/javascript" src="../../../js/jtopo/service_top.js"></script>
+
+<script type="text/javascript">
+	
+	var canvas = null;        
+	var stage = null;
+	var scene = null;
+	var data = {
+	"data":"直播",
+	"data":[{
+	    	"name":"APK",
+	      	"data":[{
+	      	        	"name":"UI模块",
+	      	        	"data":[
+	      	        	        {"mod":"UI"},
+	      	        	        {"mod":"UI"},
+	      	        	        {"mod":"UI"}]
+	      	        },{
+	      	        	"name":"业务模块",
+	      	        	"data":[
+	      	        	        {"mod":"业务"},
+	      	        	        {"mod":"业务"},
+	      	        	        {"mod":"业务"}]
+	      	        }]
+	  	},{
+	    	"name":"认证",
+	        "data":[{
+		     	        "name":"认证计费",
+		     	        "data":[
+		     	                {"mod":"认证"},
+		     	                {"mod":"认证"},
+		     	                {"mod":"认证"}]
+	       	     	}]
+	       },{
+	       	"name":"片单",
+	       	"alarm":"1",
+	       	"data":[{
+	       	        	"name":"直播片单",
+	                   	"alarm":"1",
+	       	        	"data":[
+	       	        	        {"mod":"片单"},
+	       	        	        {"mod":"片单","alarm":"1"},
+	       	        	        {"mod":"片单","alarm":"2"}]
+	       			},{
+	       				"name":"直播推荐",
+	       				"data":[
+	       				        {"mod":"推荐"},
+	       				        {"mod":"推荐"},
+	       				        {"mod":"推荐"}]
+	       			}]
+	  	}]
+	};
+	$(document).ready(function(){
+		var billaccountId = localStorage.getItem("billaccountId");
+		
+		canvas = initCanvas();
+		stage = initStage(canvas,true);
+		addToolbar(stage);
+		scene = initScene(stage);
+		
+		$.post("selectResourceRelations" , {"billaccountId" : billaccountId} , function(data){
+			createServiceData(scene,data.obj);
+			
+			localStorage.clear();
+		});
+		
+	});
+</script>
+</head>
+
+
+<body>
+	
+<ul id="rightMenu" style="top:110px;left:110px;display:none;">
+	<li><a>放大</a></li>
+	<li><a>缩小</a></li>
+	<li><a>删除</a></li>
+</ul>
+<center>
+	<div class="wrap_div">
+		<div class="content" id="content">
+			<canvas width="1200" height="750" id="canvas" style="border:1px solid rgb(68,68,68);cursor:default;background-color:rgb(238,238,238);">
+			</canvas>
+		</div>
+	</div>
+</center>	
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.GrpDatacollecttypePrvVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.datacollect.GrpDatacollecttypePrvVO" >
+    <id column="datacollecttype_prv_id" property="datacollecttypePrvId" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_id" property="datacollectPrvId" jdbcType="VARCHAR" />
+    <result column="datacollecttype_id" property="datacollecttypeId" jdbcType="VARCHAR" />
+    <result column="datacollecttype_prv_filepath" property="datacollecttypePrvFilepath" jdbcType="VARCHAR" />
+    <result column="datacollecttype_prv_state" property="datacollecttypePrvState" jdbcType="INTEGER" />
+    <result column="datacollecttype_prv_filename" property="datacollecttypePrvFilename" jdbcType="VARCHAR" />
+    <association property="grpDatacollecttypeVO" javaType="com.xunge.model.datacollect.GrpDatacollecttypeVO">
+    	<id column="datacollecttype_id" property="datacollecttypeId" jdbcType="VARCHAR" />
+	    <result column="datacollect_id" property="datacollectId" jdbcType="VARCHAR" />
+	    <result column="datacollecttemp_type" property="datacollecttempType" jdbcType="VARCHAR" />
+	    <result column="datacollecttemp_filepath" property="datacollecttempFilepath" jdbcType="VARCHAR" />
+	    <result column="datacollecttemp_filename" property="datacollecttempFilename" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <resultMap id="PrvTypeMap" type="com.xunge.model.datacollect.GrpDatacollecttypePrvVO" >
+    <id column="datacollecttype_prv_id" property="datacollecttypePrvId" jdbcType="VARCHAR" />
+    <result column="datacollect_prv_id" property="datacollectPrvId" jdbcType="VARCHAR" />
+    <result column="datacollecttype_id" property="datacollecttypeId" jdbcType="VARCHAR" />
+    <result column="datacollecttype_prv_filepath" property="datacollecttypePrvFilepath" jdbcType="VARCHAR" />
+    <result column="datacollecttype_prv_state" property="datacollecttypePrvState" jdbcType="INTEGER" />
+    <result column="datacollecttype_prv_filename" property="datacollecttypePrvFilename" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    datacollecttype_prv_id, datacollect_prv_id, datacollecttype_id, datacollecttype_prv_filepath, 
+    datacollecttype_prv_state,datacollecttemp_prv_filename
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from grp_datacollecttype_prv
+    where datacollecttype_prv_id = #{datacollecttypePrvId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from grp_datacollecttype_prv
+    where datacollecttype_prv_id = #{datacollecttypePrvId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xunge.model.datacollect.GrpDatacollecttypePrvVO" >
+    insert into grp_datacollecttype_prv (datacollecttype_prv_id, datacollect_prv_id, 
+      datacollecttype_id, datacollecttype_prv_filepath, 
+      datacollecttype_prv_state)
+    values (#{datacollecttypePrvId,jdbcType=VARCHAR}, #{datacollectPrvId,jdbcType=VARCHAR}, 
+      #{datacollecttypeId,jdbcType=VARCHAR}, #{datacollecttypePrvFilepath,jdbcType=VARCHAR}, 
+      #{datacollecttypePrvState,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunge.model.datacollect.GrpDatacollecttypePrvVO" >
+    update grp_datacollecttype_prv
+    <set >
+      <if test="datacollectPrvId != null" >
+        datacollect_prv_id = #{datacollectPrvId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypeId != null" >
+        datacollecttype_id = #{datacollecttypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypePrvFilepath != null" >
+        datacollecttype_prv_filepath = #{datacollecttypePrvFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypePrvState != null" >
+        datacollecttype_prv_state = #{datacollecttypePrvState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where datacollecttype_prv_id = #{datacollecttypePrvId,jdbcType=VARCHAR}
+  </update>                                     
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.datacollect.GrpDatacollecttypePrvVO" >
+    update grp_datacollecttype_prv
+    set datacollect_prv_id = #{datacollectPrvId,jdbcType=VARCHAR},
+      datacollecttype_id = #{datacollecttypeId,jdbcType=VARCHAR},
+      datacollecttype_prv_filepath = #{datacollecttypePrvFilepath,jdbcType=VARCHAR},
+      datacollecttype_prv_state = #{datacollecttypePrvState,jdbcType=INTEGER}
+    where datacollecttype_prv_id = #{datacollecttypePrvId,jdbcType=VARCHAR}
+  </update>
+  <!-- 根据集团收集表id删除省级上报文件编号数据 -->
+  <delete id="deleteTypePrvById" parameterType="java.lang.String">
+  	delete from grp_datacollecttype_prv
+  	where grp_datacollecttype_prv.datacollect_prv_id in (
+  		select grp_datacollect_prv.datacollect_prv_id
+  		from grp_datacollect_prv
+  		where datacollect_id = #{datacollectId}
+  	)
+  </delete>
+  <!-- 修改删除数据类型 -->
+  <delete id="deleteTypePrvByTypeId" parameterType="Map">
+  	delete from grp_datacollecttype_prv
+  	where grp_datacollecttype_prv.datacollecttype_id = #{datacollecttypeId}
+  	and grp_datacollecttype_prv.datacollect_prv_id in (
+  		select grp_datacollect_prv.datacollect_prv_id
+  		from grp_datacollect_prv
+  		where datacollect_id = #{datacollectId}
+  	)
+  </delete>
+  <!-- 新增省级上报文件类型数据 -->
+  <insert id="insertSelective" parameterType="com.xunge.model.datacollect.GrpDatacollecttypePrvVO" >
+    insert into grp_datacollecttype_prv
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="datacollecttypePrvId != null" >
+        datacollecttype_prv_id,
+      </if>
+      <if test="datacollectPrvId != null" >
+        datacollect_prv_id,
+      </if>
+      <if test="datacollecttypeId != null" >
+        datacollecttype_id,
+      </if>
+      <if test="datacollecttypePrvFilepath != null" >
+        datacollecttype_prv_filepath,
+      </if>
+      <if test="datacollecttypePrvState != null" >
+        datacollecttype_prv_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="datacollecttypePrvId != null" >
+        #{datacollecttypePrvId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollectPrvId != null" >
+        #{datacollectPrvId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypeId != null" >
+        #{datacollecttypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypePrvFilepath != null" >
+        #{datacollecttypePrvFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypePrvState != null" >
+        #{datacollecttypePrvState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 根据省份id查询省级数据详情 -->
+  <select id="queryEveryPrvMsg" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  		grp_datacollecttype_prv.datacollecttype_prv_id,
+  		grp_datacollecttype_prv.datacollecttype_prv_filename,
+  		grp_datacollecttype_prv.datacollecttype_prv_filepath,
+  		grp_datacollecttype.datacollecttemp_type,
+  		grp_datacollecttype.datacollecttemp_filepath,
+  		grp_datacollecttype.datacollecttemp_filename
+  	from
+  		grp_datacollecttype_prv,
+  		grp_datacollecttype
+  	where
+  		grp_datacollecttype_prv.datacollecttype_id = grp_datacollecttype.datacollecttype_id
+  	and grp_datacollecttype_prv.datacollect_prv_id = (
+  		select grp_datacollect_prv.datacollect_prv_id
+  		from grp_datacollect_prv
+  		where grp_datacollect_prv.datacollect_id = #{datacollectId}
+  		and grp_datacollect_prv.prv_id = #{prvId}
+  	) ordeR by grp_datacollecttype_prv.datacollecttype_id
+  </select>
+  <!-- 根据省份id查询省级数据详情 -->
+  <select id="queryEveryPrvMsgByPk" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  		grp_datacollecttype_prv.datacollecttype_prv_id,
+  		grp_datacollecttype_prv.datacollecttype_prv_filename,
+  		grp_datacollecttype_prv.datacollecttype_prv_filepath,
+  		grp_datacollecttype.datacollecttemp_type,
+  		grp_datacollecttype.datacollecttemp_filepath,
+  		grp_datacollecttype.datacollecttemp_filename
+  	from
+  		grp_datacollecttype_prv,
+  		grp_datacollecttype
+  	where
+  		grp_datacollecttype_prv.datacollecttype_id = grp_datacollecttype.datacollecttype_id
+  	and grp_datacollecttype_prv.datacollect_prv_id = #{datacollectPrvId}
+  </select>
+  <!-- 根据省份上报id查询上报信息数量 -->
+  <select id="queryPrvUploadNameById" parameterType="Map" resultMap="PrvTypeMap">
+  	select datacollecttype_prv_filename,
+  		   datacollecttype_id
+  	from grp_datacollecttype_prv
+  	where datacollect_prv_id = #{datacollectPrvId}
+  </select>
+  <!-- 修改省级上报数据类型 -->
+  <update id="updatePrvType" parameterType="com.xunge.model.datacollect.GrpDatacollecttypePrvVO">
+  	update grp_datacollecttype_prv
+    <set>
+      <if test="datacollectPrvId != null" >
+        datacollect_prv_id = #{datacollectPrvId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypeId != null" >
+        datacollecttype_id = #{datacollecttypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="datacollecttypePrvFilepath != null" >
+        datacollecttype_prv_filepath = #{datacollecttypePrvFilepath},
+      </if>
+      <if test="datacollecttypePrvState != null" >
+        datacollecttype_prv_state = #{datacollecttypePrvState,jdbcType=INTEGER},
+      </if>
+      <if test="datacollecttypePrvFilename != null" >
+        datacollecttype_prv_filename = #{datacollecttypePrvFilename},
+      </if>
+    </set>
+    where datacollecttype_prv_id = #{datacollecttypePrvId,jdbcType=VARCHAR}
+  </update>
+  <!-- 省级上报文件保存 -->
+  <update id="updatePrvFiles" parameterType="Map">
+  	update grp_datacollecttype_prv
+  	<set>
+  		<if test="datacollecttypePrvFilename != null" >
+        	datacollecttype_prv_filename = #{datacollecttypePrvFilename},
+     	</if>
+  		<if test="datacollecttypePrvFilepath != null">
+  			datacollecttype_prv_filepath = #{datacollecttypePrvFilepath},
+  		</if>
+  	</set>
+  	where datacollecttype_prv_id = #{datacollecttypePrvId}
+  </update>
+  <!-- 根据省份上报信息编码查询该省上传文件路径 -->
+   <select id="queryPrvFilePath" parameterType="Map" resultType="java.lang.String">
+	select datacollecttype_prv_filepath
+	from grp_datacollecttype_prv
+	where datacollect_prv_id = #{datacollectPrvId}
+   </select>
+</mapper>

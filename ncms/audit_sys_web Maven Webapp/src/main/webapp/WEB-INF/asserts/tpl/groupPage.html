@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<script type="text/javascript" src="asserts/js/sccl.js?v=2"></script>
+	<script type="text/javascript" src="asserts/lib/jquery.js"></script>
+	
+	<!--[if lte IE 9]>
+	    <script src="asserts/bootstrap/js/html5shiv.js"></script>
+	    <script src="asserts/bootstrap/js/respond.min.js"></script>
+	    <script src="asserts/bootstrap/js/jquery.placeholder.min.js"></script>
+    <![endif]-->
+	<!--echart-->
+	<script type="text/javascript" src="asserts/echart/echarts.js"></script>
+	<script type="text/javascript" src="asserts/echart/theme/shine.js"></script>
+	<script type="text/javascript" src="asserts/echart/theme/macarons.js"></script>
+	<script type="text/javascript" src="asserts/echart/theme/infographic.js"></script>
+	<script type="text/javascript" src="asserts/echart/map/china.js"></script>
+	<script type="text/javascript" src="asserts/echart/map/shanghai.js"></script>
+	<script src="asserts/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="home-parent">
+	<div id="home-left" class="home-left">
+		<div class="div-navbar">
+			<table style="width:100%;">
+				<tr><td style="width:30px;"></td><td style="width:100%;text-align:center">全国各项费用各省分布图</td><td style="width:30px;"></td></tr>
+			</table>
+		</div>
+		<div id="main-bing1" style="width: 100%;height:32%;"></div>
+		<div id="main-bing2" style="width: 100%;height:32%;"></div>
+		<div id="main-bing3" style="width: 100%;height:32%;"></div>
+	</div>
+	<div class="home-center1">
+		<div class="div-navbar">
+			<table style="width:100%;">
+				<tr><td style="width:100%;text-align:center">上海市2017年度各项费用汇总图</td><td style="width:30px;"></td></tr>
+			</table>
+		</div>
+		<table style="width:100%;height:100%;">
+			<tr>
+				<td style="width: 40%;height:100%">
+					<div id="mapchart" style="width: 100%;height:100%"></div>
+				</td>
+				<td style="width: 60%;height:100%">
+					<div id="linechart" style="width: 100%;height:100%"></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="home-center2">
+		<table style="width:100%;height:100%;text-align:center;">
+			<tr>
+				<td style="width:20%;">未关联合同占用率</td>
+				<td style="width:20%;">未关联机房资源占有率</td>
+				<td style="width:20%;">未关联电表占用率</td>
+				<td style="width:20%;">报账及时率</td>
+				<td style="width:20%;">报账点电费超标占用率</td>
+			</tr>
+			<tr style="height:100%;">
+				<td><div id="pan1" style="width: 100%;height:100%"></div></td>
+				<td><div id="pan2" style="width: 100%;height:100%"></div></td>
+				<td><div id="pan3" style="width: 100%;height:100%"></div></td>
+				<td><div id="pan4" style="width: 100%;height:100%"></div></td>
+				<td><div id="pan5" style="width: 100%;height:100%"></div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="home-right">
+		<div class="div-navbar">
+			<table style="width:100%;">
+				<tr><td style="width:30px;"><i class="layui-icon">&#xe63c;</i></td><td style="width:100%;text-align:center">待办事项</td><td style="width:30px;"></td></tr>
+			</table>		
+		</div>
+	</div>
+</div>
+<div class="home-bottom">©2017 中国移动物联网公司</div>
+<script type="text/javascript">
+    // 全省合同数
+    var chart1 = echarts.init(document.getElementById('main-bing1'), 'shine');
+    // 配置
+    var option1 = {
+	    title : {
+	        text: '全国电费',
+	        subtext: '',
+	        x:'center',
+	        textStyle: {
+	            fontSize: 12,
+        	},
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        position:function(p){   //其中p为当前鼠标的位置
+            	return [p[0] - 50, p[1] + 20];
+        	},
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+    	series : [
+	        {
+	            name:'全国电费',
+	            type:'pie',
+	            radius : '75%',
+	            center: ['50%', '50%'],
+	            data:[
+	                {value:Math.round(Math.random()*1000), name:'北京市'},
+	                {value:Math.round(Math.random()*1000), name:'上海市'},
+	                {value:Math.round(Math.random()*1000), name:'内蒙古'},
+	                {value:Math.round(Math.random()*1000), name:'河南省'},
+	                {value:Math.round(Math.random()*1000), name:'湖南省'},
+	            	{value:Math.round(Math.random()*1000), name:'贵州省'},
+	            	{value:Math.round(Math.random()*1000), name:'西藏'},
+	            	{value:Math.round(Math.random()*1000), name:'青海省'},
+	            	{value:Math.round(Math.random()*1000), name:'宁夏'},
+	            	{value:Math.round(Math.random()*1000), name:'新疆'}
+	            ],
+	            itemStyle: {
+	            	normal: {
+		                label: {
+		                    show: false,
+		                    position: 'outer',
+		                    textStyle: {
+		                    }
+		                },
+		                labelLine: {
+		                    show: false,
+		                    length: 5,
+		                    lineStyle: {
+		                        width: 1,
+		                        type: 'solid'
+		                    }
+		                }
+		            }
+	            }
+	        }
+	    ]
+	};
+    chart1.setOption(option1);
+
+	//全省机房+资源点数
+    var chart2 = echarts.init(document.getElementById('main-bing2'),'macarons');
+    // 配置
+    var option2 = {
+	    title : {
+	        text: '房租费',
+	        subtext: '',
+	        x:'center',
+	        textStyle: {
+	            fontSize: 12,
+        	},
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        position:function(p){   //其中p为当前鼠标的位置
+            	return [p[0] - 50, p[1] - 80];
+        	},
+        	formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    series : [
+	        {
+	            name:'房租费',
+	            type:'pie',
+	            radius : '75%',
+	            center: ['50%', '50%'],
+	            data:[
+		                {value:Math.round(Math.random()*1000), name:'北京市'},
+		                {value:Math.round(Math.random()*1000), name:'上海市'},
+		                {value:Math.round(Math.random()*1000), name:'内蒙古'},
+		                {value:Math.round(Math.random()*1000), name:'河南省'},
+		                {value:Math.round(Math.random()*1000), name:'湖南省'},
+		            	{value:Math.round(Math.random()*1000), name:'贵州省'},
+		            	{value:Math.round(Math.random()*1000), name:'西藏'},
+		            	{value:Math.round(Math.random()*1000), name:'青海省'},
+		            	{value:Math.round(Math.random()*1000), name:'宁夏'},
+		            	{value:Math.round(Math.random()*1000), name:'新疆'}
+	            ],
+	            itemStyle: {
+	            	normal: {
+		                label: {
+		                    show: false,
+		                    position: 'outer'
+		                },
+		                labelLine: {
+		                    show: true,
+		                    length: 5,
+		                    lineStyle: {
+		                        width: 1,
+		                        type: 'solid'
+		                    }
+		                }
+		            }
+	            }
+	        }
+	    ]
+	};
+    chart2.setOption(option2);
+    
+	//全省机房+资源点数
+    var chart3 = echarts.init(document.getElementById('main-bing3'),'infographic');
+    // 配置
+    var option3 = {
+	    title : {
+	        text: '铁搭产品服务费',
+	        subtext: '',
+	        x:'center',
+	        textStyle: {
+	            fontSize: 12,
+        	},
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        position:function(p){   //其中p为当前鼠标的位置
+            	return [p[0] - 50, p[1] - 80];
+        	},
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    series : [
+	        {
+	            name:'铁搭产品服务费',
+	            type:'pie',
+	            radius : '75%',
+	            center: ['50%', '50%'],
+	            data:[
+		                {value:Math.round(Math.random()*1000), name:'北京市'},
+		                {value:Math.round(Math.random()*1000), name:'上海市'},
+		                {value:Math.round(Math.random()*1000), name:'内蒙古'},
+		                {value:Math.round(Math.random()*1000), name:'河南省'},
+		                {value:Math.round(Math.random()*1000), name:'湖南省'},
+		            	{value:Math.round(Math.random()*1000), name:'贵州省'},
+		            	{value:Math.round(Math.random()*1000), name:'西藏'},
+		            	{value:Math.round(Math.random()*1000), name:'青海省'},
+		            	{value:Math.round(Math.random()*1000), name:'宁夏'},
+		            	{value:Math.round(Math.random()*1000), name:'新疆'}
+	            ],
+	            itemStyle: {
+	            	normal: {
+		                label: {
+		                    show: false,
+		                    position: 'outer'
+		                },
+		                labelLine: {
+		                    show: true,
+		                    length: 5,
+		                    lineStyle: {
+		                        width: 1,
+		                        type: 'solid'
+		                    }
+		                }
+		            }
+	            }
+	        }
+	    ]
+	};
+    chart3.setOption(option3);
+   
+	//加载地图
+	var chartMap = echarts.init(document.getElementById('mapchart'),'shine');
+	// 过渡---------------------
+	chartMap.showLoading({
+	    text: '正在努力的读取数据中...',    //loading
+	});
+	var optionMap = {
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: function(params) {
+                var res = params.name+'<br/>';
+                var myseries = optionMap.series;  
+                for (var i = 0; i < myseries.length; i++) {  
+                    for(var j=0;j<myseries[i].data.length;j++){  
+                        if(myseries[i].data[j].name==params.name){  
+                            res+=myseries[i].name +' : '+myseries[i].data[j].value+'</br>';
+                        }  
+                    }  
+                }  
+                return res;  
+            }
+	    },
+	    dataRange: {
+	        min: 0,
+	        max: 4000,
+	        x: 'left',
+	        y: 'top',
+	        text:['高','低'],           // 文本，默认为数值文本
+	        calculable : true
+	    },
+	    series : [
+	        {
+	            name: '自维电费',
+	            type: 'map',
+	            mapType: '上海',
+	            roam: false,
+	            itemStyle:{
+	                normal:{label:{show:false}},
+	                emphasis:{label:{show:true}}
+	            },
+	            data:[
+	                {name: '黄浦区',value: Math.round(Math.random()*1000)},
+	                {name: '徐汇区',value: Math.round(Math.random()*1000)},
+	                {name: '长宁区',value: Math.round(Math.random()*1000)},
+	                {name: '静安区',value: Math.round(Math.random()*1000)},
+	                {name: '普陀区',value: Math.round(Math.random()*1000)},
+	                {name: '虹口区',value: Math.round(Math.random()*1000)},
+	                {name: '杨浦区',value: Math.round(Math.random()*1000)},
+	                {name: '闵行区',value: Math.round(Math.random()*1000)},
+	                {name: '宝山区',value: Math.round(Math.random()*1000)},
+	                {name: '嘉定区',value: Math.round(Math.random()*1000)},
+	                {name: '浦东新区',value: Math.round(Math.random()*1000)},
+	                {name: '金山区',value: Math.round(Math.random()*1000)},
+	                {name: '松江区',value: Math.round(Math.random()*1000)},
+	                {name: '青浦区',value: Math.round(Math.random()*1000)},
+	                {name: '奉贤区',value: Math.round(Math.random()*1000)},
+	                {name: '崇明县',value: Math.round(Math.random()*1000)}
+	            ]
+	        },
+	        {
+	            name: '塔维电费',
+	            type: 'map',
+	            mapType: '上海',
+	            itemStyle:{
+	                normal:{label:{show:false}},
+	                emphasis:{label:{show:true}}
+	            },
+	            data:[
+	                {name: '黄浦区',value: Math.round(Math.random()*1000)},
+	                {name: '徐汇区',value: Math.round(Math.random()*1000)},
+	                {name: '长宁区',value: Math.round(Math.random()*1000)},
+	                {name: '静安区',value: Math.round(Math.random()*1000)},
+	                {name: '普陀区',value: Math.round(Math.random()*1000)},
+	                {name: '虹口区',value: Math.round(Math.random()*1000)},
+	                {name: '杨浦区',value: Math.round(Math.random()*1000)},
+	                {name: '闵行区',value: Math.round(Math.random()*1000)},
+	                {name: '宝山区',value: Math.round(Math.random()*1000)},
+	                {name: '嘉定区',value: Math.round(Math.random()*1000)},
+	                {name: '浦东新区',value: Math.round(Math.random()*1000)},
+	                {name: '金山区',value: Math.round(Math.random()*1000)},
+	                {name: '松江区',value: Math.round(Math.random()*1000)},
+	                {name: '青浦区',value: Math.round(Math.random()*1000)},
+	                {name: '奉贤区',value: Math.round(Math.random()*1000)},
+	                {name: '崇明县',value: Math.round(Math.random()*1000)}
+	            ]
+	        },
+	        {
+	            name: '自维房租',
+	            type: 'map',
+	            mapType: '上海',
+	            itemStyle:{
+	                normal:{label:{show:false}},
+	                emphasis:{label:{show:true}}
+	            },
+	            data:[
+	                {name: '黄浦区',value: Math.round(Math.random()*1000)},
+	                {name: '徐汇区',value: Math.round(Math.random()*1000)},
+	                {name: '长宁区',value: Math.round(Math.random()*1000)},
+	                {name: '静安区',value: Math.round(Math.random()*1000)},
+	                {name: '普陀区',value: Math.round(Math.random()*1000)},
+	                {name: '虹口区',value: Math.round(Math.random()*1000)},
+	                {name: '杨浦区',value: Math.round(Math.random()*1000)},
+	                {name: '闵行区',value: Math.round(Math.random()*1000)},
+	                {name: '宝山区',value: Math.round(Math.random()*1000)},
+	                {name: '嘉定区',value: Math.round(Math.random()*1000)},
+	                {name: '浦东新区',value: Math.round(Math.random()*1000)},
+	                {name: '金山区',value: Math.round(Math.random()*1000)},
+	                {name: '松江区',value: Math.round(Math.random()*1000)},
+	                {name: '青浦区',value: Math.round(Math.random()*1000)},
+	                {name: '奉贤区',value: Math.round(Math.random()*1000)},
+	                {name: '崇明县',value: Math.round(Math.random()*1000)}
+	            ]
+	        },
+	        {
+	            name: '塔维租赁费',
+	            type: 'map',
+	            mapType: '上海',
+	            itemStyle:{
+	                normal:{label:{show:false}},
+	                emphasis:{label:{show:true}}
+	            },
+	            data:[
+	                {name: '黄浦区',value: Math.round(Math.random()*1000)},
+	                {name: '徐汇区',value: Math.round(Math.random()*1000)},
+	                {name: '长宁区',value: Math.round(Math.random()*1000)},
+	                {name: '静安区',value: Math.round(Math.random()*1000)},
+	                {name: '普陀区',value: Math.round(Math.random()*1000)},
+	                {name: '虹口区',value: Math.round(Math.random()*1000)},
+	                {name: '杨浦区',value: Math.round(Math.random()*1000)},
+	                {name: '闵行区',value: Math.round(Math.random()*1000)},
+	                {name: '宝山区',value: Math.round(Math.random()*1000)},
+	                {name: '嘉定区',value: Math.round(Math.random()*1000)},
+	                {name: '浦东新区',value: Math.round(Math.random()*1000)},
+	                {name: '金山区',value: Math.round(Math.random()*1000)},
+	                {name: '松江区',value: Math.round(Math.random()*1000)},
+	                {name: '青浦区',value: Math.round(Math.random()*1000)},
+	                {name: '奉贤区',value: Math.round(Math.random()*1000)},
+	                {name: '崇明县',value: Math.round(Math.random()*1000)}
+	            ]
+	        }
+	    ]
+	};
+	//加载完数据后，隐藏加载提示
+	chartMap.hideLoading();
+	chartMap.setOption(optionMap,true);
+
+	//加载月份折线图
+	var chartLine = echarts.init(document.getElementById('linechart'),'shine');
+	var lineOption = {
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    calculable : true,
+	    xAxis : [
+	        {
+	            type : 'category',
+	            boundaryGap : false,
+	            data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        }
+	    ],
+	    series : [
+	        {
+	            name:'自维电费',
+	            type:'line',
+	            data:[12000,10100,13800,14700,15500,18900,17890,16320,13200,14500,13200,16800]
+	        },
+	        {
+	            name:'塔维电费',
+	            type:'line',
+	            data:[9800,9500,8300,9200,9900,9560,9490,8920,8700,9100,8900,8100]
+	        },
+	        {
+	            name:'自维房租',
+	            type:'line',
+	            data:[7800,6500,8200,7300,6600,5360,6290,6920,7500,8900,9100,7800]
+	        },
+	        {
+	            name:'塔维租赁费',
+	            type:'line',
+	            data:[4300,4500,5800,6500,5300,6760,7290,7320,6700,7100,6500,6800]
+	        }
+	    ]
+	};
+	chartLine.setOption(lineOption);
+	
+	//加载仪表盘
+	var chartPan1 = echarts.init(document.getElementById('pan1'),'shine');
+	var pan1Option = {
+	    tooltip : {
+	        formatter: "{a} : {c}%"
+	    },
+	    series : [
+	        {
+	            name:'未关联合同占有率',
+	            type:'gauge',
+	            detail : {
+	            	formatter:'{value}%',
+	            	offsetCenter: [0, '70%'], // x, y，单位px
+	            	textStyle: {
+	            		fontSize: 20,
+	            		color: 'auto',
+                    	fontWeight: 'bolder'
+        			}
+	            },
+	            data:[{value: (80/320)*100}]
+	        }
+	    ]
+	};
+	chartPan1.setOption(pan1Option);
+	
+	var chartPan2 = echarts.init(document.getElementById('pan2'),'shine');
+	var pan2Option = {
+	    tooltip : {
+	        formatter: "{a} : {c}%"
+	    },
+	    series : [
+	        {
+	            name:'未关联机房资源占有率',
+	            type:'gauge',
+	            detail : {
+	            	formatter:'{value}%',
+	            	offsetCenter: [0, '70%'], // x, y，单位px
+	            	textStyle: {
+	            		fontSize: 20,
+	            		color: 'auto',
+                    	fontWeight: 'bolder'
+        			}
+	            },
+	            data:[{value: (160/320)*100}]
+	        }
+	    ]
+	};
+	chartPan2.setOption(pan2Option);	
+	
+	var chartPan3 = echarts.init(document.getElementById('pan3'),'shine');
+	var pan3Option = {
+	    tooltip : {
+	        formatter: "{a} : {c}%"
+	    },
+	    series : [
+	        {
+	            name:'未关联电表占有率',
+	            type:'gauge',
+	            detail : {
+	            	formatter:'{value}%',
+	            	offsetCenter: [0, '70%'], // x, y，单位px
+	            	textStyle: {
+	            		fontSize: 20,
+	            		color: 'auto',
+                    	fontWeight: 'bolder'
+        			}
+	            },
+	            data:[{value: (240/320)*100}]
+	        }
+	    ]
+	};
+	chartPan3.setOption(pan3Option);	
+	
+	var chartPan4 = echarts.init(document.getElementById('pan4'),'shine');
+	var pan4Option = {
+	    tooltip : {
+	        formatter: "{a} : {c}%"
+	    },
+	    series : [
+	        {
+	            name:'报账及时率',
+	            type:'gauge',
+	            detail : {
+	            	formatter:'{value}%',
+	            	offsetCenter: [0, '70%'], // x, y，单位px
+	            	textStyle: {
+	            		fontSize: 20,
+	            		color: 'auto',
+                    	fontWeight: 'bolder'
+        			}
+	            },
+	            data:[{value: (280/320)*100}]
+	        }
+	    ]
+	};
+	chartPan4.setOption(pan4Option);	
+	
+	var chartPan5 = echarts.init(document.getElementById('pan5'),'shine');
+	var pan5Option = {
+	    tooltip : {
+	        formatter: "{a} : {c}%"
+	    },
+	    series : [
+	        {
+	            name:'报账点电费超标占用率',
+	            type:'gauge',
+	            detail : {
+	            	formatter:'{value}%',
+	            	offsetCenter: [0, '70%'], // x, y，单位px
+	            	textStyle: {
+	            		fontSize: 20,
+	            		color: 'auto',
+                    	fontWeight: 'bolder'
+        			}
+	            },
+	            data:[{value: (40/320)*100}]
+	        }
+	    ]
+	};
+	chartPan5.setOption(pan5Option);
+	
+	    
+    window.onresize = function () {
+        chart1.resize();
+        chart2.resize();
+        chart3.resize();
+        chartMap.resize();
+        chartLine.resize();
+        chartPan1.resize();
+        chartPan2.resize();
+        chartPan3.resize();
+        chartPan4.resize();
+        chartPan5.resize();
+    }
+ 
+</script>
+</body>
+</html>

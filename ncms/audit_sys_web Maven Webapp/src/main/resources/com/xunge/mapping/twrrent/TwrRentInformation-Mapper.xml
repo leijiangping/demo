@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.TwrRentInformationVOMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.mobile.TwrRentInformationVO" >
+   <id column="rentinformation_id" property="rentinformationId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="resources_type_id" property="resourcesTypeId" jdbcType="VARCHAR" />
+    <result column="business_confirm_number" property="businessConfirmNumber" jdbcType="VARCHAR" />
+    <result column="scence_type" property="scenceType" jdbcType="VARCHAR" />
+    <result column="agree_bill_code" property="agreeBillCode" jdbcType="VARCHAR" />
+    <result column="tower_station_code" property="towerStationCode" jdbcType="VARCHAR" />
+    <result column="tower_station_name" property="towerStationName" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operator_reg_name" property="operatorRegName" jdbcType="VARCHAR" />
+    <result column="demand_reg_name" property="demandRegName" jdbcType="VARCHAR" />
+    <result column="station_reg_name" property="stationRegName" jdbcType="VARCHAR" />
+    <result column="if_tower_link_operator" property="ifTowerLinkOperator" jdbcType="INTEGER" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="product_configuration_id" property="productConfigurationId" jdbcType="VARCHAR" />
+    <result column="product_type_id" property="productTypeId" jdbcType="VARCHAR" />
+    <result column="room_type_id" property="roomTypeId" jdbcType="VARCHAR" />
+    <result column="supporting_type_id" property="supportingTypeId" jdbcType="VARCHAR" />
+    <result column="wind_pressure" property="windPressure" jdbcType="DECIMAL" />
+    <result column="share_type_id" property="shareTypeId" jdbcType="VARCHAR" />
+    <result column="product1_unit_num" property="product1UnitNum" jdbcType="VARCHAR" />
+    <result column="product1_height" property="product1Height" jdbcType="VARCHAR" />
+    <result column="product1_antenna_num" property="product1AntennaNum" jdbcType="VARCHAR" />
+    <result column="product1_system_num" property="product1SystemNum" jdbcType="VARCHAR" />
+    <result column="product1_is_up_towerRRU" property="product1IsUpTowerRRU" jdbcType="INTEGER" />
+    <result column="product1_ifBBU_on_room" property="product1IfBBUOnRoom" jdbcType="INTEGER" />
+    <result column="product1_BBU_fee" property="product1BBUFee" jdbcType="VARCHAR" />
+    <result column="product2_unit_num" property="product2UnitNum" jdbcType="VARCHAR" />
+    <result column="product2_height" property="product2Height" jdbcType="VARCHAR" />
+    <result column="product2_antenna_num" property="product2AntennaNum" jdbcType="VARCHAR" />
+    <result column="product2_system_num" property="product2SystemNum" jdbcType="VARCHAR" />
+    <result column="product2_is_up_towerRRU" property="product2IsUpTowerRRU" jdbcType="VARCHAR" />
+    <result column="product2_ifBBU_on_room" property="product2IfBBUOnRoom" jdbcType="INTEGER" />
+    <result column="product2_BBU_fee" property="product2BBUFee" jdbcType="INTEGER" />
+    <result column="product3_unit_num" property="product3UnitNum" jdbcType="VARCHAR" />
+    <result column="product3_height" property="product3Height" jdbcType="VARCHAR" />
+    <result column="product3_antenna_num" property="product3AntennaNum" jdbcType="VARCHAR" />
+    <result column="product3_system_num" property="product3SystemNum" jdbcType="VARCHAR" />
+    <result column="product3_is_up_towerRRU" property="product3IsUpTowerRRU" jdbcType="INTEGER" />
+    <result column="product3_ifBBU_on_room" property="product3IfBBUOnRoom" jdbcType="INTEGER" />
+    <result column="product3_BBU_fee" property="product3BBUFee" jdbcType="VARCHAR" />
+    <result column="antenna_height_range_id" property="antennaHeightRangeId" jdbcType="VARCHAR" />
+    <result column="tower_height" property="towerHeight" jdbcType="VARCHAR" />
+    <result column="ifstandard_build_fee" property="ifstandardBuildFee" jdbcType="INTEGER" />
+    <result column="ifRRU_dis" property="ifRRUDis" jdbcType="INTEGER" />
+    <result column="current_tower_share_num" property="currentTowerShareNum" jdbcType="INTEGER" />
+    <result column="current_room_supporting_share_num" property="currentRoomSupportingShareNum" jdbcType="INTEGER" />
+    <result column="current_service_share_num" property="currentServiceShareNum" jdbcType="INTEGER" />
+    <result column="current_room_fee_share_num" property="currentRoomFeeShareNum" jdbcType="INTEGER" />
+    <result column="current_elecimport_share_num" property="currentElecimportShareNum" jdbcType="INTEGER" />
+    <result column="add_tower_share_num" property="addTowerShareNum" jdbcType="INTEGER" />
+    <result column="add_room_supporting_share_num" property="addRoomSupportingShareNum" jdbcType="INTEGER" />
+    <result column="is_spec_enter_station" property="isSpecEnterStation" jdbcType="INTEGER" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="unit_product_number" property="unitProductNumber" jdbcType="VARCHAR" />
+    <result column="tower_price" property="towerPrice" jdbcType="DECIMAL" />
+    <result column="room_price" property="roomPrice" jdbcType="DECIMAL" />
+    <result column="supporting_price" property="supportingPrice" jdbcType="DECIMAL" />
+    <result column="tower_share_dis" property="towerShareDis" jdbcType="DECIMAL" />
+    <result column="room_supporting_share_dis" property="roomSupportingShareDis" jdbcType="DECIMAL" />
+    <result column="compute_room_supporting_price" property="computeRoomSupportingPrice" jdbcType="DECIMAL" />
+    <result column="maintenance_fee" property="maintenanceFee" jdbcType="DECIMAL" />
+    <result column="maintenance_fee_dis" property="maintenanceFeeDis" jdbcType="DECIMAL" />
+    <result column="original_maintenance_fee" property="originalMaintenanceFee" jdbcType="DECIMAL" />
+    <result column="compute_maintenance_fee" property="computeMaintenanceFee" jdbcType="DECIMAL" />
+    <result column="stage_fee" property="stageFee" jdbcType="DECIMAL" />
+    <result column="stage_fee_dis" property="stageFeeDis" jdbcType="DECIMAL" />
+    <result column="original_stage_fee" property="originalStageFee" jdbcType="DECIMAL" />
+    <result column="electric_import_fee" property="electricImportFee" jdbcType="DECIMAL" />
+    <result column="electric_import_fee_dis" property="electricImportFeeDis" jdbcType="DECIMAL" />
+    <result column="original_electric_import_fee" property="originalElectricImportFee" jdbcType="DECIMAL" />
+    <result column="compute_electric_import_fee" property="computeElectricImportFee" jdbcType="DECIMAL" />
+    <result column="if_has_power_condition" property="ifHasPowerCondition" jdbcType="INTEGER" />
+    <result column="if_select_power_service" property="ifSelectPowerService" jdbcType="INTEGER" />
+    <result column="oil_generate_electric_method_id" property="oilGenerateElectricMethodId" jdbcType="VARCHAR" />
+    <result column="oil_generator_electric_fee" property="oilGeneratorElectricFee" jdbcType="DECIMAL" />
+    <result column="original_oil_generate_electric_fee" property="originalOilGenerateElectricFee" jdbcType="DECIMAL" />
+    <result column="compute_oil_generate_electric_fee" property="computeOilGenerateElectricFee" jdbcType="DECIMAL" />
+    <result column="other_fee" property="otherFee" jdbcType="DECIMAL" />
+    <result column="other_fee_remark" property="otherFeeRemark" jdbcType="VARCHAR" />
+    <result column="original_other_fee" property="originalOtherFee" jdbcType="DECIMAL" />
+    <result column="compute_other_fee" property="computeOtherFee" jdbcType="DECIMAL" />
+    <result column="maintenance_level_id" property="maintenanceLevelId" jdbcType="VARCHAR" />
+    <result column="hight_level_fee" property="hightLevelFee" jdbcType="DECIMAL" />
+    <result column="electric_protection_method_id" property="electricProtectionMethodId" jdbcType="VARCHAR" />
+    <result column="electric_protection_fee" property="electricProtectionFee" jdbcType="DECIMAL" />
+    <result column="reserve_battery" property="reserveBattery" jdbcType="DECIMAL" />
+    <result column="room_fee_method" property="roomFeeMethod" jdbcType="VARCHAR" />
+    <result column="elec_import_fee_method" property="elecImportFeeMethod" jdbcType="VARCHAR" />
+    <result column="microwave_service_fee" property="microwaveServiceFee" jdbcType="VARCHAR" />
+    <result column="wlan_service_fee" property="wlanServiceFee" jdbcType="VARCHAR" />
+    <result column="battery_protection_fee" property="batteryProtectionFee" jdbcType="DECIMAL" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="total_actual_amount" property="totalActualAmount" jdbcType="DECIMAL" />
+    <result column="compute_total_amount" property="computeTotalAmount" jdbcType="DECIMAL" />
+    <result column="compute_total_actual_amount" property="computeTotalActualAmount" jdbcType="DECIMAL" />
+    <result column="compute_room_price" property="computeRoomPrice" jdbcType="DECIMAL" />
+    <result column="compute_supporting_price" property="computeSupportingPrice" jdbcType="DECIMAL" />
+    <result column="compute_tower_price1" property="computeTowerPrice1" jdbcType="DECIMAL" />
+    <result column="compute_tower_price2" property="computeTowerPrice2" jdbcType="DECIMAL" />
+    <result column="compute_tower_price3" property="computeTowerPrice3" jdbcType="DECIMAL" />
+    <result column="publish_user" property="publishUser" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="check_state" property="checkState" jdbcType="INTEGER" />
+  </resultMap>
+  
+    <!-- 铁塔侧和移动侧共有字段 -->
+  <resultMap id="towerResourceInfo" type="com.xunge.model.towerrent.rentmanager.TowerResourceInfoVO" >
+    <id column="business_confirm_number" property="businessConfirmNumber" jdbcType="VARCHAR" /> 
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="resources_type_id" property="resourcesTypeId" jdbcType="VARCHAR" />
+    <result column="scence_type" property="scenceType" jdbcType="VARCHAR" />
+    <result column="agree_bill_code" property="agreeBillCode" jdbcType="VARCHAR" />
+    <result column="tower_station_code" property="towerStationCode" jdbcType="VARCHAR" />
+    <result column="tower_station_name" property="towerStationName" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operator_reg_name" property="operatorRegId" jdbcType="VARCHAR" />
+    <result column="demand_reg_name" property="demandRegId" jdbcType="VARCHAR" />
+    <result column="station_reg_name" property="stationRegId" jdbcType="VARCHAR" />
+    <result column="if_tower_link_operator" property="ifTowerLinkOperator" jdbcType="INTEGER" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="product_configuration_id" property="productConfigurationId" jdbcType="VARCHAR" />
+    <result column="product_type_id" property="productTypeId" jdbcType="VARCHAR" />
+    <result column="room_type_id" property="roomTypeId" jdbcType="VARCHAR" />
+    <result column="wind_pressure" property="windPressure" jdbcType="DECIMAL" /> 
+    <result column="product1_unit_num" property="product1UnitNum" jdbcType="VARCHAR" />
+    <result column="product1_height" property="product1Height" jdbcType="VARCHAR" />
+    <result column="product1_antenna_num" property="product1AntennaNum" jdbcType="VARCHAR" />
+    <result column="product1_system_num" property="product1SystemNum" jdbcType="VARCHAR" />
+    <result column="product1_is_up_towerRRU" property="product1IsUpTowerrru" jdbcType="INTEGER" />
+    <result column="product1_ifBBU_on_room" property="product1IfbbuOnRoom" jdbcType="INTEGER" />
+    <result column="product1_BBU_fee" property="product1BbuFee" jdbcType="VARCHAR" />
+    <result column="product2_unit_num" property="product2UnitNum" jdbcType="VARCHAR" />
+    <result column="product2_height" property="product2Height" jdbcType="VARCHAR" />
+    <result column="product2_antenna_num" property="product2AntennaNum" jdbcType="VARCHAR" />
+    <result column="product2_system_num" property="product2SystemNum" jdbcType="VARCHAR" />
+    <result column="product2_is_up_towerRRU" property="product2IsUpTowerrru" jdbcType="VARCHAR" />
+    <result column="product2_ifBBU_on_room" property="product2IfbbuOnRoom" jdbcType="INTEGER" />
+    <result column="product2_BBU_fee" property="product2BbuFee" jdbcType="INTEGER" />
+    <result column="product3_unit_num" property="product3UnitNum" jdbcType="VARCHAR" />
+    <result column="product3_height" property="product3Height" jdbcType="VARCHAR" />
+    <result column="product3_antenna_num" property="product3AntennaNum" jdbcType="VARCHAR" />
+    <result column="product3_system_num" property="product3SystemNum" jdbcType="VARCHAR" />
+    <result column="product3_is_up_towerRRU" property="product3IsUpTowerrru" jdbcType="INTEGER" />
+    <result column="product3_ifBBU_on_room" property="product3IfbbuOnRoom" jdbcType="INTEGER" />
+    <result column="product3_BBU_fee" property="product3BbuFee" jdbcType="VARCHAR" />
+    <result column="tower_height" property="towerHeight" jdbcType="VARCHAR" /> 
+    <result column="ifstandard_build_fee" property="ifstandardBuildFee" jdbcType="INTEGER" />
+    <result column="ifRRU_dis" property="ifrruDis" jdbcType="INTEGER" />
+    <result column="current_tower_share_num" property="currentTowerShareNum" jdbcType="INTEGER" />
+    <result column="current_service_share_num" property="currentServiceShareNum" jdbcType="INTEGER" />
+    <result column="current_room_fee_share_num" property="currentRoomFeeShareNum" jdbcType="INTEGER" />
+    <result column="current_elecimport_share_num" property="currentElecimportShareNum" jdbcType="INTEGER" />
+    <result column="add_room_supporting_share_num" property="addRoomSupportingShareNum" jdbcType="INTEGER" />
+    <result column="is_spec_enter_station" property="isSpecEnterStation" jdbcType="INTEGER" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="tower_price" property="towerPrice" jdbcType="DECIMAL" />
+    <result column="room_price" property="roomPrice" jdbcType="DECIMAL" />
+    <result column="supporting_price" property="supportingPrice" jdbcType="DECIMAL" />
+    <result column="tower_share_dis" property="towerShareDis" jdbcType="DECIMAL" />
+    <result column="room_supporting_share_dis" property="roomSupportingShareDis" jdbcType="DECIMAL" />
+    <result column="maintenance_fee" property="maintenanceFee" jdbcType="DECIMAL" />
+    <result column="maintenance_fee_dis" property="maintenanceFeeDis" jdbcType="DECIMAL" />
+    <result column="stage_fee" property="stageFee" jdbcType="DECIMAL" />
+    <result column="stage_fee_dis" property="stageFeeDis" jdbcType="DECIMAL" />
+    <result column="electric_import_fee" property="electricImportFee" jdbcType="DECIMAL" />
+    <result column="electric_import_fee_dis" property="electricImportFeeDis" jdbcType="DECIMAL" />
+    <result column="if_has_power_condition" property="ifHasPowerCondition" jdbcType="INTEGER" />
+    <result column="if_select_power_service" property="ifSelectPowerService" jdbcType="INTEGER" />
+    <result column="oil_generate_electric_method_id" property="oilGenerateElectricMethodId" jdbcType="VARCHAR" />
+    <result column="oil_generator_electric_fee" property="oilGeneratorElectricFee" jdbcType="DECIMAL" />
+    <result column="other_fee" property="otherFee" jdbcType="DECIMAL" />
+    <result column="other_fee_remark" property="otherFeeRemark" jdbcType="VARCHAR" />
+    <result column="maintenance_level_id" property="maintenanceLevelId" jdbcType="VARCHAR" />
+    <result column="hight_level_fee" property="hightLevelFee" jdbcType="DECIMAL" />
+    <result column="electric_protection_method_id" property="electricProtectionMethodId" jdbcType="VARCHAR" />
+    <result column="electric_protection_fee" property="electricProtectionFee" jdbcType="DECIMAL" />
+    <result column="reserve_battery" property="reserveBattery" jdbcType="DECIMAL" />
+    <result column="room_fee_method" property="roomFeeMethod" jdbcType="VARCHAR" />
+    <result column="elec_import_fee_method" property="elecImportFeeMethod" jdbcType="VARCHAR" />
+    <result column="microwave_service_fee" property="microwaveServiceFee" jdbcType="VARCHAR" />
+    <result column="wlan_service_fee" property="wlanServiceFee" jdbcType="VARCHAR" />
+    <result column="battery_protection_fee" property="batteryProtectionFee" jdbcType="DECIMAL" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="total_actual_amount" property="totalActualAmount" jdbcType="DECIMAL" />
+    <result column="publish_user" property="publishUser" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" /> 
+  </resultMap>
+  
+   
+    <sql id="Base_Column_List" >
+    rentinformation_id, reg_id, resources_type_id, business_confirm_number, scence_type, 
+    agree_bill_code, tower_station_code, tower_station_name, operator, operator_reg_name, 
+    demand_reg_name, station_reg_name, if_tower_link_operator, detail_address, longitude, 
+    latitude, product_configuration_id, product_type_id, room_type_id, supporting_type_id, 
+    wind_pressure, share_type_id, product1_unit_num, product1_height, product1_antenna_num, 
+    product1_system_num, product1_is_up_towerRRU, product1_ifBBU_on_room, product1_BBU_fee, 
+    product2_unit_num, product2_height, product2_antenna_num, product2_system_num, product2_is_up_towerRRU, 
+    product2_ifBBU_on_room, product2_BBU_fee, product3_unit_num, product3_height, product3_antenna_num, 
+    product3_system_num, product3_is_up_towerRRU, product3_ifBBU_on_room, product3_BBU_fee, 
+    antenna_height_range_id, tower_height, ifstandard_build_fee, ifRRU_dis, current_tower_share_num, 
+    current_room_supporting_share_num, current_service_share_num, current_room_fee_share_num, 
+    current_elecimport_share_num, add_tower_share_num, add_room_supporting_share_num, 
+    is_spec_enter_station, start_date, end_date, unit_product_number, tower_price, room_price, 
+    supporting_price, tower_share_dis, room_supporting_share_dis, compute_room_supporting_price, 
+    maintenance_fee, maintenance_fee_dis, original_maintenance_fee, compute_maintenance_fee, 
+    stage_fee, stage_fee_dis, original_stage_fee, electric_import_fee, electric_import_fee_dis, 
+    original_electric_import_fee, compute_electric_import_fee, if_has_power_condition, 
+    if_select_power_service, oil_generate_electric_method_id, oil_generator_electric_fee, 
+    original_oil_generate_electric_fee, compute_oil_generate_electric_fee, other_fee, 
+    other_fee_remark, original_other_fee, compute_other_fee, maintenance_level_id, hight_level_fee, 
+    electric_protection_method_id, electric_protection_fee, reserve_battery, room_fee_method, 
+    elec_import_fee_method, microwave_service_fee, wlan_service_fee, battery_protection_fee, 
+    total_amount, total_actual_amount, compute_total_amount, compute_total_actual_amount, 
+    compute_room_price, compute_supporting_price, compute_tower_price1, compute_tower_price2, 
+    compute_tower_price3, publish_user, publish_time, create_user_id, create_time, update_user_id, 
+    update_time, check_state
+  </sql>
+  <!-- 根据铁塔站址编码查询移动起租信息 -->
+  <select id="queryMsgByTwrStaCode" parameterType="Map" resultMap="BaseResultMap">
+  	select reg_id maintenance_level_id
+  	from twr_rentinformation
+  	where tower_station_code = #{towerStationCode}
+  </select>
+	<!-- 根据业务确认单号和站址编码修改移动起租信息结束时间 --> 
+	<update id="updateEndDateByStopServer" parameterType="Map">
+		update twr_rentinformation
+		set end_date = #{endDate}
+		where rentinformation_id = #{rentinformationId}
+	</update> 
+  <!-- 新增信息到无塔参数配置表 -->
+  <insert id="insertNoTowerConfig" parameterType="Map">
+  	insert into twr_nottowerconfig
+  	value(
+  		#{nottowerconfigId},
+  		#{productTypeId},
+  		#{towerStationCode},
+  		#{businessConfirmNumber}
+  	)
+  </insert>
+  <!-- 根据配置id查询种类id -->
+  <select id="queryTypeIdByConfigId" parameterType="Map" resultType="java.lang.String">
+  	select producttype_id
+  	from twr_productconfig
+  	where productconfig_id = #{productconfigId}
+  </select>
+  <!-- 根据移动起租id查询铁塔种类 -->
+  <select id="queryProConfigIdById" parameterType="Map" resultType="java.lang.String">
+  	select product_configuration_id 
+  	from twr_rentinformation
+  	where rentinformation_id = #{rentinformationId}
+  </select>
+  <!-- 根据移动起租表id修改铁塔信息变更字段 -->
+  	<update id="updateTwrRentInformationByBizChange" parameterType="Map">
+  		update twr_rentinformation
+  		set ${changeItem} = #{changeContent}
+  		where rentinformation_id = #{rentinformationId}
+  	</update>
+  	<!-- 查询新增的移动起租信息期始和期终 -->
+  	<select id="selectTime" parameterType="Map" resultMap="BaseResultMap">
+  	SELECT
+		start_date,end_date
+	FROM
+		twr_rentinformation
+	WHERE 
+		rentinformation_id = #{rentinformationId}
+  	</select>
+	<!-- 复制铁塔侧信息新增到移动侧 -->
+	<insert id="insertTwrRentInformationFromTwrRentInformationTower" parameterType="Map">
+		insert into twr_rentinformation 
+			(twr_rentinformation.rentinformation_id,	
+			twr_rentinformation.reg_id,
+			twr_rentinformation.resources_type_id,
+			twr_rentinformation.business_confirm_number,
+			twr_rentinformation.scence_type,
+			twr_rentinformation.agree_bill_code,
+			twr_rentinformation.tower_station_code,
+			twr_rentinformation.tower_station_name,
+			twr_rentinformation.operator,
+			twr_rentinformation.operator_reg_name,
+			twr_rentinformation.demand_reg_name,
+			twr_rentinformation.station_reg_name,
+			twr_rentinformation.if_tower_link_operator,
+			twr_rentinformation.detail_address,
+			twr_rentinformation.longitude,
+			twr_rentinformation.latitude,
+			twr_rentinformation.product_configuration_id,
+			twr_rentinformation.product_type_id,
+			twr_rentinformation.room_type_id,
+			twr_rentinformation.supporting_type_id,
+			twr_rentinformation.wind_pressure,
+			twr_rentinformation.share_type_id,
+			twr_rentinformation.product1_unit_num,
+			twr_rentinformation.product1_height,
+			twr_rentinformation.product1_antenna_num,
+			twr_rentinformation.product1_system_num,
+			twr_rentinformation.product1_is_up_towerRRU,
+			twr_rentinformation.product1_ifBBU_on_room,
+			twr_rentinformation.product1_BBU_fee,
+			twr_rentinformation.product2_unit_num,
+			twr_rentinformation.product2_height,
+			twr_rentinformation.product2_antenna_num,
+			twr_rentinformation.product2_system_num,
+			twr_rentinformation.product2_is_up_towerRRU,
+			twr_rentinformation.product2_ifBBU_on_room,
+			twr_rentinformation.product2_BBU_fee,
+			twr_rentinformation.product3_unit_num,
+			twr_rentinformation.product3_height,
+			twr_rentinformation.product3_antenna_num,
+			twr_rentinformation.product3_system_num,
+			twr_rentinformation.product3_is_up_towerRRU,
+			twr_rentinformation.product3_ifBBU_on_room,
+			twr_rentinformation.product3_BBU_fee,
+			twr_rentinformation.antenna_height_range_id,
+			twr_rentinformation.tower_height,
+			twr_rentinformation.ifstandard_build_fee,
+			twr_rentinformation.ifRRU_dis,
+			twr_rentinformation.current_tower_share_num,
+			twr_rentinformation.current_room_supporting_share_num,
+			twr_rentinformation.current_service_share_num,
+			twr_rentinformation.current_room_fee_share_num,
+			twr_rentinformation.current_elecimport_share_num,
+			twr_rentinformation.add_tower_share_num,
+			twr_rentinformation.add_room_supporting_share_num,
+			twr_rentinformation.is_spec_enter_station,
+			twr_rentinformation.start_date,
+			twr_rentinformation.end_date,
+			twr_rentinformation.unit_product_number,
+			twr_rentinformation.tower_price,
+			twr_rentinformation.room_price,
+			twr_rentinformation.supporting_price,
+			twr_rentinformation.tower_share_dis,
+			twr_rentinformation.room_supporting_share_dis,
+			twr_rentinformation.maintenance_fee,
+			twr_rentinformation.maintenance_fee_dis,
+			twr_rentinformation.original_maintenance_fee,
+			twr_rentinformation.stage_fee,
+			twr_rentinformation.stage_fee_dis,
+			twr_rentinformation.original_stage_fee,
+			twr_rentinformation.electric_import_fee,
+			twr_rentinformation.electric_import_fee_dis,
+			twr_rentinformation.original_electric_import_fee,
+			twr_rentinformation.if_has_power_condition,
+			twr_rentinformation.if_select_power_service,
+			twr_rentinformation.oil_generate_electric_method_id,
+			twr_rentinformation.oil_generator_electric_fee,
+			twr_rentinformation.original_oil_generate_electric_fee,
+			twr_rentinformation.other_fee,
+			twr_rentinformation.other_fee_remark,
+			twr_rentinformation.original_other_fee,
+			twr_rentinformation.maintenance_level_id,
+			twr_rentinformation.hight_level_fee,
+			twr_rentinformation.electric_protection_method_id,
+			twr_rentinformation.electric_protection_fee,
+			twr_rentinformation.reserve_battery,
+			twr_rentinformation.room_fee_method,
+			twr_rentinformation.elec_import_fee_method,
+			twr_rentinformation.microwave_service_fee,
+			twr_rentinformation.wlan_service_fee,
+			twr_rentinformation.battery_protection_fee,
+			twr_rentinformation.total_amount,
+			twr_rentinformation.total_actual_amount,
+			twr_rentinformation.publish_user,
+			twr_rentinformation.publish_time,
+			twr_rentinformation.create_user_id,
+			twr_rentinformation.create_time,
+			twr_rentinformation.update_user_id,
+			twr_rentinformation.update_time,
+			twr_rentinformation.check_state)
+			SELECT
+				#{rentinformationId},
+				twr_rentinformationtower.reg_id,
+				twr_rentinformationtower.resources_type_id,
+				twr_rentinformationtower.business_confirm_number,	
+				twr_rentinformationtower.scence_type,
+				twr_rentinformationtower.agree_bill_code,
+				twr_rentinformationtower.tower_station_code,
+				twr_rentinformationtower.tower_station_name,
+				twr_rentinformationtower.operator,
+				twr_rentinformationtower.operator_reg_name,
+				twr_rentinformationtower.demand_reg_name,
+				twr_rentinformationtower.station_reg_name,
+				twr_rentinformationtower.if_tower_link_operator,
+				twr_rentinformationtower.detail_address,
+				twr_rentinformationtower.longitude,
+				twr_rentinformationtower.latitude,
+				twr_rentinformationtower.product_configuration_id,
+				twr_rentinformationtower.product_type_id,
+				twr_rentinformationtower.room_type_id,
+				twr_rentinformationtower.supporting_type_id,
+				twr_rentinformationtower.wind_pressure,
+				twr_rentinformationtower.share_type_id,
+				twr_rentinformationtower.product1_unit_num,
+				twr_rentinformationtower.product1_height,
+				twr_rentinformationtower.product1_antenna_num,
+				twr_rentinformationtower.product1_system_num,
+				twr_rentinformationtower.product1_is_up_towerRRU,
+				twr_rentinformationtower.product1_ifBBU_on_room,
+				twr_rentinformationtower.product1_BBU_fee,
+				twr_rentinformationtower.product2_unit_num,
+				twr_rentinformationtower.product2_height,
+				twr_rentinformationtower.product2_antenna_num,
+				twr_rentinformationtower.product2_system_num,
+				twr_rentinformationtower.product2_is_up_towerRRU,
+				twr_rentinformationtower.product2_ifBBU_on_room,
+				twr_rentinformationtower.product2_BBU_fee,
+				twr_rentinformationtower.product3_unit_num,
+				twr_rentinformationtower.product3_height,
+				twr_rentinformationtower.product3_antenna_num,
+				twr_rentinformationtower.product3_system_num,
+				twr_rentinformationtower.product3_is_up_towerRRU,
+				twr_rentinformationtower.product3_ifBBU_on_room,
+				twr_rentinformationtower.product3_BBU_fee,
+				twr_rentinformationtower.antenna_height_range_id,
+				twr_rentinformationtower.tower_height,
+				twr_rentinformationtower.ifstandard_build_fee,
+				twr_rentinformationtower.ifRRU_dis,
+				twr_rentinformationtower.current_tower_share_num,
+				twr_rentinformationtower.current_room_supporting_share_num,
+				twr_rentinformationtower.current_service_share_num,
+				twr_rentinformationtower.current_room_fee_share_num,
+				twr_rentinformationtower.current_elecimport_share_num,
+				twr_rentinformationtower.add_tower_share_num,
+				twr_rentinformationtower.add_room_supporting_share_num,
+				twr_rentinformationtower.is_spec_enter_station,
+				twr_rentinformationtower.start_date,
+				twr_rentinformationtower.end_date,
+				twr_rentinformationtower.unit_product_number,
+				twr_rentinformationtower.tower_price,
+				twr_rentinformationtower.room_price,
+				twr_rentinformationtower.supporting_price,
+				twr_rentinformationtower.tower_share_dis,
+				twr_rentinformationtower.room_supporting_share_dis,
+				twr_rentinformationtower.maintenance_fee,
+				twr_rentinformationtower.maintenance_fee_dis,
+				twr_rentinformationtower.original_maintenance_fee,
+				twr_rentinformationtower.stage_fee,
+				twr_rentinformationtower.stage_fee_dis,
+				twr_rentinformationtower.original_stage_fee,
+				twr_rentinformationtower.electric_import_fee,
+				twr_rentinformationtower.electric_import_fee_dis,
+				twr_rentinformationtower.original_electric_import_fee,
+				twr_rentinformationtower.if_has_power_condition,
+				twr_rentinformationtower.if_select_power_service,
+				twr_rentinformationtower.oil_generate_electric_method_id,
+				twr_rentinformationtower.oil_generator_electric_fee,
+				twr_rentinformationtower.original_oil_generate_electric_fee,
+				twr_rentinformationtower.other_fee,
+				twr_rentinformationtower.other_fee_remark,
+				twr_rentinformationtower.original_other_fee,
+				twr_rentinformationtower.maintenance_level_id,
+				twr_rentinformationtower.hight_level_fee,
+				twr_rentinformationtower.electric_protection_method_id,
+				twr_rentinformationtower.electric_protection_fee,
+				twr_rentinformationtower.reserve_battery,
+				twr_rentinformationtower.room_fee_method,
+				twr_rentinformationtower.elec_import_fee_method,
+				twr_rentinformationtower.microwave_service_fee,
+				twr_rentinformationtower.wlan_service_fee,
+				twr_rentinformationtower.battery_protection_fee,
+				twr_rentinformationtower.total_amount,
+				twr_rentinformationtower.total_actual_amount,
+				twr_rentinformationtower.publish_user,
+				twr_rentinformationtower.publish_time,
+				twr_rentinformationtower.create_user_id,
+				twr_rentinformationtower.create_time,
+				twr_rentinformationtower.update_user_id,
+				twr_rentinformationtower.update_time,
+				twr_rentinformationtower.check_state
+				FROM twr_rentinformationtower
+				WHERE twr_rentinformationtower.rentinformationtower_id = #{rentinformationtowerId}
+	</insert>
+	<!-- 复制铁塔侧信息修改移动侧信息 -->
+	<update id="updateTwrRentInformationFromTwrRentInformationTower" parameterType="Map">
+		update 
+			twr_rentinformation,twr_rentinformationtower
+		set 
+			twr_rentinformation.reg_id = twr_rentinformationtower.reg_id,
+			twr_rentinformation.resources_type_id = twr_rentinformationtower.resources_type_id,
+			twr_rentinformation.business_confirm_number = twr_rentinformationtower.business_confirm_number,
+			twr_rentinformation.scence_type = twr_rentinformationtower.scence_type,
+			twr_rentinformation.agree_bill_code = twr_rentinformationtower.agree_bill_code,
+			twr_rentinformation.tower_station_code = twr_rentinformationtower.tower_station_code,
+			twr_rentinformation.tower_station_name = twr_rentinformationtower.tower_station_name,
+			twr_rentinformation.operator = twr_rentinformationtower.operator,
+			twr_rentinformation.operator_reg_name = twr_rentinformationtower.operator_reg_name,
+			twr_rentinformation.demand_reg_name = twr_rentinformationtower.demand_reg_name,
+			twr_rentinformation.station_reg_name = twr_rentinformationtower.station_reg_name,
+			twr_rentinformation.if_tower_link_operator = twr_rentinformationtower.if_tower_link_operator,
+			twr_rentinformation.detail_address = twr_rentinformationtower.detail_address,
+			twr_rentinformation.longitude = twr_rentinformationtower.longitude,
+			twr_rentinformation.latitude = twr_rentinformationtower.latitude,
+			twr_rentinformation.product_configuration_id = twr_rentinformationtower.product_configuration_id,
+			twr_rentinformation.product_type_id = twr_rentinformationtower.product_type_id,
+			twr_rentinformation.room_type_id = twr_rentinformationtower.room_type_id,
+			twr_rentinformation.supporting_type_id = twr_rentinformationtower.supporting_type_id,
+			twr_rentinformation.wind_pressure = twr_rentinformationtower.wind_pressure,
+			twr_rentinformation.share_type_id = twr_rentinformationtower.share_type_id,
+			twr_rentinformation.product1_unit_num = twr_rentinformationtower.product1_unit_num,
+			twr_rentinformation.product1_height = twr_rentinformationtower.product1_height,
+			twr_rentinformation.product1_antenna_num = twr_rentinformationtower.product1_antenna_num,
+			twr_rentinformation.product1_system_num = twr_rentinformationtower.product1_system_num,
+			twr_rentinformation.product1_is_up_towerRRU = twr_rentinformationtower.product1_is_up_towerRRU,
+			twr_rentinformation.product1_ifBBU_on_room = twr_rentinformationtower.product1_ifBBU_on_room,
+			twr_rentinformation.product1_BBU_fee = twr_rentinformationtower.product1_BBU_fee,
+			twr_rentinformation.product2_unit_num = twr_rentinformationtower.product2_unit_num,
+			twr_rentinformation.product2_height = twr_rentinformationtower.product2_height,
+			twr_rentinformation.product2_antenna_num = twr_rentinformationtower.product2_antenna_num,
+			twr_rentinformation.product2_system_num = twr_rentinformationtower.product2_system_num,
+			twr_rentinformation.product2_is_up_towerRRU = twr_rentinformationtower.product2_is_up_towerRRU,
+			twr_rentinformation.product2_ifBBU_on_room = twr_rentinformationtower.product2_ifBBU_on_room,
+			twr_rentinformation.product2_BBU_fee = twr_rentinformationtower.product2_BBU_fee,
+			twr_rentinformation.product3_unit_num = twr_rentinformationtower.product3_unit_num,
+			twr_rentinformation.product3_height = twr_rentinformationtower.product3_height,
+			twr_rentinformation.product3_antenna_num = twr_rentinformationtower.product3_antenna_num,
+			twr_rentinformation.product3_system_num = twr_rentinformationtower.product3_system_num,
+			twr_rentinformation.product3_is_up_towerRRU = twr_rentinformationtower.product3_is_up_towerRRU,
+			twr_rentinformation.product3_ifBBU_on_room = twr_rentinformationtower.product3_ifBBU_on_room,
+			twr_rentinformation.product3_BBU_fee = twr_rentinformationtower.product3_BBU_fee,
+			twr_rentinformation.antenna_height_range_id = twr_rentinformationtower.antenna_height_range_id,
+			twr_rentinformation.tower_height = twr_rentinformationtower.tower_height,
+			twr_rentinformation.ifstandard_build_fee = twr_rentinformationtower.ifstandard_build_fee,
+			twr_rentinformation.ifRRU_dis = twr_rentinformationtower.ifRRU_dis,
+			twr_rentinformation.current_tower_share_num = twr_rentinformationtower.current_tower_share_num,
+			twr_rentinformation.current_room_supporting_share_num = twr_rentinformationtower.current_room_supporting_share_num,
+			twr_rentinformation.current_service_share_num = twr_rentinformationtower.current_service_share_num,
+			twr_rentinformation.current_room_fee_share_num = twr_rentinformationtower.current_room_fee_share_num,
+			twr_rentinformation.current_elecimport_share_num = twr_rentinformationtower.current_elecimport_share_num,
+			twr_rentinformation.add_tower_share_num = twr_rentinformationtower.add_tower_share_num,
+			twr_rentinformation.add_room_supporting_share_num = twr_rentinformationtower.add_room_supporting_share_num,
+			twr_rentinformation.is_spec_enter_station = twr_rentinformationtower.is_spec_enter_station,
+			twr_rentinformation.start_date = twr_rentinformationtower.start_date,
+			twr_rentinformation.end_date = twr_rentinformationtower.end_date,
+			twr_rentinformation.unit_product_number = twr_rentinformationtower.unit_product_number,
+			twr_rentinformation.tower_price = twr_rentinformationtower.tower_price,
+			twr_rentinformation.room_price = twr_rentinformationtower.room_price,
+			twr_rentinformation.supporting_price = twr_rentinformationtower.supporting_price,
+			twr_rentinformation.tower_share_dis = twr_rentinformationtower.tower_share_dis,
+			twr_rentinformation.room_supporting_share_dis = twr_rentinformationtower.room_supporting_share_dis,
+			twr_rentinformation.maintenance_fee = twr_rentinformationtower.maintenance_fee,
+			twr_rentinformation.maintenance_fee_dis = twr_rentinformationtower.maintenance_fee_dis,
+			twr_rentinformation.original_maintenance_fee = twr_rentinformationtower.original_maintenance_fee,
+			twr_rentinformation.stage_fee = twr_rentinformationtower.stage_fee,
+			twr_rentinformation.stage_fee_dis = twr_rentinformationtower.stage_fee_dis,
+			twr_rentinformation.original_stage_fee = twr_rentinformationtower.original_stage_fee,
+			twr_rentinformation.electric_import_fee = twr_rentinformationtower.electric_import_fee,
+			twr_rentinformation.electric_import_fee_dis = twr_rentinformationtower.electric_import_fee_dis,
+			twr_rentinformation.original_electric_import_fee = twr_rentinformationtower.original_electric_import_fee,
+			twr_rentinformation.if_has_power_condition = twr_rentinformationtower.if_has_power_condition,
+			twr_rentinformation.if_select_power_service = twr_rentinformationtower.if_select_power_service,
+			twr_rentinformation.oil_generate_electric_method_id = twr_rentinformationtower.oil_generate_electric_method_id,
+			twr_rentinformation.oil_generator_electric_fee = twr_rentinformationtower.oil_generator_electric_fee,
+			twr_rentinformation.original_oil_generate_electric_fee = twr_rentinformationtower.original_oil_generate_electric_fee,
+			twr_rentinformation.other_fee = twr_rentinformationtower.other_fee,
+			twr_rentinformation.other_fee_remark = twr_rentinformationtower.other_fee_remark,
+			twr_rentinformation.original_other_fee = twr_rentinformationtower.original_other_fee,
+			twr_rentinformation.maintenance_level_id = twr_rentinformationtower.maintenance_level_id,
+			twr_rentinformation.hight_level_fee = twr_rentinformationtower.hight_level_fee,
+			twr_rentinformation.electric_protection_method_id = twr_rentinformationtower.electric_protection_method_id,
+			twr_rentinformation.electric_protection_fee = twr_rentinformationtower.electric_protection_fee,
+			twr_rentinformation.reserve_battery = twr_rentinformationtower.reserve_battery,
+			twr_rentinformation.room_fee_method = twr_rentinformationtower.room_fee_method,
+			twr_rentinformation.elec_import_fee_method = twr_rentinformationtower.elec_import_fee_method,
+			twr_rentinformation.microwave_service_fee = twr_rentinformationtower.microwave_service_fee,
+			twr_rentinformation.wlan_service_fee = twr_rentinformationtower.wlan_service_fee,
+			twr_rentinformation.battery_protection_fee = twr_rentinformationtower.battery_protection_fee,
+			twr_rentinformation.total_amount = twr_rentinformationtower.total_amount,
+			twr_rentinformation.total_actual_amount = twr_rentinformationtower.total_actual_amount,
+			twr_rentinformation.publish_user = twr_rentinformationtower.publish_user,
+			twr_rentinformation.publish_time = twr_rentinformationtower.publish_time,
+			twr_rentinformation.create_user_id = twr_rentinformationtower.create_user_id,
+			twr_rentinformation.create_time = twr_rentinformationtower.create_time,
+			twr_rentinformation.update_user_id = twr_rentinformationtower.update_user_id,
+			twr_rentinformation.update_time = twr_rentinformationtower.update_time,
+			twr_rentinformation.check_state = twr_rentinformationtower.check_state
+		where
+			twr_rentinformation.rentinformation_id = #{rentinformationId} 
+		and 
+			twr_rentinformationtower.rentinformationtower_id = #{rentinformationtowerId}
+	</update>
+	<!-- 查询是否有与铁塔侧信息相同的移动侧信息 -->
+	<select id="queryTwrRentInformationByTower" parameterType="Map" resultType="java.lang.String">
+		select rentinformation_id 
+		from twr_rentinformation
+		where business_confirm_number = #{businessConfirmNumber} 
+		and tower_station_code = #{towerStationCode}
+	</select>
+	
+	<!-- 查询移动侧是否有信息 并且生效时间在合同期内 -->
+	<!-- yuefy -->
+	<select id="queryTwrRentInformationBybusinessConfirmNumber" parameterType="Map" resultMap="BaseResultMap">
+		select rentinformation_id,business_confirm_number,tower_station_code
+		from twr_rentinformation
+		where business_confirm_number = #{businessConfirmNumber} 
+		and tower_station_code = #{towerStationCode}
+		and end_date &gt;= #{activeDate} 
+		and start_date &lt;=  #{activeDate}
+	</select>
+  
+  <sql id="Info_Column_List" >
+	business_confirm_number,
+	reg_id,
+	resources_type_id,
+	scence_type,
+	agree_bill_code,
+	tower_station_code,
+	tower_station_name,
+	operator,
+	operator_reg_name,
+	demand_reg_name,
+	station_reg_name,
+	if_tower_link_operator,
+	detail_address ,
+	longitude,
+	latitude,
+	product_configuration_id,
+	product_type_id,
+	room_type_id,
+	wind_pressure,
+	product1_unit_num,
+	product1_height,
+	product1_antenna_num,
+	product1_system_num,
+	product1_is_up_towerRRU,
+	product1_ifBBU_on_room ,
+	product1_BBU_fee ,
+	product2_unit_num,
+	product2_height,
+	product2_antenna_num,
+	product2_system_num,
+	product2_is_up_towerRRU,
+	product2_ifBBU_on_room,
+	product2_BBU_fee,
+	product3_unit_num,
+	product3_height,
+	product3_antenna_num,
+	product3_system_num,
+	product3_is_up_towerRRU,
+	product3_ifBBU_on_room,
+	product3_BBU_fee,
+	tower_height ,
+	ifstandard_build_fee,
+	ifRRU_dis,
+	current_tower_share_num,
+	current_service_share_num ,
+	current_room_fee_share_num ,
+	current_elecimport_share_num ,
+	add_room_supporting_share_num ,
+	is_spec_enter_station,
+	start_date,
+	end_date,
+	tower_price,
+	room_price,
+	supporting_price,
+	tower_share_dis,
+	room_supporting_share_dis,
+	maintenance_fee,
+	maintenance_fee_dis,
+	stage_fee,
+	stage_fee_dis,
+	electric_import_fee,
+	electric_import_fee_dis,
+	if_has_power_condition,
+	if_select_power_service,
+	oil_generate_electric_method_id,
+	oil_generator_electric_fee,
+	other_fee,
+	other_fee_remark,
+	maintenance_level_id,
+	hight_level_fee,
+	electric_protection_method_id,
+	electric_protection_fee,
+	reserve_battery,
+	room_fee_method,
+	elec_import_fee_method,
+	microwave_service_fee,
+	wlan_service_fee,
+	battery_protection_fee,
+	total_amount,
+	total_actual_amount,
+	publish_user,
+	publish_time
+  </sql>
+  
+  <!-- 全查移动起租审核页面导出信息 xup-->
+  <select id="queryExportTwrRentInformation" resultMap="BaseResultMap" parameterType="Map"  >
+  		SELECT 
+  		<include refid="Info_Column_List" />
+    	from twr_rentinformation
+   	 	<where>
+	   	 	<if test="rentinformationIds != null and rentinformationIds.size()>0">
+		        	and rentinformation_id in  
+			        <foreach collection="rentinformationIds" item="item" index="index" open="(" separator="," close=")">  
+		                #{item}
+		            </foreach> 
+		    </if>
+   	 	</where>
+   	 	
+  		
+  </select>	
+  
+  <!-- 审核展示页面全查  xup-->
+  <select id="queryTwrRentInformation" resultMap="BaseResultMap" parameterType="Map"  >
+  	SELECT
+	twr_rentinformation.rentinformation_id,
+	twr_rentinformation.reg_id,
+	twr_rentinformation.resources_type_id,
+	twr_rentinformation.business_confirm_number,
+	twr_rentinformation.scence_type,
+	twr_rentinformation.agree_bill_code,
+	twr_rentinformation.tower_station_code,
+	twr_rentinformation.tower_station_name,
+	twr_rentinformation.operator,
+	twr_rentinformation.operator_reg_name,
+	twr_rentinformation.demand_reg_name,
+	twr_rentinformation.station_reg_name,
+	twr_rentinformation.if_tower_link_operator,
+	twr_rentinformation.detail_address,
+	twr_rentinformation.longitude,
+	twr_rentinformation.latitude,
+	twr_rentinformation.product_configuration_id,
+	twr_rentinformation.product_type_id,
+	twr_rentinformation.room_type_id,
+	twr_rentinformation.supporting_type_id,
+	twr_rentinformation.wind_pressure,
+	twr_rentinformation.share_type_id,
+	twr_rentinformation.product1_unit_num,
+	twr_rentinformation.product1_height,
+	twr_rentinformation.product1_antenna_num,
+	twr_rentinformation.product1_system_num,
+	twr_rentinformation.product1_is_up_towerRRU,
+	twr_rentinformation.product1_ifBBU_on_room,
+	twr_rentinformation.product1_BBU_fee,
+	twr_rentinformation.product2_unit_num,
+	twr_rentinformation.product2_height,
+	twr_rentinformation.product2_antenna_num,
+	twr_rentinformation.product2_system_num,
+	twr_rentinformation.product2_is_up_towerRRU,
+	twr_rentinformation.product2_ifBBU_on_room,
+	twr_rentinformation.product2_BBU_fee,
+	twr_rentinformation.product3_unit_num,
+	twr_rentinformation.product3_height,
+	twr_rentinformation.product3_antenna_num,
+	twr_rentinformation.product3_system_num,
+	twr_rentinformation.product3_is_up_towerRRU,
+	twr_rentinformation.product3_ifBBU_on_room,
+	twr_rentinformation.product3_BBU_fee,
+	twr_rentinformation.antenna_height_range_id,
+	twr_rentinformation.tower_height,
+	twr_rentinformation.ifstandard_build_fee,
+	twr_rentinformation.ifRRU_dis,
+	twr_rentinformation.current_tower_share_num,
+	twr_rentinformation.current_room_supporting_share_num,
+	twr_rentinformation.current_service_share_num,
+	twr_rentinformation.current_room_fee_share_num,
+	twr_rentinformation.current_elecimport_share_num,
+	twr_rentinformation.add_tower_share_num,
+	twr_rentinformation.add_room_supporting_share_num,
+	twr_rentinformation.is_spec_enter_station,
+	twr_rentinformation.start_date,
+	twr_rentinformation.end_date,
+	twr_rentinformation.unit_product_number,
+	twr_rentinformation.tower_price,
+	twr_rentinformation.room_price,
+	twr_rentinformation.supporting_price,
+	twr_rentinformation.tower_share_dis,
+	twr_rentinformation.room_supporting_share_dis,
+	twr_rentinformation.compute_room_supporting_price,
+	twr_rentinformation.maintenance_fee,
+	twr_rentinformation.maintenance_fee_dis,
+	twr_rentinformation.original_maintenance_fee,
+	twr_rentinformation.compute_maintenance_fee,
+	twr_rentinformation.stage_fee,
+	twr_rentinformation.stage_fee_dis,
+	twr_rentinformation.original_stage_fee,
+	twr_rentinformation.electric_import_fee,
+	twr_rentinformation.electric_import_fee_dis,
+	twr_rentinformation.original_electric_import_fee,
+	twr_rentinformation.compute_electric_import_fee,
+	twr_rentinformation.if_has_power_condition,
+	twr_rentinformation.if_select_power_service,
+	twr_rentinformation.oil_generate_electric_method_id,
+	twr_rentinformation.oil_generator_electric_fee,
+	twr_rentinformation.original_oil_generate_electric_fee,
+	twr_rentinformation.compute_oil_generate_electric_fee,
+	twr_rentinformation.other_fee,
+	twr_rentinformation.other_fee_remark,
+	twr_rentinformation.original_other_fee,
+	twr_rentinformation.compute_other_fee,
+	twr_rentinformation.maintenance_level_id,
+	twr_rentinformation.hight_level_fee,
+	twr_rentinformation.electric_protection_method_id,
+	twr_rentinformation.electric_protection_fee,
+	twr_rentinformation.reserve_battery,
+	twr_rentinformation.room_fee_method,
+	twr_rentinformation.elec_import_fee_method,
+	twr_rentinformation.microwave_service_fee,
+	twr_rentinformation.wlan_service_fee,
+	twr_rentinformation.battery_protection_fee,
+	twr_rentinformation.total_amount,
+	twr_rentinformation.total_actual_amount,
+	twr_rentinformation.compute_total_amount,
+	twr_rentinformation.compute_total_actual_amount,
+	twr_rentinformation.compute_room_price,
+	twr_rentinformation.compute_supporting_price,
+	twr_rentinformation.compute_tower_price1,
+	twr_rentinformation.compute_tower_price2,
+	twr_rentinformation.compute_tower_price3,
+	twr_rentinformation.publish_user,
+	twr_rentinformation.publish_time,
+	twr_rentinformation.create_user_id,
+	twr_rentinformation.create_time,
+	twr_rentinformation.update_user_id,
+	twr_rentinformation.update_time,
+	twr_rentinformation.check_state,
+	v_sys_region.preg_id,
+	v_sys_region.reg_name,
+	v_sys_region.prv_id,
+	v_sys_region.reg_state,
+	v_sys_region.preg_name,
+	v_sys_region.prv_name
+	FROM
+	twr_rentinformation INNER JOIN v_sys_region ON v_sys_region.reg_id = twr_rentinformation.reg_id 
+	<where>
+			<if test="resourcesTypeId != '' and resourcesTypeId != null">
+				and twr_rentinformation.resources_type_id = #{resourcesTypeId,jdbcType=VARCHAR}
+			</if>
+			<if test="regId != '' and regId != null">
+				and v_sys_region.reg_id = #{regId,jdbcType=VARCHAR}
+			</if>
+			<if test="pregId != '' and pregId != null">
+				and v_sys_region.preg_id = #{pregId,jdbcType=VARCHAR}
+			</if>
+			<if test="checkState != '' and checkState != null">
+				and twr_rentinformation.check_state = #{checkState,jdbcType=VARCHAR}
+			</if>
+			 <!-- 根据权限过滤 -->
+   			<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+			<!-- 流程实例id集合 -->
+			<if test="idsList != null and idsList.size()>0">  
+	        	and twr_rentinformation.rentinformation_id in  
+		        <foreach collection="idsList" item="item" index="index" open="(" separator="," close=")">  
+	                #{item.businessId}
+	            </foreach>  
+    		</if>
+		</where>
+  </select>
+  
+  <update id="commit" parameterType="Map" >
+  	update twr_rentinformation set check_state=#{state} where rentinformation_id = #{rentinformationId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from twr_rentinformation
+    where rentinformation_id = #{rentinformationId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="queryTowerResourceInfo" resultType="com.xunge.model.towerrent.rentmanager.TowerResourceInfoVO" parameterType="Map" >
+    select 
+    <include refid="Info_Column_List" />
+    from twr_rentinformation
+    where 
+    reg_id in (
+		select reg_id from sys_userregion 
+		where relation_state=#{state}
+		and user_id = #{userId, jdbcType=VARCHAR}
+		)
+  </select>
+ 
+  <!-- 修改起租表信息 -->
+	<update id="updateTwrRentInformation" parameterType="Map">
+		update twr_rentinformation tr,twr_rentinformationhistory trh
+		set tr.product_configuration_id=trh.product_configuration_id,
+		tr.antenna_height_range_id=trh.antenna_height_range_id,
+		tr.is_spec_enter_station=trh.is_spec_enter_station,
+		tr.maintenance_level_id=trh.maintenance_level_id,
+		tr.electric_protection_method_id=trh.electric_protection_method_id,
+		tr.if_select_power_service=trh.if_select_power_service,
+		tr.oil_generate_electric_method_id=trh.oil_generate_electric_method_id,
+		tr.unit_product_number=trh.unit_product_number,
+		tr.maintenance_fee_dis=trh.maintenance_fee_dis,
+		tr.stage_fee_dis=trh.stage_fee_dis,
+		tr.electric_import_fee_dis=trh.electric_import_fee_dis,
+		tr.tower_share_dis=trh.tower_share_dis,
+		tr.room_supporting_share_dis=trh.room_supporting_share_dis,
+		tr.update_user_id=trh.update_user_id,
+		tr.update_time=trh.update_time
+		where 
+		trh.rentinformation_id=#{rentinformationId}
+		and trh.end_date=#{endDate}
+		and trh.check_state=#{state}
+	</update>
+
+</mapper>

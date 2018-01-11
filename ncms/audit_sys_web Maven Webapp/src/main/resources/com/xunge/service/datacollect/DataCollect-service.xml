@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    <!-- 集团派发工单 -->
+    <bean id="grpDatacollectService" class="com.xunge.service.datacollect.impl.GrpDatacollectServiceImpl">
+    	<property name="grpDatacollectDao" ref="grpDatacollectDao"></property>
+    	<property name="grpDatacollectPrvDao" ref="grpDatacollectPrvDao"></property>
+    	<property name="grpDatacollecttypeDao" ref="grpDatacollecttypeDao"></property>
+    	<property name="grpDatacollecttypePrvDao" ref="grpDatacollecttypePrvDao"></property> 
+ 		<property name="sysUserDao" ref="sysUserDao"></property>
+ 		<property name="grpDatacollectHistoryDao" ref="grpDatacollectHistoryDao"></property>
+ 	</bean>
+ 	<!-- 省份上报工单 -->
+ 	<bean id="grpDatacollectPrvService" class="com.xunge.service.datacollect.impl.GrpDatacollectPrvServiceImpl"> 
+ 		<property name="grpDatacollectDao" ref="grpDatacollectDao"></property>
+    	<property name="grpDatacollectPrvDao" ref="grpDatacollectPrvDao"></property>
+    	<property name="grpDatacollecttypeDao" ref="grpDatacollecttypeDao"></property>
+    	<property name="grpDatacollecttypePrvDao" ref="grpDatacollecttypePrvDao"></property> 
+    	<property name="grpDatacollectHistoryDao" ref="grpDatacollectHistoryDao"></property>
+    	<property name="sysRoleDao" ref="sysRoleDao"></property>
+ 	</bean>
+ 	<!-- 集团派发工单数据类型 -->
+ 	<bean id="grpDatacollecttypeService" class="com.xunge.service.datacollect.impl.GrpDatacollecttypeServiceImpl"> 
+ 		<property name="grpDatacollectDao" ref="grpDatacollectDao"></property>
+    	<property name="grpDatacollectPrvDao" ref="grpDatacollectPrvDao"></property>
+    	<property name="grpDatacollecttypeDao" ref="grpDatacollecttypeDao"></property>
+    	<property name="grpDatacollecttypePrvDao" ref="grpDatacollecttypePrvDao"></property> 
+ 	</bean>
+ 	<!-- 省份上报工单数据类型 -->
+ 	<bean id="grpDatacollecttypePrvService" class="com.xunge.service.datacollect.impl.GrpDatacollecttypePrvServiceImpl"> 
+ 		<property name="grpDatacollectDao" ref="grpDatacollectDao"></property>
+    	<property name="grpDatacollectPrvDao" ref="grpDatacollectPrvDao"></property>
+    	<property name="grpDatacollecttypeDao" ref="grpDatacollecttypeDao"></property>
+    	<property name="grpDatacollecttypePrvDao" ref="grpDatacollecttypePrvDao"></property> 
+ 	</bean>
+ 	<!-- 短信发送历史记录 --> 
+ 	<bean id="sysSmssendHistroyService" class="com.xunge.service.sysSmsSendHistroy.impl.SysSmssendHistroyServiceImpl"> 
+ 		<property name="grpDatacollectDao" ref="grpDatacollectDao"></property>
+    	<property name="grpDatacollectPrvDao" ref="grpDatacollectPrvDao"></property>
+    	<property name="grpDatacollecttypeDao" ref="grpDatacollecttypeDao"></property>
+    	<property name="grpDatacollecttypePrvDao" ref="grpDatacollecttypePrvDao"></property>
+    	<property name="sysSmssendHistroyDao" ref="sysSmssendHistroyDao"></property>  
+    	<property name="smsSendTools" ref="smsSendTools"></property>
+    	<property name="sysSmsConfigDao" ref="sysSmsConfigDao"></property>
+ 	</bean> 
+ 	<!-- 短信发送调用接口 -->
+ 	<bean id="smsSendTools" class="com.xunge.service.system.sms.impl.SmsSendTools"> 
+ 	</bean>
+ 	<!-- 集团-省公司 工单流转记录 -->
+ 	<bean id="grpDatacollectHistoryService" class="com.xunge.service.datacollect.impl.GrpDatacollectHistoryServiceImpl"> 
+ 		<property name="grpDatacollectDao" ref="grpDatacollectDao"></property>
+    	<property name="grpDatacollectPrvDao" ref="grpDatacollectPrvDao"></property>
+    	<property name="grpDatacollecttypeDao" ref="grpDatacollecttypeDao"></property>
+    	<property name="grpDatacollecttypePrvDao" ref="grpDatacollecttypePrvDao"></property>
+    	<property name="grpDatacollectHistoryDao" ref="grpDatacollectHistoryDao"></property>
+ 	</bean>
+</beans>

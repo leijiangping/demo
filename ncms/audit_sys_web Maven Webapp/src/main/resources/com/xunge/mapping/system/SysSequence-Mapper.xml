@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.selfelec.SysSequenceMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.util.SysSequence" >
+    <id column="seq_code" property="seqCode" jdbcType="VARCHAR" />
+    <id column="seq_name" property="seqName" jdbcType="VARCHAR" />
+    <result column="last_update_year" property="lastUpdateYear" jdbcType="VARCHAR" />
+    <result column="cur_seq_num" property="curSeqNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seq_code, seq_name, last_update_year, cur_seq_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xunge.model.util.SysSequence" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_sequence
+    where seq_code = #{seqCode,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateByPrimaryKey" parameterType="com.xunge.model.util.SysSequence" >
+    update sys_sequence
+    set last_update_year = #{lastUpdateYear,jdbcType=VARCHAR},
+      cur_seq_num = #{curSeqNum,jdbcType=INTEGER}
+    where seq_code = #{seqCode,jdbcType=VARCHAR}
+    	and seq_name = #{seqName,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="insertSequence" parameterType="com.xunge.model.util.SysSequence" >
+  	insert into sys_sequence (seq_code, seq_name, last_update_year, cur_seq_num) values (#{seqCode,jdbcType=VARCHAR},#{seqName,jdbcType=VARCHAR},#{lastUpdateYear,jdbcType=VARCHAR},#{curSeqNum,jdbcType=INTEGER})
+  
+  </insert>
+</mapper>

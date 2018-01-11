@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.dao.towerrent.rentmanager.TowerResourceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.xunge.model.towerrent.rentmanager.TowerResourceInfoVO" >
+	<id column="rentinformationtower_id" jdbcType="VARCHAR" property="rentinformationtowerId" />
+    <result column="reg_id" jdbcType="VARCHAR" property="regId" />
+    <result column="resources_type_id" jdbcType="VARCHAR" property="resourcesTypeId" />
+    <result column="business_confirm_number" jdbcType="VARCHAR" property="businessConfirmNumber" />
+    <result column="scence_type" jdbcType="VARCHAR" property="scenceType" />
+    <result column="agree_bill_code" jdbcType="VARCHAR" property="agreeBillCode" />
+    <result column="tower_station_code" jdbcType="VARCHAR" property="towerStationCode" />
+    <result column="tower_station_name" jdbcType="VARCHAR" property="towerStationName" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operator_reg_name" jdbcType="VARCHAR" property="operatorRegName" />
+    <result column="demand_reg_name" jdbcType="VARCHAR" property="demandRegName" />
+    <result column="station_reg_name" jdbcType="VARCHAR" property="stationRegName" />
+    <result column="if_tower_link_operator" jdbcType="INTEGER" property="ifTowerLinkOperator" />
+    <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="product_configuration_id" jdbcType="VARCHAR" property="productConfigurationId" />
+    <result column="product_type_id" jdbcType="VARCHAR" property="productTypeId" />
+    <result column="room_type_id" jdbcType="VARCHAR" property="roomTypeId" />
+    <result column="supporting_type_id" jdbcType="VARCHAR" property="supportingTypeId" />
+    <result column="wind_pressure" jdbcType="DECIMAL" property="windPressure" />
+    <result column="share_type_id" jdbcType="VARCHAR" property="shareTypeId" />
+    <result column="product1_unit_num" jdbcType="VARCHAR" property="product1UnitNum" />
+    <result column="product1_height" jdbcType="VARCHAR" property="product1Height" />
+    <result column="product1_antenna_num" jdbcType="VARCHAR" property="product1AntennaNum" />
+    <result column="product1_system_num" jdbcType="VARCHAR" property="product1SystemNum" />
+    <result column="product1_is_up_towerRRU" jdbcType="INTEGER" property="product1IsUpTowerRRU" />
+    <result column="product1_ifBBU_on_room" jdbcType="INTEGER" property="product1IfBBUOnRoom" />
+    <result column="product1_BBU_fee" jdbcType="VARCHAR" property="product1BBUFee" />
+    <result column="product2_unit_num" jdbcType="VARCHAR" property="product2UnitNum" />
+    <result column="product2_height" jdbcType="VARCHAR" property="product2Height" />
+    <result column="product2_antenna_num" jdbcType="VARCHAR" property="product2AntennaNum" />
+    <result column="product2_system_num" jdbcType="VARCHAR" property="product2SystemNum" />
+    <result column="product2_is_up_towerRRU" jdbcType="INTEGER" property="product2IsUpTowerRRU" />
+    <result column="product2_ifBBU_on_room" jdbcType="INTEGER" property="product2IfBBUOnRoom" />
+    <result column="product2_BBU_fee" jdbcType="VARCHAR" property="product2BBUFee" />
+    <result column="product3_unit_num" jdbcType="VARCHAR" property="product3UnitNum" />
+    <result column="product3_height" jdbcType="VARCHAR" property="product3Height" />
+    <result column="product3_antenna_num" jdbcType="VARCHAR" property="product3AntennaNum" />
+    <result column="product3_system_num" jdbcType="VARCHAR" property="product3SystemNum" />
+    <result column="product3_is_up_towerRRU" jdbcType="INTEGER" property="product3IsUpTowerRRU" />
+    <result column="product3_ifBBU_on_room" jdbcType="INTEGER" property="product3IfBBUOnRoom" />
+    <result column="product3_BBU_fee" jdbcType="VARCHAR" property="product3BBUFee" />
+    <result column="antenna_height_range_id" jdbcType="VARCHAR" property="antennaHeightRangeId" />
+    <result column="tower_height" jdbcType="VARCHAR" property="towerHeight" />
+    <result column="ifstandard_build_fee" jdbcType="INTEGER" property="ifstandardBuildFee" />
+    <result column="ifRRU_dis" jdbcType="INTEGER" property="ifRRUDis" />
+    <result column="current_tower_share_num" jdbcType="INTEGER" property="currentTowerShareNum" />
+    <result column="current_room_supporting_share_num" jdbcType="INTEGER" property="currentRoomSupportingShareNum" />
+    <result column="current_service_share_num" jdbcType="INTEGER" property="currentServiceShareNum" />
+    <result column="current_room_fee_share_num" jdbcType="INTEGER" property="currentRoomFeeShareNum" />
+    <result column="current_elecimport_share_num" jdbcType="INTEGER" property="currentElecimportShareNum" />
+    <result column="add_tower_share_num" jdbcType="INTEGER" property="addTowerShareNum" />
+    <result column="add_room_supporting_share_num" jdbcType="INTEGER" property="addRoomSupportingShareNum" />
+    <result column="is_spec_enter_station" jdbcType="INTEGER" property="isSpecEnterStation" />
+    <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="unit_product_number" jdbcType="VARCHAR" property="unitProductNumber" />
+    <result column="tower_price" jdbcType="DECIMAL" property="towerPrice" />
+    <result column="room_price" jdbcType="DECIMAL" property="roomPrice" />
+    <result column="supporting_price" jdbcType="DECIMAL" property="supportingPrice" />
+    <result column="tower_share_dis" jdbcType="DECIMAL" property="towerShareDis" />
+    <result column="room_supporting_share_dis" jdbcType="DECIMAL" property="roomSupportingShareDis" />
+    <result column="maintenance_fee" jdbcType="DECIMAL" property="maintenanceFee" />
+    <result column="maintenance_fee_dis" jdbcType="DECIMAL" property="maintenanceFeeDis" />
+    <result column="original_maintenance_fee" jdbcType="DECIMAL" property="originalMaintenanceFee" />
+    <result column="stage_fee" jdbcType="DECIMAL" property="stageFee" />
+    <result column="stage_fee_dis" jdbcType="DECIMAL" property="stageFeeDis" />
+    <result column="original_stage_fee" jdbcType="VARCHAR" property="originalStageFee" />
+    <result column="electric_import_fee" jdbcType="DECIMAL" property="electricImportFee" />
+    <result column="electric_import_fee_dis" jdbcType="DECIMAL" property="electricImportFeeDis" />
+    <result column="original_electric_import_fee" jdbcType="DECIMAL" property="originalElectricImportFee" />
+    <result column="if_has_power_condition" jdbcType="INTEGER" property="ifHasPowerCondition" />
+    <result column="if_select_power_service" jdbcType="INTEGER" property="ifSelectPowerService" />
+    <result column="oil_generate_electric_method_id" jdbcType="VARCHAR" property="oilGenerateElectricMethodId" />
+    <result column="oil_generator_electric_fee" jdbcType="DECIMAL" property="oilGeneratorElectricFee" />
+    <result column="original_oil_generate_electric_fee" jdbcType="DECIMAL" property="originalOilGenerateElectricFee" />
+    <result column="other_fee" jdbcType="DECIMAL" property="otherFee" />
+    <result column="other_fee_remark" jdbcType="VARCHAR" property="otherFeeRemark" />
+    <result column="original_other_fee" jdbcType="DECIMAL" property="originalOtherFee" />
+    <result column="maintenance_level_id" jdbcType="VARCHAR" property="maintenanceLevelId" />
+    <result column="hight_level_fee" jdbcType="DECIMAL" property="hightLevelFee" />
+    <result column="electric_protection_method_id" jdbcType="VARCHAR" property="electricProtectionMethodId" />
+    <result column="electric_protection_fee" jdbcType="DECIMAL" property="electricProtectionFee" />
+    <result column="reserve_battery" jdbcType="DECIMAL" property="reserveBattery" />
+    <result column="room_fee_method" jdbcType="VARCHAR" property="roomFeeMethod" />
+    <result column="elec_import_fee_method" jdbcType="VARCHAR" property="elecImportFeeMethod" />
+    <result column="microwave_service_fee" jdbcType="VARCHAR" property="microwaveServiceFee" />
+    <result column="wlan_service_fee" jdbcType="VARCHAR" property="wlanServiceFee" />
+    <result column="battery_protection_fee" jdbcType="DECIMAL" property="batteryProtectionFee" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="total_actual_amount" jdbcType="DECIMAL" property="totalActualAmount" />
+    <result column="change_tower_share_dis_value1" jdbcType="DECIMAL" property="changeTowerShareDisValue1" />
+    <result column="change_tower_share_dis_start_date1" jdbcType="TIMESTAMP" property="changeTowerShareDisStartDate1" />
+    <result column="change_room_supporting_share_dis_value1" jdbcType="DECIMAL" property="changeRoomSupportingShareDisValue1" />
+    <result column="change_room_supporting_share_dis_start_date1" jdbcType="TIMESTAMP" property="changeRoomSupportingShareDisStartDate1" />
+    <result column="change_tower_share_dis_value2" jdbcType="DECIMAL" property="changeTowerShareDisValue2" />
+    <result column="change_tower_share_dis_start_date2" jdbcType="TIMESTAMP" property="changeTowerShareDisStartDate2" />
+    <result column="change_room_supporting_share_dis_value2" jdbcType="DECIMAL" property="changeRoomSupportingShareDisValue2" />
+    <result column="change_room_supporting_share_dis_start_date2" jdbcType="TIMESTAMP" property="changeRoomSupportingShareDisStartDate2" />
+    <result column="change_tower_share_dis_value3" jdbcType="DECIMAL" property="changeTowerShareDisValue3" />
+    <result column="change_tower_share_dis_start_date3" jdbcType="TIMESTAMP" property="changeTowerShareDisStartDate3" />
+    <result column="change_room_supporting_share_dis_value3" jdbcType="DECIMAL" property="changeRoomSupportingShareDisValue3" />
+    <result column="change_room_supporting_share_dis_start_date3" jdbcType="TIMESTAMP" property="changeRoomSupportingShareDisStartDate3" />
+    <result column="change_maintenance_fee_dis_value1" jdbcType="DECIMAL" property="changeMaintenanceFeeDisValue1" />
+    <result column="change_maintenance_fee_dis_start_date1" jdbcType="TIMESTAMP" property="changeMaintenanceFeeDisStartDate1" />
+    <result column="change_stage_fee_dis_value1" jdbcType="DECIMAL" property="changeStageFeeDisValue1" />
+    <result column="change_stage_fee_dis_start_date1" jdbcType="TIMESTAMP" property="changeStageFeeDisStartDate1" />
+    <result column="change_electric_import_dis_value1" jdbcType="DECIMAL" property="changeElectricImportDisValue1" />
+    <result column="change_electric_import_dis_start_date1" jdbcType="TIMESTAMP" property="changeElectricImportDisStartDate1" />
+    <result column="change_maintenance_fee_dis_value2" jdbcType="DECIMAL" property="changeMaintenanceFeeDisValue2" />
+    <result column="change_maintenance_fee_dis_start_date2" jdbcType="TIMESTAMP" property="changeMaintenanceFeeDisStartDate2" />
+    <result column="change_stage_fee_dis_value2" jdbcType="DECIMAL" property="changeStageFeeDisValue2" />
+    <result column="change_stage_fee_dis_start_date2" jdbcType="TIMESTAMP" property="changeStageFeeDisStartDate2" />
+    <result column="change_electric_import_dis_value2" jdbcType="DECIMAL" property="changeElectricImportDisValue2" />
+    <result column="change_electric_import_dis_start_date2" jdbcType="TIMESTAMP" property="changeElectricImportDisStartDate2" />
+    <result column="change_maintenance_fee_dis_value3" jdbcType="DECIMAL" property="changeMaintenanceFeeDisValue3" />
+    <result column="change_maintenance_fee_dis_start_date3" jdbcType="TIMESTAMP" property="changeMaintenanceFeeDisStartDate3" />
+    <result column="change_stage_fee_dis_value3" jdbcType="DECIMAL" property="changeStageFeeDisValue3" />
+    <result column="change_stage_fee_dis_start_date3" jdbcType="TIMESTAMP" property="changeStageFeeDisStartDate3" />
+    <result column="change_electric_import_dis_value3" jdbcType="DECIMAL" property="changeElectricImportDisValue3" />
+    <result column="change_electric_import_dis_start_date3" jdbcType="TIMESTAMP" property="changeElectricImportDisStartDate3" />
+    <result column="publish_user" jdbcType="VARCHAR" property="publishUser" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="check_state" jdbcType="INTEGER" property="auditState" />
+  	<association property="sysRegionVO" javaType="com.xunge.model.system.region.SysRegionVO">
+            <id column="reg_id" property="regId" jdbcType="VARCHAR" />
+		    <result column="prv_id" property="prvId" jdbcType="VARCHAR" />
+		    <result column="reg_code" property="regCode" jdbcType="VARCHAR" />
+		    <result column="reg_name" property="regName" jdbcType="VARCHAR" />
+		    <result column="preg_name" property="pRegName" jdbcType="VARCHAR" />
+		    <result column="preg_id" property="pregId" jdbcType="VARCHAR" />
+		    <result column="prv_name" property="prvName" jdbcType="INTEGER" />
+		    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+		    <result column="reg_order" property="regOrder" jdbcType="INTEGER" />
+		    <result column="reg_state" property="regState" jdbcType="INTEGER" />
+         </association>
+  </resultMap>
+  
+  <!-- 铁塔侧和移动侧共有字段 -->
+  <resultMap id="towerResourceInfo" type="com.xunge.model.towerrent.rentmanager.TowerResourceInfoVO" >
+    <id column="business_confirm_number" property="businessConfirmNumber" jdbcType="VARCHAR" /> 
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="resources_type_id" property="resourcesTypeId" jdbcType="VARCHAR" />
+    <result column="scence_type" property="scenceType" jdbcType="VARCHAR" />
+    <result column="agree_bill_code" property="agreeBillCode" jdbcType="VARCHAR" />
+    <result column="tower_station_code" property="towerStationCode" jdbcType="VARCHAR" />
+    <result column="tower_station_name" property="towerStationName" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operator_reg_name" property="operatorRegName" jdbcType="VARCHAR" />
+    <result column="demand_reg_name" property="demandRegName" jdbcType="VARCHAR" />
+    <result column="station_reg_name" property="stationRegName" jdbcType="VARCHAR" />
+    <result column="if_tower_link_operator" property="ifTowerLinkOperator" jdbcType="INTEGER" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="product_configuration_id" property="productConfigurationId" jdbcType="VARCHAR" />
+    <result column="product_type_id" property="productTypeId" jdbcType="VARCHAR" />
+    <result column="room_type_id" property="roomTypeId" jdbcType="VARCHAR" />
+    <result column="wind_pressure" property="windPressure" jdbcType="DECIMAL" /> 
+    <result column="product1_unit_num" property="product1UnitNum" jdbcType="VARCHAR" />
+    <result column="product1_height" property="product1Height" jdbcType="VARCHAR" />
+    <result column="product1_antenna_num" property="product1AntennaNum" jdbcType="VARCHAR" />
+    <result column="product1_system_num" property="product1SystemNum" jdbcType="VARCHAR" />
+    <result column="product1_is_up_towerRRU" property="product1IsUpTowerrru" jdbcType="INTEGER" />
+    <result column="product1_ifBBU_on_room" property="product1IfbbuOnRoom" jdbcType="INTEGER" />
+    <result column="product1_BBU_fee" property="product1BbuFee" jdbcType="VARCHAR" />
+    <result column="product2_unit_num" property="product2UnitNum" jdbcType="VARCHAR" />
+    <result column="product2_height" property="product2Height" jdbcType="VARCHAR" />
+    <result column="product2_antenna_num" property="product2AntennaNum" jdbcType="VARCHAR" />
+    <result column="product2_system_num" property="product2SystemNum" jdbcType="VARCHAR" />
+    <result column="product2_is_up_towerRRU" property="product2IsUpTowerrru" jdbcType="VARCHAR" />
+    <result column="product2_ifBBU_on_room" property="product2IfbbuOnRoom" jdbcType="INTEGER" />
+    <result column="product2_BBU_fee" property="product2BbuFee" jdbcType="INTEGER" />
+    <result column="product3_unit_num" property="product3UnitNum" jdbcType="VARCHAR" />
+    <result column="product3_height" property="product3Height" jdbcType="VARCHAR" />
+    <result column="product3_antenna_num" property="product3AntennaNum" jdbcType="VARCHAR" />
+    <result column="product3_system_num" property="product3SystemNum" jdbcType="VARCHAR" />
+    <result column="product3_is_up_towerRRU" property="product3IsUpTowerrru" jdbcType="INTEGER" />
+    <result column="product3_ifBBU_on_room" property="product3IfbbuOnRoom" jdbcType="INTEGER" />
+    <result column="product3_BBU_fee" property="product3BbuFee" jdbcType="VARCHAR" />
+    <result column="tower_height" property="towerHeight" jdbcType="VARCHAR" /> 
+    <result column="ifstandard_build_fee" property="ifstandardBuildFee" jdbcType="INTEGER" />
+    <result column="ifRRU_dis" property="ifrruDis" jdbcType="INTEGER" />
+    <result column="current_tower_share_num" property="currentTowerShareNum" jdbcType="INTEGER" />
+    <result column="current_service_share_num" property="currentServiceShareNum" jdbcType="INTEGER" />
+    <result column="current_room_fee_share_num" property="currentRoomFeeShareNum" jdbcType="INTEGER" />
+    <result column="current_elecimport_share_num" property="currentElecimportShareNum" jdbcType="INTEGER" />
+    <result column="add_room_supporting_share_num" property="addRoomSupportingShareNum" jdbcType="INTEGER" />
+    <result column="is_spec_enter_station" property="isSpecEnterStation" jdbcType="INTEGER" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="tower_price" property="towerPrice" jdbcType="DECIMAL" />
+    <result column="room_price" property="roomPrice" jdbcType="DECIMAL" />
+    <result column="supporting_price" property="supportingPrice" jdbcType="DECIMAL" />
+    <result column="tower_share_dis" property="towerShareDis" jdbcType="DECIMAL" />
+    <result column="room_supporting_share_dis" property="roomSupportingShareDis" jdbcType="DECIMAL" />
+    <result column="maintenance_fee" property="maintenanceFee" jdbcType="DECIMAL" />
+    <result column="maintenance_fee_dis" property="maintenanceFeeDis" jdbcType="DECIMAL" />
+    <result column="stage_fee" property="stageFee" jdbcType="DECIMAL" />
+    <result column="stage_fee_dis" property="stageFeeDis" jdbcType="DECIMAL" />
+    <result column="electric_import_fee" property="electricImportFee" jdbcType="DECIMAL" />
+    <result column="electric_import_fee_dis" property="electricImportFeeDis" jdbcType="DECIMAL" />
+    <result column="if_has_power_condition" property="ifHasPowerCondition" jdbcType="INTEGER" />
+    <result column="if_select_power_service" property="ifSelectPowerService" jdbcType="INTEGER" />
+    <result column="oil_generate_electric_method_id" property="oilGenerateElectricMethodId" jdbcType="VARCHAR" />
+    <result column="oil_generator_electric_fee" property="oilGeneratorElectricFee" jdbcType="DECIMAL" />
+    <result column="other_fee" property="otherFee" jdbcType="DECIMAL" />
+    <result column="other_fee_remark" property="otherFeeRemark" jdbcType="VARCHAR" />
+    <result column="maintenance_level_id" property="maintenanceLevelId" jdbcType="VARCHAR" />
+    <result column="hight_level_fee" property="hightLevelFee" jdbcType="DECIMAL" />
+    <result column="electric_protection_method_id" property="electricProtectionMethodId" jdbcType="VARCHAR" />
+    <result column="electric_protection_fee" property="electricProtectionFee" jdbcType="DECIMAL" />
+    <result column="reserve_battery" property="reserveBattery" jdbcType="DECIMAL" />
+    <result column="room_fee_method" property="roomFeeMethod" jdbcType="VARCHAR" />
+    <result column="elec_import_fee_method" property="elecImportFeeMethod" jdbcType="VARCHAR" />
+    <result column="microwave_service_fee" property="microwaveServiceFee" jdbcType="VARCHAR" />
+    <result column="wlan_service_fee" property="wlanServiceFee" jdbcType="VARCHAR" />
+    <result column="battery_protection_fee" property="batteryProtectionFee" jdbcType="DECIMAL" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="total_actual_amount" property="totalActualAmount" jdbcType="DECIMAL" />
+    <result column="publish_user" property="publishUser" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" /> 
+  </resultMap>
+  <sql id="Base_Column_List">
+    rentinformationtower_id,twr_rentinformationtower.reg_id, resources_type_id, business_confirm_number, scence_type, 
+    agree_bill_code, tower_station_code, tower_station_name, operator, operator_reg_name, 
+    demand_reg_name, station_reg_name, if_tower_link_operator, detail_address, longitude, 
+    latitude, product_configuration_id, product_type_id, room_type_id, supporting_type_id, 
+    wind_pressure, share_type_id, product1_unit_num, product1_height, product1_antenna_num, 
+    product1_system_num, product1_is_up_towerRRU, product1_ifBBU_on_room, product1_BBU_fee, 
+    product2_unit_num, product2_height, product2_antenna_num, product2_system_num, product2_is_up_towerRRU, 
+    product2_ifBBU_on_room, product2_BBU_fee, product3_unit_num, product3_height, product3_antenna_num, 
+    product3_system_num, product3_is_up_towerRRU, product3_ifBBU_on_room, product3_BBU_fee, 
+    antenna_height_range_id, tower_height, ifstandard_build_fee, ifRRU_dis, current_tower_share_num, 
+    current_room_supporting_share_num, current_service_share_num, current_room_fee_share_num, 
+    current_elecimport_share_num, add_tower_share_num, add_room_supporting_share_num, 
+    is_spec_enter_station, start_date, end_date, unit_product_number, tower_price, room_price, 
+    supporting_price, tower_share_dis, room_supporting_share_dis, maintenance_fee, maintenance_fee_dis, 
+    original_maintenance_fee, stage_fee, stage_fee_dis, original_stage_fee, electric_import_fee, 
+    electric_import_fee_dis, original_electric_import_fee, if_has_power_condition, if_select_power_service, 
+    oil_generate_electric_method_id, oil_generator_electric_fee, original_oil_generate_electric_fee, 
+    other_fee, other_fee_remark, original_other_fee, maintenance_level_id, hight_level_fee, 
+    electric_protection_method_id, electric_protection_fee, reserve_battery, room_fee_method, 
+    elec_import_fee_method, microwave_service_fee, wlan_service_fee, battery_protection_fee, 
+    total_amount, total_actual_amount, change_tower_share_dis_value1, change_tower_share_dis_start_date1, 
+    change_room_supporting_share_dis_value1, change_room_supporting_share_dis_start_date1, 
+    change_tower_share_dis_value2, change_tower_share_dis_start_date2, change_room_supporting_share_dis_value2, 
+    change_room_supporting_share_dis_start_date2, change_tower_share_dis_value3, change_tower_share_dis_start_date3, 
+    change_room_supporting_share_dis_value3, change_room_supporting_share_dis_start_date3, 
+    change_maintenance_fee_dis_value1, change_maintenance_fee_dis_start_date1, change_stage_fee_dis_value1, 
+    change_stage_fee_dis_start_date1, change_electric_import_dis_value1, change_electric_import_dis_start_date1, 
+    change_maintenance_fee_dis_value2, change_maintenance_fee_dis_start_date2, change_stage_fee_dis_value2, 
+    change_stage_fee_dis_start_date2, change_electric_import_dis_value2, change_electric_import_dis_start_date2, 
+    change_maintenance_fee_dis_value3, change_maintenance_fee_dis_start_date3, change_stage_fee_dis_value3, 
+    change_stage_fee_dis_start_date3, change_electric_import_dis_value3, change_electric_import_dis_start_date3, 
+    publish_user, publish_time, create_user_id, create_time, update_user_id, update_time, 
+    check_state
+  </sql>
+  	
+  <sql id="Info_List" >
+	business_confirm_number,
+	reg_id,
+	resources_type_id,
+	scence_type,
+	agree_bill_code,
+	tower_station_code,
+	tower_station_name,
+	operator,
+	operator_reg_name,
+	demand_reg_name,
+	station_reg_name,
+	if_tower_link_operator,
+	detail_address ,
+	longitude,
+	latitude,
+	product_configuration_id,
+	product_type_id,
+	room_type_id,
+	wind_pressure,
+	product1_unit_num,
+	product1_height,
+	product1_antenna_num,
+	product1_system_num,
+	product1_is_up_towerRRU,
+	product1_ifBBU_on_room ,
+	product1_BBU_fee ,
+	product2_unit_num,
+	product2_height,
+	product2_antenna_num,
+	product2_system_num,
+	product2_is_up_towerRRU,
+	product2_ifBBU_on_room,
+	product2_BBU_fee,
+	product3_unit_num,
+	product3_height,
+	product3_antenna_num,
+	product3_system_num,
+	product3_is_up_towerRRU,
+	product3_ifBBU_on_room,
+	product3_BBU_fee,
+	tower_height ,
+	ifstandard_build_fee,
+	ifRRU_dis,
+	current_tower_share_num,
+	current_service_share_num ,
+	current_room_fee_share_num ,
+	current_elecimport_share_num ,
+	add_room_supporting_share_num ,
+	is_spec_enter_station,
+	start_date,
+	end_date,
+	tower_price,
+	room_price,
+	supporting_price,
+	tower_share_dis,
+	room_supporting_share_dis,
+	maintenance_fee,
+	maintenance_fee_dis,
+	stage_fee,
+	stage_fee_dis,
+	electric_import_fee,
+	electric_import_fee_dis,
+	if_has_power_condition,
+	if_select_power_service,
+	oil_generate_electric_method_id,
+	oil_generator_electric_fee,
+	other_fee,
+	other_fee_remark,
+	maintenance_level_id,
+	hight_level_fee,
+	electric_protection_method_id,
+	electric_protection_fee,
+	reserve_battery,
+	room_fee_method,
+	elec_import_fee_method,
+	microwave_service_fee,
+	wlan_service_fee,
+	battery_protection_fee,
+	total_amount,
+	total_actual_amount,
+	publish_user,
+	publish_time
+  </sql>
+  
+  <!-- 审核完成后修改数据状态 -->
+  <update id="updateCommit" parameterType="Map">
+  	update twr_rentinformationtower
+  	set check_state = #{checkState}
+  	where rentinformationtower_id = #{rentinformationtowerId}
+  </update>
+  <!-- 根据id查询铁塔资源信息 -->
+  <select id="queryTowerResourceInfoVOById" parameterType="Map" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>,
+  		v_sys_region.preg_id,
+		v_sys_region.reg_name,
+		v_sys_region.prv_id,
+		v_sys_region.reg_state,
+		v_sys_region.preg_name,
+		v_sys_region.prv_name
+  	from twr_rentinformationtower INNER JOIN v_sys_region ON v_sys_region.reg_id = twr_rentinformationtower.reg_id 
+  	where rentinformationtower_id = #{rentinformationtowerId}
+  </select>
+  <!-- 查询所有铁塔资源信息 -->
+  <select id="queryTowerResourceInfo" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />,
+    	v_sys_region.preg_id,
+		v_sys_region.reg_name,
+		v_sys_region.prv_id,
+		v_sys_region.reg_state,
+		v_sys_region.preg_name,
+		v_sys_region.prv_name
+    from twr_rentinformationtower INNER JOIN v_sys_region ON v_sys_region.reg_id = twr_rentinformationtower.reg_id 
+    <where>
+    	1=1
+    	<if test="rentinformationtowerId != '' and rentinformationtowerId != null">
+    		and rentinformationtower_id = #{rentinformationtowerId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="checkState != '' and checkState != null">
+    		and check_state = #{checkState}
+    	</if>
+    	<if test="regId != '' and regId != null">
+			and v_sys_region.reg_id = #{regId,jdbcType=VARCHAR}
+		</if>
+			
+    	<if test="pregId != '' and pregId != null">
+    		and preg_id = #{pregId,jdbcType=VARCHAR}
+    	</if>
+    	<if test=" rentinformationtowerIds != null and rentinformationtowerIds != ''">
+			and rentinformationtower_id in
+			<foreach collection="rentinformationtowerIds" index="index" item="item" open="(" separator="," close=")">    
+	            #{item}    
+	        </foreach>  
+		</if>
+    	<!-- 流程实例id集合 -->
+		<if test="idsList != null and idsList.size()>0">  
+        	and twr_rentinformationtower.rentinformationtower_id in  
+	        <foreach collection="idsList" item="item" index="index" open="(" separator="," close=")">  
+                #{item.businessId}
+            </foreach>  
+   		</if>
+   		<!-- 根据权限过滤 -->
+   			<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+    </where>
+  </select>
+  
+  <!-- 查询铁塔侧和移动侧共有字段 -->
+   <select id="queryTowerInfo" resultType="com.xunge.model.towerrent.rentmanager.TowerResourceInfoVO" parameterType="Map" >
+    select 
+    <include refid="Info_List" />
+    from twr_rentinformationtower
+    where 
+    <!-- 根据权限过滤 -->
+   	<include refid="com.xunge.dao.system.SysRegionVOMapper.queryRegionByUserIds"></include>
+  </select>
+ 
+ <!-- 新增铁塔资源信息 -->
+  <insert id="insertTowerResourceInfo" parameterType="Map">
+    insert into twr_rentinformationtower
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rentinformationtowerId != null">
+        rentinformationtower_id,
+      </if>
+      <if test="regId != null">
+        reg_id,
+      </if>
+      <if test="resourcesTypeId != null">
+        resources_type_id,
+      </if>
+      <if test="businessConfirmNumber != null">
+        business_confirm_number,
+      </if>
+      <if test="scenceType != null">
+        scence_type,
+      </if>
+      <if test="agreeBillCode != null">
+        agree_bill_code,
+      </if>
+      <if test="towerStationCode != null">
+        tower_station_code,
+      </if>
+      <if test="towerStationName != null">
+        tower_station_name,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operatorRegName != null">
+        operator_reg_name,
+      </if>
+      <if test="demandRegName != null">
+        demand_reg_name,
+      </if>
+      <if test="stationRegName != null">
+        station_reg_name,
+      </if>
+      <if test="ifTowerLinkOperator != null">
+        if_tower_link_operator,
+      </if>
+      <if test="detailAddress != null">
+        detail_address,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="productConfigurationId != null">
+        product_configuration_id,
+      </if>
+      <if test="productTypeId != null">
+        product_type_id,
+      </if>
+      <if test="roomTypeId != null">
+        room_type_id,
+      </if>
+      <if test="supportingTypeId != null">
+        supporting_type_id,
+      </if>
+      <if test="windPressure != null">
+        wind_pressure,
+      </if>
+      <if test="shareTypeId != null">
+        share_type_id,
+      </if>
+      <if test="product1UnitNum != null">
+        product1_unit_num,
+      </if>
+      <if test="product1Height != null">
+        product1_height,
+      </if>
+      <if test="product1AntennaNum != null">
+        product1_antenna_num,
+      </if>
+      <if test="product1SystemNum != null">
+        product1_system_num,
+      </if>
+      <if test="product1IsUpTowerRRU != null">
+        product1_is_up_towerRRU,
+      </if>
+      <if test="product1IfBBUOnRoom != null">
+        product1_ifBBU_on_room,
+      </if>
+      <if test="product1BBUFee != null">
+        product1_BBU_fee,
+      </if>
+      <if test="product2UnitNum != null">
+        product2_unit_num,
+      </if>
+      <if test="product2Height != null">
+        product2_height,
+      </if>
+      <if test="product2AntennaNum != null">
+        product2_antenna_num,
+      </if>
+      <if test="product2SystemNum != null">
+        product2_system_num,
+      </if>
+      <if test="product2IsUpTowerRRU != null">
+        product2_is_up_towerRRU,
+      </if>
+      <if test="product2IfBBUOnRoom != null">
+        product2_ifBBU_on_room,
+      </if>
+      <if test="product2BBUFee != null">
+        product2_BBU_fee,
+      </if>
+      <if test="product3UnitNum != null">
+        product3_unit_num,
+      </if>
+      <if test="product3Height != null">
+        product3_height,
+      </if>
+      <if test="product3AntennaNum != null">
+        product3_antenna_num,
+      </if>
+      <if test="product3SystemNum != null">
+        product3_system_num,
+      </if>
+      <if test="product3IsUpTowerRRU != null">
+        product3_is_up_towerRRU,
+      </if>
+      <if test="product3IfBBUOnRoom != null">
+        product3_ifBBU_on_room,
+      </if>
+      <if test="product3BBUFee != null">
+        product3_BBU_fee,
+      </if>
+      <if test="antennaHeightRangeId != null">
+        antenna_height_range_id,
+      </if>
+      <if test="towerHeight != null">
+        tower_height,
+      </if>
+      <if test="ifstandardBuildFee != null">
+        ifstandard_build_fee,
+      </if>
+      <if test="ifRRUDis != null">
+        ifRRU_dis,
+      </if>
+      <if test="currentTowerShareNum != null">
+        current_tower_share_num,
+      </if>
+      <if test="currentRoomSupportingShareNum != null">
+        current_room_supporting_share_num,
+      </if>
+      <if test="currentServiceShareNum != null">
+        current_service_share_num,
+      </if>
+      <if test="currentRoomFeeShareNum != null">
+        current_room_fee_share_num,
+      </if>
+      <if test="currentElecimportShareNum != null">
+        current_elecimport_share_num,
+      </if>
+      <if test="addTowerShareNum != null">
+        add_tower_share_num,
+      </if>
+      <if test="addRoomSupportingShareNum != null">
+        add_room_supporting_share_num,
+      </if>
+      <if test="isSpecEnterStation != null">
+        is_spec_enter_station,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="unitProductNumber != null">
+        unit_product_number,
+      </if>
+      <if test="towerPrice != null">
+        tower_price,
+      </if>
+      <if test="roomPrice != null">
+        room_price,
+      </if>
+      <if test="supportingPrice != null">
+        supporting_price,
+      </if>
+      <if test="towerShareDis != null">
+        tower_share_dis,
+      </if>
+      <if test="roomSupportingShareDis != null">
+        room_supporting_share_dis,
+      </if>
+      <if test="maintenanceFee != null">
+        maintenance_fee,
+      </if>
+      <if test="maintenanceFeeDis != null">
+        maintenance_fee_dis,
+      </if>
+      <if test="originalMaintenanceFee != null">
+        original_maintenance_fee,
+      </if>
+      <if test="stageFee != null">
+        stage_fee,
+      </if>
+      <if test="stageFeeDis != null">
+        stage_fee_dis,
+      </if>
+      <if test="originalStageFee != null">
+        original_stage_fee,
+      </if>
+      <if test="electricImportFee != null">
+        electric_import_fee,
+      </if>
+      <if test="electricImportFeeDis != null">
+        electric_import_fee_dis,
+      </if>
+      <if test="originalElectricImportFee != null">
+        original_electric_import_fee,
+      </if>
+      <if test="ifHasPowerCondition != null">
+        if_has_power_condition,
+      </if>
+      <if test="ifSelectPowerService != null">
+        if_select_power_service,
+      </if>
+      <if test="oilGenerateElectricMethodId != null">
+        oil_generate_electric_method_id,
+      </if>
+      <if test="oilGeneratorElectricFee != null">
+        oil_generator_electric_fee,
+      </if>
+      <if test="originalOilGenerateElectricFee != null">
+        original_oil_generate_electric_fee,
+      </if>
+      <if test="otherFee != null">
+        other_fee,
+      </if>
+      <if test="otherFeeRemark != null">
+        other_fee_remark,
+      </if>
+      <if test="originalOtherFee != null">
+        original_other_fee,
+      </if>
+      <if test="maintenanceLevelId != null">
+        maintenance_level_id,
+      </if>
+      <if test="hightLevelFee != null">
+        hight_level_fee,
+      </if>
+      <if test="electricProtectionMethodId != null">
+        electric_protection_method_id,
+      </if>
+      <if test="electricProtectionFee != null">
+        electric_protection_fee,
+      </if>
+      <if test="reserveBattery != null">
+        reserve_battery,
+      </if>
+      <if test="roomFeeMethod != null">
+        room_fee_method,
+      </if>
+      <if test="elecImportFeeMethod != null">
+        elec_import_fee_method,
+      </if>
+      <if test="microwaveServiceFee != null">
+        microwave_service_fee,
+      </if>
+      <if test="wlanServiceFee != null">
+        wlan_service_fee,
+      </if>
+      <if test="batteryProtectionFee != null">
+        battery_protection_fee,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="totalActualAmount != null">
+        total_actual_amount,
+      </if>
+      <if test="changeTowerShareDisValue1 != null">
+        change_tower_share_dis_value1,
+      </if>
+      <if test="changeTowerShareDisStartDate1 != null">
+        change_tower_share_dis_start_date1,
+      </if>
+      <if test="changeRoomSupportingShareDisValue1 != null">
+        change_room_supporting_share_dis_value1,
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate1 != null">
+        change_room_supporting_share_dis_start_date1,
+      </if>
+      <if test="changeTowerShareDisValue2 != null">
+        change_tower_share_dis_value2,
+      </if>
+      <if test="changeTowerShareDisStartDate2 != null">
+        change_tower_share_dis_start_date2,
+      </if>
+      <if test="changeRoomSupportingShareDisValue2 != null">
+        change_room_supporting_share_dis_value2,
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate2 != null">
+        change_room_supporting_share_dis_start_date2,
+      </if>
+      <if test="changeTowerShareDisValue3 != null">
+        change_tower_share_dis_value3,
+      </if>
+      <if test="changeTowerShareDisStartDate3 != null">
+        change_tower_share_dis_start_date3,
+      </if>
+      <if test="changeRoomSupportingShareDisValue3 != null">
+        change_room_supporting_share_dis_value3,
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate3 != null">
+        change_room_supporting_share_dis_start_date3,
+      </if>
+      <if test="changeMaintenanceFeeDisValue1 != null">
+        change_maintenance_fee_dis_value1,
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate1 != null">
+        change_maintenance_fee_dis_start_date1,
+      </if>
+      <if test="changeStageFeeDisValue1 != null">
+        change_stage_fee_dis_value1,
+      </if>
+      <if test="changeStageFeeDisStartDate1 != null">
+        change_stage_fee_dis_start_date1,
+      </if>
+      <if test="changeElectricImportDisValue1 != null">
+        change_electric_import_dis_value1,
+      </if>
+      <if test="changeElectricImportDisStartDate1 != null">
+        change_electric_import_dis_start_date1,
+      </if>
+      <if test="changeMaintenanceFeeDisValue2 != null">
+        change_maintenance_fee_dis_value2,
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate2 != null">
+        change_maintenance_fee_dis_start_date2,
+      </if>
+      <if test="changeStageFeeDisValue2 != null">
+        change_stage_fee_dis_value2,
+      </if>
+      <if test="changeStageFeeDisStartDate2 != null">
+        change_stage_fee_dis_start_date2,
+      </if>
+      <if test="changeElectricImportDisValue2 != null">
+        change_electric_import_dis_value2,
+      </if>
+      <if test="changeElectricImportDisStartDate2 != null">
+        change_electric_import_dis_start_date2,
+      </if>
+      <if test="changeMaintenanceFeeDisValue3 != null">
+        change_maintenance_fee_dis_value3,
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate3 != null">
+        change_maintenance_fee_dis_start_date3,
+      </if>
+      <if test="changeStageFeeDisValue3 != null">
+        change_stage_fee_dis_value3,
+      </if>
+      <if test="changeStageFeeDisStartDate3 != null">
+        change_stage_fee_dis_start_date3,
+      </if>
+      <if test="changeElectricImportDisValue3 != null">
+        change_electric_import_dis_value3,
+      </if>
+      <if test="changeElectricImportDisStartDate3 != null">
+        change_electric_import_dis_start_date3,
+      </if>
+      <if test="publishUser != null">
+        publish_user,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="auditState != null">
+        check_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rentinformationtowerId != null">
+        #{rentinformationtowerId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null">
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesTypeId != null">
+        #{resourcesTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="businessConfirmNumber != null">
+        #{businessConfirmNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="scenceType != null">
+        #{scenceType,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeBillCode != null">
+        #{agreeBillCode,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationCode != null">
+        #{towerStationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationName != null">
+        #{towerStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorRegName != null">
+        #{operatorRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="demandRegName != null">
+        #{demandRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRegName != null">
+        #{stationRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="ifTowerLinkOperator != null">
+        #{ifTowerLinkOperator,jdbcType=INTEGER},
+      </if>
+      <if test="detailAddress != null">
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="productConfigurationId != null">
+        #{productConfigurationId,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeId != null">
+        #{productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTypeId != null">
+        #{roomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportingTypeId != null">
+        #{supportingTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="windPressure != null">
+        #{windPressure,jdbcType=DECIMAL},
+      </if>
+      <if test="shareTypeId != null">
+        #{shareTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="product1UnitNum != null">
+        #{product1UnitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product1Height != null">
+        #{product1Height,jdbcType=VARCHAR},
+      </if>
+      <if test="product1AntennaNum != null">
+        #{product1AntennaNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product1SystemNum != null">
+        #{product1SystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product1IsUpTowerRRU != null">
+        #{product1IsUpTowerRRU,jdbcType=INTEGER},
+      </if>
+      <if test="product1IfBBUOnRoom != null">
+        #{product1IfBBUOnRoom,jdbcType=INTEGER},
+      </if>
+      <if test="product1BBUFee != null">
+        #{product1BBUFee,jdbcType=DECIMAL},
+      </if>
+      <if test="product2UnitNum != null">
+        #{product2UnitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product2Height != null">
+        #{product2Height,jdbcType=VARCHAR},
+      </if>
+      <if test="product2AntennaNum != null">
+        #{product2AntennaNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product2SystemNum != null">
+        #{product2SystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product2IsUpTowerRRU != null">
+        #{product2IsUpTowerRRU,jdbcType=VARCHAR},
+      </if>
+      <if test="product2IfBBUOnRoom != null">
+        #{product2IfBBUOnRoom,jdbcType=INTEGER},
+      </if>
+      <if test="product2BBUFee != null">
+        #{product2BBUFee,jdbcType=INTEGER},
+      </if>
+      <if test="product3UnitNum != null">
+        #{product3UnitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product3Height != null">
+        #{product3Height,jdbcType=VARCHAR},
+      </if>
+      <if test="product3AntennaNum != null">
+        #{product3AntennaNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product3SystemNum != null">
+        #{product3SystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product3IsUpTowerRRU != null">
+        #{product3IsUpTowerRRU,jdbcType=INTEGER},
+      </if>
+      <if test="product3IfBBUOnRoom != null">
+        #{product3IfBBUOnRoom,jdbcType=INTEGER},
+      </if>
+      <if test="product3BBUFee != null">
+        #{product3BBUFee,jdbcType=VARCHAR},
+      </if>
+      <if test="antennaHeightRangeId != null">
+        #{antennaHeightRangeId,jdbcType=VARCHAR},
+      </if>
+      <if test="towerHeight != null">
+        #{towerHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="ifstandardBuildFee != null">
+        #{ifstandardBuildFee,jdbcType=INTEGER},
+      </if>
+      <if test="ifRRUDis != null">
+        #{ifRRUDis,jdbcType=INTEGER},
+      </if>
+      <if test="currentTowerShareNum != null">
+        #{currentTowerShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentRoomSupportingShareNum != null">
+        #{currentRoomSupportingShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentServiceShareNum != null">
+        #{currentServiceShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentRoomFeeShareNum != null">
+        #{currentRoomFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentElecimportShareNum != null">
+        #{currentElecimportShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="addTowerShareNum != null">
+        #{addTowerShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="addRoomSupportingShareNum != null">
+        #{addRoomSupportingShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="isSpecEnterStation != null">
+        #{isSpecEnterStation,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitProductNumber != null">
+        #{unitProductNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="towerPrice != null">
+        #{towerPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="roomPrice != null">
+        #{roomPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingPrice != null">
+        #{supportingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="towerShareDis != null">
+        #{towerShareDis,jdbcType=DECIMAL},
+      </if>
+      <if test="roomSupportingShareDis != null">
+        #{roomSupportingShareDis,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenanceFee != null">
+        #{maintenanceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenanceFeeDis != null">
+        #{maintenanceFeeDis,jdbcType=DECIMAL},
+      </if>
+      <if test="originalMaintenanceFee != null">
+        #{originalMaintenanceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="stageFee != null">
+        #{stageFee,jdbcType=DECIMAL},
+      </if>
+      <if test="stageFeeDis != null">
+        #{stageFeeDis,jdbcType=DECIMAL},
+      </if>
+      <if test="originalStageFee != null">
+        #{originalStageFee,jdbcType=VARCHAR},
+      </if>
+      <if test="electricImportFee != null">
+        #{electricImportFee,jdbcType=DECIMAL},
+      </if>
+      <if test="electricImportFeeDis != null">
+        #{electricImportFeeDis,jdbcType=DECIMAL},
+      </if>
+      <if test="originalElectricImportFee != null">
+        #{originalElectricImportFee,jdbcType=DECIMAL},
+      </if>
+      <if test="ifHasPowerCondition != null">
+        #{ifHasPowerCondition,jdbcType=INTEGER},
+      </if>
+      <if test="ifSelectPowerService != null">
+        #{ifSelectPowerService,jdbcType=INTEGER},
+      </if>
+      <if test="oilGenerateElectricMethodId != null">
+        #{oilGenerateElectricMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="oilGeneratorElectricFee != null">
+        #{oilGeneratorElectricFee,jdbcType=DECIMAL},
+      </if>
+      <if test="originalOilGenerateElectricFee != null">
+        #{originalOilGenerateElectricFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee != null">
+        #{otherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeRemark != null">
+        #{otherFeeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="originalOtherFee != null">
+        #{originalOtherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenanceLevelId != null">
+        #{maintenanceLevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="hightLevelFee != null">
+        #{hightLevelFee,jdbcType=DECIMAL},
+      </if>
+      <if test="electricProtectionMethodId != null">
+        #{electricProtectionMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="electricProtectionFee != null">
+        #{electricProtectionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="reserveBattery != null">
+        #{reserveBattery,jdbcType=DECIMAL},
+      </if>
+      <if test="roomFeeMethod != null">
+        #{roomFeeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="elecImportFeeMethod != null">
+        #{elecImportFeeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="microwaveServiceFee != null">
+        #{microwaveServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="wlanServiceFee != null">
+        #{wlanServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryProtectionFee != null">
+        #{batteryProtectionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalActualAmount != null">
+        #{totalActualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisValue1 != null">
+        #{changeTowerShareDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisStartDate1 != null">
+        #{changeTowerShareDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeRoomSupportingShareDisValue1 != null">
+        #{changeRoomSupportingShareDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate1 != null">
+        #{changeRoomSupportingShareDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeTowerShareDisValue2 != null">
+        #{changeTowerShareDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisStartDate2 != null">
+        #{changeTowerShareDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeRoomSupportingShareDisValue2 != null">
+        #{changeRoomSupportingShareDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate2 != null">
+        #{changeRoomSupportingShareDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeTowerShareDisValue3 != null">
+        #{changeTowerShareDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisStartDate3 != null">
+        #{changeTowerShareDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeRoomSupportingShareDisValue3 != null">
+        #{changeRoomSupportingShareDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate3 != null">
+        #{changeRoomSupportingShareDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeMaintenanceFeeDisValue1 != null">
+        #{changeMaintenanceFeeDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate1 != null">
+        #{changeMaintenanceFeeDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeStageFeeDisValue1 != null">
+        #{changeStageFeeDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeStageFeeDisStartDate1 != null">
+        #{changeStageFeeDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeElectricImportDisValue1 != null">
+        #{changeElectricImportDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeElectricImportDisStartDate1 != null">
+        #{changeElectricImportDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeMaintenanceFeeDisValue2 != null">
+        #{changeMaintenanceFeeDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate2 != null">
+        #{changeMaintenanceFeeDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeStageFeeDisValue2 != null">
+        #{changeStageFeeDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeStageFeeDisStartDate2 != null">
+        #{changeStageFeeDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeElectricImportDisValue2 != null">
+        #{changeElectricImportDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeElectricImportDisStartDate2 != null">
+        #{changeElectricImportDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeMaintenanceFeeDisValue3 != null">
+        #{changeMaintenanceFeeDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate3 != null">
+        #{changeMaintenanceFeeDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeStageFeeDisValue3 != null">
+        #{changeStageFeeDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeStageFeeDisStartDate3 != null">
+        #{changeStageFeeDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeElectricImportDisValue3 != null">
+        #{changeElectricImportDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeElectricImportDisStartDate3 != null">
+        #{changeElectricImportDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishUser != null">
+        #{publishUser,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditState != null">
+        #{auditState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 修改铁塔资源信息 -->
+  <update id="updateTowerResourceInfo" parameterType="Map">
+    update twr_rentinformationtower
+    <set>
+      <if test="regId != null">
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesTypeId != null">
+        resources_type_id = #{resourcesTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="businessConfirmNumber != null">
+        business_confirm_number = #{businessConfirmNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="scenceType != null">
+        scence_type = #{scenceType,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeBillCode != null">
+        agree_bill_code = #{agreeBillCode,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationCode != null">
+        tower_station_code = #{towerStationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="towerStationName != null">
+        tower_station_name = #{towerStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorRegName != null">
+        operator_reg_name = #{operatorRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="demandRegName != null">
+        demand_reg_name = #{demandRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRegName != null">
+        station_reg_name = #{stationRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="ifTowerLinkOperator != null">
+        if_tower_link_operator = #{ifTowerLinkOperator,jdbcType=INTEGER},
+      </if>
+      <if test="detailAddress != null">
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="productConfigurationId != null">
+        product_configuration_id = #{productConfigurationId,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeId != null">
+        product_type_id = #{productTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTypeId != null">
+        room_type_id = #{roomTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportingTypeId != null">
+        supporting_type_id = #{supportingTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="windPressure != null">
+        wind_pressure = #{windPressure,jdbcType=DECIMAL},
+      </if>
+      <if test="shareTypeId != null">
+        share_type_id = #{shareTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="product1UnitNum != null">
+        product1_unit_num = #{product1UnitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product1Height != null">
+        product1_height = #{product1Height,jdbcType=VARCHAR},
+      </if>
+      <if test="product1AntennaNum != null">
+        product1_antenna_num = #{product1AntennaNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product1SystemNum != null">
+        product1_system_num = #{product1SystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product1IsUpTowerRRU != null">
+        product1_is_up_towerRRU = #{product1IsUpTowerRRU,jdbcType=INTEGER},
+      </if>
+      <if test="product1IfBBUOnRoom != null">
+        product1_ifBBU_on_room = #{product1IfBBUOnRoom,jdbcType=INTEGER},
+      </if>
+      <if test="product1BBUFee != null">
+        product1_BBU_fee = #{product1BBUFee,jdbcType=DECIMAL},
+      </if>
+      <if test="product2UnitNum != null">
+        product2_unit_num = #{product2UnitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product2Height != null">
+        product2_height = #{product2Height,jdbcType=VARCHAR},
+      </if>
+      <if test="product2AntennaNum != null">
+        product2_antenna_num = #{product2AntennaNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product2SystemNum != null">
+        product2_system_num = #{product2SystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product2IsUpTowerRRU != null">
+        product2_is_up_towerRRU = #{product2IsUpTowerRRU,jdbcType=VARCHAR},
+      </if>
+      <if test="product2IfBBUOnRoom != null">
+        product2_ifBBU_on_room = #{product2IfBBUOnRoom,jdbcType=INTEGER},
+      </if>
+      <if test="product2BBUFee != null">
+        product2_BBU_fee = #{product2BBUFee,jdbcType=INTEGER},
+      </if>
+      <if test="product3UnitNum != null">
+        product3_unit_num = #{product3UnitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product3Height != null">
+        product3_height = #{product3Height,jdbcType=VARCHAR},
+      </if>
+      <if test="product3AntennaNum != null">
+        product3_antenna_num = #{product3AntennaNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product3SystemNum != null">
+        product3_system_num = #{product3SystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="product3IsUpTowerRRU != null">
+        product3_is_up_towerRRU = #{product3IsUpTowerRRU,jdbcType=INTEGER},
+      </if>
+      <if test="product3IfBBUOnRoom != null">
+        product3_ifBBU_on_room = #{product3IfBBUOnRoom,jdbcType=INTEGER},
+      </if>
+      <if test="product3BBUFee != null">
+        product3_BBU_fee = #{product3BBUFee,jdbcType=VARCHAR},
+      </if>
+      <if test="antennaHeightRangeId != null">
+        antenna_height_range_id = #{antennaHeightRangeId,jdbcType=VARCHAR},
+      </if>
+      <if test="towerHeight != null">
+        tower_height = #{towerHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="ifstandardBuildFee != null">
+        ifstandard_build_fee = #{ifstandardBuildFee,jdbcType=INTEGER},
+      </if>
+      <if test="ifrruDis != null">
+        ifRRU_dis = #{ifrruDis,jdbcType=INTEGER},
+      </if>
+      <if test="currentTowerShareNum != null">
+        current_tower_share_num = #{currentTowerShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentRoomSupportingShareNum != null">
+        current_room_supporting_share_num = #{currentRoomSupportingShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentServiceShareNum != null">
+        current_service_share_num = #{currentServiceShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentRoomFeeShareNum != null">
+        current_room_fee_share_num = #{currentRoomFeeShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentElecimportShareNum != null">
+        current_elecimport_share_num = #{currentElecimportShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="addTowerShareNum != null">
+        add_tower_share_num = #{addTowerShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="addRoomSupportingShareNum != null">
+        add_room_supporting_share_num = #{addRoomSupportingShareNum,jdbcType=INTEGER},
+      </if>
+      <if test="isSpecEnterStation != null">
+        is_spec_enter_station = #{isSpecEnterStation,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitProductNumber != null">
+        unit_product_number = #{unitProductNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="towerPrice != null">
+        tower_price = #{towerPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="roomPrice != null">
+        room_price = #{roomPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="supportingPrice != null">
+        supporting_price = #{supportingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="towerShareDis != null">
+        tower_share_dis = #{towerShareDis,jdbcType=DECIMAL},
+      </if>
+      <if test="roomSupportingShareDis != null">
+        room_supporting_share_dis = #{roomSupportingShareDis,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenanceFee != null">
+        maintenance_fee = #{maintenanceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenanceFeeDis != null">
+        maintenance_fee_dis = #{maintenanceFeeDis,jdbcType=DECIMAL},
+      </if>
+      <if test="originalMaintenanceFee != null">
+        original_maintenance_fee = #{originalMaintenanceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="stageFee != null">
+        stage_fee = #{stageFee,jdbcType=DECIMAL},
+      </if>
+      <if test="stageFeeDis != null">
+        stage_fee_dis = #{stageFeeDis,jdbcType=DECIMAL},
+      </if>
+      <if test="originalStageFee != null">
+        original_stage_fee = #{originalStageFee,jdbcType=VARCHAR},
+      </if>
+      <if test="electricImportFee != null">
+        electric_import_fee = #{electricImportFee,jdbcType=DECIMAL},
+      </if>
+      <if test="electricImportFeeDis != null">
+        electric_import_fee_dis = #{electricImportFeeDis,jdbcType=DECIMAL},
+      </if>
+      <if test="originalElectricImportFee != null">
+        original_electric_import_fee = #{originalElectricImportFee,jdbcType=DECIMAL},
+      </if>
+      <if test="ifHasPowerCondition != null">
+        if_has_power_condition = #{ifHasPowerCondition,jdbcType=INTEGER},
+      </if>
+      <if test="ifSelectPowerService != null">
+        if_select_power_service = #{ifSelectPowerService,jdbcType=INTEGER},
+      </if>
+      <if test="oilGenerateElectricMethodId != null">
+        oil_generate_electric_method_id = #{oilGenerateElectricMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="oilGeneratorElectricFee != null">
+        oil_generator_electric_fee = #{oilGeneratorElectricFee,jdbcType=DECIMAL},
+      </if>
+      <if test="originalOilGenerateElectricFee != null">
+        original_oil_generate_electric_fee = #{originalOilGenerateElectricFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee != null">
+        other_fee = #{otherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeRemark != null">
+        other_fee_remark = #{otherFeeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="originalOtherFee != null">
+        original_other_fee = #{originalOtherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="maintenanceLevelId != null">
+        maintenance_level_id = #{maintenanceLevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="hightLevelFee != null">
+        hight_level_fee = #{hightLevelFee,jdbcType=DECIMAL},
+      </if>
+      <if test="electricProtectionMethodId != null">
+        electric_protection_method_id = #{electricProtectionMethodId,jdbcType=VARCHAR},
+      </if>
+      <if test="electricProtectionFee != null">
+        electric_protection_fee = #{electricProtectionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="reserveBattery != null">
+        reserve_battery = #{reserveBattery,jdbcType=DECIMAL},
+      </if>
+      <if test="roomFeeMethod != null">
+        room_fee_method = #{roomFeeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="elecImportFeeMethod != null">
+        elec_import_fee_method = #{elecImportFeeMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="microwaveServiceFee != null">
+        microwave_service_fee = #{microwaveServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="wlanServiceFee != null">
+        wlan_service_fee = #{wlanServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryProtectionFee != null">
+        battery_protection_fee = #{batteryProtectionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalActualAmount != null">
+        total_actual_amount = #{totalActualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisValue1 != null">
+        change_tower_share_dis_value1 = #{changeTowerShareDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisStartDate1 != null">
+        change_tower_share_dis_start_date1 = #{changeTowerShareDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeRoomSupportingShareDisValue1 != null">
+        change_room_supporting_share_dis_value1 = #{changeRoomSupportingShareDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate1 != null">
+        change_room_supporting_share_dis_start_date1 = #{changeRoomSupportingShareDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeTowerShareDisValue2 != null">
+        change_tower_share_dis_value2 = #{changeTowerShareDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisStartDate2 != null">
+        change_tower_share_dis_start_date2 = #{changeTowerShareDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeRoomSupportingShareDisValue2 != null">
+        change_room_supporting_share_dis_value2 = #{changeRoomSupportingShareDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate2 != null">
+        change_room_supporting_share_dis_start_date2 = #{changeRoomSupportingShareDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeTowerShareDisValue3 != null">
+        change_tower_share_dis_value3 = #{changeTowerShareDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeTowerShareDisStartDate3 != null">
+        change_tower_share_dis_start_date3 = #{changeTowerShareDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeRoomSupportingShareDisValue3 != null">
+        change_room_supporting_share_dis_value3 = #{changeRoomSupportingShareDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeRoomSupportingShareDisStartDate3 != null">
+        change_room_supporting_share_dis_start_date3 = #{changeRoomSupportingShareDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeMaintenanceFeeDisValue1 != null">
+        change_maintenance_fee_dis_value1 = #{changeMaintenanceFeeDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate1 != null">
+        change_maintenance_fee_dis_start_date1 = #{changeMaintenanceFeeDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeStageFeeDisValue1 != null">
+        change_stage_fee_dis_value1 = #{changeStageFeeDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeStageFeeDisStartDate1 != null">
+        change_stage_fee_dis_start_date1 = #{changeStageFeeDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeElectricImportDisValue1 != null">
+        change_electric_import_dis_value1 = #{changeElectricImportDisValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="changeElectricImportDisStartDate1 != null">
+        change_electric_import_dis_start_date1 = #{changeElectricImportDisStartDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeMaintenanceFeeDisValue2 != null">
+        change_maintenance_fee_dis_value2 = #{changeMaintenanceFeeDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate2 != null">
+        change_maintenance_fee_dis_start_date2 = #{changeMaintenanceFeeDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeStageFeeDisValue2 != null">
+        change_stage_fee_dis_value2 = #{changeStageFeeDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeStageFeeDisStartDate2 != null">
+        change_stage_fee_dis_start_date2 = #{changeStageFeeDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeElectricImportDisValue2 != null">
+        change_electric_import_dis_value2 = #{changeElectricImportDisValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="changeElectricImportDisStartDate2 != null">
+        change_electric_import_dis_start_date2 = #{changeElectricImportDisStartDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeMaintenanceFeeDisValue3 != null">
+        change_maintenance_fee_dis_value3 = #{changeMaintenanceFeeDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeMaintenanceFeeDisStartDate3 != null">
+        change_maintenance_fee_dis_start_date3 = #{changeMaintenanceFeeDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeStageFeeDisValue3 != null">
+        change_stage_fee_dis_value3 = #{changeStageFeeDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeStageFeeDisStartDate3 != null">
+        change_stage_fee_dis_start_date3 = #{changeStageFeeDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeElectricImportDisValue3 != null">
+        change_electric_import_dis_value3 = #{changeElectricImportDisValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="changeElectricImportDisStartDate3 != null">
+        change_electric_import_dis_start_date3 = #{changeElectricImportDisStartDate3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishUser != null">
+        publish_user = #{publishUser,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditState != null">
+        check_state = #{auditState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rentinformationtower_id = #{rentinformationtowerId,jdbcType=VARCHAR}
+    and business_confirm_number = #{businessConfirmNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

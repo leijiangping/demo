@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunge.mapping.RentBillAccountContractVOMapper" >
+	<resultMap type="com.xunge.model.selfrent.rebursepoint.RentBillAccountContractVO" id="BaseResultMap">
+		<id column="billaccountcontract_id" property="billAccountContractId" jdbcType="VARCHAR"/>
+		<result column="billaccount_id" property="billAccountId" jdbcType="VARCHAR"/>
+		<result column="rentcontract_id" property="rentContractId" jdbcType="VARCHAR"/>
+		<result column="relation_state" property="relationState" jdbcType="INTEGER"/>
+		<result column="relation_startdate" property="relationStartdate" jdbcType="DATE"/>
+		<result column="relation_enddate" property="relationEnddate" jdbcType="DATE"/>
+	</resultMap>
+<!-- 	添加报账点合同关系 -->
+	<insert id="insertBillAccountContract"  parameterType="com.xunge.model.selfrent.rebursepoint.RentBillAccountContractVO">
+		INSERT INTO rent_billaccountcontract (
+		billaccountcontract_id,
+		billaccount_id,
+		rentcontract_id,
+		relation_state,
+		relation_startdate,
+		relation_enddate
+		)
+		VALUES
+			(
+				#{billAccountContractId},
+				#{billAccountId},
+				#{rentContractId},
+				#{relationState},
+				now(),
+				#{relationEnddate}
+			);
+	</insert>
+<!-- 	更新报账点合同关系表 -->
+	<update id="updateBillAccountContract"  parameterType="Map">
+		UPDATE rent_billaccountcontract
+		SET 
+		 rentcontract_id = #{rentcontractId},
+		 relation_startdate = now()
+		WHERE
+		 billaccount_id = #{billaccountId}
+		
+	</update>
+<!-- 	删除报账点合同关系表 -->
+	<delete id="deleteBillAccountContract"  parameterType="java.lang.String">
+		delete from rent_billaccountcontract where billaccount_id=#{billAccountId}
+	</delete>
+	<select id="queryContractBindBillacc" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT
+		rbc.billaccount_id,
+		rbc.rentcontract_id
+		FROM
+		rent_billaccountcontract rbc
+		where rbc.rentcontract_id=#{rentContractId}
+	</select>                     
+	
+</mapper>
